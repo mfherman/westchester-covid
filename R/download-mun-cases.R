@@ -22,8 +22,8 @@ scrape_mun_daily <- function() {
     clean_names()
   
   web_table %>% 
-    pivot_longer(-municipality, names_to = "metric", values_to = "cases") %>% 
-    mutate(date = web_date, metric = str_remove(metric, "_cases")) %>% 
+    pivot_longer(-municipality, names_to = "metric") %>% 
+    mutate(date = web_date) %>% 
     relocate(date)
 
 }
@@ -33,7 +33,7 @@ update_daily_mun_data <- function() {
   updated <- FALSE
   counter <- 0
   
-  old_mun_daily <- read_csv("data/by-mun-daily.csv", col_types = cols())
+  old_mun_daily <- read_csv("data/by-mun-cases.csv", col_types = cols())
   max_old_date <- max(old_mun_daily$date)
 
   while (!updated | counter < 22) {
@@ -51,7 +51,7 @@ update_daily_mun_data <- function() {
   
   old_mun_daily %>% 
     bind_rows(new_mun_daily) %>% 
-    write_csv("data/by-mun-daily.csv")
+    write_csv("data/by-mun-cases.csv")
 }
 
 update_daily_mun_data()
