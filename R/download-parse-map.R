@@ -14,7 +14,7 @@ covid_map_img_url <- westchestergov_timeline %>%
 # download covid map images
 walk2(
   covid_map_img_url$media_url,
-  paste0("map_img/", as.Date(covid_map_img_url$created_at), ".jpg"),
+  paste0("data/map_img/", as.Date(covid_map_img_url$created_at), ".jpg"),
   ~ download.file(.x, .y, mode = "wb")
   )
 
@@ -60,7 +60,7 @@ parse_covid_map <- function(x) {
 parse_covid_map_safely <- safely(parse_covid_map)
 
 # get all downloaded covid map files
-covid_map_img_files <- list.files("map_img", full.names = TRUE)
+covid_map_img_files <- list.files("data/map_img", full.names = TRUE)
 
 # parse every map
 covid_map_data <- map(covid_map_img_files, parse_covid_map_safely)
@@ -80,8 +80,6 @@ covid_map_data_success <- map_dfr(covid_map_data, "result") %>%
 
 covid_map_data_success %>% 
   write_csv("data/raw/map-data-ocr-output.csv")
-
-
 
 cleaned <- read_csv("data/raw/map-data-ocr-output-cleaned.csv") %>% 
   mutate(date = mdy(date)) %>% 
