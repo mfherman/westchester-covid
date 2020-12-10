@@ -4,3 +4,5 @@
 .Ruserdata
 log/
 site/docs/
+.utf.md
+.knit.md

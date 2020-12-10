@@ -87,27 +87,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Westchester Covid-19 Tracking: About this site</title>
 
-  <meta property="description" itemprop="description" content="Some additional details about the website"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Westchester Covid-19 Tracking: About this site"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Some additional details about the website"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Westchester Covid-19 Tracking"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Westchester Covid-19 Tracking: About this site"/>
-  <meta property="twitter:description" content="Some additional details about the website"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["Some additional details about the website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2005,7 +2002,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"About this site","description":"Some additional details about the website","authors":[]}
+{"title":"About this site","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2030,11 +2027,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>About this site</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Some additional details about the website</p></p>
+
 </div>
 
 
 <div class="d-article">
+<p>This website contains information about the Covid-19 pandemic in Westchester County, NY. The <a href="https://health.westchestergov.com/2019-novel-coronavirus">Westchester County Department of Health website</a> does not contain much data or detailed information about the state of the pandemic in the county, so this website hopes to fill the gap.</p>
+<h2 id="about-the-data">About the data</h2>
+<p>Westchester County does not currently post historical data with the number of new cases per day by municipality. Because of this limitation, I have attempted to extract this historical data from maps that are posted each weekday to the <a href="https://twitter.com/westchestergov/status/1336045976981811206">WestchesterGov Twitter account</a>. This extraction processes is imperfect but until the county releases more accurate historical data, this is best I can do. Starting on December 3, 2020, I began scraping this data each day from the <a href="https://westchestergov.com/covid-19-cases">Westchester County website</a>, which results in significantly more reliable data.</p>
+<p>In addition to the data scraped from the county, I also download Westchester data from the <a href="https://github.com/nytimes/covid-19-data">New York Times</a> and the <a href="https://health.data.ny.gov/Health/New-York-State-Statewide-COVID-19-Testing/xdss-u53e">New York State Department of Health</a>. Each of these data sources reports data at the county-level only. New York Times data contains daily cases and deaths. New York State Department of Health data contains daily cases and daily tests.</p>
+<p>The data scraped from the county as well as New York State and New York Times data is available in this <a href="https://github.com/mfherman/westchester-covid/tree/master/data">GithHub repository</a>. It is updated daily as new data is reported and is the source data for the tables, charts, and maps contained on this website.</p>
+<h2 id="about-me">About me</h2>
+<p>This website was built and is maintained by me, <a href="http://mattherman.info">Matt Herman</a>. I live in Katonah, NY. You can contact me at <a href="mailto:mfherman@gmail.com">mfherman@gmail.com</a> with comments, questions, or suggestions.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
