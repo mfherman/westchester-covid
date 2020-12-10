@@ -1,0 +1,13 @@
+name: "westchester-covid"
+title: "Westchester Covid-19 Tracking"
+description: |
+  Westchester Covid-19 Tracking
+output_dir: "docs"
+exclude: ["README.Rmd", "log", "data", "R", "sh"]
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: distill::distill_article

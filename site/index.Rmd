@@ -1,0 +1,124 @@
+---
+title: "Westchester Covid-19 Tracking"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(plotly)
+library(sf)
+library(leaflet)
+library(DT)
+library(here)
+library(slider)
+library(scales)
+library(lubridate)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+
+ggplotly_config <- function(x) {
+  plotly::ggplotly(x, tooltip = "text") %>%
+    layout(
+      xaxis = list(fixedrange = TRUE),
+      yaxis = list(fixedrange = TRUE),
+      font = list(family = "IBM Plex Sans Condensed"),
+      hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"))
+    ) %>%
+    plotly::config(displayModeBar = FALSE)
+}
+
+month_day_year <- function(x, abbr = FALSE) {
+  if(all(lubridate::is.Date(x) || lubridate::is.POSIXt(x))) {
+  glue::glue("{lubridate::month(x, label = TRUE, abbr = abbr)} {lubridate::day(x)}, {lubridate::year(x)}")
+  } else
+    stop("Input vector must be Date or POSIX format.")
+}
+```
+
+```{r read_in_data}
+nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv"))
+nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv"))
+mun_cases <- read_csv(here("data/by-mun-cases.csv"))
+```
+
+<div class = "l-page">
+::::: {.panelset}
+::: {.panel}
+[New Cases]{.panel-name}
+
+```{r county-case-bar, layout="l-page"}
+to_plot <- nys_cases %>% 
+  group_by(metric) %>% 
+  mutate(
+    avg_7 = slide_dbl(value, mean, .before = 6, .complete = TRUE),
+    avg_14 = slide_dbl(value, mean, .before = 13, .complete = TRUE)
+    ) %>% 
+  ungroup() %>%
+  filter(metric == "new_cases") %>% 
+  ggplot(aes(date, value)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New cases: ", comma(value, 1), "<br>",
+        "7-day average: ", comma(avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_comma()) +
+  labs(
+    x = NULL,
+    y = "New cases"
+  ) +
+  theme_minimal()
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[New Tests]{.panel-name}
+
+```{r county-test-bar, layout="l-page"}
+to_plot <- nys_cases %>% 
+  group_by(metric) %>% 
+  mutate(
+    avg_7 = slide_dbl(value, mean, .before = 6, .complete = TRUE),
+    avg_14 = slide_dbl(value, mean, .before = 13, .complete = TRUE)
+    ) %>% 
+  ungroup() %>%
+  filter(metric == "new_tests") %>% 
+  ggplot(aes(date, value)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New tests: ", comma(value, 1), "<br>",
+        "7-day average: ", comma(avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_comma()) +
+  labs(
+    x = NULL,
+    y = "New tests"
+  ) +
+  theme_minimal()
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+:::::
+</div>

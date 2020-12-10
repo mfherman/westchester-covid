@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 log/
+docs/
+site/docs/
