@@ -1119,3 +1119,7 @@ date,metric,value
 2020-12-08,total_deaths,1539
 2020-12-08,new_cases,610
 2020-12-08,new_deaths,5
+2020-12-09,total_cases,56371
+2020-12-09,total_deaths,1545
+2020-12-09,new_cases,575
+2020-12-09,new_deaths,6
