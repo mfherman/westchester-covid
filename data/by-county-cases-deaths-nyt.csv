@@ -486,7 +486,7 @@ date,metric,value
 2020-07-03,total_cases,34979
 2020-07-03,total_deaths,1558
 2020-07-03,new_cases,68
-2020-07-03,new_deaths,-1
+2020-07-03,new_deaths,0
 2020-07-04,total_cases,35019
 2020-07-04,total_deaths,1558
 2020-07-04,new_cases,40
@@ -622,7 +622,7 @@ date,metric,value
 2020-08-06,total_cases,36106
 2020-08-06,total_deaths,1447
 2020-08-06,new_cases,32
-2020-08-06,new_deaths,-132
+2020-08-06,new_deaths,0
 2020-08-07,total_cases,36135
 2020-08-07,total_deaths,1447
 2020-08-07,new_cases,29
@@ -966,7 +966,7 @@ date,metric,value
 2020-10-31,total_cases,40796
 2020-10-31,total_deaths,1471
 2020-10-31,new_cases,116
-2020-10-31,new_deaths,-2
+2020-10-31,new_deaths,0
 2020-11-01,total_cases,40945
 2020-11-01,total_deaths,1472
 2020-11-01,new_cases,149
