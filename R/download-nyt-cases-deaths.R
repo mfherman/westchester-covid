@@ -14,7 +14,7 @@ nyt_clean <- nyt_county %>%
     new_cases = cases - lag(cases),
     new_cases = if_else(is.na(new_cases), 0, new_cases),
     new_deaths = deaths - lag(deaths),
-    new_deaths = if_else(is.na(new_deaths), 0, new_deaths)
+    new_deaths = if_else(is.na(new_deaths) | new_deaths < 0, 0, new_deaths)
     ) %>% 
   rename(total_cases = cases, total_deaths = deaths) %>% 
   pivot_longer(-date, names_to = "metric")
