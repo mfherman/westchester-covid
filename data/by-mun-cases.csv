@@ -18875,3 +18875,135 @@ date,municipality,metric,value
 2020-12-10,Totals,total_cases,46845
 2020-12-10,Totals,active_cases,5959
 2020-12-10,Totals,new_cases,317
+2020-12-11,Ardsley,total_cases,182
+2020-12-11,Ardsley,active_cases,39
+2020-12-11,Ardsley,new_cases,2
+2020-12-11,Bedford,total_cases,631
+2020-12-11,Bedford,active_cases,141
+2020-12-11,Bedford,new_cases,3
+2020-12-11,Briarcliff Manor,total_cases,244
+2020-12-11,Briarcliff Manor,active_cases,50
+2020-12-11,Briarcliff Manor,new_cases,5
+2020-12-11,Bronxville,total_cases,180
+2020-12-11,Bronxville,active_cases,36
+2020-12-11,Bronxville,new_cases,1
+2020-12-11,Buchanan,total_cases,86
+2020-12-11,Buchanan,active_cases,11
+2020-12-11,Buchanan,new_cases,1
+2020-12-11,Cortlandt,total_cases,1423
+2020-12-11,Cortlandt,active_cases,148
+2020-12-11,Cortlandt,new_cases,8
+2020-12-11,Croton-on-Hudson,total_cases,317
+2020-12-11,Croton-on-Hudson,active_cases,48
+2020-12-11,Croton-on-Hudson,new_cases,5
+2020-12-11,Dobbs Ferry,total_cases,516
+2020-12-11,Dobbs Ferry,active_cases,71
+2020-12-11,Dobbs Ferry,new_cases,9
+2020-12-11,Eastchester,total_cases,814
+2020-12-11,Eastchester,active_cases,148
+2020-12-11,Eastchester,new_cases,9
+2020-12-11,Elmsford,total_cases,329
+2020-12-11,Elmsford,active_cases,47
+2020-12-11,Elmsford,new_cases,1
+2020-12-11,Greenburgh,total_cases,1897
+2020-12-11,Greenburgh,active_cases,239
+2020-12-11,Greenburgh,new_cases,15
+2020-12-11,Harrison,total_cases,925
+2020-12-11,Harrison,active_cases,178
+2020-12-11,Harrison,new_cases,15
+2020-12-11,Hastings-on-Hudson,total_cases,206
+2020-12-11,Hastings-on-Hudson,active_cases,18
+2020-12-11,Hastings-on-Hudson,new_cases,0
+2020-12-11,Irvington,total_cases,163
+2020-12-11,Irvington,active_cases,28
+2020-12-11,Irvington,new_cases,0
+2020-12-11,Larchmont,total_cases,155
+2020-12-11,Larchmont,active_cases,24
+2020-12-11,Larchmont,new_cases,1
+2020-12-11,Lewisboro,total_cases,320
+2020-12-11,Lewisboro,active_cases,81
+2020-12-11,Lewisboro,new_cases,4
+2020-12-11,Mamaroneck Town,total_cases,311
+2020-12-11,Mamaroneck Town,active_cases,37
+2020-12-11,Mamaroneck Town,new_cases,1
+2020-12-11,Mamaroneck Village,total_cases,922
+2020-12-11,Mamaroneck Village,active_cases,161
+2020-12-11,Mamaroneck Village,new_cases,7
+2020-12-11,Mount Kisco,total_cases,655
+2020-12-11,Mount Kisco,active_cases,152
+2020-12-11,Mount Kisco,new_cases,11
+2020-12-11,Mount Pleasant,total_cases,1028
+2020-12-11,Mount Pleasant,active_cases,183
+2020-12-11,Mount Pleasant,new_cases,21
+2020-12-11,Mount Vernon,total_cases,3828
+2020-12-11,Mount Vernon,active_cases,294
+2020-12-11,Mount Vernon,new_cases,26
+2020-12-11,New Castle,total_cases,436
+2020-12-11,New Castle,active_cases,64
+2020-12-11,New Castle,new_cases,6
+2020-12-11,New Rochelle,total_cases,5073
+2020-12-11,New Rochelle,active_cases,520
+2020-12-11,New Rochelle,new_cases,11
+2020-12-11,North Castle,total_cases,433
+2020-12-11,North Castle,active_cases,80
+2020-12-11,North Castle,new_cases,6
+2020-12-11,North Salem,total_cases,277
+2020-12-11,North Salem,active_cases,35
+2020-12-11,North Salem,new_cases,1
+2020-12-11,Ossining Town,total_cases,247
+2020-12-11,Ossining Town,active_cases,35
+2020-12-11,Ossining Town,new_cases,2
+2020-12-11,Ossining Village,total_cases,1815
+2020-12-11,Ossining Village,active_cases,211
+2020-12-11,Ossining Village,new_cases,5
+2020-12-11,Peekskill,total_cases,1712
+2020-12-11,Peekskill,active_cases,221
+2020-12-11,Peekskill,new_cases,12
+2020-12-11,Pelham,total_cases,294
+2020-12-11,Pelham,active_cases,52
+2020-12-11,Pelham,new_cases,3
+2020-12-11,Pelham Manor,total_cases,207
+2020-12-11,Pelham Manor,active_cases,24
+2020-12-11,Pelham Manor,new_cases,0
+2020-12-11,Pleasantville,total_cases,268
+2020-12-11,Pleasantville,active_cases,41
+2020-12-11,Pleasantville,new_cases,2
+2020-12-11,Port Chester,total_cases,2186
+2020-12-11,Port Chester,active_cases,234
+2020-12-11,Port Chester,new_cases,11
+2020-12-11,Pound Ridge,total_cases,86
+2020-12-11,Pound Ridge,active_cases,19
+2020-12-11,Pound Ridge,new_cases,0
+2020-12-11,Rye Brook,total_cases,371
+2020-12-11,Rye Brook,active_cases,46
+2020-12-11,Rye Brook,new_cases,2
+2020-12-11,Rye City,total_cases,479
+2020-12-11,Rye City,active_cases,90
+2020-12-11,Rye City,new_cases,3
+2020-12-11,Scarsdale,total_cases,543
+2020-12-11,Scarsdale,active_cases,74
+2020-12-11,Scarsdale,new_cases,5
+2020-12-11,Sleepy Hollow,total_cases,745
+2020-12-11,Sleepy Hollow,active_cases,70
+2020-12-11,Sleepy Hollow,new_cases,1
+2020-12-11,Somers,total_cases,753
+2020-12-11,Somers,active_cases,106
+2020-12-11,Somers,new_cases,7
+2020-12-11,Tarrytown,total_cases,494
+2020-12-11,Tarrytown,active_cases,57
+2020-12-11,Tarrytown,new_cases,2
+2020-12-11,Tuckahoe,total_cases,223
+2020-12-11,Tuckahoe,active_cases,20
+2020-12-11,Tuckahoe,new_cases,1
+2020-12-11,White Plains,total_cases,3015
+2020-12-11,White Plains,active_cases,468
+2020-12-11,White Plains,new_cases,28
+2020-12-11,Yonkers,total_cases,10957
+2020-12-11,Yonkers,active_cases,1201
+2020-12-11,Yonkers,new_cases,90
+2020-12-11,Yorktown,total_cases,1457
+2020-12-11,Yorktown,active_cases,251
+2020-12-11,Yorktown,new_cases,16
+2020-12-11,Totals,total_cases,47203
+2020-12-11,Totals,active_cases,6053
+2020-12-11,Totals,new_cases,359
