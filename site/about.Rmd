@@ -6,9 +6,9 @@ title: "About this site"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This website contains information about the Covid-19 pandemic in Westchester County, NY. The [Westchester County Department of Health website](https://health.westchestergov.com/2019-novel-coronavirus) does not contain much data or detailed information about the state of the pandemic in the county, so this website hopes to fill the gap.
+This site contains information about the Covid-19 pandemic in Westchester County, NY. The [Westchester County Department of Health website](https://health.westchestergov.com/2019-novel-coronavirus) does not contain much data or detailed information about the state of the pandemic in the county, so this site hopes to fill the gap.
 
-## About the data
+## The data
 
 Westchester County does not currently post historical data with the number of new cases per day by municipality. Because of this limitation, I have attempted to extract this historical data from maps that are posted each weekday to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). This extraction processes is imperfect but until the county releases more accurate historical data, this is best I can do. Starting on December 3, 2020, I began scraping this data each day from the [Westchester County website](https://westchestergov.com/covid-19-cases), which results in significantly more reliable data.
 
@@ -16,6 +16,6 @@ In addition to the data scraped from the county, I also download Westchester dat
 
 The data scraped from the county as well as New York State and New York Times data is available in this [GithHub repository](https://github.com/mfherman/westchester-covid/tree/master/data). It is updated daily as new data is reported and is the source data for the tables, charts, and maps contained on this website.
 
-## About me
+## Me
 
 This website was built and is maintained by me, [Matt Herman](http://mattherman.info). I live in Katonah, NY. You can contact me at [mfherman@gmail.com](mailto:mfherman@gmail.com) with comments, questions, or suggestions.

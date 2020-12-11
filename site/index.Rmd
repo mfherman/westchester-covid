@@ -1,5 +1,6 @@
 ---
 title: "Westchester Covid-19 Tracking"
+date: "`r Sys.Date()`"
 site: distill::distill_website
 ---
 
@@ -15,6 +16,8 @@ library(here)
 library(slider)
 library(scales)
 library(lubridate)
+library(leaflet)
+library(leaflet.extras)
 ```
 
 ```{r xaringan-panelset, echo=FALSE}
@@ -37,21 +40,27 @@ month_day_year <- function(x, abbr = FALSE) {
   } else
     stop("Input vector must be Date or POSIX format.")
 }
+
+pretty_frac <- function(x, accuracy = 1) {
+  paste("1 in", scales::number(1 / x, accuracy))
+}
+
 ```
 
 ```{r read_in_data}
 nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv"))
 nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv"))
 mun_cases <- read_csv(here("data/by-mun-cases.csv"))
+mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
 <div class = "l-page">
 ::::: {.panelset}
 ::: {.panel}
-[New Cases]{.panel-name}
+[Cases]{.panel-name}
 
 ```{r county-case-bar, layout="l-page"}
-to_plot <- nys_cases %>% 
+to_plot <- nyt_cases %>% 
   group_by(metric) %>% 
   mutate(
     avg_7 = slide_dbl(value, mean, .before = 6, .complete = TRUE),
@@ -72,12 +81,17 @@ to_plot <- nys_cases %>%
     ) +
   geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
   scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_comma()) +
+  scale_y_continuous(label = label_number_si()) +
   labs(
+    title = "New Cases Reported",
     x = NULL,
-    y = "New cases"
+    y = NULL
   ) +
-  theme_minimal()
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
 
 ggplotly_config(to_plot) %>% 
   layout(hovermode = "x unified")
@@ -85,7 +99,49 @@ ggplotly_config(to_plot) %>%
 :::
 
 ::: {.panel}
-[New Tests]{.panel-name}
+[Deaths]{.panel-name}
+
+```{r county-death-bar, layout="l-page"}
+to_plot <- nyt_cases %>% 
+  group_by(metric) %>% 
+  mutate(
+    avg_7 = slide_dbl(value, mean, .before = 6, .complete = TRUE),
+    avg_14 = slide_dbl(value, mean, .before = 13, .complete = TRUE)
+    ) %>% 
+  ungroup() %>%
+  filter(metric == "new_deaths") %>% 
+  ggplot(aes(date, value)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New deaths: ", comma(value, 1), "<br>",
+        "7-day average: ", comma(avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New Deaths Reported",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Tests]{.panel-name}
 
 ```{r county-test-bar, layout="l-page"}
 to_plot <- nys_cases %>% 
@@ -109,12 +165,68 @@ to_plot <- nys_cases %>%
     ) +
   geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
   scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_comma()) +
+  scale_y_continuous(label = label_number_si()) +
   labs(
+    title = "New Tests Reported",
     x = NULL,
-    y = "New tests"
+    y = NULL
   ) +
-  theme_minimal()
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Positivity Rate]{.panel-name}
+
+```{r county-pos-rate-bar, layout="l-page"}
+pos_rate_avg <- nys_cases %>% 
+  filter(metric %in% c("new_cases", "new_tests")) %>% 
+  group_by(metric) %>% 
+  mutate(
+    avg_7 = slide_dbl(value, mean, .before = 6, .complete = TRUE),
+    avg_14 = slide_dbl(value, mean, .before = 13, .complete = TRUE)
+    ) %>% 
+  pivot_wider(names_from = metric, values_from = c(value, avg_7, avg_14)) %>% 
+  mutate(
+    pos_rate_7 = avg_7_new_cases / avg_7_new_tests,
+    pos_rate_14 = avg_14_new_cases / avg_14_new_tests
+    ) %>% 
+  transmute(date, metric = "pos_rate", avg_7 = pos_rate_7, avg_14 = pos_rate_14)
+
+to_plot <- nys_cases %>% 
+  filter(metric == "pos_rate", value < 1) %>% 
+  left_join(pos_rate_avg, by = c("date", "metric")) %>% 
+  ggplot(aes(date, value)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "Positivity rate: ", percent(value, 0.1), "<br>",
+        "7-day average: ", percent(avg_7, 0.1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_percent(1)) +
+  labs(
+    title = "Test Postivity Rate",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
 
 ggplotly_config(to_plot) %>% 
   layout(hovermode = "x unified")
@@ -123,7 +235,107 @@ ggplotly_config(to_plot) %>%
 :::::
 </div>
 
+::::: {.panelset}
+::: {.panel}
+[Daily cases per capita]{.panel-name}
+
+```{r per_capita_map, out.height="600px", out.width="600px"}
+mun_recent <- mun_cases %>% 
+  filter(date == max(date), municipality != "Totals") %>%
+  pivot_wider(names_from = metric, values_from = value) %>% 
+  mutate(new_cases_day_avg = active_cases / 14)
+
+mun_cases_poly <- mun_bound %>% 
+  left_join(mun_recent, by = "municipality") %>% 
+  mutate(
+    new_cases_per_cap = new_cases_day_avg / total_pop * 1e5,
+    total_cases_per_cap = total_cases / total_pop
+    )
+
+
+to_map <- mun_cases_poly %>% 
+  st_transform(4326) %>% 
+  mutate(
+    label = paste0(
+      "<b>", municipality, "</b><br>",
+      "Avg. daily cases: ", comma(new_cases_day_avg, 1), "<br>",
+      "Per 100k: ", number(new_cases_per_cap, 0.1)
+      )
+    )
+
+bins <- c(0, 20, 30, 40, 50, 60, 80, 100)
+
+cd_pal <- colorBin(
+  palette = "Blues",
+  bins = bins,
+  domain = to_map$new_cases_day_avg
+  )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    weight = 1.5,
+    color = "white",
+    fillColor = ~cd_pal(new_cases_per_cap),
+    fillOpacity = 0.8,
+    popup = ~label,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>%
+  addLegend(
+    pal = cd_pal,
+    values = to_map$new_cases_per_cap,
+    opacity = 0.7,
+    position = "bottomright",
+    title = "Avg. daily cases per 100k<br>in past 14 days"
+  ) %>% 
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
+```
+:::
+
+::: {.panel}
+[Total cases]{.panel-name}
+
+```{r total_cases_map, out.height="600px", out.width="600px"}
+to_map <- mun_cases_centroid %>% 
+  st_transform(4326) %>% 
+  mutate(
+    label = paste0(
+      "<b>", municipality, "</b><br>",
+      "Total cases: ", comma(total_cases, 1), "<br>",
+      "Share of population: ", pretty_frac(total_cases_per_cap)
+      )
+    )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircles(
+    radius = ~ sqrt(total_cases) * 50,
+    color = "steelblue",
+    opacity = 0.7,
+    weight = 1.5,
+    fillColor = "steelblue",
+    fillOpacity = 0.2,
+    popup = ~label
+    ) %>% 
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
+```
+:::
+:::::
+</div>
+
 ```{css}
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.leaflet {
+  margin: auto
+}
 ```
 
