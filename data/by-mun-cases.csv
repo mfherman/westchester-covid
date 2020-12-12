@@ -2919,7 +2919,7 @@ date,municipality,metric,value
 2020-06-02,Buchanan,active_cases,0
 2020-06-02,Buchanan,new_cases,0
 2020-06-02,Cortlandt,total_cases,785
-2020-06-02,Cortlandt,active_cases,2
+2020-06-02,Cortlandt,active_cases,25
 2020-06-02,Cortlandt,new_cases,0
 2020-06-02,Croton-on-Hudson,total_cases,170
 2020-06-02,Croton-on-Hudson,active_cases,2
@@ -3186,7 +3186,7 @@ date,municipality,metric,value
 2020-06-05,Cortlandt,active_cases,16
 2020-06-05,Cortlandt,new_cases,NA
 2020-06-05,Croton-on-Hudson,total_cases,170
-2020-06-05,Croton-on-Hudson,active_cases,NA
+2020-06-05,Croton-on-Hudson,active_cases,0
 2020-06-05,Croton-on-Hudson,new_cases,NA
 2020-06-05,Dobbs Ferry,total_cases,305
 2020-06-05,Dobbs Ferry,active_cases,3
@@ -3279,7 +3279,7 @@ date,municipality,metric,value
 2020-06-05,Sleepy Hollow,active_cases,2
 2020-06-05,Sleepy Hollow,new_cases,0
 2020-06-05,Somers,total_cases,354
-2020-06-05,Somers,active_cases,2
+2020-06-05,Somers,active_cases,28
 2020-06-05,Somers,new_cases,5
 2020-06-05,Tarrytown,total_cases,273
 2020-06-05,Tarrytown,active_cases,5
@@ -3297,7 +3297,7 @@ date,municipality,metric,value
 2020-06-05,Yorktown,active_cases,3
 2020-06-05,Yorktown,new_cases,2
 2020-06-05,Totals,total_cases,NA
-2020-06-05,Totals,active_cases,26583538
+2020-06-05,Totals,active_cases,538
 2020-06-05,Totals,new_cases,46
 2020-06-08,Ardsley,total_cases,92
 2020-06-08,Ardsley,active_cases,0
@@ -3447,7 +3447,7 @@ date,municipality,metric,value
 2020-06-11,Buchanan,active_cases,0
 2020-06-11,Buchanan,new_cases,0
 2020-06-11,Cortlandt,total_cases,816
-2020-06-11,Cortlandt,active_cases,438
+2020-06-11,Cortlandt,active_cases,38
 2020-06-11,Cortlandt,new_cases,2
 2020-06-11,Croton-on-Hudson,total_cases,187
 2020-06-11,Croton-on-Hudson,active_cases,20
@@ -3747,7 +3747,7 @@ date,municipality,metric,value
 2020-06-15,Mamaroneck Town,active_cases,3
 2020-06-15,Mamaroneck Town,new_cases,2
 2020-06-15,Mamaroneck Village,total_cases,422
-2020-06-15,Mamaroneck Village,active_cases,238
+2020-06-15,Mamaroneck Village,active_cases,38
 2020-06-15,Mamaroneck Village,new_cases,4
 2020-06-15,Mount Kisco,total_cases,277
 2020-06-15,Mount Kisco,active_cases,7
@@ -3846,7 +3846,7 @@ date,municipality,metric,value
 2020-06-16,Cortlandt,active_cases,NA
 2020-06-16,Cortlandt,new_cases,NA
 2020-06-16,Croton-on-Hudson,total_cases,NA
-2020-06-16,Croton-on-Hudson,active_cases,NA
+2020-06-16,Croton-on-Hudson,active_cases,22
 2020-06-16,Croton-on-Hudson,new_cases,NA
 2020-06-16,Dobbs Ferry,total_cases,NA
 2020-06-16,Dobbs Ferry,active_cases,NA
@@ -3864,7 +3864,7 @@ date,municipality,metric,value
 2020-06-16,Harrison,active_cases,NA
 2020-06-16,Harrison,new_cases,NA
 2020-06-16,Hastings-on-Hudson,total_cases,NA
-2020-06-16,Hastings-on-Hudson,active_cases,NA
+2020-06-16,Hastings-on-Hudson,active_cases,9
 2020-06-16,Hastings-on-Hudson,new_cases,NA
 2020-06-16,Irvington,total_cases,NA
 2020-06-16,Irvington,active_cases,NA
@@ -3879,7 +3879,7 @@ date,municipality,metric,value
 2020-06-16,Mamaroneck Town,active_cases,NA
 2020-06-16,Mamaroneck Town,new_cases,NA
 2020-06-16,Mamaroneck Village,total_cases,NA
-2020-06-16,Mamaroneck Village,active_cases,NA
+2020-06-16,Mamaroneck Village,active_cases,27
 2020-06-16,Mamaroneck Village,new_cases,NA
 2020-06-16,Mount Kisco,total_cases,NA
 2020-06-16,Mount Kisco,active_cases,NA
@@ -5523,7 +5523,7 @@ date,municipality,metric,value
 2020-07-07,Sleepy Hollow,active_cases,8
 2020-07-07,Sleepy Hollow,new_cases,0
 2020-07-07,Somers,total_cases,391
-2020-07-07,Somers,active_cases,123
+2020-07-07,Somers,active_cases,12
 2020-07-07,Somers,new_cases,2
 2020-07-07,Tarrytown,total_cases,290
 2020-07-07,Tarrytown,active_cases,6
@@ -11811,7 +11811,7 @@ date,municipality,metric,value
 2020-09-18,Mount Vernon,active_cases,26
 2020-09-18,Mount Vernon,new_cases,1
 2020-09-18,New Castle,total_cases,245
-2020-09-18,New Castle,active_cases,2
+2020-09-18,New Castle,active_cases,22
 2020-09-18,New Castle,new_cases,3
 2020-09-18,New Rochelle,total_cases,3279
 2020-09-18,New Rochelle,active_cases,54
@@ -13974,7 +13974,7 @@ date,municipality,metric,value
 2020-10-13,Somers,active_cases,15
 2020-10-13,Somers,new_cases,4
 2020-10-13,Tarrytown,total_cases,336
-2020-10-13,Tarrytown,active_cases,410
+2020-10-13,Tarrytown,active_cases,10
 2020-10-13,Tarrytown,new_cases,5
 2020-10-13,Tuckahoe,total_cases,152
 2020-10-13,Tuckahoe,active_cases,4
@@ -14439,7 +14439,7 @@ date,municipality,metric,value
 2020-10-19,Mamaroneck Town,active_cases,6
 2020-10-19,Mamaroneck Town,new_cases,3
 2020-10-19,Mamaroneck Village,total_cases,523
-2020-10-19,Mamaroneck Village,active_cases,7
+2020-10-19,Mamaroneck Village,active_cases,17
 2020-10-19,Mamaroneck Village,new_cases,3
 2020-10-19,Mount Kisco,total_cases,323
 2020-10-19,Mount Kisco,active_cases,10
@@ -15231,7 +15231,7 @@ date,municipality,metric,value
 2020-10-27,Mamaroneck Town,active_cases,13
 2020-10-27,Mamaroneck Town,new_cases,0
 2020-10-27,Mamaroneck Village,total_cases,558
-2020-10-27,Mamaroneck Village,active_cases,4
+2020-10-27,Mamaroneck Village,active_cases,41
 2020-10-27,Mamaroneck Village,new_cases,6
 2020-10-27,Mount Kisco,total_cases,331
 2020-10-27,Mount Kisco,active_cases,12
@@ -15573,7 +15573,7 @@ date,municipality,metric,value
 2020-10-29,Yorktown,active_cases,36
 2020-10-29,Yorktown,new_cases,2
 2020-10-29,Totals,total_cases,33059
-2020-10-29,Totals,active_cases,4142
+2020-10-29,Totals,active_cases,1142
 2020-10-29,Totals,new_cases,68
 2020-10-30,Ardsley,total_cases,120
 2020-10-30,Ardsley,active_cases,5
@@ -16119,7 +16119,7 @@ date,municipality,metric,value
 2020-11-06,Buchanan,active_cases,5
 2020-11-06,Buchanan,new_cases,1
 2020-11-06,Cortlandt,total_cases,1076
-2020-11-06,Cortlandt,active_cases,341
+2020-11-06,Cortlandt,active_cases,34
 2020-11-06,Cortlandt,new_cases,3
 2020-11-06,Croton-on-Hudson,total_cases,229
 2020-11-06,Croton-on-Hudson,active_cases,5
@@ -16731,7 +16731,7 @@ date,municipality,metric,value
 2020-11-13,Pound Ridge,active_cases,5
 2020-11-13,Pound Ridge,new_cases,0
 2020-11-13,Rye Brook,total_cases,258
-2020-11-13,Rye Brook,active_cases,341
+2020-11-13,Rye Brook,active_cases,34
 2020-11-13,Rye Brook,new_cases,2
 2020-11-13,Rye City,total_cases,311
 2020-11-13,Rye City,active_cases,34
@@ -17730,7 +17730,7 @@ date,municipality,metric,value
 2020-11-25,Irvington,active_cases,14
 2020-11-25,Irvington,new_cases,5
 2020-11-25,Larchmont,total_cases,122
-2020-11-25,Larchmont,active_cases,1
+2020-11-25,Larchmont,active_cases,11
 2020-11-25,Larchmont,new_cases,1
 2020-11-25,Lewisboro,total_cases,223
 2020-11-25,Lewisboro,active_cases,48
@@ -17958,7 +17958,7 @@ date,municipality,metric,value
 2020-12-01,Bedford,active_cases,107
 2020-12-01,Bedford,new_cases,9
 2020-12-01,Briarcliff Manor,total_cases,211
-2020-12-01,Briarcliff Manor,active_cases,1
+2020-12-01,Briarcliff Manor,active_cases,41
 2020-12-01,Briarcliff Manor,new_cases,1
 2020-12-01,Bronxville,total_cases,150
 2020-12-01,Bronxville,active_cases,28

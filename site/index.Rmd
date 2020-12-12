@@ -23,8 +23,8 @@ library(leaflet.extras)
 ```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
 
-ggplotly_config <- function(x) {
-  plotly::ggplotly(x, tooltip = "text") %>%
+ggplotly_config <- function(x, ...) {
+  plotly::ggplotly(x, tooltip = "text", ...) %>%
     layout(
       xaxis = list(fixedrange = TRUE),
       yaxis = list(fixedrange = TRUE),
@@ -44,15 +44,20 @@ month_day_year <- function(x, abbr = FALSE) {
 pretty_frac <- function(x, accuracy = 1) {
   paste("1 in", scales::number(1 / x, accuracy))
 }
-
 ```
 
 ```{r read_in_data}
 nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv"))
 nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv"))
+
 mun_cases <- read_csv(here("data/by-mun-cases.csv"))
 mun_bound <- read_rds(here("data/mun-boundary.rds"))
+
+hosp_geo <- read_rds(here("data/hospital-locations.rds"))
+hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
 ```
+
+Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
 
 <div class = "l-page">
 ::::: {.panelset}
@@ -252,6 +257,8 @@ mun_cases_poly <- mun_bound %>%
     total_cases_per_cap = total_cases / total_pop
     )
 
+mun_cases_centroid <- mun_cases_poly %>% 
+  st_centroid()
 
 to_map <- mun_cases_poly %>% 
   st_transform(4326) %>% 
@@ -329,7 +336,111 @@ leaflet(to_map) %>%
 ```
 :::
 :::::
-</div>
+
+# Case rate trends by municipality
+
+```{r mun_heat_map, layout="l-page", out.height="700px"}
+all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")
+all_mun <- mun_bound$municipality
+
+a <- crossing(date = all_dates, municipality = all_mun, metric = "active_cases") %>% 
+  left_join(mun_cases, by = c("date", "municipality", "metric")) %>% 
+  left_join(st_drop_geometry(mun_bound), by = "municipality") %>% 
+  filter(metric == "active_cases") %>%
+  mutate(active_per_cap = value / total_pop) %>% 
+  group_by(municipality) %>% 
+  fill(active_per_cap, value) %>%
+  ungroup() %>% 
+  filter(!is.na(active_per_cap), active_per_cap < 0.03) %>% 
+  mutate(municipality = fct_reorder(municipality, active_per_cap, mean)) %>% 
+  ggplot(aes(date, municipality, fill = active_per_cap)) +
+  geom_tile(
+    aes(
+      text = paste0(
+        "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
+        "Avg. daily cases: ", comma(value / 14, 1), "<br>",
+        "Per 100k: ", comma(active_per_cap / 14 * 1e5, 0.1)
+      ))) +
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  scale_x_date(
+
+    labels = label_date_short(),
+    breaks = "1 month",
+    expand = expansion(mult = c(0.01, 0))
+    ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank()
+    )
+
+ggplotly_config(a)
+```
+
+
+::: {.panel}
+[Hospital capacity]{.panel-name}
+
+```{r hosp_cap_map, out.height="600px", out.width="600px", eval=F}
+hosp_wide <- hosp_cap %>% 
+  filter(year_week == max(year_week)) %>%
+  pivot_wider(names_from = metric, values_from = n)
+
+to_map <- hosp_geo %>% 
+  mutate(hospital_pk = as.double(hospital_pk)) %>% 
+  left_join(hosp_wide) %>%
+  filter(year_week == max(year_week)) %>% 
+  mutate(
+    lng = st_coordinates(.)[, 1],
+    lat = st_coordinates(.)[, 2],
+    bed_free = bed_capacity - bed_occupied,
+    icu_free = icu_capacity - icu_occupied,
+    label = paste0(
+      "<b>", hospital_name, "</b></br>",
+      "Bed occupancy: ", percent(bed_occupied / bed_capacity, 1), "<br>",
+      "Beds free: ", comma(bed_free, 1), "</br>",   
+      "Total beds: ", comma(bed_capacity, 1), "</br>",
+      "</br>",
+      "ICU occupancy: ", percent(icu_occupied / icu_capacity, 1), "<br>",
+      "ICU beds free: ", comma(icu_free, 1), "</br>",
+      "Total ICU beds: ", comma(icu_capacity, 1), "</br>"
+      ),
+    label = str_replace_all(label, "NA", "&ndash;")
+    ) %>% 
+  st_drop_geometry()
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircles(
+    radius = ~ sqrt(bed_capacity) * 100,
+    color = "coral",
+    opacity = 0.7,
+    weight = 1.5,
+    fillColor = "coral",
+    fillOpacity = 0.5,
+    popup = ~label
+    ) %>%
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
+  addResetMapButton()
+
+
+# leaflet() %>%
+#   addProviderTiles(providers$CartoDB.Positron) %>%
+#   addMinicharts(
+#     lng = to_map$lng,
+#     lat = to_map$lat,
+#     type = "pie",
+#     chartdata = select(to_map, `Beds occupued` = bed_occupied, `Beds free` = bed_free),
+#     width = sqrt(to_map$bed_capacity) * 1.75,
+#     colorPalette = c("steelblue", "coral"),
+#     opacity = 0.9,
+#     popup = popupArgs(html = to_map$label)
+#     ) %>%
+#   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
+#   addResetMapButton()
+```
+
 
 ```{css}
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
