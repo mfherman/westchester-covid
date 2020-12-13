@@ -1,6 +1,7 @@
 library(tidyverse)
 library(sf)
 library(tidycensus)
+library(rmapshaper)
 
 mun_bound_online <- "https://opendata.arcgis.com/datasets/278ce38ecd784b79993af098f81809ed_163.geojson"
 
@@ -28,4 +29,5 @@ pop_by_mun <- tract_geo %>%
 mun_sf %>% 
   left_join(pop_by_mun, by = "municipality") %>%
   relocate(geometry, .after = last_col()) %>% 
+  ms_simplify(keep_shapes = TRUE, keep = 0.01) %>%
   write_rds("data/mun-boundary.rds")
