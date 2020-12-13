@@ -1,0 +1,180 @@
+---
+title: "Westchester Municipalities"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(plotly)
+library(sf)
+library(leaflet)
+library(DT)
+library(here)
+library(slider)
+library(scales)
+library(lubridate)
+library(leaflet)
+library(leaflet.extras)
+library(leaflet.minicharts)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+source(here("R/utils.R"))
+```
+
+```{r read_in_data}
+mun_cases <- read_csv(here("data/by-mun-cases.csv"))
+mun_bound <- read_rds(here("data/mun-boundary.rds"))
+```
+
+Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
+
+::::: {.panelset}
+::: {.panel}
+[Daily cases per capita]{.panel-name}
+
+```{r mun_per_capita_map, out.height="600px", out.width="600px"}
+mun_recent <- mun_cases %>% 
+  filter(date == max(date), municipality != "Totals") %>%
+  mutate(new_cases_day_avg = active_cases / 14)
+
+mun_cases_poly <- mun_bound %>% 
+  left_join(mun_recent, by = "municipality") %>% 
+  mutate(
+    new_cases_per_cap = new_cases_day_avg / total_pop * 1e5,
+    total_cases_per_cap = total_cases / total_pop
+    )
+
+mun_cases_centroid <- mun_cases_poly %>% 
+  st_centroid()
+
+to_map <- mun_cases_poly %>% 
+  st_transform(4326) %>% 
+  mutate(
+    label = paste0(
+      "<b>", municipality, "</b><br>",
+      "Avg. daily cases: ", comma(new_cases_day_avg, 1), "<br>",
+      "Per 100k: ", number(new_cases_per_cap, 0.1)
+      )
+    )
+
+cd_pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = 0:100
+  )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    weight = 1.5,
+    color = "white",
+    fillColor = ~cd_pal(new_cases_per_cap),
+    fillOpacity = 0.8,
+    popup = ~label,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>%
+  addLegend(
+    pal = cd_pal,
+    values = to_map$new_cases_per_cap,
+    opacity = 0.7,
+    bins = c(30, 50, 70, 90),
+    position = "bottomright",
+    title = "Avg. daily cases per 100k<br>in past 14 days",
+      
+  ) %>% 
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
+```
+:::
+
+::: {.panel}
+[Total cases]{.panel-name}
+
+```{r total_cases_map, out.height="600px", out.width="600px"}
+to_map <- mun_cases_centroid %>% 
+  st_transform(4326) %>% 
+  mutate(
+    label = paste0(
+      "<b>", municipality, "</b><br>",
+      "Total cases: ", comma(total_cases, 1), "<br>",
+      "Share of population: ", pretty_frac(total_cases_per_cap)
+      )
+    )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircles(
+    radius = ~ sqrt(total_cases) * 50,
+    color = "coral",
+    opacity = 0.7,
+    weight = 1.5,
+    fillColor = "coral",
+    fillOpacity = 0.2,
+    popup = ~label
+    ) %>% 
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
+```
+:::
+:::::
+
+# Cases per capita by town
+
+```{r mun_heat_map, layout="l-page", out.height="700px"}
+all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")
+all_mun <- mun_bound$municipality
+
+all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>% 
+  left_join(mun_cases, by = c("date", "municipality")) %>% 
+  left_join(st_drop_geometry(mun_bound), by = "municipality") %>% 
+  mutate(active_per_cap = active_cases / total_pop) %>% 
+  group_by(municipality) %>% 
+  fill(active_per_cap, c(total_cases:active_per_cap)) %>%
+  ungroup()
+  
+p <- all_days_mun %>%  
+  filter(!is.na(active_per_cap), active_per_cap < 0.03) %>% 
+  mutate(municipality = fct_reorder(municipality, active_per_cap, mean)) %>% 
+  ggplot(aes(date, municipality, fill = active_per_cap)) +
+  geom_tile(
+    aes(
+      text = paste0(
+        "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
+        "Avg. daily cases: ", comma(active_cases / 14, 1), "<br>",
+        "Per 100k: ", comma(active_per_cap / 14 * 1e5, 0.1)
+      ))) +
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  scale_x_date(
+
+    labels = label_date_short(),
+    breaks = "1 month",
+    expand = expansion(mult = c(0.01, 0))
+    ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank()
+    )
+
+ggplotly_config(p)
+```
+
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.leaflet {
+  margin: auto
+}
+```
+

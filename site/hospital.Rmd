@@ -1,0 +1,115 @@
+---
+title: "Westchester Covid-19 Tracking"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(sf)
+library(here)
+library(scales)
+library(lubridate)
+library(leaflet)
+library(leaflet.extras)
+library(leaflet.minicharts)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+ggplotly_config <- function(x, ...) {
+  plotly::ggplotly(x, tooltip = "text", ...) %>%
+    layout(
+      xaxis = list(fixedrange = TRUE),
+      yaxis = list(fixedrange = TRUE),
+      font = list(family = "IBM Plex Sans Condensed"),
+      hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"))
+    ) %>%
+    plotly::config(displayModeBar = FALSE)
+}
+
+month_day_year <- function(x, abbr = FALSE) {
+  if(all(lubridate::is.Date(x) || lubridate::is.POSIXt(x))) {
+  glue::glue("{lubridate::month(x, label = TRUE, abbr = abbr)} {lubridate::day(x)}, {lubridate::year(x)}")
+  } else
+    stop("Input vector must be Date or POSIX format.")
+}
+
+pretty_frac <- function(x, accuracy = 1) {
+  paste("1 in", scales::number(1 / x, accuracy))
+}
+```
+
+```{r read_in_data}
+hosp_geo <- read_rds(here("data/hospital-locations.rds"))
+hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
+```
+
+Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
+
+# Hospital Capacity
+
+```{r hosp_cap_map, out.height="600px", out.width="600px"}
+hosp_recent <- hosp_cap %>% 
+  filter(year_week == max(year_week))
+
+to_map <- hosp_geo %>%
+  st_drop_geometry() %>% 
+  left_join(hosp_recent, by = "hospital_pk") %>%
+  mutate(
+    bed_free = bed_capacity - bed_occupied,
+    icu_free = icu_capacity - icu_occupied,
+    label = paste0(
+      "<b>", hospital_name, "</b></br>",
+      "Bed occupancy: ", percent(bed_occupied / bed_capacity, 1), "<br>",
+      "Beds free: ", comma(bed_free, 1), "</br>",   
+      "Total beds: ", comma(bed_capacity, 1), "</br>",
+      "</br>",
+      "ICU occupancy: ", percent(icu_occupied / icu_capacity, 1), "<br>",
+      "ICU beds free: ", comma(icu_free, 1), "</br>",
+      "Total ICU beds: ", comma(icu_capacity, 1), "</br>",
+      "</br>",
+      "Covid-19 patients: ", comma(covid_patients, 1)
+      ),
+    label = str_replace_all(label, "NA", "&ndash;")
+    )
+
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addMinicharts(
+    lng = to_map$long,
+    lat = to_map$lat,
+    type = "pie",
+    chartdata = select(to_map, `Beds occupued` = bed_occupied, `Beds free` = bed_free),
+    width = sqrt(to_map$bed_capacity) * 1.2,
+    colorPalette = c("steelblue", "coral"),
+    opacity = 0.9,
+    popup = popupArgs(html = to_map$label)
+    ) %>%
+  addResetMapButton()
+
+# leaflet(to_map) %>%
+#   addProviderTiles(providers$CartoDB.Positron) %>%
+#   addCircles(
+#     radius = ~ sqrt(bed_capacity) * 100,
+#     color = "coral",
+#     opacity = 0.7,
+#     weight = 1.5,
+#     fillColor = "coral",
+#     fillOpacity = 0.5,
+#     popup = ~label
+#     ) %>%
+#   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
+#   addResetMapButton()
+
+```
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.leaflet {
+  margin: auto
+}
+```
+

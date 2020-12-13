@@ -8,6 +8,10 @@ navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "Towns"
+      href: municipality.html
+    - text: "Hospitals"
+      href: hospital.html
     - text: "About"
       href: about.html
     - icon: fab fa-github
