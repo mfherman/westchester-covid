@@ -6,8 +6,8 @@ message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
 url <- "https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv"
 
-ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange",
-                 "New York City", "Suffolk", "Nassau")
+ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange", "Ulster",
+                 "New York City", "Suffolk", "Nassau", "Dutchess")
 
 ct_counties <- c("Fairfield", "New Haven", "Litchfield")
 

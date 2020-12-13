@@ -3,10 +3,13 @@ title: "Westchester Covid-19 Tracking"
 description: |
   Westchester Covid-19 Tracking
 output_dir: "docs"
-exclude: ["README.Rmd", "log", "data", "R", "sh"]
+base_url: https://rstudio.github.io/distill
+twitter:
+  site: "@buddyherms"
+theme: theme.css
 navbar:
   right:
-    - text: "Home"
+    - text: "County"
       href: index.html
     - text: "Towns"
       href: municipality.html

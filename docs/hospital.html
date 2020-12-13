@@ -99,6 +99,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Westchester Covid-19 Tracking"/>
+  <meta property="twitter:site" content="@buddyherms"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
@@ -1984,6 +1985,311 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </script>
 
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+
+  .leaflet {
+    margin: auto
+  }
+  </style>
+  <style type="text/css">
+  /* base style */
+
+  /* FONT FAMILIES */
+
+  :root {
+    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body,
+  .posts-list .post-preview p,
+  .posts-list .description p {
+    font-family: var(--body-font), var(--body-default);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .posts-list .post-preview h2,
+  .posts-list .description h2 {
+    font-family: var(--heading-font), var(--heading-default);
+  }
+
+  d-article div.sourceCode code,
+  d-article pre code {
+  	font-family: var(--mono-font), var(--mono-default);
+  }
+
+
+  /*-- TITLE --*/
+  d-title h1,
+  .posts-list > h1 {
+    color: var(--title-color, black);
+  }
+
+  d-title h1 {
+    font-size: var(--title-size, 50px);
+  }
+
+  /*-- HEADERS --*/
+  d-article h1,
+  d-article h2,
+  d-article h3,
+  d-article h4,
+  d-article h5,
+  d-article h6 {
+    color: var(--header-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- BODY --*/
+  /* only text inside of <p> tags */
+  d-article > p {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+    font-size: var(--body-size, 1.06rem);
+  }
+
+  /*-- CODE --*/
+  d-article div.sourceCode code,
+  d-article pre code {
+  	font-size: var(--code-size, 14px);
+  }
+
+  /*-- ASIDE --*/
+  d-article aside {
+  	font-size: var(--aside-size, 12px);
+  	color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- FIGURE CAPTIONS --*/
+  figure .caption,
+  figure figcaption,
+  .figure .caption {
+  	font-size: var(--fig-cap-size, 13px);
+  	color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- METADATA --*/
+  d-byline h3 {
+  	font-size: var(--heading-size, 0.6rem);
+  	color: var(--heading-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-byline {
+  	font-size: var(--body-size, 0.8rem);
+  	color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  d-byline a,
+  d-article d-byline a {
+  	color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- TABLE OF CONTENTS --*/
+  .d-contents nav h3 {
+  	font-size: var(--heading-size, 18px);
+  }
+
+  .d-contents nav a {
+  	font-size: var(--contents-size, 13px);
+  }
+
+  /*-- APPENDIX --*/
+  d-appendix h3 {
+    font-size: var(--heading-size, 15px);
+  	color: var(--heading-color, rgba(0, 0, 0, 0.65));
+  }
+
+  d-appendix {
+    font-size: var(--text-size, 0.8em);
+  	color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-appendix d-footnote-list a.footnote-backlink {
+  	color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  .distill-site-header .title {
+  	font-size: var(--title-size, 18px);
+  	font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a,
+  .nav-dropdown .nav-dropbtn {
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a:hover {
+  	color: var(--hover-color, white);
+  }
+
+  .distill-site-header {
+  	font-size: var(--text-size, 15px);
+  	color: var(--text-color, rgba(255, 255, 255, 0.8));
+  	background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer {
+  	font-size: var(--text-size, 15px);
+  	color: var(--text-color, rgba(255, 255, 255, 0.8));
+  	background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer a:hover {
+  	color: var(--hover-color, white);
+  }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
   <script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
@@ -2030,7 +2336,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="index.html" class="title">Westchester Covid-19 Tracking</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Home</a>
+<a href="index.html">County</a>
 <a href="municipality.html">Towns</a>
 <a href="hospital.html">Hospitals</a>
 <a href="about.html">About</a>
@@ -2063,17 +2369,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Last updated: <strong>Dec 12, 2020</strong></p>
 <h1 id="hospital-capacity">Hospital Capacity</h1>
 <div class="layout-chunk" data-layout="l-body">
-<div id="htmlwidget-f89dbb05e1da5575ee67" style="width:600px;height:600px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f89dbb05e1da5575ee67">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMinicharts","args":[[{"dyn":{"width":[31.6809090778658]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.16652,41.18886)","lat":41.18886,"lng":-73.16652},"timeSteps":1},{"dyn":{"width":[21.3181612715544]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.20263,41.20014)","lat":41.20014,"lng":-73.20263},"timeSteps":1},{"dyn":{"width":[20.5406913223484]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.42047,41.110622)","lat":41.110622,"lng":-73.42047},"timeSteps":1},{"dyn":{"width":[21.2505058763315]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.44672,41.406002)","lat":41.406002,"lng":-73.44672},"timeSteps":1},{"dyn":{"width":[18.14342856243]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.5380588835422,41.0547061)","lat":41.0547061,"lng":-73.5380588835422},"timeSteps":1},{"dyn":{"width":[15.6]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.62938,41.034847)","lat":41.034847,"lng":-73.62938},"timeSteps":1},{"dyn":{"width":[12.8124939024376]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.663765,41.387836)","lat":41.387836,"lng":-73.663765},"timeSteps":1},{"dyn":{"width":[16.0549057923116]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.72473,41.19605)","lat":41.19605,"lng":-73.72473},"timeSteps":1},{"dyn":{"width":[20.258331619361]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.77007,41.026123)","lat":41.026123,"lng":-73.77007},"timeSteps":1},{"dyn":{"width":[12.69960629311]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.787056,40.913013)","lat":40.913013,"lng":-73.787056},"timeSteps":1},{"dyn":{"width":[45.8833303063324]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.80399,41.087883)","lat":41.087883,"lng":-73.80399},"timeSteps":1},{"dyn":{"width":[9.2951600308978]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.84006,40.91293)","lat":40.91293,"lng":-73.84006},"timeSteps":1},{"dyn":{"width":[16.2066652954888]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.860794,41.103313)","lat":41.103313,"lng":-73.860794},"timeSteps":1},{"dyn":{"width":[23.1136323411099]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.88508,40.967857)","lat":40.967857,"lng":-73.88508},"timeSteps":1},{"dyn":{"width":[13.7869503516913]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.89187,41.291386)","lat":41.291386,"lng":-73.89187},"timeSteps":1},{"dyn":{"width":[12.9243955371228]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.897545,40.930096)","lat":40.930096,"lng":-73.897545},"timeSteps":1},{"dyn":{"width":[14.8431802522236]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.92474,41.096634)","lat":41.096634,"lng":-73.92474},"timeSteps":1},{"dyn":{"width":[11.3841995766062]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.982185,41.21217)","lat":41.21217,"lng":-73.982185},"timeSteps":1},{"dyn":{"width":[14.2643611844344]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.015175,41.503475)","lat":41.503475,"lng":-74.015175},"timeSteps":1},{"dyn":{"width":[19.5345847153196]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.1344492920664,41.11084915)","lat":41.11084915,"lng":-74.1344492920664},"timeSteps":1},{"dyn":{"width":[14.4499134945508]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.139015,40.859295)","lat":40.859295,"lng":-74.139015},"timeSteps":1},{"dyn":{"width":[34.2998542270955]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.166824,40.902527)","lat":40.902527,"lng":-74.166824},"timeSteps":1},{"dyn":{"width":[8.48528137423857]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.35644,41.26269)","lat":41.26269,"lng":-74.35644},"timeSteps":1},{"dyn":{"width":[23.939924811912]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.3682,41.439877)","lat":41.439877,"lng":-74.3682},"timeSteps":1},{"dyn":{"width":[8.4]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.6809426462244,41.36734935)","lat":41.36734935,"lng":-74.6809426462244},"timeSteps":1}],[[[370.9,326.1]],[[220.6,95]],[[144.3,148.7]],[[256.4,57.2]],[[203.6,25]],[[126.4,42.6]],[[67.3,46.7]],[[78.3,100.7]],[[227.9,57.1]],[[72,40]],[[1145.7,316.3]],[[37,23]],[[100.4,82]],[[199.9,171.1]],[[139.6,-7.59999999999999]],[[82.3,33.7]],[[120.3,32.7]],[[69.1,20.9]],[[132.3,9]],[[199.7,65.3]],[[70.3,74.7]],[[579.7,237.3]],[[14.4,35.6]],[[293.3,104.7]],[[17.4,31.6]]],1145.7,["steelblue","coral"],["1"],null,{"showTitle":true,"showValues":true,"labels":["Beds occupued","Beds free"],"supValues":null,"supLabels":[],"html":[["<b>Bridgeport Hospital<\/b><\/br>Bed occupancy: 53%<br>Beds free: 326<\/br>Total beds: 697<\/br><\/br>ICU occupancy: 86%<br>ICU beds free: 7<\/br>Total ICU beds: 54<\/br><\/br>Covid-19 patients: 139"],["<b>St Vincent's Medical Center<\/b><\/br>Bed occupancy: 70%<br>Beds free: 95<\/br>Total beds: 316<\/br><\/br>ICU occupancy: 29%<br>ICU beds free: 47<\/br>Total ICU beds: 66<\/br><\/br>Covid-19 patients: 56"],["<b>Norwalk Hospital<\/b><\/br>Bed occupancy: 49%<br>Beds free: 149<\/br>Total beds: 293<\/br><\/br>ICU occupancy: 36%<br>ICU beds free: 19<\/br>Total ICU beds: 30<\/br><\/br>Covid-19 patients: 47"],["<b>Danbury Hospital<\/b><\/br>Bed occupancy: 82%<br>Beds free: 57<\/br>Total beds: 314<\/br><\/br>ICU occupancy: 80%<br>ICU beds free: 4<\/br>Total ICU beds: 20<\/br><\/br>Covid-19 patients: 75"],["<b>Stamford Hospital<\/b><\/br>Bed occupancy: 89%<br>Beds free: 25<\/br>Total beds: 229<\/br><\/br>ICU occupancy: 81%<br>ICU beds free: 6<\/br>Total ICU beds: 32<\/br><\/br>Covid-19 patients: 44"],["<b>Greenwich Hospital Association -<\/b><\/br>Bed occupancy: 75%<br>Beds free: 43<\/br>Total beds: 169<\/br><\/br>ICU occupancy: 39%<br>ICU beds free: 18<\/br>Total ICU beds: 30<\/br><\/br>Covid-19 patients: 33"],["<b>Putnam Hospital Center<\/b><\/br>Bed occupancy: 59%<br>Beds free: 47<\/br>Total beds: 114<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: 16"],["<b>Northern Westchester Hospital<\/b><\/br>Bed occupancy: 44%<br>Beds free: 101<\/br>Total beds: 179<\/br><\/br>ICU occupancy: 40%<br>ICU beds free: 9<\/br>Total ICU beds: 15<\/br><\/br>Covid-19 patients: 21"],["<b>White Plains Hospital Center<\/b><\/br>Bed occupancy: 80%<br>Beds free: 57<\/br>Total beds: 285<\/br><\/br>ICU occupancy: 59%<br>ICU beds free: 9<\/br>Total ICU beds: 22<\/br><\/br>Covid-19 patients: 52"],["<b>Montefiore New Rochelle Hospital<\/b><\/br>Bed occupancy: 64%<br>Beds free: 40<\/br>Total beds: 112<\/br><\/br>ICU occupancy: 39%<br>ICU beds free: 14<\/br>Total ICU beds: 23<\/br><\/br>Covid-19 patients: 19"],["<b>Westchester Medical Center<\/b><\/br>Bed occupancy: 78%<br>Beds free: 316<\/br>Total beds: 1,462<\/br><\/br>ICU occupancy: 81%<br>ICU beds free: 40<\/br>Total ICU beds: 208<\/br><\/br>Covid-19 patients: 177"],["<b>Montefiore Mount Vernon Hospital<\/b><\/br>Bed occupancy: 62%<br>Beds free: 23<\/br>Total beds: 60<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: &ndash;"],["<b>Phelps Hospital<\/b><\/br>Bed occupancy: 55%<br>Beds free: 82<\/br>Total beds: 182<\/br><\/br>ICU occupancy: 69%<br>ICU beds free: 4<\/br>Total ICU beds: 12<\/br><\/br>Covid-19 patients: 17"],["<b>St John's Riverside Hospital<\/b><\/br>Bed occupancy: 54%<br>Beds free: 171<\/br>Total beds: 371<\/br><\/br>ICU occupancy: 25%<br>ICU beds free: 39<\/br>Total ICU beds: 52<\/br><\/br>Covid-19 patients: 43"],["<b>Hudson Valley Hospital Center<\/b><\/br>Bed occupancy: 106%<br>Beds free: -8<\/br>Total beds: 132<\/br><\/br>ICU occupancy: 83%<br>ICU beds free: 2<\/br>Total ICU beds: 12<\/br><\/br>Covid-19 patients: 39"],["<b>St Joseph's Medical Center<\/b><\/br>Bed occupancy: 71%<br>Beds free: 34<\/br>Total beds: 116<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 6<\/br><\/br>Covid-19 patients: 6"],["<b>Nyack Hospital<\/b><\/br>Bed occupancy: 79%<br>Beds free: 33<\/br>Total beds: 153<\/br><\/br>ICU occupancy: 26%<br>ICU beds free: 45<\/br>Total ICU beds: 60<\/br><\/br>Covid-19 patients: 33"],["<b>Helen Hayes Hospital<\/b><\/br>Bed occupancy: 77%<br>Beds free: 21<\/br>Total beds: 90<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: &ndash;<\/br><\/br>Covid-19 patients: 10"],["<b>St Luke's Cornwall Hospital<\/b><\/br>Bed occupancy: 94%<br>Beds free: 9<\/br>Total beds: 141<\/br><\/br>ICU occupancy: 69%<br>ICU beds free: 8<\/br>Total ICU beds: 25<\/br><\/br>Covid-19 patients: 46"],["<b>Good Samaritan Hospital Of Suffern<\/b><\/br>Bed occupancy: 75%<br>Beds free: 65<\/br>Total beds: 265<\/br><\/br>ICU occupancy: 78%<br>ICU beds free: 7<\/br>Total ICU beds: 31<\/br><\/br>Covid-19 patients: 25"],["<b>St Mary's General Hospital<\/b><\/br>Bed occupancy: 48%<br>Beds free: 75<\/br>Total beds: 145<\/br><\/br>ICU occupancy: 55%<br>ICU beds free: 10<\/br>Total ICU beds: 22<\/br><\/br>Covid-19 patients: 30"],["<b>St Joseph's University Medical Center<\/b><\/br>Bed occupancy: 71%<br>Beds free: 237<\/br>Total beds: 817<\/br><\/br>ICU occupancy: 50%<br>ICU beds free: 66<\/br>Total ICU beds: 131<\/br><\/br>Covid-19 patients: 197"],["<b>St Anthony Community Hospital<\/b><\/br>Bed occupancy: 29%<br>Beds free: 36<\/br>Total beds: 50<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 8<\/br><\/br>Covid-19 patients: &ndash;"],["<b>Garnet Health Medical Center<\/b><\/br>Bed occupancy: 74%<br>Beds free: 105<\/br>Total beds: 398<\/br><\/br>ICU occupancy: 24%<br>ICU beds free: 72<\/br>Total ICU beds: 95<\/br><\/br>Covid-19 patients: 43"],["<b>Bon Secours Community Hospital<\/b><\/br>Bed occupancy: 36%<br>Beds free: 32<\/br>Total beds: 49<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: &ndash;"]],"noPopup":false,"digits":null},null]},{"method":"addLegend","args":[{"colors":["steelblue","coral"],"labels":["Beds occupued","Beds free"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"unknown","title":null,"extra":null,"layerId":"minichartsLegend","className":"info legend","group":null}]},{"method":"addEasyButton","args":[{"icon":"ion-arrow-shrink","title":"Reset View","onClick":"function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }","position":"topleft"}]}],"limits":{"lat":[40.859295,41.503475],"lng":[-74.6809426462244,-73.16652]}},"evals":["calls.3.args.0.onClick"],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-.leaflet {
-  margin: auto
-}
-</style>
+<div id="htmlwidget-3945921c499c49e04859" style="width:600px;height:600px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3945921c499c49e04859">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMinicharts","args":[[{"dyn":{"width":[31.6809090778658]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.16652,41.18886)","lat":41.18886,"lng":-73.16652},"timeSteps":1},{"dyn":{"width":[21.3181612715544]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.20263,41.20014)","lat":41.20014,"lng":-73.20263},"timeSteps":1},{"dyn":{"width":[20.5406913223484]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.42047,41.110622)","lat":41.110622,"lng":-73.42047},"timeSteps":1},{"dyn":{"width":[21.2505058763315]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.44672,41.406002)","lat":41.406002,"lng":-73.44672},"timeSteps":1},{"dyn":{"width":[18.14342856243]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.5380588835422,41.0547061)","lat":41.0547061,"lng":-73.5380588835422},"timeSteps":1},{"dyn":{"width":[15.6]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.62938,41.034847)","lat":41.034847,"lng":-73.62938},"timeSteps":1},{"dyn":{"width":[12.8124939024376]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.663765,41.387836)","lat":41.387836,"lng":-73.663765},"timeSteps":1},{"dyn":{"width":[16.0549057923116]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.72473,41.19605)","lat":41.19605,"lng":-73.72473},"timeSteps":1},{"dyn":{"width":[20.258331619361]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.77007,41.026123)","lat":41.026123,"lng":-73.77007},"timeSteps":1},{"dyn":{"width":[12.69960629311]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.787056,40.913013)","lat":40.913013,"lng":-73.787056},"timeSteps":1},{"dyn":{"width":[45.8833303063324]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.80399,41.087883)","lat":41.087883,"lng":-73.80399},"timeSteps":1},{"dyn":{"width":[9.2951600308978]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.84006,40.91293)","lat":40.91293,"lng":-73.84006},"timeSteps":1},{"dyn":{"width":[16.2066652954888]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.860794,41.103313)","lat":41.103313,"lng":-73.860794},"timeSteps":1},{"dyn":{"width":[23.1136323411099]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.88508,40.967857)","lat":40.967857,"lng":-73.88508},"timeSteps":1},{"dyn":{"width":[13.7869503516913]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.89187,41.291386)","lat":41.291386,"lng":-73.89187},"timeSteps":1},{"dyn":{"width":[12.9243955371228]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.897545,40.930096)","lat":40.930096,"lng":-73.897545},"timeSteps":1},{"dyn":{"width":[14.8431802522236]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.92474,41.096634)","lat":41.096634,"lng":-73.92474},"timeSteps":1},{"dyn":{"width":[11.3841995766062]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-73.982185,41.21217)","lat":41.21217,"lng":-73.982185},"timeSteps":1},{"dyn":{"width":[14.2643611844344]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.015175,41.503475)","lat":41.503475,"lng":-74.015175},"timeSteps":1},{"dyn":{"width":[19.5345847153196]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.1344492920664,41.11084915)","lat":41.11084915,"lng":-74.1344492920664},"timeSteps":1},{"dyn":{"width":[14.4499134945508]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.139015,40.859295)","lat":40.859295,"lng":-74.139015},"timeSteps":1},{"dyn":{"width":[34.2998542270955]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.166824,40.902527)","lat":40.902527,"lng":-74.166824},"timeSteps":1},{"dyn":{"width":[8.48528137423857]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.35644,41.26269)","lat":41.26269,"lng":-74.35644},"timeSteps":1},{"dyn":{"width":[23.939924811912]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.3682,41.439877)","lat":41.439877,"lng":-74.3682},"timeSteps":1},{"dyn":{"width":[8.4]},"static":{"type":"pie","height":30,"opacity":0.9,"labels":"none","labelMinSize":8,"labelMaxSize":24,"transitionTime":750,"fillColor":"#1f77b4","layerId":"_minichart (-74.6809426462244,41.36734935)","lat":41.36734935,"lng":-74.6809426462244},"timeSteps":1}],[[[370.9,326.1]],[[220.6,95]],[[144.3,148.7]],[[256.4,57.2]],[[203.6,25]],[[126.4,42.6]],[[67.3,46.7]],[[78.3,100.7]],[[227.9,57.1]],[[72,40]],[[1145.7,316.3]],[[37,23]],[[100.4,82]],[[199.9,171.1]],[[139.6,-7.59999999999999]],[[82.3,33.7]],[[120.3,32.7]],[[69.1,20.9]],[[132.3,9]],[[199.7,65.3]],[[70.3,74.7]],[[579.7,237.3]],[[14.4,35.6]],[[293.3,104.7]],[[17.4,31.6]]],1145.7,["steelblue","coral"],["1"],null,{"showTitle":true,"showValues":true,"labels":["Beds occupued","Beds free"],"supValues":null,"supLabels":[],"html":[["<b>Bridgeport Hospital<\/b><\/br>Bed occupancy: 53%<br>Beds free: 326<\/br>Total beds: 697<\/br><\/br>ICU occupancy: 86%<br>ICU beds free: 7<\/br>Total ICU beds: 54<\/br><\/br>Covid-19 patients: 139"],["<b>St Vincent's Medical Center<\/b><\/br>Bed occupancy: 70%<br>Beds free: 95<\/br>Total beds: 316<\/br><\/br>ICU occupancy: 29%<br>ICU beds free: 47<\/br>Total ICU beds: 66<\/br><\/br>Covid-19 patients: 56"],["<b>Norwalk Hospital<\/b><\/br>Bed occupancy: 49%<br>Beds free: 149<\/br>Total beds: 293<\/br><\/br>ICU occupancy: 36%<br>ICU beds free: 19<\/br>Total ICU beds: 30<\/br><\/br>Covid-19 patients: 47"],["<b>Danbury Hospital<\/b><\/br>Bed occupancy: 82%<br>Beds free: 57<\/br>Total beds: 314<\/br><\/br>ICU occupancy: 80%<br>ICU beds free: 4<\/br>Total ICU beds: 20<\/br><\/br>Covid-19 patients: 75"],["<b>Stamford Hospital<\/b><\/br>Bed occupancy: 89%<br>Beds free: 25<\/br>Total beds: 229<\/br><\/br>ICU occupancy: 81%<br>ICU beds free: 6<\/br>Total ICU beds: 32<\/br><\/br>Covid-19 patients: 44"],["<b>Greenwich Hospital Association -<\/b><\/br>Bed occupancy: 75%<br>Beds free: 43<\/br>Total beds: 169<\/br><\/br>ICU occupancy: 39%<br>ICU beds free: 18<\/br>Total ICU beds: 30<\/br><\/br>Covid-19 patients: 33"],["<b>Putnam Hospital Center<\/b><\/br>Bed occupancy: 59%<br>Beds free: 47<\/br>Total beds: 114<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: 16"],["<b>Northern Westchester Hospital<\/b><\/br>Bed occupancy: 44%<br>Beds free: 101<\/br>Total beds: 179<\/br><\/br>ICU occupancy: 40%<br>ICU beds free: 9<\/br>Total ICU beds: 15<\/br><\/br>Covid-19 patients: 21"],["<b>White Plains Hospital Center<\/b><\/br>Bed occupancy: 80%<br>Beds free: 57<\/br>Total beds: 285<\/br><\/br>ICU occupancy: 59%<br>ICU beds free: 9<\/br>Total ICU beds: 22<\/br><\/br>Covid-19 patients: 52"],["<b>Montefiore New Rochelle Hospital<\/b><\/br>Bed occupancy: 64%<br>Beds free: 40<\/br>Total beds: 112<\/br><\/br>ICU occupancy: 39%<br>ICU beds free: 14<\/br>Total ICU beds: 23<\/br><\/br>Covid-19 patients: 19"],["<b>Westchester Medical Center<\/b><\/br>Bed occupancy: 78%<br>Beds free: 316<\/br>Total beds: 1,462<\/br><\/br>ICU occupancy: 81%<br>ICU beds free: 40<\/br>Total ICU beds: 208<\/br><\/br>Covid-19 patients: 177"],["<b>Montefiore Mount Vernon Hospital<\/b><\/br>Bed occupancy: 62%<br>Beds free: 23<\/br>Total beds: 60<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: &ndash;"],["<b>Phelps Hospital<\/b><\/br>Bed occupancy: 55%<br>Beds free: 82<\/br>Total beds: 182<\/br><\/br>ICU occupancy: 69%<br>ICU beds free: 4<\/br>Total ICU beds: 12<\/br><\/br>Covid-19 patients: 17"],["<b>St John's Riverside Hospital<\/b><\/br>Bed occupancy: 54%<br>Beds free: 171<\/br>Total beds: 371<\/br><\/br>ICU occupancy: 25%<br>ICU beds free: 39<\/br>Total ICU beds: 52<\/br><\/br>Covid-19 patients: 43"],["<b>Hudson Valley Hospital Center<\/b><\/br>Bed occupancy: 106%<br>Beds free: -8<\/br>Total beds: 132<\/br><\/br>ICU occupancy: 83%<br>ICU beds free: 2<\/br>Total ICU beds: 12<\/br><\/br>Covid-19 patients: 39"],["<b>St Joseph's Medical Center<\/b><\/br>Bed occupancy: 71%<br>Beds free: 34<\/br>Total beds: 116<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 6<\/br><\/br>Covid-19 patients: 6"],["<b>Nyack Hospital<\/b><\/br>Bed occupancy: 79%<br>Beds free: 33<\/br>Total beds: 153<\/br><\/br>ICU occupancy: 26%<br>ICU beds free: 45<\/br>Total ICU beds: 60<\/br><\/br>Covid-19 patients: 33"],["<b>Helen Hayes Hospital<\/b><\/br>Bed occupancy: 77%<br>Beds free: 21<\/br>Total beds: 90<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: &ndash;<\/br><\/br>Covid-19 patients: 10"],["<b>St Luke's Cornwall Hospital<\/b><\/br>Bed occupancy: 94%<br>Beds free: 9<\/br>Total beds: 141<\/br><\/br>ICU occupancy: 69%<br>ICU beds free: 8<\/br>Total ICU beds: 25<\/br><\/br>Covid-19 patients: 46"],["<b>Good Samaritan Hospital Of Suffern<\/b><\/br>Bed occupancy: 75%<br>Beds free: 65<\/br>Total beds: 265<\/br><\/br>ICU occupancy: 78%<br>ICU beds free: 7<\/br>Total ICU beds: 31<\/br><\/br>Covid-19 patients: 25"],["<b>St Mary's General Hospital<\/b><\/br>Bed occupancy: 48%<br>Beds free: 75<\/br>Total beds: 145<\/br><\/br>ICU occupancy: 55%<br>ICU beds free: 10<\/br>Total ICU beds: 22<\/br><\/br>Covid-19 patients: 30"],["<b>St Joseph's University Medical Center<\/b><\/br>Bed occupancy: 71%<br>Beds free: 237<\/br>Total beds: 817<\/br><\/br>ICU occupancy: 50%<br>ICU beds free: 66<\/br>Total ICU beds: 131<\/br><\/br>Covid-19 patients: 197"],["<b>St Anthony Community Hospital<\/b><\/br>Bed occupancy: 29%<br>Beds free: 36<\/br>Total beds: 50<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 8<\/br><\/br>Covid-19 patients: &ndash;"],["<b>Garnet Health Medical Center<\/b><\/br>Bed occupancy: 74%<br>Beds free: 105<\/br>Total beds: 398<\/br><\/br>ICU occupancy: 24%<br>ICU beds free: 72<\/br>Total ICU beds: 95<\/br><\/br>Covid-19 patients: 43"],["<b>Bon Secours Community Hospital<\/b><\/br>Bed occupancy: 36%<br>Beds free: 32<\/br>Total beds: 49<\/br><\/br>ICU occupancy: &ndash;<br>ICU beds free: &ndash;<\/br>Total ICU beds: 10<\/br><\/br>Covid-19 patients: &ndash;"]],"noPopup":false,"digits":null},null]},{"method":"addLegend","args":[{"colors":["steelblue","coral"],"labels":["Beds occupued","Beds free"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"unknown","title":null,"extra":null,"layerId":"minichartsLegend","className":"info legend","group":null}]},{"method":"addEasyButton","args":[{"icon":"ion-arrow-shrink","title":"Reset View","onClick":"function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }","position":"topleft"}]}],"limits":{"lat":[40.859295,41.503475],"lng":[-74.6809426462244,-73.16652]}},"evals":["calls.3.args.0.onClick"],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

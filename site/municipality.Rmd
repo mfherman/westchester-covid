@@ -32,10 +32,6 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 
 Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
 
-::::: {.panelset}
-::: {.panel}
-[Daily cases per capita]{.panel-name}
-
 ```{r mun_per_capita_map, out.height="600px", out.width="600px"}
 mun_recent <- mun_cases %>% 
   filter(date == max(date), municipality != "Totals") %>%
@@ -94,10 +90,7 @@ leaflet(to_map) %>%
   setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
   addResetMapButton()
 ```
-:::
 
-::: {.panel}
-[Total cases]{.panel-name}
 
 ```{r total_cases_map, out.height="600px", out.width="600px"}
 to_map <- mun_cases_centroid %>% 
@@ -124,8 +117,7 @@ leaflet(to_map) %>%
   setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
   addResetMapButton()
 ```
-:::
-:::::
+
 
 # Cases per capita by town
 
@@ -168,13 +160,3 @@ p <- all_days_mun %>%
 
 ggplotly_config(p)
 ```
-
-
-```{css}
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-.leaflet {
-  margin: auto
-}
-```
-
