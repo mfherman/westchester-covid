@@ -1,0 +1,294 @@
+---
+title: "Westchester and Surrounding Counties"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(plotly)
+library(sf)
+library(leaflet)
+library(DT)
+library(here)
+library(slider)
+library(scales)
+library(lubridate)
+library(leaflet)
+library(leaflet.extras)
+library(gghighlight)
+
+source(here("R/utils.R"))
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r read_in_data}
+county_bound <- read_rds(here("data/county-boundary.rds"))
+
+nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
+  group_by(county) %>% 
+  mutate(
+    across(c(new_cases, total_cases, new_tests, total_tests), 
+    list(
+      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
+      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
+      )
+    ),
+    pos_rate_avg_7 = new_cases_avg_7 / new_tests_avg_7,
+    pos_rate_avg_14 = new_cases_avg_14 / new_tests_avg_14
+    ) %>% 
+  ungroup()
+
+nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
+  group_by(county, state) %>% 
+  mutate(
+    across(where(is.numeric), 
+    list(
+      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
+      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
+      )
+    )) %>% 
+  ungroup() %>% 
+  inner_join(select(county_bound, -fips), by = c("county", "state")) %>% 
+  mutate(
+    new_cases_per_cap = new_cases_avg_7 / total_pop * 1e5,
+    new_deaths_per_cap = new_deaths_avg_7 / total_pop * 1e5
+    ) %>% 
+  select(-geometry)
+```
+
+Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
+
+<div class = "l-page">
+::::: {.panelset}
+::: {.panel}
+[Cases]{.panel-name}
+
+```{r county_case_bar, layout="l-page"}
+to_plot <- nyt_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, new_cases)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New cases: ", comma(new_cases, 1), "<br>",
+        "7-day average: ", comma(new_cases_avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = new_cases_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New Cases Reported",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Deaths]{.panel-name}
+
+```{r county_death_bar, layout="l-page"}
+to_plot <- nyt_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, new_deaths)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New deaths: ", comma(new_deaths, 1), "<br>",
+        "7-day average: ", comma(new_deaths_avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New Deaths Reported",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Tests]{.panel-name}
+
+```{r county_test_bar, layout="l-page"}
+to_plot <- nys_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, new_tests)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New tests: ", comma(new_tests, 1), "<br>",
+        "7-day average: ", comma(new_tests_avg_7, 1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = new_tests_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New Tests Reported",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Positivity Rate]{.panel-name}
+
+```{r county_pos_rate_bar, layout="l-page"}
+to_plot <- nys_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, pos_rate)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "Positivity rate: ", percent(pos_rate, 0.1), "<br>",
+        "7-day average: ", percent(pos_rate_avg_7, 0.1)
+        )
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = pos_rate_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_y_continuous(label = label_percent(1), limits = c(0, 0.5)) +
+  labs(
+    title = "Test Postivity Rate",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+:::::
+</div>
+
+## New cases per capita (7-day average)
+
+```{r metro_cases_map, layout="l-page", out.height = "800px"}
+to_map <- county_bound %>% 
+  inner_join(nyt_cases, by = c("county", "state")) %>% 
+  filter(date == max(date)) %>% 
+  mutate(
+    label = paste0(
+      "<b>", county, "</b><br>",
+      "Avg. daily cases: ", comma(new_cases_avg_7, 1), "<br>",
+      "Per 100k: ", number(new_cases_per_cap, 0.1)
+      )
+    )
+
+cd_pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = 0:100
+  )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    weight = 1.5,
+    color = "white",
+    fillColor = ~cd_pal(new_cases_per_cap),
+    fillOpacity = 0.8,
+    popup = ~label,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>%
+  addLegend(
+    pal = cd_pal,
+    values = to_map$new_cases_per_cap,
+    opacity = 0.7,
+    bins = c(20, 40, 60, 80, 100),
+    position = "bottomright",
+    title = "Avg. daily cases per 100k",
+  ) %>% 
+  setView(lng = -73.75, lat = 41.3, zoom = 9) %>% 
+  addResetMapButton()
+```
+
+<br>
+<br>
+
+## New cases per capita trend
+
+```{r small_mult_cases_per_cap, layout = "l-page", dpi=300, dev="svg", fig.width=12, fig.height=6}
+nyt_cases %>% 
+  mutate(
+    county = fct_reorder(county, -new_cases_per_cap, mean, na.rm = TRUE),
+    county = fct_relevel(county, "Westchester")
+    ) %>%
+  ggplot(aes(date, new_cases_per_cap, color = county)) +
+  geom_line(color = "steelblue", size = 1) +
+  gghighlight(
+    use_direct_label = FALSE,
+    unhighlighted_params = list(size = 0.3)
+    ) +
+  facet_wrap(vars(county), nrow = 3) +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(face = "bold", size = 14, hjust = 0)
+    )
+```
+
+
+
+
+

@@ -32,6 +32,8 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 
 Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
 
+## New cases per capita (14-day average)
+
 ```{r mun_per_capita_map, out.height="600px", out.width="600px"}
 mun_recent <- mun_cases %>% 
   filter(date == max(date), municipality != "Totals") %>%
@@ -91,6 +93,9 @@ leaflet(to_map) %>%
   addResetMapButton()
 ```
 
+<br>
+
+## Total cases
 
 ```{r total_cases_map, out.height="600px", out.width="600px"}
 to_map <- mun_cases_centroid %>% 
@@ -118,8 +123,9 @@ leaflet(to_map) %>%
   addResetMapButton()
 ```
 
+<br>
 
-# Cases per capita by town
+## New cases per capita by trend
 
 ```{r mun_heat_map, layout="l-page", out.height="700px"}
 all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")

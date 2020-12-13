@@ -9,8 +9,10 @@ twitter:
 theme: theme.css
 navbar:
   right:
-    - text: "County"
+    - text: "Home"
       href: index.html
+    - text: "County"
+      href: county.html
     - text: "Towns"
       href: municipality.html
     - text: "Hospitals"

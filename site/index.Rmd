@@ -17,11 +17,9 @@ library(scales)
 library(lubridate)
 library(leaflet)
 library(leaflet.extras)
-```
 
-```{r xaringan-panelset, echo=FALSE}
-xaringanExtra::use_panelset()
 source(here("R/utils.R"))
+
 ```
 
 ```{r read_in_data}
@@ -56,11 +54,6 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 
 Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
 
-<div class = "l-page">
-::::: {.panelset}
-::: {.panel}
-[Cases]{.panel-name}
-
 ```{r county_case_bar, layout="l-page"}
 to_plot <- nyt_cases %>% 
   filter(county == "Westchester") %>% 
@@ -92,114 +85,3 @@ to_plot <- nyt_cases %>%
 ggplotly_config(to_plot) %>% 
   layout(hovermode = "x unified")
 ```
-:::
-
-::: {.panel}
-[Deaths]{.panel-name}
-
-```{r county_death_bar, layout="l-page"}
-to_plot <- nyt_cases %>% 
-  filter(county == "Westchester") %>% 
-  ggplot(aes(date, new_deaths)) +
-  geom_col(
-    aes(
-      text = paste0(
-        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
-        "New deaths: ", comma(new_deaths, 1), "<br>",
-        "7-day average: ", comma(new_deaths_avg_7, 1)
-        )
-      ),
-    fill = "#82bae8"
-    ) +
-  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_number_si()) +
-  labs(
-    title = "New Deaths Reported",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    panel.grid.major.x = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-    )
-
-ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
-```
-:::
-
-::: {.panel}
-[Tests]{.panel-name}
-
-```{r county_test_bar, layout="l-page"}
-to_plot <- nys_cases %>% 
-  filter(county == "Westchester") %>% 
-  ggplot(aes(date, new_tests)) +
-  geom_col(
-    aes(
-      text = paste0(
-        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
-        "New tests: ", comma(new_tests, 1), "<br>",
-        "7-day average: ", comma(new_tests_avg_7, 1)
-        )
-      ),
-    fill = "#82bae8"
-    ) +
-  geom_line(aes(y = new_tests_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_number_si()) +
-  labs(
-    title = "New Tests Reported",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    panel.grid.major.x = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-    )
-
-ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
-```
-:::
-
-::: {.panel}
-[Positivity Rate]{.panel-name}
-
-```{r county_pos_rate_bar, layout="l-page"}
-to_plot <- nys_cases %>% 
-  filter(county == "Westchester") %>% 
-  ggplot(aes(date, pos_rate)) +
-  geom_col(
-    aes(
-      text = paste0(
-        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
-        "Positivity rate: ", percent(pos_rate, 0.1), "<br>",
-        "7-day average: ", percent(pos_rate_avg_7, 0.1)
-        )
-      ),
-    fill = "#82bae8"
-    ) +
-  geom_line(aes(y = pos_rate_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_percent(1), limits = c(0, 0.5)) +
-  labs(
-    title = "Test Postivity Rate",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    panel.grid.major.x = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-    )
-
-ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
-```
-:::
-:::::
-</div>
