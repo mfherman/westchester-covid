@@ -1,23 +1,35 @@
 suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
 suppressWarnings(suppressPackageStartupMessages(library(glue)))
+suppressWarnings(suppressPackageStartupMessages(library(vroom)))
 
 message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
 url <- "https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv"
 
-nyt_county <- read_csv(url, col_types = cols()) %>% 
-  filter(county == "Westchester", state == "New York") %>% 
-  select(date, cases, deaths)
+ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange",
+                 "New York City", "Suffolk", "Nassau")
+
+ct_counties <- c("Fairfield", "New Haven", "Litchfield")
+
+nj_counties <- c("Bergen", "Passaic", "Sussex", "Hudson", "Essex", "Morris")
+
+nyt_county <- vroom(url, col_types = cols()) %>% 
+  filter(
+    (state == "New York" & county %in% ny_counties) |
+    (state == "Connecticut" & county %in% ct_counties) |
+    (state == "New Jersey" & county %in% nj_counties)
+    )
 
 nyt_clean <- nyt_county %>% 
+  group_by(county, state) %>% 
   mutate(
     new_cases = cases - lag(cases),
     new_cases = if_else(is.na(new_cases), 0, new_cases),
     new_deaths = deaths - lag(deaths),
     new_deaths = if_else(is.na(new_deaths) | new_deaths < 0, 0, new_deaths)
     ) %>% 
-  rename(total_cases = cases, total_deaths = deaths) %>% 
-  pivot_longer(-date, names_to = "metric")
+  ungroup() %>% 
+  rename(total_cases = cases, total_deaths = deaths)
 
 write_csv(nyt_clean, "data/by-county-cases-deaths-nyt.csv")
 

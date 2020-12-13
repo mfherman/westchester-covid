@@ -22,7 +22,6 @@ scrape_mun_daily <- function() {
     clean_names()
   
   web_table %>% 
-    pivot_longer(-municipality, names_to = "metric") %>% 
     mutate(date = web_date) %>% 
     relocate(date)
 

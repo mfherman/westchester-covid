@@ -5,8 +5,10 @@ url <- "https://healthdata.gov/sites/default/files/reported_hospital_capacity_ad
 
 hospital <- vroom(url)
 
+fips <- c("36071", "36079", "36087", "36119", "09001", "34031")
+
 hosp_data <- hospital %>% 
-  filter(fips_code == "36119", hospital_subtype != "Childrens Hospitals") %>% 
+  filter(fips_code %in% fips, hospital_subtype != "Childrens Hospitals") %>% 
   select(
     hospital_pk,
     year_week = collection_week,
@@ -19,14 +21,7 @@ hosp_data <- hospital %>%
     ) %>% 
   mutate(across(where(is.numeric), na_if, -999999))
 
-hosp_long <- hosp_data %>% 
-  pivot_longer(
-    cols = -c(hospital_pk, year_week),
-    names_to = "metric",
-    values_to = "n"
-  )
-
-write_csv(hosp_long, "data/hospital-beds-occupancy.csv")
+write_csv(hosp_data, "data/hospital-beds-occupancy.csv")
 
 
     # bed_pct_full = bed_occupied / bed_capacity,

@@ -2,19 +2,26 @@ suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
 suppressWarnings(suppressPackageStartupMessages(library(janitor)))
 suppressWarnings(suppressPackageStartupMessages(library(lubridate)))
 suppressWarnings(suppressPackageStartupMessages(library(glue)))
+suppressWarnings(suppressPackageStartupMessages(library(vroom)))
+
 
 message(glue("{Sys.time()} -- Starting download of NY state data"))
 
 url <- "https://health.data.ny.gov/api/views/xdss-u53e/rows.csv?accessType=DOWNLOAD"
 
-state_county <- read_csv(url, col_types = cols()) %>% 
+ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange",
+                 "Bronx", "Kings", "Queens", "Richmond", "New York",
+                 "Suffolk", "Nassau")
+
+state_county <- vroom(url, col_types = cols()) %>% 
   clean_names() %>% 
-  filter(county == "Westchester") %>% 
+  filter(county %in% ny_counties) %>% 
   mutate(date = mdy(test_date))
 
 state_clean <- state_county %>% 
   transmute(
     date,
+    county,
     new_cases = new_positives,
     total_cases = cumulative_number_of_positives,
     new_tests = total_number_of_tests_performed,
@@ -22,7 +29,7 @@ state_clean <- state_county %>%
     pos_rate = new_cases / new_tests,
     pos_rate = if_else(is.na(pos_rate), 0, pos_rate),
     ) %>% 
-  pivot_longer(-date, names_to = "metric")
+  arrange(date, county)
 
 write_csv(state_clean, "data/by-county-cases-tests-nys.csv")
 
