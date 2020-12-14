@@ -5014,3 +5014,21 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2020-12-12,Suffolk,New York,36103,73281,2108,1163,7
 2020-12-12,Ulster,New York,36111,4251,114,75,3
 2020-12-12,Westchester,New York,36119,58243,1558,638,5
+2020-12-13,Fairfield,Connecticut,09001,46615,1588,0,0
+2020-12-13,Litchfield,Connecticut,09005,5796,186,0,0
+2020-12-13,New Haven,Connecticut,09009,37836,1360,0,0
+2020-12-13,Bergen,New Jersey,34003,40737,2202,368,6
+2020-12-13,Essex,New Jersey,34013,41323,2295,439,1
+2020-12-13,Hudson,New Jersey,34017,37346,1631,337,2
+2020-12-13,Morris,New Jersey,34027,16849,898,206,2
+2020-12-13,Passaic,New Jersey,34031,35512,1372,438,0
+2020-12-13,Sussex,New Jersey,34037,3388,203,55,1
+2020-12-13,Dutchess,New York,36027,9146,206,170,1
+2020-12-13,Nassau,New York,36059,70475,2297,839,3
+2020-12-13,New York City,New York,NA,360700,24501,3211,34
+2020-12-13,Orange,New York,36071,19551,464,206,4
+2020-12-13,Putnam,New York,36079,3743,66,66,0
+2020-12-13,Rockland,New York,36087,23991,547,142,4
+2020-12-13,Suffolk,New York,36103,74367,2113,1086,5
+2020-12-13,Ulster,New York,36111,4327,116,76,2
+2020-12-13,Westchester,New York,36119,58836,1562,593,4
