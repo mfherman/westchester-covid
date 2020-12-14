@@ -81,7 +81,7 @@ leaflet() %>%
     lng = to_map$long,
     lat = to_map$lat,
     type = "pie",
-    chartdata = select(to_map, `Beds occupued` = bed_occupied, `Beds free` = bed_free),
+    chartdata = select(to_map, `Beds occupied` = bed_occupied, `Beds free` = bed_free),
     width = sqrt(to_map$bed_capacity) * 1.2,
     colorPalette = c("steelblue", "coral"),
     opacity = 0.9,
