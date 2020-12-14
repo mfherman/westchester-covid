@@ -23,20 +23,6 @@ source(here("R/utils.R"))
 ```
 
 ```{r read_in_data}
-nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
-  group_by(county) %>% 
-  mutate(
-    across(c(new_cases, total_cases, new_tests, total_tests), 
-    list(
-      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
-      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
-      )
-    ),
-    pos_rate_avg_7 = new_cases_avg_7 / new_tests_avg_7,
-    pos_rate_avg_14 = new_cases_avg_14 / new_tests_avg_14
-    ) %>% 
-  ungroup()
-
 nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
   group_by(county, state) %>% 
   mutate(
@@ -53,6 +39,66 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
 Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
+
+```{r}
+recent <- nyt_cases %>% 
+  filter(date == max(date), county == "Westchester")
+
+last_week <- nyt_cases %>% 
+  filter(date == max(date) - days(7), county == "Westchester")
+
+cases_recent <- recent$new_cases_avg_7 * 7
+cases_last_week <- last_week$new_cases_avg_7 * 7
+
+cases_change <- cases_recent - cases_last_week
+cases_change_pct <- cases_change / cases_last_week
+cases_change_word <- if_else(cases_change > 0, "increase", "decrease")
+
+cases_change_pct_print <- if_else(
+  abs(cases_change_pct) < 0.005,
+  "small",
+  percent(cases_change_pct, 1)
+  )
+
+deaths_recent <- recent$new_deaths_avg_7 * 7
+deaths_last_week <- last_week$new_deaths_avg_7 * 7
+
+deaths_change <- deaths_recent - deaths_last_week
+deaths_change_pct <- deaths_change / deaths_last_week
+
+deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
+```
+
+<div style = "font-size:1.7rem;line-height:1.2em">
+In the last seven days, <span style = "color:white;background-color:steelblue;font-weight:500;font-size:2.2rem;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a `r cases_change_pct_print` `r cases_change_word` from the prior seven days.
+
+There were <span style = "color:white;background-color:coral;font-weight:500;font-size:2.2rem;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is `r deaths_change` `r deaths_change_word` than the prior seven days.
+</div>
+
+
+<span style = "font-size:1.7rem;">
+[County and metro area &#10230;](county.html)
+</span></br>
+Westchester county cases, deaths, and tests + comparisons with the metro area
+
+<span style = "font-size:1.7rem;">
+[Westchester towns &#10230;](municipality.html)
+</span></br>
+Recent case rates in the 43 municipalities of Westchester County
+
+<span style = "font-size:1.7rem;">
+[Hospital capacity &#10230;](hospital.html)
+</span>
+</br>
+Available beds and Covid-19 patients in metro area hospitals
+
+<span style = "font-size:1.7rem;">
+[About the site &#10230;](about.html)
+</span></br>
+Data sources, etc.
+
+
+### New Cases Reported
 
 ```{r county_case_bar, layout="l-page"}
 to_plot <- nyt_cases %>% 
@@ -72,7 +118,7 @@ to_plot <- nyt_cases %>%
   scale_x_date(label = label_date_short(), date_breaks = "1 month") +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Cases Reported",
+    #title = "New Cases Reported",
     x = NULL,
     y = NULL
   ) +
@@ -84,4 +130,66 @@ to_plot <- nyt_cases %>%
 
 ggplotly_config(to_plot) %>% 
   layout(hovermode = "x unified")
+```
+
+
+### Hot Spots
+
+```{r mun_per_capita_map, out.height="500px", out.width="600px"}
+mun_recent <- mun_cases %>% 
+  filter(date == max(date), municipality != "Totals") %>%
+  mutate(new_cases_day_avg = active_cases / 14)
+
+mun_cases_poly <- mun_bound %>% 
+  left_join(mun_recent, by = "municipality") %>% 
+  mutate(
+    new_cases_per_cap = new_cases_day_avg / total_pop * 1e5,
+    total_cases_per_cap = total_cases / total_pop
+    )
+
+mun_cases_centroid <- mun_cases_poly %>% 
+  st_centroid()
+
+to_map <- mun_cases_poly %>% 
+  st_transform(4326) %>% 
+  mutate(
+    label = paste0(
+      "<b>", municipality, "</b><br>",
+      "Avg. daily cases: ", comma(new_cases_day_avg, 1), "<br>",
+      "Per 100k: ", number(new_cases_per_cap, 0.1)
+      )
+    )
+
+cd_pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = 0:100
+  )
+
+leaflet(to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    weight = 1.5,
+    color = "white",
+    fillColor = ~cd_pal(new_cases_per_cap),
+    fillOpacity = 0.8,
+    popup = ~label,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>%
+  addLegend(
+    pal = cd_pal,
+    values = to_map$new_cases_per_cap,
+    opacity = 0.7,
+    bins = c(30, 50, 70, 90),
+    position = "bottomright",
+    title = "Avg. daily cases per 100k<br>in past 14 days",
+      
+  ) %>% 
+  setView(lat = 41.12, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
 ```

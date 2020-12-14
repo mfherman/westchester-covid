@@ -4,7 +4,6 @@ build_site <- function() {
   rmarkdown::render_site(input = "site/")
   
   # move site to docs/
-  fs::dir_delete(path = "docs/")
   fs::dir_copy(path = "site/docs/", new_path = "docs/", overwrite = TRUE) 
   
   # clean-up directories
