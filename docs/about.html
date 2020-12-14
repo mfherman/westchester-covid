@@ -2129,9 +2129,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /* These properties only apply to Distill sites and blogs  */
 
   .distill-site-header {
-    --title-size:       24px;
+    --title-size:       20px;
     --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        17px;
+    --text-size:        16px;
     --hover-color:      white;
     --bkgd-color:       #2d516f;
   }
@@ -2152,10 +2152,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .leaflet-container, .info {
     font-family: 'IBM Plex Sans Condensed', sans-serif !important;
+    background: #FFF !important;
   }
 
   .panel-tab {
     font-family: 'Roboto', sans-serif !important;
+  }
+
+  .index-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .index-row > div {
+    margin: 0 15px 0 15px;
+  }
+
+  .index-column-l {
+    flex: 40%;
+  }
+
+  .index-column-r {
+    flex: 60%;
+  }
+
+  @media (max-width: 1000px) {
+    .index-row {
+      flex-direction: column;
+    }
   }</style>
   <style type="text/css">
   /* base style */

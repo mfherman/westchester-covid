@@ -6,3 +6,11 @@ log/
 site/docs/
 *.utf8.md
 *.knit.md
+site/site_libs/
+site/county_files/
+site/about.html
+site/county.html
+site/index.html
+site/hospital.html
+site/municipality.html
+site/theme.css

@@ -264,7 +264,7 @@ leaflet(to_map) %>%
 
 ### New cases per capita trend
 
-```{r small_mult_cases_per_cap, layout = "l-page", dpi=300, dev="svg", fig.width=12, fig.height=6}
+```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 nyt_cases %>% 
   mutate(
     county = fct_reorder(county, -new_cases_per_cap, mean, na.rm = TRUE),

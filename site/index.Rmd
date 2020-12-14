@@ -38,8 +38,6 @@ mun_cases <- read_csv(here("data/by-mun-cases.csv"))
 mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
-Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
-
 ```{r}
 recent <- nyt_cases %>% 
   filter(date == max(date), county == "Westchester")
@@ -57,7 +55,7 @@ cases_change_word <- if_else(cases_change > 0, "increase", "decrease")
 cases_change_pct_print <- if_else(
   abs(cases_change_pct) < 0.005,
   "small",
-  percent(cases_change_pct, 1)
+  percent(abs(cases_change_pct), 1)
   )
 
 deaths_recent <- recent$new_deaths_avg_7 * 7
@@ -68,37 +66,6 @@ deaths_change_pct <- deaths_change / deaths_last_week
 
 deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
 ```
-
-<div style = "font-size:1.7rem;line-height:1.2em">
-In the last seven days, <span style = "color:white;background-color:steelblue;font-weight:500;font-size:2.2rem;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a `r cases_change_pct_print` `r cases_change_word` from the prior seven days.
-
-There were <span style = "color:white;background-color:coral;font-weight:500;font-size:2.2rem;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is `r deaths_change` `r deaths_change_word` than the prior seven days.
-</div>
-
-
-<span style = "font-size:1.7rem;">
-[County and metro area &#10230;](county.html)
-</span></br>
-Westchester county cases, deaths, and tests + comparisons with the metro area
-
-<span style = "font-size:1.7rem;">
-[Westchester towns &#10230;](municipality.html)
-</span></br>
-Recent case rates in the 43 municipalities of Westchester County
-
-<span style = "font-size:1.7rem;">
-[Hospital capacity &#10230;](hospital.html)
-</span>
-</br>
-Available beds and Covid-19 patients in metro area hospitals
-
-<span style = "font-size:1.7rem;">
-[About the site &#10230;](about.html)
-</span></br>
-Data sources, etc.
-
-
-### New Cases Reported
 
 ```{r county_case_bar, layout="l-page"}
 to_plot <- nyt_cases %>% 
@@ -118,7 +85,7 @@ to_plot <- nyt_cases %>%
   scale_x_date(label = label_date_short(), date_breaks = "1 month") +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    #title = "New Cases Reported",
+    title = "New Cases Reported",
     x = NULL,
     y = NULL
   ) +
@@ -132,10 +99,15 @@ ggplotly_config(to_plot) %>%
   layout(hovermode = "x unified")
 ```
 
+<div style = "font-size:1.7rem;line-height:1.2em">
+In the last seven days, <span style = "color:white;background-color:steelblue;font-weight:500;font-size:2.2rem;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a `r cases_change_pct_print` `r cases_change_word` from the prior seven days.
 
-### Hot Spots
+There were <span style = "color:white;background-color:coral;font-weight:500;font-size:2.2rem;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is `r abs(deaths_change)` `r deaths_change_word` than in the prior seven days.
+</div>
 
-```{r mun_per_capita_map, out.height="500px", out.width="600px"}
+<div class="index-row l-page">
+  <div class="index-column-1">
+```{r mun_per_capita_map, out.height="500px", out.width="400px"}
 mun_recent <- mun_cases %>% 
   filter(date == max(date), municipality != "Totals") %>%
   mutate(new_cases_day_avg = active_cases / 14)
@@ -165,14 +137,14 @@ cd_pal <- colorNumeric(
   domain = 0:100
   )
 
-leaflet(to_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+to_map %>%
+  leaflet(options = leafletOptions(zoomControl = FALSE, minZoom = 10, maxZoom = 10, dragging = FALSE)) %>%
   addPolygons(
     weight = 1.5,
     color = "white",
     fillColor = ~cd_pal(new_cases_per_cap),
     fillOpacity = 0.8,
-    popup = ~label,
+    label = lapply(to_map$label, htmltools::HTML),
     highlight = highlightOptions(
       weight = 2,
       color = "#666666",
@@ -181,15 +153,35 @@ leaflet(to_map) %>%
       bringToFront = TRUE
       )
     ) %>%
-  addLegend(
-    pal = cd_pal,
-    values = to_map$new_cases_per_cap,
-    opacity = 0.7,
-    bins = c(30, 50, 70, 90),
-    position = "bottomright",
-    title = "Avg. daily cases per 100k<br>in past 14 days",
-      
-  ) %>% 
-  setView(lat = 41.12, lng = -73.75, zoom = 10) %>% 
-  addResetMapButton()
+  setView(lat = 41.12, lng = -73.75, zoom = 10)
 ```
+  </div>
+  
+  <div class="index-column-2">
+</br>
+</br>
+</br>
+<span style = "font-size:1.7rem;">
+[County and metro area &#10230;](county.html)
+</span></br>
+Westchester county cases, deaths, and tests + comparisons with the metro area
+
+<span style = "font-size:1.7rem;">
+[Westchester towns &#10230;](municipality.html)
+</span></br>
+Recent case rates in the 43 municipalities of Westchester County
+
+<span style = "font-size:1.7rem;">
+[Hospital capacity &#10230;](hospital.html)
+</span>
+</br>
+Available beds and Covid-19 patients in metro area hospitals
+
+<span style = "font-size:1.7rem;">
+[About the site &#10230;](about.html)
+</span></br>
+Data sources, etc.
+
+  </div>
+</div>
+
