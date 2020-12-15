@@ -9,7 +9,6 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(plotly)
 library(sf)
-library(leaflet)
 library(DT)
 library(here)
 library(slider)
@@ -18,10 +17,7 @@ library(lubridate)
 library(leaflet)
 library(leaflet.extras)
 library(leaflet.minicharts)
-```
 
-```{r xaringan-panelset, echo=FALSE}
-xaringanExtra::use_panelset()
 source(here("R/utils.R"))
 ```
 
@@ -30,11 +26,8 @@ mun_cases <- read_csv(here("data/by-mun-cases.csv"))
 mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
-Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
 
-### New cases per capita (14-day average)
-
-```{r mun_per_capita_map, out.height="600px", out.width="600px"}
+```{r}
 mun_recent <- mun_cases %>% 
   filter(date == max(date), municipality != "Totals") %>%
   mutate(new_cases_day_avg = active_cases / 14)
@@ -44,8 +37,24 @@ mun_cases_poly <- mun_bound %>%
   mutate(
     new_cases_per_cap = new_cases_day_avg / total_pop * 1e5,
     total_cases_per_cap = total_cases / total_pop
-    )
+    ) %>% 
+  arrange(desc(new_cases_per_cap))
 
+
+tot_cases_least <- mun_cases_poly %>% 
+  arrange(total_cases_per_cap)
+
+tot_cases_most <- mun_cases_poly %>% 
+  arrange(desc(total_cases_per_cap))
+```
+
+The municipality with the most new cases per capita in the past 14 days is `r mun_cases_poly$municipality[1]`, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents).
+
+Through the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are `r tot_cases_most$municipality[1]` (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and `r tot_cases_most$municipality[2]` (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the least cases per capita are `r tot_cases_least$municipality[1]` (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and `r tot_cases_least$municipality[2]` (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
+
+### New cases per capita (14-day average)
+
+```{r mun_per_capita_map, out.height="600px", out.width="600px"}
 mun_cases_centroid <- mun_cases_poly %>% 
   st_centroid()
 
@@ -59,46 +68,7 @@ to_map <- mun_cases_poly %>%
       )
     )
 
-cd_pal <- colorNumeric(
-  palette = "YlOrRd",
-  domain = 0:100
-  )
-
-leaflet(to_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(
-    weight = 1.5,
-    color = "white",
-    fillColor = ~cd_pal(new_cases_per_cap),
-    fillOpacity = 0.8,
-    popup = ~label,
-    highlight = highlightOptions(
-      weight = 2,
-      color = "#666666",
-      opacity = 0.7,
-      fillOpacity = 0.7,
-      bringToFront = TRUE
-      )
-    ) %>%
-  addLegend(
-    pal = cd_pal,
-    values = to_map$new_cases_per_cap,
-    opacity = 0.7,
-    bins = c(30, 50, 70, 90),
-    position = "bottomright",
-    title = "Avg. daily cases per 100k<br>in past 14 days",
-      
-  ) %>% 
-  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
-  addResetMapButton()
-```
-
-<br>
-
-### Total cases
-
-```{r total_cases_map, out.height="600px", out.width="600px"}
-to_map <- mun_cases_centroid %>% 
+to_map_total <- mun_cases_centroid %>% 
   st_transform(4326) %>% 
   mutate(
     label = paste0(
@@ -108,24 +78,94 @@ to_map <- mun_cases_centroid %>%
       )
     )
 
+cd_pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = 0:100
+  )
+
 leaflet(to_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    group = "Cases per 100k",
+    weight = 1.5,
+    color = "white",
+    fillColor = ~cd_pal(new_cases_per_cap),
+    fillOpacity = 0.8,
+    label = lapply(to_map$label, htmltools::HTML),
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>%
   addCircles(
+    data = to_map_total,
+    group = "Total cases",
     radius = ~ sqrt(total_cases) * 50,
-    color = "coral",
+    color = "steelblue",
     opacity = 0.7,
     weight = 1.5,
-    fillColor = "coral",
+    fillColor = "steelblue",
     fillOpacity = 0.2,
-    popup = ~label
+    label = lapply(to_map_total$label, htmltools::HTML)
     ) %>% 
+  addLegend(
+    group = "Cases per 100k",
+    pal = cd_pal,
+    values = to_map$new_cases_per_cap,
+    opacity = 0.7,
+    bins = c(30, 50, 70, 90),
+    position = "bottomright",
+    title = "Avg. daily cases per 100k<br>in past 14 days"
+    ) %>% 
+  addLayersControl(
+    baseGroups = c("Cases per 100k", "Total cases"),
+    options = layersControlOptions(collapsed = FALSE)
+   ) %>% 
   setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
   addResetMapButton()
 ```
 
 <br>
 
-### New cases per capita by municipality
+```{r town-table, layout="l-body-outset", out.height="510px"}
+mun_cases_poly %>% 
+  st_drop_geometry() %>% 
+  arrange(desc(new_cases_per_cap)) %>% 
+  mutate(total_cases_per_cap = pretty_frac(total_cases_per_cap)) %>% 
+  select(
+    `Municipality` = municipality,
+    `Avg. daily cases per 100k` = new_cases_per_cap,
+    `Avg. daily cases` = new_cases_day_avg,
+    `Total cases` = total_cases,
+    `Share of pop` = total_cases_per_cap,
+    `Total pop` = total_pop
+    ) %>% 
+  datatable(
+    class = "compact hover",
+    extensions = "Scroller",
+    options = list(
+      dom = "fti",
+      deferRender = TRUE,
+      scrollY = 250,
+      scroller = TRUE,
+      columnDefs = list(
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1),
+        list(className = "dt-center", targets = 5)
+        )
+      )
+    ) %>% 
+  formatRound(2, digits = 1) %>% 
+  formatRound(c(3:4, 6), digits = 0) %>% 
+  formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(2:6, fontFamily = "Roboto Mono")
+```
+
+<br>
+<br>
 
 ```{r mun_heat_map, layout="l-page", out.height="700px"}
 all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")

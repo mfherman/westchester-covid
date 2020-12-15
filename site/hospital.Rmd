@@ -45,8 +45,6 @@ hosp_geo <- read_rds(here("data/hospital-locations.rds"))
 hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
 ```
 
-Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
-
 # Hospital Capacity
 
 ```{r hosp_cap_map, out.height="600px", out.width="600px"}

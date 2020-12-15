@@ -1,5 +1,5 @@
 ---
-title: "Westchester Covid-19 Tracking"
+title: "Covid-19 in Westchester County"
 site: distill::distill_website
 ---
 
@@ -23,15 +23,18 @@ source(here("R/utils.R"))
 ```
 
 ```{r read_in_data}
-nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
-  group_by(county, state) %>% 
+nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
+  group_by(county) %>% 
   mutate(
-    across(where(is.numeric), 
+    across(c(new_cases, total_cases, new_tests, total_tests), 
     list(
       "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
       "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
       )
-    )) %>% 
+    ),
+    pos_rate_avg_7 = new_cases_avg_7 / new_tests_avg_7,
+    pos_rate_avg_14 = new_cases_avg_14 / new_tests_avg_14
+    ) %>% 
   ungroup()
 
 mun_cases <- read_csv(here("data/by-mun-cases.csv"))
@@ -68,21 +71,26 @@ deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
 ```
 
 ```{r county_case_bar, layout="l-page"}
-to_plot <- nyt_cases %>% 
+to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_cases)) +
   geom_col(
     aes(
-      text = paste0(
+      text = str_replace(paste0(
         "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
         "New cases: ", comma(new_cases, 1), "<br>",
         "7-day average: ", comma(new_cases_avg_7, 1)
-        )
+        ), "NA", " -")
       ),
     fill = "#82bae8"
     ) +
   geom_line(aes(y = new_cases_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
     title = "New Cases Reported",
@@ -99,10 +107,10 @@ ggplotly_config(to_plot) %>%
   layout(hovermode = "x unified")
 ```
 
-<div style = "font-size:1.7rem;line-height:1.2em">
-In the last seven days, <span style = "color:white;background-color:steelblue;font-weight:500;font-size:2.2rem;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a `r cases_change_pct_print` `r cases_change_word` from the prior seven days.
+<div style = "font-size:1.8rem;line-height:1.2em;font-family:'IBM Plex Sans', sans-serif;">
+In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days.
 
-There were <span style = "color:white;background-color:coral;font-weight:500;font-size:2.2rem;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is `r abs(deaths_change)` `r deaths_change_word` than in the prior seven days.
+There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days.
 </div>
 
 <div class="index-row l-page">
@@ -161,6 +169,7 @@ to_map %>%
 </br>
 </br>
 </br>
+    <div style = "font-family:'IBM Plex Sans', sans-serif;">
 <span style = "font-size:1.7rem;">
 [County and metro area &#10230;](county.html)
 </span></br>
@@ -181,7 +190,7 @@ Available beds and Covid-19 patients in metro area hospitals
 [About the site &#10230;](about.html)
 </span></br>
 Data sources, etc.
-
+    </div>
   </div>
 </div>
 

@@ -9,7 +9,6 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(plotly)
 library(sf)
-library(leaflet)
 library(DT)
 library(here)
 library(slider)
@@ -62,32 +61,35 @@ nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>%
   select(-geometry)
 ```
 
-Last updated: **`r month_day_year(Sys.Date(), abbr = TRUE)`**
-
 <div class = "l-page">
 ::::: {.panelset}
 ::: {.panel}
 [Cases]{.panel-name}
 
 ```{r county_case_bar, layout="l-page"}
-to_plot <- nyt_cases %>% 
+to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_cases)) +
   geom_col(
     aes(
-      text = paste0(
+      text = str_replace(paste0(
         "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
         "New cases: ", comma(new_cases, 1), "<br>",
         "7-day average: ", comma(new_cases_avg_7, 1)
-        )
+        ),  "NA", " -")
       ),
     fill = "#82bae8"
     ) +
   geom_line(aes(y = new_cases_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Cases Reported",
+    title = "New Cases Reported in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -111,19 +113,24 @@ to_plot <- nyt_cases %>%
   ggplot(aes(date, new_deaths)) +
   geom_col(
     aes(
-      text = paste0(
+      text = str_replace(paste0(
         "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
         "New deaths: ", comma(new_deaths, 1), "<br>",
         "7-day average: ", comma(new_deaths_avg_7, 1)
-        )
+        ),  "NA", " -")
       ),
     fill = "#82bae8"
     ) +
   geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Deaths Reported",
+    title = "New Deaths Reported in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -147,19 +154,24 @@ to_plot <- nys_cases %>%
   ggplot(aes(date, new_tests)) +
   geom_col(
     aes(
-      text = paste0(
+      text = str_replace(paste0(
         "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
         "New tests: ", comma(new_tests, 1), "<br>",
         "7-day average: ", comma(new_tests_avg_7, 1)
-        )
+        ),  "NA", " -")
       ),
     fill = "#82bae8"
     ) +
   geom_line(aes(y = new_tests_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Tests Reported",
+    title = "New Tests Reported in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -183,19 +195,24 @@ to_plot <- nys_cases %>%
   ggplot(aes(date, pos_rate)) +
   geom_col(
     aes(
-      text = paste0(
+      text = str_replace(paste0(
         "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
         "Positivity rate: ", percent(pos_rate, 0.1), "<br>",
         "7-day average: ", percent(pos_rate_avg_7, 0.1)
-        )
+        ),  "NA", " -")
       ),
     fill = "#82bae8"
     ) +
   geom_line(aes(y = pos_rate_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(label = label_date_short(), date_breaks = "1 month") +
-  scale_y_continuous(label = label_percent(1), limits = c(0, 0.5)) +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
+  scale_y_continuous(label = label_percent(1), limits = c(0, 0.507)) +
   labs(
-    title = "Test Postivity Rate",
+    title = "Test Postivity Rate in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -212,9 +229,54 @@ ggplotly_config(to_plot) %>%
 :::::
 </div>
 
+```{r westchester-table, layout="l-page"}
+deaths <- nyt_cases %>% 
+  filter(county == "Westchester") %>% 
+  select(date, new_deaths, total_deaths)
+
+nys_cases %>% 
+  filter(county == "Westchester") %>% 
+  select(date, new_cases, new_tests, total_cases, pos_rate) %>% 
+  left_join(deaths, by = "date") %>% 
+  arrange(desc(date)) %>% 
+  mutate(
+    across(where(is.numeric), ~ if_else(is.na(.x), 0, .x)),
+    date = month_day_year(date, abbr = TRUE)
+    ) %>% 
+  select(
+    `Report date` = date,
+    `New cases` = new_cases,
+    `New tests` = new_tests,
+    `New deaths` = new_deaths,
+    `Test positivity rate` = pos_rate,
+    `Total cases` = total_cases,
+    `Total deaths` = total_deaths
+    ) %>% 
+  datatable(
+    class = "compact hover",
+    extensions = "Scroller",
+    options = list(
+      dom = "ti",
+      deferRender = TRUE,
+      scrollY = 250,
+      scroller = TRUE,
+      columnDefs = list(
+        list(orderData = 0, targets = 1),
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1)
+        )
+      )
+    ) %>% 
+  formatPercentage(5, digits = 1) %>% 
+  formatRound(c(2:4, 6:7), digits = 0) %>% 
+  formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(2:7, fontFamily = "Roboto Mono")
+```
+
+
 ### New cases per capita (7-day average)
 
-```{r metro_cases_map, layout="l-page", out.height = "800px"}
+```{r metro_cases_map, out.height = "600px"}
 to_map <- county_bound %>% 
   inner_join(nyt_cases, by = c("county", "state")) %>% 
   filter(date == max(date)) %>% 
@@ -238,7 +300,7 @@ leaflet(to_map) %>%
     color = "white",
     fillColor = ~cd_pal(new_cases_per_cap),
     fillOpacity = 0.8,
-    popup = ~label,
+    label = lapply(to_map$label, htmltools::HTML),
     highlight = highlightOptions(
       weight = 2,
       color = "#666666",
@@ -255,14 +317,12 @@ leaflet(to_map) %>%
     position = "bottomright",
     title = "Avg. daily cases per 100k",
   ) %>% 
-  setView(lng = -73.75, lat = 41.3, zoom = 9) %>% 
+  setView(lng = -73.75, lat = 41.3, zoom = 8) %>% 
   addResetMapButton()
 ```
 
 <br>
 <br>
-
-### New cases per capita trend
 
 ```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 nyt_cases %>% 
@@ -274,10 +334,12 @@ nyt_cases %>%
   geom_line(color = "steelblue", size = 1) +
   gghighlight(
     use_direct_label = FALSE,
-    unhighlighted_params = list(size = 0.3)
+    unhighlighted_params = list(size = 0.2)
     ) +
   facet_wrap(vars(county), nrow = 3) +
   labs(
+    title = "New cases per 100,000 residents",
+    subtitle = str_wrap("Trend lines for all counties in the metro area are drawn in gray to compare with trend of each county drawn in blue", 65),
     x = NULL,
     y = NULL
   ) +
@@ -285,6 +347,8 @@ nyt_cases %>%
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank(),
-    strip.text = element_text(face = "bold", size = 14, hjust = 0)
+    strip.text = element_text(size = 14, hjust = 0),
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 12)
     )
 ```
