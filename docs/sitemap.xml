@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://rstudio.github.io/distill/about.html</loc>
-    <lastmod>2020-12-10T16:57:40-05:00</lastmod>
+    <lastmod>2020-12-15T11:19:32-05:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/county.html</loc>
