@@ -1,5 +1,5 @@
 ---
-title: "Westchester Covid-19 Tracking"
+title: "Hospital Capacity"
 site: distill::distill_website
 ---
 
@@ -45,20 +45,51 @@ hosp_geo <- read_rds(here("data/hospital-locations.rds"))
 hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
 ```
 
-# Hospital Capacity
 
-```{r hosp_cap_map, out.height="600px", out.width="600px"}
-hosp_recent <- hosp_cap %>% 
-  filter(year_week == max(year_week))
+```{r}
+hosp_wch <- hosp_cap %>% 
+  filter(
+    year_week == max(year_week),
+    county == "Westchester"
+    )
 
-to_map <- hosp_geo %>%
-  st_drop_geometry() %>% 
-  left_join(hosp_recent, by = "hospital_pk") %>%
+hosp_wch_sum <- hosp_wch %>% 
+  group_by(year_week) %>% 
+  summarize(across(where(is.numeric), sum, na.rm = TRUE), .groups = "drop") %>% 
   mutate(
     bed_free = bed_capacity - bed_occupied,
     icu_free = icu_capacity - icu_occupied,
+    pct_covid = covid_patients / all_patients,
+    pct_bed = bed_occupied / bed_capacity,
+    pct_icu = icu_occupied / icu_capacity
+    )
+```
+
+In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7))`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free.
+
+### Hospital capacity
+
+```{r hosp_cap_map, out.height="600px", out.width="600px"}
+fips <- c("36071", "36079", "36087", "36119", "09001", "34031", "34003", "34037")
+
+hosp_recent <- hosp_cap %>% 
+  filter(
+    year_week == max(year_week),
+    fips_code %in% fips
+    )
+
+to_map <- hosp_geo %>%
+  st_drop_geometry() %>% 
+  inner_join(hosp_recent, by = "hospital_pk") %>%
+  mutate(
+    bed_free = bed_capacity - bed_occupied,
+    icu_free = icu_capacity - icu_occupied,
+    pct_covid = covid_patients / all_patients,
+    pct_bed = bed_occupied / bed_capacity,
+    pct_icu = icu_occupied / icu_capacity,
     label = paste0(
       "<b>", hospital_name, "</b></br>",
+      "Week ending ", month_day_year(year_week + days(7), abbr = TRUE), "<br><br>",
       "Bed occupancy: ", percent(bed_occupied / bed_capacity, 1), "<br>",
       "Beds free: ", comma(bed_free, 1), "</br>",   
       "Total beds: ", comma(bed_capacity, 1), "</br>",
@@ -72,10 +103,10 @@ to_map <- hosp_geo %>%
     label = str_replace_all(label, "NA", "&ndash;")
     )
 
-
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addMinicharts(
+    layerId = as.character(1:nrow(to_map)),
     lng = to_map$long,
     lat = to_map$lat,
     type = "pie",
@@ -84,21 +115,52 @@ leaflet() %>%
     colorPalette = c("steelblue", "coral"),
     opacity = 0.9,
     popup = popupArgs(html = to_map$label)
-    ) %>%
-  addResetMapButton()
-
-# leaflet(to_map) %>%
-#   addProviderTiles(providers$CartoDB.Positron) %>%
-#   addCircles(
-#     radius = ~ sqrt(bed_capacity) * 100,
-#     color = "coral",
-#     opacity = 0.7,
-#     weight = 1.5,
-#     fillColor = "coral",
-#     fillOpacity = 0.5,
-#     popup = ~label
-#     ) %>%
-#   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
-#   addResetMapButton()
-
+    )
 ```
+
+<br>
+<br>
+
+```{r wch-hosp-map, layout="l-page"}
+na_format <- c(
+    "function(row, data){",
+    "  for(var i=0; i<data.length; i++){",
+    "    if(data[i+1] === null){",
+    "      $('td:eq('+i+')', row).html('NA')",
+    "        .css({'color': 'rgb(151,151,151)', 'font-style': 'italic'});",
+    "    }",
+    "  }",
+    "}"  
+  )
+
+to_map %>% 
+  filter(county == "Westchester") %>% 
+  arrange(desc(bed_occupied)) %>% 
+  select(
+    `Hospital` = hospital_name,
+    `City` = city,
+    `Covid-19 patients` = covid_patients,
+    `Beds used` = pct_bed,
+    `Total beds` = bed_capacity,
+    `ICU beds used` = pct_icu,
+    `Total ICU beds` = icu_capacity
+    ) %>%
+  datatable(
+    class = "compact hover",
+    extensions = "Scroller",
+    options = list(
+      dom = "t",
+      rowCallback = na_format,
+      columnDefs = list(
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1:2)
+        #list(className = "dt-center", targets = 5)
+        )
+      )
+    ) %>% 
+  formatRound(c(3, 5, 7), digits = 0) %>% 
+  formatPercentage(c(4, 6), digits = 0) %>% 
+  formatStyle(1:2, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(3:7, fontFamily = "Roboto Mono")
+```
+
