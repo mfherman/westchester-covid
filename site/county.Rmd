@@ -1,5 +1,5 @@
 ---
-title: "Westchester and Surrounding Counties"
+title: "Westchester and surrounding counties"
 site: distill::distill_website
 ---
 
@@ -61,12 +61,13 @@ nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>%
   select(-geometry)
 ```
 
-<div class = "l-page">
+
+<div class = "l-body-outset">
 ::::: {.panelset}
 ::: {.panel}
 [Cases]{.panel-name}
 
-```{r county_case_bar, layout="l-page"}
+```{r county_case_bar, layout="l-body-outset"}
 to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_cases)) +
@@ -107,7 +108,7 @@ ggplotly_config(to_plot) %>%
 ::: {.panel}
 [Deaths]{.panel-name}
 
-```{r county_death_bar, layout="l-page"}
+```{r county_death_bar, layout="l-body-outset"}
 to_plot <- nyt_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_deaths)) +
@@ -148,7 +149,7 @@ ggplotly_config(to_plot) %>%
 ::: {.panel}
 [Tests]{.panel-name}
 
-```{r county_test_bar, layout="l-page"}
+```{r county_test_bar, layout="l-body-outset"}
 to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_tests)) +
@@ -189,7 +190,7 @@ ggplotly_config(to_plot) %>%
 ::: {.panel}
 [Positivity Rate]{.panel-name}
 
-```{r county_pos_rate_bar, layout="l-page"}
+```{r county_pos_rate_bar, layout="l-body-outset"}
 to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, pos_rate)) +
@@ -229,7 +230,7 @@ ggplotly_config(to_plot) %>%
 :::::
 </div>
 
-```{r westchester-table, layout="l-page"}
+```{r westchester-table, layout="l-body-outset"}
 deaths <- nyt_cases %>% 
   filter(county == "Westchester") %>% 
   select(date, new_deaths, total_deaths)
@@ -352,3 +353,5 @@ nyt_cases %>%
     plot.subtitle = element_text(size = 12)
     )
 ```
+
+

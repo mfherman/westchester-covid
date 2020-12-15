@@ -1,5 +1,5 @@
 ---
-title: "Westchester Municipalities"
+title: "Westchester municipalities"
 site: distill::distill_website
 ---
 
@@ -48,9 +48,9 @@ tot_cases_most <- mun_cases_poly %>%
   arrange(desc(total_cases_per_cap))
 ```
 
-The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is also a recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
+The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
 
-Throughout the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are **`r tot_cases_most$municipality[1]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and **`r tot_cases_most$municipality[2]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the least cases per capita are **`r tot_cases_least$municipality[1]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and **`r tot_cases_least$municipality[2]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
+Throughout the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are **`r tot_cases_most$municipality[1]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and **`r tot_cases_most$municipality[2]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the fewest cases per capita are **`r tot_cases_least$municipality[1]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and **`r tot_cases_least$municipality[2]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
 
 ### New cases per capita (14-day average)
 

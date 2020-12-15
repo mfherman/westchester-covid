@@ -31,3 +31,19 @@ month_day_year <- function(x, abbr = FALSE) {
 pretty_frac <- function(x, accuracy = 1) {
   paste("1 in", scales::number(1 / x, accuracy))
   }
+
+num_sign <- function(x, accuracy = NULL) {
+  ifelse(
+    x > 0,
+    glue::glue("+{scales::comma(x, accuracy)}"),
+    scales::comma(x, accuracy)
+    )
+  }
+
+percent_sign <- function(x, accuracy = NULL) {
+  ifelse(
+    x > 0,
+    glue::glue("+{scales::percent(x, accuracy)}"),
+    scales::percent(x, accuracy)
+    )
+  }

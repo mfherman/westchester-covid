@@ -42,10 +42,10 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
 ```{r}
-recent <- nyt_cases %>% 
+recent <- nys_cases %>% 
   filter(date == max(date), county == "Westchester")
 
-last_week <- nyt_cases %>% 
+last_week <- nys_cases %>% 
   filter(date == max(date) - days(7), county == "Westchester")
 
 cases_recent <- recent$new_cases_avg_7 * 7
@@ -61,8 +61,14 @@ cases_change_pct_print <- if_else(
   percent(abs(cases_change_pct), 1)
   )
 
-deaths_recent <- recent$new_deaths_avg_7 * 7
-deaths_last_week <- last_week$new_deaths_avg_7 * 7
+recent_nyt <- nyt_cases %>% 
+  filter(date == max(date), county == "Westchester")
+
+last_week_nyt <- nyt_cases %>% 
+  filter(date == max(date) - days(7), county == "Westchester")
+
+deaths_recent <- recent_nyt$new_deaths_avg_7 * 7
+deaths_last_week <- last_week_nyt$new_deaths_avg_7 * 7
 
 deaths_change <- deaths_recent - deaths_last_week
 deaths_change_pct <- deaths_change / deaths_last_week
@@ -70,7 +76,40 @@ deaths_change_pct <- deaths_change / deaths_last_week
 deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
 ```
 
-```{r county_case_bar, layout="l-page"}
+```{r calc-key-metrics}
+recent <- nys_cases %>% 
+  filter(date == max(date), county == "Westchester")
+
+last_week <- nys_cases %>% 
+  filter(date == max(date) - days(7), county == "Westchester")
+
+recent_nyt <- nyt_cases %>% 
+  filter(date == max(date), county == "Westchester")
+
+last_week_nyt <- nyt_cases %>% 
+  filter(date == max(date) - days(7), county == "Westchester")
+
+cases_recent <- recent$new_cases_avg_7 * 7
+cases_last_week <- last_week$new_cases_avg_7 * 7
+cases_change <- cases_recent - cases_last_week
+cases_change_pct <- cases_change / cases_last_week
+
+deaths_recent <- recent_nyt$new_deaths_avg_7 * 7
+deaths_last_week <- last_week_nyt$new_deaths_avg_7 * 7
+deaths_change <- deaths_recent - deaths_last_week
+deaths_change_pct <- deaths_change / deaths_last_week
+
+tests_recent <- recent$new_tests_avg_7 * 7
+tests_last_week <- last_week$new_tests_avg_7 * 7
+tests_change <- tests_recent - tests_last_week
+tests_change_pct <- tests_change / tests_last_week
+
+pos_rate_recent <- cases_recent / tests_recent
+pos_rate_last_week <- cases_last_week / tests_last_week
+pos_rate_change <- pos_rate_recent - pos_rate_last_week
+```
+
+```{r county_case_bar, layout="l-body-outset"}
 to_plot <- nys_cases %>% 
   filter(county == "Westchester") %>% 
   ggplot(aes(date, new_cases)) +
@@ -107,31 +146,69 @@ ggplotly_config(to_plot) %>%
   layout(hovermode = "x unified")
 ```
 
-<div style = "font-size:1.8rem;line-height:1.2em;font-family:'IBM Plex Sans', sans-serif;">
+<div class="index-row l-page">
+  <div class = "index-column-l l-page">
+  
+<table class = "key-metric-t" style="width=300;">
+  <tr>
+    <th class = "t-left"></th>
+    <th class = "t-right">Last 7 days</th>
+    <th class = "t-right">7-day change</th>
+  </tr>
+  <tr>
+    <td class = "t-left">New deaths</td>
+    <td class = "t-right">`r comma(deaths_recent, 1)`</td>
+    <td class = "t-right">`r percent_sign(deaths_change_pct, 1)`</td>
+  </tr>
+  <tr>
+    <td class = "t-left">New cases</td>
+    <td class = "t-right">`r comma(cases_recent, 1)`</td>
+    <td class = "t-right">`r percent_sign(cases_change_pct, 1)`</td>
+  </tr>
+  <tr>
+    <td class = "t-left">New tests</td>
+    <td class = "t-right">`r comma(tests_recent, 1)`</td>
+    <td class = "t-right">`r percent_sign(tests_change_pct, 1)`</td>
+  </tr>
+    <tr>
+    <td class = "t-left">Positivity rate</td>
+    <td class = "t-right">`r percent(pos_rate_recent, 0.1)`</td>
+    <td class = "t-right">`r num_sign(pos_rate_recent, 0.1)`</td>
+  </tr>
+  
+</table>
+  </div>
+
+  <div class = "index-column-r l-page" style = "font-size:1.4rem;line-height:1.2em;font-family:'IBM Plex Sans', sans-serif;">
+
 In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days.
 
 There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days.
+
+  </div>
 </div>
 
+<br>
+
 <div class="index-row l-page">
-  <div class="index-column-1">
+  <div class="index-column-l l-page">
 ```{r mun_per_capita_map, out.height="500px", out.width="400px"}
-mun_recent <- mun_cases %>% 
+mun_recent <- mun_cases %>%
   filter(date == max(date), municipality != "Totals") %>%
   mutate(new_cases_day_avg = active_cases / 14)
 
-mun_cases_poly <- mun_bound %>% 
-  left_join(mun_recent, by = "municipality") %>% 
+mun_cases_poly <- mun_bound %>%
+  left_join(mun_recent, by = "municipality") %>%
   mutate(
     new_cases_per_cap = new_cases_day_avg / total_pop * 1e5,
     total_cases_per_cap = total_cases / total_pop
     )
 
-mun_cases_centroid <- mun_cases_poly %>% 
+mun_cases_centroid <- mun_cases_poly %>%
   st_centroid()
 
-to_map <- mun_cases_poly %>% 
-  st_transform(4326) %>% 
+to_map <- mun_cases_poly %>%
+  st_transform(4326) %>%
   mutate(
     label = paste0(
       "<b>", municipality, "</b><br>",
@@ -164,8 +241,8 @@ to_map %>%
   setView(lat = 41.12, lng = -73.75, zoom = 10)
 ```
   </div>
-  
-  <div class="index-column-2">
+
+  <div class="index-column-r l-page">
 </br>
 </br>
 </br>

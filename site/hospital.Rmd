@@ -1,5 +1,5 @@
 ---
-title: "Hospital Capacity"
+title: "Hospital capacity"
 site: distill::distill_website
 ---
 
@@ -12,6 +12,7 @@ library(here)
 library(scales)
 library(lubridate)
 library(leaflet)
+library(DT)
 library(leaflet.extras)
 library(leaflet.minicharts)
 ```
@@ -65,11 +66,11 @@ hosp_wch_sum <- hosp_wch %>%
     )
 ```
 
-In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7))`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free.
+In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7))`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free.
 
-### Hospital capacity
+<br>
 
-```{r hosp_cap_map, out.height="600px", out.width="600px"}
+```{r wch-hosp-table, layout="l-body-outset"}
 fips <- c("36071", "36079", "36087", "36119", "09001", "34031", "34003", "34037")
 
 hosp_recent <- hosp_cap %>% 
@@ -103,25 +104,6 @@ to_map <- hosp_geo %>%
     label = str_replace_all(label, "NA", "&ndash;")
     )
 
-leaflet() %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  addMinicharts(
-    layerId = as.character(1:nrow(to_map)),
-    lng = to_map$long,
-    lat = to_map$lat,
-    type = "pie",
-    chartdata = select(to_map, `Beds occupied` = bed_occupied, `Beds free` = bed_free),
-    width = sqrt(to_map$bed_capacity) * 1.2,
-    colorPalette = c("steelblue", "coral"),
-    opacity = 0.9,
-    popup = popupArgs(html = to_map$label)
-    )
-```
-
-<br>
-<br>
-
-```{r wch-hosp-map, layout="l-page"}
 na_format <- c(
     "function(row, data){",
     "  for(var i=0; i<data.length; i++){",
@@ -154,7 +136,6 @@ to_map %>%
       columnDefs = list(
         list(visible = FALSE, targets = 0),
         list(className = "dt-head-left", targets = 1:2)
-        #list(className = "dt-center", targets = 5)
         )
       )
     ) %>% 
@@ -164,3 +145,21 @@ to_map %>%
   formatStyle(3:7, fontFamily = "Roboto Mono")
 ```
 
+### Regional hospital capacity
+
+```{r hosp_cap_map, out.height="600px", out.width="600px"}
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addMinicharts(
+    layerId = as.character(1:nrow(to_map)),
+    lng = to_map$long,
+    lat = to_map$lat,
+    type = "pie",
+    chartdata = select(to_map, `Beds occupied` = bed_occupied, `Beds free` = bed_free),
+    width = sqrt(to_map$bed_capacity) * 1.2,
+    colorPalette = c("steelblue", "coral"),
+    opacity = 0.9,
+    popup = popupArgs(html = to_map$label)
+    ) %>% 
+  addResetMapButton()
+```
