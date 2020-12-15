@@ -3,11 +3,12 @@ library(vroom)
 library(tidygeocoder)
 library(sf)
 
-url <- "https://healthdata.gov/sites/default/files/reported_hospital_capacity_admissions_facility-level_weekly_average_timeseries_20201207.csv"
+url <- "https://healthdata.gov/node/3651441/download"
 
 hospital <- vroom(url)
 
-fips <- c("36071", "36079", "36087", "36119", "09001", "34031")
+fips <- c("34003", "36119", "36087", "09001", "34031", "34017", "09005", "34013",
+          "34027", "36071", "09009", "36079", "34037", "36027", "36111")
 
 hosp_addr <- hospital %>% 
   filter(fips_code %in% fips, hospital_subtype != "Childrens Hospitals") %>% 
@@ -20,6 +21,7 @@ hosp_addr <- hospital %>%
     )
 
 hosp_geo <- hosp_addr %>% 
+  mutate(address = str_replace(address, "STEET", "STREET")) %>% 
   geocode(
     street = address,
     city = city,

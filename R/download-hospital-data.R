@@ -1,16 +1,27 @@
 library(tidyverse)
 library(vroom)
 
-url <- "https://healthdata.gov/sites/default/files/reported_hospital_capacity_admissions_facility-level_weekly_average_timeseries_20201207.csv"
+url <- "https://healthdata.gov/node/3651441/download"
 
 hospital <- vroom(url)
 
-fips <- c("36071", "36079", "36087", "36119", "09001", "34031")
+fips <- c("34003", "36119", "36087", "09001", "34031", "34017", "09005", "34013",
+          "34027", "36071", "09009", "36079", "34037", "36027", "36111")
+
+county_fips <- tidycensus::fips_codes %>% 
+  mutate(
+    county_fips = paste0(state_code, county_code),
+    county = str_remove(county, " County")
+    ) %>% 
+  select(county, fips_code = county_fips)
 
 hosp_data <- hospital %>% 
   filter(fips_code %in% fips, hospital_subtype != "Childrens Hospitals") %>% 
+  left_join(county_fips, by = "fips_code") %>% 
   select(
     hospital_pk,
+    fips_code,
+    county,
     year_week = collection_week,
     bed_capacity   = all_adult_hospital_inpatient_beds_7_day_avg,
     bed_occupied   = all_adult_hospital_inpatient_bed_occupied_7_day_avg,
