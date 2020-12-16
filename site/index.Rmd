@@ -1,6 +1,7 @@
 ---
 title: "Covid-19 in Westchester County"
 site: distill::distill_website
+preview: img/wch-map.png
 ---
 
 ```{r setup, include=FALSE}

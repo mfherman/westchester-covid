@@ -6,7 +6,7 @@ output_dir: "docs"
 google_analytics: "G-F0HRW0152G"
 base_url: https://westchester-covid.mattherman.info
 twitter:
-  site: "@buddyherms"
+  creator: "@buddyherms"
 theme: theme.css
 navbar:
   right:
