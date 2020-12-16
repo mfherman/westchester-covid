@@ -49,7 +49,6 @@ percent_sign <- function(x, accuracy = NULL) {
 }
 
 a_or_an <- function(x) {
-  a <- c(1:7, 9:10, 12:17, 19:79)
   an <- c(8, 11, 18, 80:89)
-  ifelse(x %in% a, "a", "an")
+  ifelse(x %in% an, "an", "a")
 }

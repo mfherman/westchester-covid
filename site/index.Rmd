@@ -38,6 +38,16 @@ nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>%
     ) %>% 
   ungroup()
 
+nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
+  group_by(county, state) %>% 
+  mutate(
+    across(where(is.numeric), 
+    list(
+      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
+      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
+      )
+    ))
+
 mun_cases <- read_csv(here("data/by-mun-cases.csv"))
 mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```

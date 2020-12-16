@@ -1,6 +1,7 @@
 ---
 title: "Hospital capacity"
 site: distill::distill_website
+preview: img/wch-map.png
 ---
 
 ```{r setup, include=FALSE}
