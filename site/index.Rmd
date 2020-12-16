@@ -61,6 +61,12 @@ cases_change_pct_print <- if_else(
   percent(abs(cases_change_pct), 1)
   )
 
+if (cases_change_pct_print == "small") {
+  pct_change_prefix <- "a"
+} else {
+  pct_change_prefix <- a_or_an(signif(cases_change_pct * 100, 2))
+}
+
 recent_nyt <- nyt_cases %>% 
   filter(date == max(date), county == "Westchester")
 
@@ -179,9 +185,9 @@ ggplotly_config(to_plot) %>%
 </table>
   </div>
 
-  <div class = "index-column-r l-page" style = "font-size:1.4rem;line-height:1.2em;font-family:'IBM Plex Sans', sans-serif;">
+  <div class = "index-column-r l-page" style = "font-size:1.4rem;line-height:1.3em;font-family:'IBM Plex Sans', sans-serif;">
 
-In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is a <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days.
+In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is `r pct_change_prefix` <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days.
 
 There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days.
 
@@ -223,7 +229,14 @@ cd_pal <- colorNumeric(
   )
 
 to_map %>%
-  leaflet(options = leafletOptions(zoomControl = FALSE, minZoom = 10, maxZoom = 10, dragging = FALSE)) %>%
+  leaflet(
+    options = leafletOptions(
+      zoomControl = FALSE,
+      minZoom = 10,
+      maxZoom = 10,
+      dragging = FALSE
+      )
+    ) %>%
   addPolygons(
     weight = 1.5,
     color = "white",

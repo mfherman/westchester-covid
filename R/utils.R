@@ -46,4 +46,10 @@ percent_sign <- function(x, accuracy = NULL) {
     glue::glue("+{scales::percent(x, accuracy)}"),
     scales::percent(x, accuracy)
     )
-  }
+}
+
+a_or_an <- function(x) {
+  a <- c(1:7, 9:10, 12:17, 19:79)
+  an <- c(8, 11, 18, 80:89)
+  ifelse(x %in% a, "a", "an")
+}
