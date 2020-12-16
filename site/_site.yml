@@ -7,6 +7,7 @@ google_analytics: "G-F0HRW0152G"
 base_url: https://westchester-covid.mattherman.info
 twitter:
   creator: "@buddyherms"
+favicon: img/wch-map.png
 theme: theme.css
 navbar:
   right:
