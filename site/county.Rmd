@@ -18,6 +18,7 @@ library(leaflet)
 library(leaflet.extras)
 library(gghighlight)
 library(extrafont)
+library(xfun)
 
 source(here("R/utils.R"))
 ```
@@ -56,11 +57,23 @@ nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>%
   inner_join(select(county_bound, -fips), by = c("county", "state")) %>% 
   mutate(
     new_cases_per_cap = new_cases_avg_7 / total_pop * 1e5,
+    tot_cases_per_cap = total_cases / total_pop,
     new_deaths_per_cap = new_deaths_avg_7 / total_pop * 1e5
     ) %>% 
   select(-geometry)
 ```
 
+```{r}
+recent <- nys_cases %>% 
+  filter(county == "Westchester", date == max(date))
+
+recent_nyt <- nyt_cases %>% 
+  filter(county == "Westchester", date == max(date))
+```
+
+On `r month_day_year(recent$date, abbr = TRUE)`, `r comma(recent$new_cases, 1)` people tested positive for SARS-CoV2 out of `r comma(recent$new_tests, 1)` tests reported in Westchester. This is a test positivity rate of `r percent(recent$pos_rate, 0.1)`. `r n2w(recent_nyt$new_deaths, and = TRUE, hyphen = FALSE, cap = TRUE)` new deaths due to Covid-19 were reported on `r month_day_year(recent_nyt$date, abbr = TRUE)`. Since the beginning of the pandemic, `r comma(recent$total_cases, 1)` people have tested positive and `r comma(recent_nyt$total_deaths, 1)` have died in Westchester County.
+
+<br>
 
 <div class = "l-body-outset">
 ::::: {.panelset}
@@ -90,48 +103,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Cases Reported in Weschester",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    panel.grid.major.x = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-    )
-
-ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
-```
-:::
-
-::: {.panel}
-[Deaths]{.panel-name}
-
-```{r county_death_bar, layout="l-body-outset"}
-to_plot <- nyt_cases %>% 
-  filter(county == "Westchester") %>% 
-  ggplot(aes(date, new_deaths)) +
-  geom_col(
-    aes(
-      text = str_replace(paste0(
-        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
-        "New deaths: ", comma(new_deaths, 1), "<br>",
-        "7-day average: ", comma(new_deaths_avg_7, 1)
-        ),  "NA", " -")
-      ),
-    fill = "#82bae8"
-    ) +
-  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(
-    label = label_date_short(),
-    date_breaks = "1 month",
-    limits = c(as.Date("2020-03-01"), NA),
-    expand = expansion(add = c(0, 2))
-    ) +
-  scale_y_continuous(label = label_number_si()) +
-  labs(
-    title = "New Deaths Reported in Weschester",
+    title = "New cases reported in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -172,7 +144,48 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Tests Reported in Weschester",
+    title = "New tests reported in Weschester",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(hovermode = "x unified")
+```
+:::
+
+::: {.panel}
+[Deaths]{.panel-name}
+
+```{r county_death_bar, layout="l-body-outset"}
+to_plot <- nyt_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, new_deaths)) +
+  geom_col(
+    aes(
+      text = str_replace(paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New deaths: ", comma(new_deaths, 1), "<br>",
+        "7-day average: ", comma(new_deaths_avg_7, 1)
+        ),  "NA", " -")
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New deaths reported in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -213,7 +226,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_percent(1), limits = c(0, 0.507)) +
   labs(
-    title = "Test Postivity Rate in Weschester",
+    title = "Test postivity rate in Weschester",
     x = NULL,
     y = NULL
   ) +
@@ -274,8 +287,27 @@ nys_cases %>%
   formatStyle(2:7, fontFamily = "Roboto Mono")
 ```
 
+## Metro area
 
-### New cases per capita (7-day average)
+```{r}
+recent_metro_nyt <- nyt_cases %>% 
+  filter(date == max(date), county != "Westchester") %>% 
+  arrange(desc(new_cases_per_cap))
+
+tot_metro_nyt <- nyt_cases %>% 
+  filter(date == max(date), county != "Westchester") %>% 
+  arrange(desc(tot_cases_per_cap))
+
+tot_metro_least <- nyt_cases %>% 
+  filter(date == max(date), county != "Westchester") %>% 
+  arrange(tot_cases_per_cap)
+```
+
+In the New York metropolitan area, the county with the most new cases per capita in the past seven days is **`r recent_metro_nyt$county[1]` County**, where there have been an average of `r comma(recent_metro_nyt$new_cases_avg_7[1], 1)` cases per day reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[1], 1)` per 100,000 residents). **`r recent_metro_nyt$county[2]` County** is another recent hot spot, with `r comma(recent_metro_nyt$new_cases_avg_7[2], 1)` average daily cases cases reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[2], 1)` per 100,000). In **Westchester County**, `r comma(recent_nyt$new_cases_per_cap[1], 1)` cases per 100,000 residents have been reported in the past week (`r comma(recent_nyt$new_cases_avg_7[1], 1)` new cases per day).
+
+Throughout the pandemic, the counties that have had the largest share of their population test positive for coronavirus are **`r tot_metro_nyt$county[1]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[1])`) and **`r tot_metro_nyt$county[2]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[2])`). The counties that have had the fewest cases per capita are **`r tot_metro_least$county[1]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[1])`) and **`r tot_metro_least$county[2]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[2])`). In **Westchester County**, `r pretty_frac(recent_nyt$tot_cases_per_cap)` residents have tested positive since the beginning of the pandemic (`r comma(recent_nyt$total_cases, 1)`).
+
+### New cases per capita
 
 ```{r metro_cases_map, out.height = "600px"}
 to_map <- county_bound %>% 
@@ -323,6 +355,41 @@ leaflet(to_map) %>%
 ```
 
 <br>
+
+```{r county-table, layout="l-body-outset", out.height="510px"}
+to_map %>% 
+  st_drop_geometry() %>% 
+  arrange(desc(new_cases_per_cap)) %>% 
+  mutate(tot_cases_per_cap = pretty_frac(tot_cases_per_cap)) %>% 
+  select(
+    `County` = county,
+    `Avg daily cases per 100k` = new_cases_per_cap,
+    `Avg daily cases` = new_cases_avg_7,
+    `Total cases` = total_cases,
+    `Share of pop` = tot_cases_per_cap,
+    `Total pop` = total_pop.x
+    ) %>% 
+  datatable(
+    class = "compact hover",
+    extensions = "Scroller",
+    options = list(
+      dom = "fti",
+      deferRender = TRUE,
+      scrollY = 250,
+      scroller = TRUE,
+      columnDefs = list(
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1),
+        list(className = "dt-center", targets = 5)
+        )
+      )
+    ) %>% 
+  formatRound(2, digits = 1) %>% 
+  formatRound(c(3:4, 6), digits = 0) %>% 
+  formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(2:6, fontFamily = "Roboto Mono")
+```
+
 <br>
 
 ```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}

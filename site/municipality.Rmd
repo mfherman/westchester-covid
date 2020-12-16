@@ -137,8 +137,8 @@ mun_cases_poly %>%
   mutate(total_cases_per_cap = pretty_frac(total_cases_per_cap)) %>% 
   select(
     `Municipality` = municipality,
-    `Avg. daily cases per 100k` = new_cases_per_cap,
-    `Avg. daily cases` = new_cases_day_avg,
+    `Avg daily cases per 100k` = new_cases_per_cap,
+    `Avg daily cases` = new_cases_day_avg,
     `Total cases` = total_cases,
     `Share of pop` = total_cases_per_cap,
     `Total pop` = total_pop

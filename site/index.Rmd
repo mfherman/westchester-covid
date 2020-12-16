@@ -132,7 +132,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New Cases Reported",
+    title = "New cases reported",
     x = NULL,
     y = NULL
   ) +
