@@ -96,6 +96,10 @@ d-appendix {
   font-family: 'Roboto', sans-serif !important;
 }
 
+.distill-site-footer {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 .index-row {
   display: flex;
   flex-direction: row;
