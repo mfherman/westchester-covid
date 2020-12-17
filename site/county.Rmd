@@ -314,7 +314,7 @@ nys_cases %>%
     class = "compact hover",
     extensions = "Scroller",
     caption = tags$caption(
-      withTags(div(HTML('<a href="https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing">NYS DOH and NY Times</a>')))
+      withTags(div(HTML('<a href="https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing">NYS Dept of Health and NY Times</a>')))
     ),
     options = list(
       dom = "t",
