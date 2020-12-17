@@ -4,17 +4,79 @@ title: "About this site"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+source(here("R/utils.R"))
+
+library(tidyverse)
+
+nys_date <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
+  filter(date == max(date)) %>% 
+  distinct(date) %>% 
+  pull()
+
+nyt_date <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>%
+  filter(date == max(date)) %>% 
+  distinct(date) %>% 
+  pull()
+
+
 ```
 
 This site contains information about the Covid-19 pandemic in Westchester County, NY and the surrounding metroplitan area. The [Westchester County Department of Health website](https://health.westchestergov.com/2019-novel-coronavirus) does not provide much data or detailed information about the state of the pandemic in the county, so this site hopes to fill the gap.
 
-## The data
+## Data sources
 
+
+### [New York State Statewide Covid-19 Testing](https://health.data.ny.gov/Health/New-York-State-Statewide-COVID-19-Testing/xdss-u53e)
+
+*New York State Department of Health*
+<br>
+This dataset includes the number of **tests** and **positive cases** of SARS-CoV2 in New York State. The data is reported by county. It is updated daily and includes all tests reported by the end of the prior day. Tests include those administered by clinical laboratories as well as pooled or batch tests reported by colleges and universities.
+
+Tests are assigned to a county based on the patient's address. If that cannot be determined, the address of the health care provider who ordered the test is used.
+
+If a person has multiple specimens tested on the same day, they are only counted as one test. If a person is tested on multiple days, each day's test will be counted separately. An individual will only be counted positive one time, regardless of the number of positive tests that individual has.
+
+Most recent data: **`r month_day_year(nys_date)`**
+<br>
+Update frequency: **Daily**
+<br>
+Geographic aggregation: **County (New York State only)**
+<br>
+Where it's used: **New and total tests, new and total cases, test positivity rate**
+
+### [Coronavirus (Covid-19) Data in the United States](https://github.com/nytimes/covid-19-data)
+
+*New York Times*
+<br>
+This dataset includes the number of **cases** and **deaths** due to SARS-CoV2 in the United States. The data is reported by county. It is updated daily and includes all cases and deaths compiled by *Times* journalists by the end of the prior day. The data is collected from state and city health departments across the county and each state may have a slightly different reporting methodology.
+
+For counties in New York State, the *Times* uses data reported by the NYS Department of Health. There is a one-day lag in the NYS data in the *Times* dataset. For example, data counted on December 16 by the New York Times was reported on December 15 by NYSDOH.
+
+Beginning August 6, the [methodology for assigning deaths to counties in New York State was modified](https://github.com/nytimes/covid-19-data/blob/master/NEW-YORK-DEATHS-METHODOLOGY.md). Currently, deaths are assigned to the county of residence. Before August 6, deaths were assigned to county in which the death took place.
+
+Most recent data: **`r month_day_year(nyt_date)`**
+<br>
+Update frequency: **Daily**
+<br>
+Geographic aggregation: **County (United States)**
+<br>
+Where it's used: **New and total deaths, new and total cases (metro area)**
+
+
+### [Covid-19 Confirmed Cases](https://www.westchestergov.com/covid-19-cases)
+
+*Westchester County Department of Health*
+<br>
 Westchester County does not currently post historical data with the number of new cases per day by municipality. Because of this limitation, I have attempted to extract this historical data from maps that are posted each weekday to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). This extraction processes is imperfect but until the county releases more accurate historical data, this is best I can do. Starting on December 3, 2020, I began scraping this data each day from the [Westchester County website](https://westchestergov.com/covid-19-cases), which results in significantly more reliable data.
 
-In addition to the data scraped from the county, I also download Westchester data from the [New York Times](https://github.com/nytimes/covid-19-data) and the [New York State Department of Health](https://health.data.ny.gov/Health/New-York-State-Statewide-COVID-19-Testing/xdss-u53e). Each of these data sources reports data at the county-level only. New York Times data contains daily cases and deaths. New York State Department of Health data contains daily cases and daily tests.
-
-The data scraped from the county as well as New York State and New York Times data is available in this [GithHub repository](https://github.com/mfherman/westchester-covid/tree/master/data). It is updated daily as new data is reported and is the source data for the tables, charts, and maps contained on this website.
+Most recent data:
+<br>
+Update frequency: **(most) Weekdays**
+<br>
+Geographic aggregation: **Municipality (Westchester County only)**
+<br>
+Where it's used: **New and total cases**
 
 ## Me
 

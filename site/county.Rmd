@@ -2,6 +2,7 @@
 title: "Westchester and surrounding counties"
 site: distill::distill_website
 preview: img/wch-map.png
+
 ---
 
 ```{r setup, include=FALSE}
