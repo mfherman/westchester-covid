@@ -21,6 +21,7 @@ library(leaflet.extras)
 library(gghighlight)
 library(extrafont)
 library(xfun)
+library(htmltools)
 
 source(here("R/utils.R"))
 ```
@@ -116,7 +117,17 @@ to_plot <- nys_cases %>%
     )
 
 ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = "<a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
 ```
 :::
 
@@ -157,48 +168,17 @@ to_plot <- nys_cases %>%
     )
 
 ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
-```
-:::
-
-::: {.panel}
-[Deaths]{.panel-name}
-
-```{r county_death_bar, layout="l-body-outset"}
-to_plot <- nyt_cases %>% 
-  filter(county == "Westchester") %>% 
-  ggplot(aes(date, new_deaths)) +
-  geom_col(
-    aes(
-      text = str_replace(paste0(
-        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
-        "New deaths: ", comma(new_deaths, 1), "<br>",
-        "7-day average: ", comma(new_deaths_avg_7, 1)
-        ),  "NA", " -")
-      ),
-    fill = "#82bae8"
-    ) +
-  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
-  scale_x_date(
-    label = label_date_short(),
-    date_breaks = "1 month",
-    limits = c(as.Date("2020-03-01"), NA),
-    expand = expansion(add = c(0, 2))
-    ) +
-  scale_y_continuous(label = label_number_si()) +
-  labs(
-    title = "New deaths reported in Weschester",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    panel.grid.major.x = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = "<a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
     )
-
-ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
 ```
 :::
 
@@ -239,9 +219,71 @@ to_plot <- nys_cases %>%
     )
 
 ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = "<a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
 ```
 :::
+
+::: {.panel}
+[Deaths]{.panel-name}
+
+```{r county_death_bar, layout="l-body-outset"}
+to_plot <- nyt_cases %>% 
+  filter(county == "Westchester") %>% 
+  ggplot(aes(date, new_deaths)) +
+  geom_col(
+    aes(
+      text = str_replace(paste0(
+        "<b>", month_day_year(date, abbr = TRUE), "</b><br>",
+        "New deaths: ", comma(new_deaths, 1), "<br>",
+        "7-day average: ", comma(new_deaths_avg_7, 1)
+        ),  "NA", " -")
+      ),
+    fill = "#82bae8"
+    ) +
+  geom_line(aes(y = new_deaths_avg_7), color = "#3766b3", size = 0.65) +
+  scale_x_date(
+    label = label_date_short(),
+    date_breaks = "1 month",
+    limits = c(as.Date("2020-03-01"), NA),
+    expand = expansion(add = c(0, 2))
+    ) +
+  scale_y_continuous(label = label_number_si()) +
+  labs(
+    title = "New deaths reported in Weschester",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(to_plot) %>% 
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = "<a href='https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states' target='_self'>NY Times</a>", 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+:::
+
 :::::
 </div>
 
@@ -271,8 +313,11 @@ nys_cases %>%
   datatable(
     class = "compact hover",
     extensions = "Scroller",
+    caption = tags$caption(
+      withTags(div(HTML('<a href="https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing">NYS DOH and NY Times</a>')))
+    ),
     options = list(
-      dom = "ti",
+      dom = "t",
       deferRender = TRUE,
       scrollY = 250,
       scroller = TRUE,
@@ -374,8 +419,12 @@ to_map %>%
   datatable(
     class = "compact hover",
     extensions = "Scroller",
+    caption = tags$caption(
+      style = 'caption-side: bottom; text-align: right;',
+      withTags(div(HTML('<a href="https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states">NY Times</a>')))
+    ),
     options = list(
-      dom = "fti",
+      dom = "ft",
       deferRender = TRUE,
       scrollY = 250,
       scroller = TRUE,

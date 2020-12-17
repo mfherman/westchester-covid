@@ -37,7 +37,7 @@ html {
   --heading-font:     Roboto, sans-serif;
   --mono-font:       'Roboto Mono', monospace;
   --body-font:       'Lora', serif;
-  --navbar-font:     'IBM Plex Sans', sans-serif;  /* websites + blogs only */
+  --navbar-font:     'Roboto', sans-serif;  /* websites + blogs only */
 }
 
 /*-- ARTICLE METADATA --*/
@@ -82,6 +82,11 @@ d-appendix {
 
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
+
+d-article h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 .leaflet {
   margin: auto;
@@ -166,4 +171,19 @@ th.t-left, th.t-right {
   line-height: 1;
   padding-bottom: 5px;
   border-bottom: 0px !important;
+}
+
+.plotly a {
+  fill: rgba(0, 0, 0, 0.6) !important;
+  text-decoration: underline !important;
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+}
+
+.dataTable caption {
+  caption-side: bottom !important;
+  text-align: right !important;
+  font-size: 12px;
+  margin-top: 7px;
+  font-family: Roboto, sans-serif;
 }
