@@ -94,19 +94,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Westchester Covid-19 Tracking: About this site"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:image" content="https://westchester-covid.mattherman.info/./img/wch-map.png"/>
+  <meta property="og:image:width" content="399"/>
+  <meta property="og:image:height" content="487"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Westchester Covid-19 Tracking"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
-  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:card" content="summary_large_image"/>
   <meta property="twitter:title" content="Westchester Covid-19 Tracking: About this site"/>
+  <meta property="twitter:image" content="https://westchester-covid.mattherman.info/./img/wch-map.png"/>
+  <meta property="twitter:image:width" content="399"/>
+  <meta property="twitter:image:height" content="487"/>
   <meta property="twitter:creator" content="@buddyherms"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","preview"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["img/wch-map.png"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2243,14 +2249,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     fill: rgba(0, 0, 0, 0.6) !important;
     text-decoration: underline !important;
     font-family: Roboto, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .dataTable caption {
     caption-side: bottom !important;
     text-align: right !important;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 11px;
+    margin-top: 7px;
     font-family: Roboto, sans-serif;
   }</style>
   <style type="text/css">
@@ -2467,14 +2473,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>This dataset includes the number of <strong>tests</strong> and <strong>positive cases</strong> of Covid-19 in New York State. The data is reported by county. It is updated daily and includes all tests reported by the end of the prior day. Tests include those administered by clinical laboratories as well as pooled or batch tests reported by colleges and universities.</p>
 <p>Tests are assigned to a county based on the patient’s address. If that cannot be determined, the address of the health care provider who ordered the test is used.</p>
 <p>If a person has multiple specimens tested on the same day, they are only counted as one test. If a person is tested on multiple days, each day’s test will be counted separately. An individual will only be counted positive one time, regardless of the number of positive tests that individual has.</p>
-<p>Most recent data: <strong>December 15, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (New York State only)</strong> <br> Where it’s used: <strong>New and total tests, new and total cases, test positivity rate</strong></p>
+<p>Most recent data: <strong>Dec 16, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (New York State only)</strong> <br> Where it’s used: <strong>New and total tests, new and total cases, test positivity rate</strong></p>
 <p><br> <br></p>
 <h3 id="coronavirus-covid-19-data-in-the-united-states"><a href="https://github.com/nytimes/covid-19-data">Coronavirus (Covid-19) Data in the United States</a></h3>
 <p><em>The New York Times</em></p>
 <p>This dataset includes the number of <strong>cases</strong> and <strong>deaths</strong> due to Covid-19 in the United States. The data is reported by county. It is updated daily and includes all cases and deaths compiled by <em>Times</em> journalists by the end of the prior day. The data is based on reports from state and local health agencies across the county and each state may have a slightly different reporting methodology.</p>
 <p>For counties in New York State, the <em>Times</em> uses data reported by the NYS Department of Health. There is a one-day lag in the NYS data in the <em>Times</em> dataset. For example, data counted on December 16 by the New York Times was reported on December 15 by NYSDOH.</p>
 <p>Beginning August 6, the <a href="https://github.com/nytimes/covid-19-data/blob/master/NEW-YORK-DEATHS-METHODOLOGY.md">methodology for assigning deaths to counties in New York State was modified</a>. Currently, deaths are assigned to the county of residence. Before August 6, deaths were assigned to county in which the death took place.</p>
-<p>Most recent data: <strong>December 15, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (United States)</strong> <br> Where it’s used: <strong>New and total deaths, new and total cases (metro area)</strong></p>
+<p>Most recent data: <strong>Dec 16, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (United States)</strong> <br> Where it’s used: <strong>New and total deaths, new and total cases (metro area)</strong></p>
 <p><br> <br></p>
 <h3 id="covid-19-confirmed-cases"><a href="https://www.westchestergov.com/covid-19-cases">Covid-19 Confirmed Cases</a></h3>
 <p><em>Westchester County Department of Health</em></p>
@@ -2482,7 +2488,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Often, the data reported by the county differs significantly from the data reported by NYSDOH. Given the lack of information shared by the Westchester County Department of Health about this data, I only use the County data to compare municipalities within Westchester. The data released by the County should not be directly compared to data released by the State or other sources.</p>
 <p>Unfortunately, the County does not currently post historical data, but rather posts a map on most weekdays to the <a href="https://twitter.com/westchestergov/status/1336045976981811206">WestchesterGov Twitter account</a>. Because of this limitation, I have extracted this historical data from maps that are posted on Twitter. This extraction process is imperfect but until the county releases more accurate historical data, this is best I can do. Beginning on December 3, 2020, I began scraping the daily data from the <a href="https://westchestergov.com/covid-19-cases">Westchester County website</a>, which results in more reliable data. Because of the unavailability of this historical data from the County, <em>extreme caution</em> should be used when looking at municipal-level trends.</p>
 <p>Given these limitations, I have decided to use the “active cases” metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!</p>
-<p>Most recent data: <strong>December 11, 2020</strong> <br> Update frequency: <strong>Weekdays (usually)</strong> <br> Geographic aggregation: <strong>Municipality (Westchester County only)</strong> <br> Where it’s used: <strong>New and total cases</strong></p>
+<p>Most recent data: <strong>Dec 11, 2020</strong> <br> Update frequency: <strong>Weekdays (usually)</strong> <br> Geographic aggregation: <strong>Municipality (Westchester County only)</strong> <br> Where it’s used: <strong>New and total cases</strong></p>
 <p><br> <br></p>
 <h3 id="covid-19-reported-patient-impact-and-hospital-capacity-by-facility"><a href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility">COVID-19 Reported Patient Impact and Hospital Capacity by Facility</a></h3>
 <p><em>United States Department of Health and Human Services</em></p>
@@ -2499,7 +2505,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>ICU beds used: staffed inpatient ICU beds that are occupied</li>
 <li>Bed occupancy: ICU beds used divided by total ICU beds</li>
 </ul>
-<p>Most recent data: <strong>December 4, 2020 – December 11, 2020</strong> <br> Update frequency: <strong>Weekly</strong> <br> Geographic aggregation: <strong>None (facility-level data, United States)</strong> <br> Where it’s used: <strong>Hospital capacity, occupancy, Covid-19 patients</strong></p>
+<p>Most recent data: <strong>Dec 4, 2020 – Dec 11, 2020</strong> <br> Update frequency: <strong>Weekly</strong> <br> Geographic aggregation: <strong>None (facility-level data, United States)</strong> <br> Where it’s used: <strong>Hospital capacity, occupancy, Covid-19 patients</strong></p>
 <h2 id="me">Me</h2>
 <p>This website was built and is maintained by me, <a href="http://mattherman.info">Matt Herman</a>. I live in Katonah, NY. Contact me at <a href="mailto:mfherman@gmail.com">mfherman@gmail.com</a> with comments, questions, or suggestions.</p>
 <h2 id="tools-etc.">Tools, etc.</h2>

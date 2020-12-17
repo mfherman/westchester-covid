@@ -177,13 +177,13 @@ th.t-left, th.t-right {
   fill: rgba(0, 0, 0, 0.6) !important;
   text-decoration: underline !important;
   font-family: Roboto, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .dataTable caption {
   caption-side: bottom !important;
   text-align: right !important;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 11px;
+  margin-top: 7px;
   font-family: Roboto, sans-serif;
 }

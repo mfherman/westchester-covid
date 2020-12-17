@@ -1,13 +1,16 @@
 ---
 title: "About this site"
+site: distill::distill_website
+preview: img/wch-map.png
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-source(here::here("R/utils.R"))
-
 library(tidyverse)
+library(here)
+
+source(here("R/utils.R"))
 
 nys_date <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
   filter(date == max(date)) %>% 
@@ -45,7 +48,7 @@ Tests are assigned to a county based on the patient's address. If that cannot be
 
 If a person has multiple specimens tested on the same day, they are only counted as one test. If a person is tested on multiple days, each day's test will be counted separately. An individual will only be counted positive one time, regardless of the number of positive tests that individual has.
 
-Most recent data: **`r month_day_year(nys_date)`**
+Most recent data: **`r month_day_year(nys_date, abbr = TRUE)`**
 <br>
 Update frequency: **Daily**
 <br>
@@ -66,7 +69,7 @@ For counties in New York State, the *Times* uses data reported by the NYS Depart
 
 Beginning August 6, the [methodology for assigning deaths to counties in New York State was modified](https://github.com/nytimes/covid-19-data/blob/master/NEW-YORK-DEATHS-METHODOLOGY.md). Currently, deaths are assigned to the county of residence. Before August 6, deaths were assigned to county in which the death took place.
 
-Most recent data: **`r month_day_year(nyt_date)`**
+Most recent data: **`r month_day_year(nyt_date, abbr = TRUE)`**
 <br>
 Update frequency: **Daily**
 <br>
@@ -89,7 +92,7 @@ Unfortunately, the County does not currently post historical data, but rather po
 
 Given these limitations, I have decided to use the "active cases" metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!
 
-Most recent data: **`r month_day_year(mun_date)`**
+Most recent data: **`r month_day_year(mun_date, abbr = TRUE)`**
 <br>
 Update frequency: **Weekdays (usually)**
 <br>
@@ -120,7 +123,7 @@ Hospital metric definitions:
 - ICU beds used: staffed inpatient  ICU beds that are occupied
 - Bed occupancy: ICU beds used divided by total ICU beds
 
-Most recent data: **`r month_day_year(hosp_date)` -- `r month_day_year(hosp_date + 7)`**
+Most recent data: **`r month_day_year(hosp_date, abbr = TRUE)` -- `r month_day_year(hosp_date + 7, abbr = TRUE)`**
 <br>
 Update frequency: **Weekly**
 <br>

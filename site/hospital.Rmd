@@ -133,6 +133,10 @@ to_map %>%
   datatable(
     class = "compact hover",
     extensions = "Scroller",
+    caption = tags$caption(
+      style = 'caption-side: bottom; text-align: right;',
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>')))
+    ),    
     options = list(
       dom = "t",
       rowCallback = na_format,
