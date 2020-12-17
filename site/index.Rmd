@@ -20,7 +20,6 @@ library(leaflet)
 library(leaflet.extras)
 
 source(here("R/utils.R"))
-
 ```
 
 ```{r read_in_data}

@@ -16,6 +16,8 @@ library(leaflet)
 library(DT)
 library(leaflet.extras)
 library(leaflet.minicharts)
+
+source(here("R/utils.R"))
 ```
 
 ```{r xaringan-panelset, echo=FALSE}
