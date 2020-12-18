@@ -106,7 +106,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New cases reported in Weschester",
+    title = "New cases reported in Westchester",
     x = NULL,
     y = NULL
   ) +
@@ -157,7 +157,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New tests reported in Weschester",
+    title = "New tests reported in Westchester",
     x = NULL,
     y = NULL
   ) +
@@ -208,7 +208,7 @@ to_plot <- nys_cases %>%
     ) +
   scale_y_continuous(label = label_percent(1), limits = c(0, 0.507)) +
   labs(
-    title = "Test postivity rate in Weschester",
+    title = "Test postivity rate in Westchester",
     x = NULL,
     y = NULL
   ) +
@@ -259,7 +259,7 @@ to_plot <- nyt_cases %>%
     ) +
   scale_y_continuous(label = label_number_si()) +
   labs(
-    title = "New deaths reported in Weschester",
+    title = "New deaths reported in Westchester",
     x = NULL,
     y = NULL
   ) +
@@ -466,7 +466,8 @@ nyt_cases %>%
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank(),
-    strip.text = element_text(size = 14, hjust = 0),
+    strip.text = element_text(size = 12, hjust = 0.1, color = "gray15", family = "Roboto Condensed"),
+    axis.text.x = element_text(size = 6.5, color = "gray45"),
     strip.placement = "outside",
     plot.title = element_text(face = "bold", size = 18),
     plot.subtitle = element_text(size = 12),
