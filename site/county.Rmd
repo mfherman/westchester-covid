@@ -450,12 +450,12 @@ nyt_cases %>%
     county = fct_relevel(county, "Westchester")
     ) %>%
   ggplot(aes(date, new_cases_per_cap, color = county)) +
-  geom_line(color = "steelblue", size = 1) +
+  geom_line(color = "steelblue", size = 0.8) +
   gghighlight(
     use_direct_label = FALSE,
     unhighlighted_params = list(size = 0.2)
     ) +
-  facet_wrap(vars(county), nrow = 3) +
+  facet_wrap(vars(county), nrow = 3, strip.position = "bottom") +
   labs(
     title = "New cases per 100,000 residents",
     subtitle = str_wrap("Trend lines for all counties in the metro area are drawn in gray to compare with trend of each county drawn in blue", 65),
@@ -467,8 +467,11 @@ nyt_cases %>%
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank(),
     strip.text = element_text(size = 14, hjust = 0),
+    strip.placement = "outside",
     plot.title = element_text(face = "bold", size = 18),
-    plot.subtitle = element_text(size = 12)
+    plot.subtitle = element_text(size = 12),
+    panel.spacing.y = unit(12, "points")
+    #panel.border = element_rect(color = "gray95", fill = NA, size = 0.5)
     )
 ```
 

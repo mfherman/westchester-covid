@@ -151,7 +151,7 @@ mun_cases_poly %>%
     extensions = "Scroller",
     caption = tags$caption(
       style = 'caption-side: bottom; text-align: right;',
-      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases">Westchester County DOH</a>')))
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases" target="_self">Westchester County DOH</a>')))
     ),
     options = list(
       dom = "ft",
