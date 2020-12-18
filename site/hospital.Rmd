@@ -21,27 +21,7 @@ source(here("R/utils.R"))
 ```
 
 ```{r xaringan-panelset, echo=FALSE}
-ggplotly_config <- function(x, ...) {
-  plotly::ggplotly(x, tooltip = "text", ...) %>%
-    layout(
-      xaxis = list(fixedrange = TRUE),
-      yaxis = list(fixedrange = TRUE),
-      font = list(family = "IBM Plex Sans Condensed"),
-      hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"))
-    ) %>%
-    plotly::config(displayModeBar = FALSE)
-}
-
-month_day_year <- function(x, abbr = FALSE) {
-  if(all(lubridate::is.Date(x) || lubridate::is.POSIXt(x))) {
-  glue::glue("{lubridate::month(x, label = TRUE, abbr = abbr)} {lubridate::day(x)}, {lubridate::year(x)}")
-  } else
-    stop("Input vector must be Date or POSIX format.")
-}
-
-pretty_frac <- function(x, accuracy = 1) {
-  paste("1 in", scales::number(1 / x, accuracy))
-}
+xaringanExtra::use_panelset()
 ```
 
 ```{r read_in_data}
@@ -70,6 +50,165 @@ hosp_wch_sum <- hosp_wch %>%
 ```
 
 In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7))`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free.
+
+<br>
+
+<div class = "l-body-outset">
+::::: {.panelset}
+::: {.panel}
+[Covid-19 patients]{.panel-name}
+
+```{r, layout="body-outset"}
+to_plot <- hosp_cap %>% 
+  filter(county == "Westchester") %>% 
+  group_by(year_week) %>% 
+  summarize(across(where(is.numeric), sum, na.rm = TRUE)) %>% 
+  mutate(
+    bed_pct = bed_occupied / bed_capacity,
+    icu_pct = icu_occupied / icu_capacity
+  )
+
+p <- to_plot %>% 
+  ggplot(aes(year_week, covid_patients)) +
+  geom_line(color = "steelblue") +
+  geom_point(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "Covid-19 patients: ", comma(covid_patients, 1)
+        )
+      ),
+    color = "steelblue"
+    ) +
+  expand_limits(y = 0) +
+  scale_x_date(labels = label_date_short()) +
+  scale_y_continuous(labels = label_number_si()) +
+  labs(
+    title = "Covid-19 patients hospitalized in Westchester",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+  )
+
+ggplotly_config(p) %>% 
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+:::
+
+::: {.panel}
+[Bed occupancy]{.panel-name}
+```{r, layout="body-outset"}
+p <- to_plot %>% 
+  ggplot(aes(year_week, bed_pct)) +
+  geom_line(color = "steelblue") +
+  geom_point(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "Bed occupancy: ", percent(bed_pct, 1), "<br>",
+        "Beds occupied: ", comma(bed_occupied, 1), "<br>",
+        "Bed capacity: ", comma(bed_capacity, 1), "<br>"
+        )
+      ),
+    color = "steelblue"
+    ) +
+  expand_limits(y = c(0.5, 1)) +
+  scale_x_date(labels = label_date_short()) +
+  scale_y_continuous(labels = label_percent(1)) +
+  labs(
+    title = "Total inpatient bed occupancy at Westchester hospitals",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+  )
+
+ggplotly_config(p) %>% 
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+:::
+
+::: {.panel}
+[ICU bed occupancy]{.panel-name}
+```{r, layout="body-outset"}
+p <- to_plot %>% 
+  ggplot(aes(year_week, icu_pct)) +
+  geom_line(color = "steelblue") +
+  geom_point(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "ICU bed occupancy: ", percent(icu_pct, 1), "<br>",
+        "ICU beds occupied: ", comma(icu_occupied, 1), "<br>",
+        "ICU bed capacity: ", comma(icu_capacity, 1), "<br>"
+        )
+      ),
+    color = "steelblue"
+    ) +
+  expand_limits(y = c(0, 1)) +
+  scale_x_date(labels = label_date_short()) +
+  scale_y_continuous(labels = label_percent(1)) +
+  labs(
+    title = "ICU bed occupancy at Westchester hospitals",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+  )
+
+ggplotly_config(p) %>% 
+  layout(
+    hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+:::
+
+:::::
+</div>
 
 <br>
 
@@ -170,102 +309,3 @@ leaflet() %>%
     ) %>% 
   addResetMapButton()
 ```
-
-<br>
-<br>
-
-```{r eval=F}
-to_plot <- hosp_cap %>% 
-  filter(county == "Westchester") %>% 
-  group_by(year_week) %>% 
-  summarize(across(where(is.numeric), sum, na.rm = TRUE)) %>% 
-  mutate(
-    bed_pct = bed_occupied / bed_capacity,
-    icu_pct = icu_occupied / icu_capacity
-  )
-
-p <- to_plot %>% 
-  ggplot(aes(year_week, covid_patients)) +
-  geom_line(color = "steelblue") +
-  geom_point(
-    aes(
-      text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
-        "Covid-19 patients: ", comma(covid_patients, 1)
-        )
-      ),
-    color = "steelblue"
-    ) +
-  expand_limits(y = 0) +
-  scale_x_date(labels = label_date_short()) +
-  scale_y_continuous(labels = label_number_si()) +
-  labs(
-    title = "Covid-19 patients hospitalized in Westchester",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-  )
-
-ggplotly_config(p) %>% 
-  layout(
-    hovermode = "x unified",
-    annotations = list(
-      x = 1, y = -0.175,
-      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
-      showarrow = FALSE,
-      xref = "paper", yref = "paper", 
-      xanchor = "right", yanchor = "auto",
-      xshift = 0, yshift = 0
-      )
-    )
-```
-
-```{r}
-p <- to_plot %>% 
-  ggplot(aes(year_week, bed_pct)) +
-  geom_line(color = "steelblue") +
-  geom_point(
-    aes(
-      text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
-        "Covid-19 patients: ", comma(covid_patients, 1)
-        )
-      ),
-    color = "steelblue"
-    ) +
-  expand_limits(y = c(0.5, 1)) +
-  scale_x_date(labels = label_date_short()) +
-  scale_y_continuous(labels = label_percent(1)) +
-  labs(
-    title = "Inpatient bed capacity",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
-  )
-
-ggplotly_config(p) %>% 
-  layout(
-    hovermode = "x unified",
-    annotations = list(
-      x = 1, y = -0.175,
-      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
-      showarrow = FALSE,
-      xref = "paper", yref = "paper", 
-      xanchor = "right", yanchor = "auto",
-      xshift = 0, yshift = 0
-      )
-    )
-```
-
