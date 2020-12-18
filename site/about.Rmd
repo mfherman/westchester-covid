@@ -131,6 +131,17 @@ Geographic aggregation: **None (facility-level data, United States)**
 <br>
 Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
+<br>
+<br>
+
+### [American Community Survey](https://data.census.gov/cedsci/table?q=ACSDT1Y2019.B01003&g=0500000US36119&tid=ACSDT1Y2019.B01003&hidePreview=true)
+
+*US Census Bureau*
+
+To calculate per capita rates of Covid-19, I use estimates of total population from the American Community Survey (table B01003). County per capita rates are calculated using 2019 1-year ACS estimates. Municipality rates are calculated using 2015 -- 2019 5-year ACS estimates.
+
+Where it's used: **Per capita case rates**
+
 ## Me
 
 This website was built and is maintained by me, [Matt Herman](http://mattherman.info). I live in Katonah, NY. Contact me at [mfherman@gmail.com](mailto:mfherman@gmail.com) with comments, questions, or suggestions.
