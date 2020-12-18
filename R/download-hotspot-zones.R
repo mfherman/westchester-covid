@@ -3,6 +3,7 @@ library(janitor)
 library(tidyverse)
 library(jsonlite)
 library(lubridate)
+library(rmapshaper)
 
 url <- "https://covidhotspotlookup.health.ny.gov/assets/HotSpots_Zone.geojson"
 
@@ -10,7 +11,7 @@ hotspot_geo <- read_sf(url) %>%
   clean_names() %>% 
   transmute(
     zone_id = ana_id,
-    cluster,
+    cluster = str_replace(cluster, "_", " "),
     zone,
     date_eff = as.Date(dmy_hms(effct_date))
     ) %>% 
@@ -27,7 +28,7 @@ hotspot_rates <- jsonlite::fromJSON(rates_url, simplifyDataFrame = TRUE) %>%
   select(date, zone_id = zone_mapping_id, pos_rate = percent_positive) %>% 
   arrange(zone_id)
 
-
 hotspot_geo %>% 
+  ms_simplify(keep = 0.25) %>% 
   left_join(hotspot_rates, by = "zone_id") %>%
   write_rds("data/nys-hotspot.rds")
