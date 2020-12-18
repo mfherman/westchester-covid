@@ -49,7 +49,9 @@ tot_cases_most <- mun_cases_poly %>%
   arrange(desc(total_cases_per_cap))
 ```
 
-The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
+***The Westchester County Department of Health has not released updated case data by municipality since `r month_day_year(max(mun_recent$date), abbr = TRUE)`, so the information presented here may not reflect the current state of the pandemic in Westchester municipalities.***
+
+The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
 
 Throughout the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are **`r tot_cases_most$municipality[1]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and **`r tot_cases_most$municipality[2]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the fewest cases per capita are **`r tot_cases_least$municipality[1]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and **`r tot_cases_least$municipality[2]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
 
