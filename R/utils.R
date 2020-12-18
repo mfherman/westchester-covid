@@ -1,7 +1,7 @@
-build_site <- function() {
+build_site <- function(quiet = FALSE) {
   
   # build site
-  rmarkdown::render_site(input = "site/", quiet = TRUE)
+  rmarkdown::render_site(input = "site/", quiet = quiet)
   
   # move site to docs/
   fs::dir_copy(path = "site/docs/", new_path = "docs/", overwrite = TRUE) 

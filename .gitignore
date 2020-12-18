@@ -14,3 +14,4 @@ site/index.html
 site/hospital.html
 site/municipality.html
 site/theme.css
+R/build_site.R

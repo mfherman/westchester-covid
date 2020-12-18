@@ -152,7 +152,7 @@ mun_cases_poly %>%
       withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases">Westchester County DOH</a>')))
     ),
     options = list(
-      dom = "fti",
+      dom = "ft",
       deferRender = TRUE,
       scrollY = 250,
       scroller = TRUE,

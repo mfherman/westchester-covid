@@ -172,7 +172,7 @@ ggplotly_config(to_plot) %>%
     hovermode = "x unified",
     annotations = list(
       x = 1, y = -0.175,
-      text = "<Source: a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",
@@ -223,7 +223,7 @@ ggplotly_config(to_plot) %>%
     hovermode = "x unified",
     annotations = list(
       x = 1, y = -0.175,
-      text = "<Source: a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",
@@ -274,7 +274,7 @@ ggplotly_config(to_plot) %>%
     hovermode = "x unified",
     annotations = list(
       x = 1, y = -0.175,
-      text = "<Source: a href='https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states' target='_self'>NY Times</a>", 
+      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states' target='_self'>NY Times</a>", 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",

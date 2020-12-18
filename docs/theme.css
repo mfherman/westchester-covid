@@ -180,6 +180,13 @@ th.t-left, th.t-right {
   font-size: 11px;
 }
 
+.annotation-text {
+  fill: rgba(0, 0, 0, 0.6) !important;
+  font-family: Roboto, sans-serif;
+  font-size: 11px;
+}
+
+
 .dataTable caption {
   caption-side: bottom !important;
   text-align: right !important;
