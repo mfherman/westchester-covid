@@ -15,6 +15,8 @@ suppressPackageStartupMessages(suppressWarnings(library(extrafont)))
 suppressPackageStartupMessages(suppressWarnings(library(xfun)))
 suppressPackageStartupMessages(suppressWarnings(library(htmltools)))
 suppressPackageStartupMessages(suppressWarnings(library(gghighlight)))
+suppressPackageStartupMessages(suppressWarnings(library(jsonlite)))
+suppressPackageStartupMessages(suppressWarnings(library(rmapshaper)))
 
 conflicted::conflict_prefer("filter", "dplyr", quiet = TRUE)
 conflicted::conflict_prefer("layout", "plotly", quiet = TRUE)
