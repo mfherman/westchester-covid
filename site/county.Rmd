@@ -16,9 +16,12 @@ recent <- nys_cases %>%
 
 recent_nyt <- nyt_cases %>% 
   filter(county == "Westchester", date == max(date))
+
+cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
+death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
 ```
 
-On `r month_day_year(recent$date, abbr = TRUE)`, `r comma(recent$new_cases, 1)` people tested positive for the novel coronavirus out of `r comma(recent$new_tests, 1)` tests reported in Westchester. This is a test positivity rate of `r percent(recent$pos_rate, 0.1)`. `r n2w(recent_nyt$new_deaths, and = TRUE, hyphen = FALSE, cap = TRUE)` new deaths due to Covid-19 were reported on `r month_day_year(recent_nyt$date, abbr = TRUE)`. Since the beginning of the pandemic, `r comma(recent$total_cases, 1)` people have tested positive and `r comma(recent_nyt$total_deaths, 1)` have died in Westchester County.
+On `r month_day_year(recent$date, abbr = TRUE)`, `r comma(recent$new_cases, 1)` people tested positive for the novel coronavirus out of `r comma(recent$new_tests, 1)` tests reported in Westchester. This is a test positivity rate of `r percent(recent$pos_rate, 0.1)`. `r n2w(recent_nyt$new_deaths, and = TRUE, hyphen = FALSE, cap = TRUE)` new deaths due to Covid-19 were reported on `r month_day_year(recent_nyt$date, abbr = TRUE)`. Since the beginning of the pandemic, `r comma(recent$total_cases, 1)` people have tested positive (`r cases_per_cap`) and `r comma(recent_nyt$total_deaths, 1)` have died in Westchester County (`r death_per_cap`).
 
 <br>
 
@@ -296,7 +299,7 @@ tot_metro_least <- nyt_cases %>%
 
 In the New York metropolitan area, the county with the most new cases per capita in the past seven days is **`r recent_metro_nyt$county[1]` County**, where there have been an average of `r comma(recent_metro_nyt$new_cases_avg_7[1], 1)` cases per day reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[1], 1)` per 100,000 residents). **`r recent_metro_nyt$county[2]` County** is another recent hot spot, with `r comma(recent_metro_nyt$new_cases_avg_7[2], 1)` average daily cases cases reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[2], 1)` per 100,000). In **Westchester County**, `r comma(recent_nyt$new_cases_per_cap[1], 1)` cases per 100,000 residents have been reported in the past week (`r comma(recent_nyt$new_cases_avg_7[1], 1)` new cases per day).
 
-Throughout the pandemic, the counties that have had the largest share of their population test positive for coronavirus are **`r tot_metro_nyt$county[1]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[1])`) and **`r tot_metro_nyt$county[2]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[2])`). The counties that have had the fewest cases per capita are **`r tot_metro_least$county[1]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[1])`) and **`r tot_metro_least$county[2]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[2])`). In **Westchester County**, `r pretty_frac(recent_nyt$tot_cases_per_cap)` residents have tested positive since the beginning of the pandemic (`r comma(recent_nyt$total_cases, 1)`).
+Throughout the pandemic, the counties that have had the largest share of their population test positive for coronavirus are **`r tot_metro_nyt$county[1]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[1])`) and **`r tot_metro_nyt$county[2]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[2])`). The counties that have had the fewest cases per capita are **`r tot_metro_least$county[1]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[1])`) and **`r tot_metro_least$county[2]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[2])`). In **Westchester County**, `r pretty_frac(recent_nyt$tot_cases_per_cap)` residents have tested positive since the beginning of the pandemic.
 
 ### New cases per capita
 
@@ -367,7 +370,7 @@ leaflet(to_map) %>%
     pal = county_pal,
     values = to_map$new_cases_per_cap,
     opacity = 0.7,
-    bins = c(20, 40, 60, 80, 100),
+    bins = 3,
     position = "bottomright",
     title = "Avg. daily cases per 100k"
     ) %>% 
@@ -453,5 +456,3 @@ nyt_cases %>%
     #panel.border = element_rect(color = "gray95", fill = NA, size = 0.5)
     )
 ```
-
-

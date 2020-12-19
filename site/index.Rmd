@@ -263,3 +263,7 @@ Data sources, etc.
   </div>
 </div>
 
+<br>
+<br>
+
+<p style="text-align: center;">*Updated `r month_day_year(Sys.Date(), abbr = TRUE)`, `r pretty_time(Sys.time())`*</p>

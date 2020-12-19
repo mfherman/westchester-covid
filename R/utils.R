@@ -28,6 +28,21 @@ month_day_year <- function(x, abbr = FALSE) {
     stop("Input vector must be Date or POSIX format.")
   }
 
+month_day_year <- function(x, abbr = FALSE) {
+  if(all(lubridate::is.Date(x) || lubridate::is.POSIXt(x))) {
+  glue::glue("{lubridate::month(x, label = TRUE, abbr = abbr)} {lubridate::day(x)}, {lubridate::year(x)}")
+  } else
+    stop("Input vector must be Date or POSIX format.")
+  }
+
+pretty_time <- function(x) {
+  if(all(lubridate::is.POSIXt(x))) {
+  paste(as.numeric(format(x, "%I")), format(x, "%M %p"), sep = ":")
+  } else
+    stop("Input vector must be POSIX format.")
+  }
+
+
 pretty_frac <- function(x, accuracy = 1) {
   paste("1 in", scales::number(1 / x, accuracy))
   }
