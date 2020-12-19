@@ -6,29 +6,8 @@ preview: img/wch-map.png
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
-library(tidyverse)
-library(sf)
-library(here)
-library(scales)
-library(lubridate)
-library(leaflet)
-library(DT)
-library(leaflet.extras)
-library(leaflet.minicharts)
-
-source(here("R/utils.R"))
-```
-
-```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
 ```
-
-```{r read_in_data}
-hosp_geo <- read_rds(here("data/hospital-locations.rds"))
-hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
-```
-
 
 ```{r}
 hosp_wch <- hosp_cap %>% 
@@ -101,7 +80,7 @@ ggplotly_config(p) %>%
     hovermode = "x unified",
     annotations = list(
       x = 1, y = -0.175,
-      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility">US HHS</a>', 
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",
@@ -271,7 +250,7 @@ to_map %>%
     ) %>%
   datatable(
     class = "compact hover",
-    extensions = "Scroller",
+    extensions = c("Scroller", "Responsive"),
     caption = tags$caption(
       style = 'caption-side: bottom; text-align: right;',
       withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>')))

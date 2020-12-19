@@ -7,27 +7,28 @@ preview: img/wch-map.png
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-library(tidyverse)
-library(here)
+source(here::here("R/attach-packages.R"))
+source(here::here("R/utils.R"))
+source(here::here("R/load-data.R"))
+```
 
-source(here("R/utils.R"))
-
-nys_date <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
+```{r}
+nys_date <- nys_cases %>% 
   filter(date == max(date)) %>% 
   distinct(date) %>% 
   pull()
 
-nyt_date <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>%
+nyt_date <- nyt_cases %>%
   filter(date == max(date)) %>% 
   distinct(date) %>% 
   pull()
 
-mun_date <- read_csv(here("data/by-mun-cases.csv")) %>% 
+mun_date <- mun_cases %>% 
   filter(date == max(date)) %>% 
   distinct(date) %>% 
   pull()
 
-hosp_date <- read_csv(here("data/hospital-beds-occupancy.csv")) %>% 
+hosp_date <- hosp_cap %>% 
   filter(year_week == max(year_week)) %>% 
   distinct(year_week) %>% 
   pull()
@@ -36,7 +37,6 @@ hosp_date <- read_csv(here("data/hospital-beds-occupancy.csv")) %>%
 This site contains information about the Covid-19 pandemic in Westchester County, NY and the surrounding metroplitan area. The [Westchester County Department of Health website](https://health.westchestergov.com/2019-novel-coronavirus) does not provide much data or detailed information about the state of the pandemic in the county, so this site hopes to fill the gap.
 
 ## Data sources
-
 
 ### [New York State Statewide Covid-19 Testing](https://health.data.ny.gov/Health/New-York-State-Statewide-COVID-19-Testing/xdss-u53e)
 

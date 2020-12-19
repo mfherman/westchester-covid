@@ -2200,10 +2200,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     }
   }
 
-  .dataTables_info, .dataTables_filter, .dataTables_empty, .dataTable > thead {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-variant-caps: all-small-caps;
+  .dataTables_info, .dataTables_filter, .dtr-title, .dataTables_empty, .dataTable > thead {
+    font-family: "IBM Plex Sans", sans-serif !important;
+    font-variant-caps: all-small-caps !important;
     border-bottom: 0px !important;
+  }
+
+  .dtr-data {
+    font-family: "Roboto Mono", monospace !important;
+
   }
 
   .key-metric-t {
@@ -2473,6 +2478,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <p>This site contains information about the Covid-19 pandemic in Westchester County, NY and the surrounding metroplitan area. The <a href="https://health.westchestergov.com/2019-novel-coronavirus">Westchester County Department of Health website</a> does not provide much data or detailed information about the state of the pandemic in the county, so this site hopes to fill the gap.</p>
 <h2 id="data-sources">Data sources</h2>
 <h3 id="new-york-state-statewide-covid-19-testing"><a href="https://health.data.ny.gov/Health/New-York-State-Statewide-COVID-19-Testing/xdss-u53e">New York State Statewide Covid-19 Testing</a></h3>

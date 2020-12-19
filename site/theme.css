@@ -128,10 +128,15 @@ d-article h3 {
   }
 }
 
-.dataTables_info, .dataTables_filter, .dataTables_empty, .dataTable > thead {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-variant-caps: all-small-caps;
+.dataTables_info, .dataTables_filter, .dtr-title, .dataTables_empty, .dataTable > thead {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-variant-caps: all-small-caps !important;
   border-bottom: 0px !important;
+}
+
+.dtr-data {
+  font-family: "Roboto Mono", monospace !important;
+
 }
 
 .key-metric-t {

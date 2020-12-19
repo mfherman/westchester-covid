@@ -6,49 +6,6 @@ preview: img/wch-map.png
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
-library(tidyverse)
-library(plotly)
-library(sf)
-library(leaflet)
-library(DT)
-library(here)
-library(slider)
-library(scales)
-library(lubridate)
-library(leaflet)
-library(leaflet.extras)
-
-source(here("R/utils.R"))
-```
-
-```{r read_in_data}
-nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
-  group_by(county) %>% 
-  mutate(
-    across(c(new_cases, total_cases, new_tests, total_tests), 
-    list(
-      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
-      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
-      )
-    ),
-    pos_rate_avg_7 = new_cases_avg_7 / new_tests_avg_7,
-    pos_rate_avg_14 = new_cases_avg_14 / new_tests_avg_14
-    ) %>% 
-  ungroup()
-
-nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
-  group_by(county, state) %>% 
-  mutate(
-    across(where(is.numeric), 
-    list(
-      "avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE),
-      "avg_14" = ~ slide_dbl(.x, mean, .before = 13, .complete = TRUE)
-      )
-    ))
-
-mun_cases <- read_csv(here("data/by-mun-cases.csv"))
-mun_bound <- read_rds(here("data/mun-boundary.rds"))
 ```
 
 ```{r}

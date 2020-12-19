@@ -6,27 +6,7 @@ preview: img/wch-map.png
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
-library(tidyverse)
-library(plotly)
-library(sf)
-library(DT)
-library(here)
-library(slider)
-library(scales)
-library(lubridate)
-library(leaflet)
-library(leaflet.extras)
-library(leaflet.minicharts)
-
-source(here("R/utils.R"))
 ```
-
-```{r read_in_data}
-mun_cases <- read_csv(here("data/by-mun-cases.csv"))
-mun_bound <- read_rds(here("data/mun-boundary.rds"))
-```
-
 
 ```{r}
 mun_recent <- mun_cases %>% 
@@ -41,7 +21,6 @@ mun_cases_poly <- mun_bound %>%
     ) %>% 
   arrange(desc(new_cases_per_cap))
 
-
 tot_cases_least <- mun_cases_poly %>% 
   arrange(total_cases_per_cap)
 
@@ -50,6 +29,10 @@ tot_cases_most <- mun_cases_poly %>%
 ```
 
 ***The Westchester County Department of Health has not released updated case data by municipality since `r month_day_year(max(mun_recent$date), abbr = TRUE)`, so the information presented here may not reflect the current state of the pandemic in Westchester municipalities.***
+
+On Dec 18, 2020, the County government tweeted that they are pausing the release of municipal-level data:
+
+<a href="https://twitter.com/westchestergov/status/1340044992023318534"><img src="img/westchester-gov-tweet.png" alt="@westchestergov tweet" style="width:80%"></a>
 
 The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
 
@@ -148,7 +131,7 @@ mun_cases_poly %>%
     ) %>% 
   datatable(
     class = "compact hover",
-    extensions = "Scroller",
+    extensions = c("Scroller", "Responsive"),
     caption = tags$caption(
       style = 'caption-side: bottom; text-align: right;',
       withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases" target="_self">Westchester County DOH</a>')))
