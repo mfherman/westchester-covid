@@ -47,6 +47,10 @@ deaths_change <- deaths_recent - deaths_last_week
 deaths_change_pct <- deaths_change / deaths_last_week
 
 deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
+
+cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
+death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
+
 ```
 
 ```{r calc-key-metrics}
@@ -66,16 +70,19 @@ cases_recent <- recent$new_cases_avg_7 * 7
 cases_last_week <- last_week$new_cases_avg_7 * 7
 cases_change <- cases_recent - cases_last_week
 cases_change_pct <- cases_change / cases_last_week
+cases_total <- recent$total_cases
 
 deaths_recent <- recent_nyt$new_deaths_avg_7 * 7
 deaths_last_week <- last_week_nyt$new_deaths_avg_7 * 7
 deaths_change <- deaths_recent - deaths_last_week
 deaths_change_pct <- deaths_change / deaths_last_week
+deaths_total <- recent_nyt$total_deaths
 
 tests_recent <- recent$new_tests_avg_7 * 7
 tests_last_week <- last_week$new_tests_avg_7 * 7
 tests_change <- tests_recent - tests_last_week
 tests_change_pct <- tests_change / tests_last_week
+tests_total <- recent$total_tests
 
 pos_rate_recent <- cases_recent / tests_recent
 pos_rate_last_week <- cases_last_week / tests_last_week
@@ -127,37 +134,42 @@ ggplotly_config(to_plot) %>%
     <th class = "t-left"></th>
     <th class = "t-right">Last 7 days</th>
     <th class = "t-right">7-day change</th>
+    <th class = "t-right">Total</th>
   </tr>
   <tr>
-    <td class = "t-left">New deaths</td>
+    <td class = "t-left">Deaths</td>
     <td class = "t-right">`r comma(deaths_recent, 1)`</td>
     <td class = "t-right">`r percent_sign(deaths_change_pct, 1)`</td>
+    <td class = "t-right">`r comma(deaths_total, 1)`</td>
   </tr>
   <tr>
-    <td class = "t-left">New cases</td>
+    <td class = "t-left">Cases</td>
     <td class = "t-right">`r comma(cases_recent, 1)`</td>
     <td class = "t-right">`r percent_sign(cases_change_pct, 1)`</td>
+    <td class = "t-right">`r comma(cases_total, 1)`</td>
   </tr>
   <tr>
-    <td class = "t-left">New tests</td>
+    <td class = "t-left">Tests</td>
     <td class = "t-right">`r comma(tests_recent, 1)`</td>
     <td class = "t-right">`r percent_sign(tests_change_pct, 1)`</td>
+    <td class = "t-right">`r label_number_si(0.01)(tests_total)`</td>
+    
   </tr>
     <tr>
-    <td class = "t-left">Positivity rate</td>
+    <td class = "t-left">Pos rate</td>
     <td class = "t-right">`r percent(pos_rate_recent, 0.1)`</td>
     <td class = "t-right">`r num_sign(pos_rate_recent, 0.1)`</td>
+    <td class = "t-right"></td>
   </tr>
   
 </table>
   </div>
 
-  <div class = "index-column-r l-page" style = "font-size:1.4rem;line-height:1.3em;font-family:'IBM Plex Sans', sans-serif;">
+  <div class = "index-column-r l-page" style = "font-size:1.2rem;line-height:1.2em;font-family:'IBM Plex Sans', sans-serif;">
 
-In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is `r pct_change_prefix` <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days.
+In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is `r pct_change_prefix` <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days. Since the beginning of the pandemic, <span style = "color:white;background-color:steelblue;">`r cases_per_cap`</span> Westchester residents have tested positive for the novel coronavirus.
 
-There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days.
-
+There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days. <span style = "color:white;background-color:coral;">`r death_per_cap`</span> Westchester residents have died from Covid-19.
   </div>
 </div>
 
