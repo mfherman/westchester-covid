@@ -1,12 +1,14 @@
+message(paste0(Sys.time(), " -- Loading data"))
+
 mun_bound <- read_rds(here("data/mun-boundary.rds"))
 county_bound <- read_rds(here("data/county-boundary.rds"))
 hotspot <- read_rds((here("data/nys-hotspot.rds")))
 hosp_geo <- read_rds(here("data/hospital-locations.rds"))
 
-hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"))
-mun_cases <- read_csv(here("data/by-mun-cases.csv"))
+hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = cols())
+mun_cases <- read_csv(here("data/by-mun-cases.csv"), col_types = cols())
 
-nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>% 
+nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv"), col_types = cols()) %>% 
   group_by(county) %>% 
   mutate(
     across(c(new_cases, total_cases, new_tests, total_tests), 
@@ -20,7 +22,7 @@ nys_cases <- read_csv(here("data/by-county-cases-tests-nys.csv")) %>%
     ) %>% 
   ungroup()
 
-nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv")) %>% 
+nyt_cases <- read_csv(here("data/by-county-cases-deaths-nyt.csv"), col_types = cols()) %>% 
   group_by(county, state) %>% 
   mutate(
     across(where(is.numeric), 
