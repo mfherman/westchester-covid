@@ -18,4 +18,4 @@ suppressPackageStartupMessages(suppressWarnings(library(gghighlight)))
 
 conflicted::conflict_prefer("filter", "dplyr", quiet = TRUE)
 conflicted::conflict_prefer("layout", "plotly", quiet = TRUE)
-confliched::conflict_prefer("cols", "readr", quiet = TRUE)
+conflicted::conflict_prefer("cols", "readr", quiet = TRUE)
