@@ -1,9 +1,6 @@
-library(sf)
-library(janitor)
-library(tidyverse)
-library(jsonlite)
-library(lubridate)
-library(rmapshaper)
+source(here::here("R/attach-packages.R"))
+
+message(glue("{Sys.time()} -- Starting download of NY hotpsots"))
 
 url <- "https://covidhotspotlookup.health.ny.gov/assets/HotSpots_Zone.geojson"
 
@@ -32,3 +29,6 @@ hotspot_geo %>%
   ms_simplify(keep = 0.25) %>% 
   left_join(hotspot_rates, by = "zone_id") %>%
   write_rds("data/nys-hotspot.rds")
+
+message(glue("Most recent data is from {max(hotspot_rates$date)}"))
+message(glue("{Sys.time()} -- Finsished download of NY hotspots"))

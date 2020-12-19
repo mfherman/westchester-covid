@@ -1,9 +1,4 @@
-suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
-suppressWarnings(suppressPackageStartupMessages(library(janitor)))
-suppressWarnings(suppressPackageStartupMessages(library(lubridate)))
-suppressWarnings(suppressPackageStartupMessages(library(glue)))
-suppressWarnings(suppressPackageStartupMessages(library(vroom)))
-
+source(here::here("R/attach-packages.R"))
 
 message(glue("{Sys.time()} -- Starting download of NY state data"))
 

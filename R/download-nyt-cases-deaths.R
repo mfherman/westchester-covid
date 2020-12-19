@@ -1,6 +1,4 @@
-suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
-suppressWarnings(suppressPackageStartupMessages(library(glue)))
-suppressWarnings(suppressPackageStartupMessages(library(vroom)))
+source(here::here("R/attach-packages.R"))
 
 message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
