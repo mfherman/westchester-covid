@@ -368,9 +368,9 @@ leaflet(to_map) %>%
     ) %>% 
   addLegend(
     pal = county_pal,
-    values = to_map$new_cases_per_cap,
+    values = 0:100,
     opacity = 0.7,
-    bins = 3,
+    bins = c(0, 25, 50, 75, 100),
     position = "bottomright",
     title = "Avg. daily cases per 100k"
     ) %>% 
