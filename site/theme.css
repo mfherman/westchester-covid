@@ -160,10 +160,16 @@ d-article h3 {
   width: 65px
 }
 
+@media only screen and (max-width: 600px) {
+  .key-metric-t td:nth-child(4), .key-metric-t th:nth-child(4) {
+    display:none;
+  }
+}
+
 .t-left {
   text-align: left;
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   border-bottom: 0px !important;
 }
 
@@ -182,6 +188,8 @@ th.t-left, th.t-right {
   border-bottom: 0px !important;
 }
 
+
+
 .plotly a {
   fill: rgba(0, 0, 0, 0.6) !important;
   text-decoration: underline !important;
@@ -194,7 +202,6 @@ th.t-left, th.t-right {
   font-family: Roboto, sans-serif!important;
   font-size: 11px !important;
 }
-
 
 .dataTable caption {
   caption-side: bottom !important;

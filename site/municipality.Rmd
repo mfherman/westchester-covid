@@ -49,7 +49,7 @@ to_map <- mun_cases_poly %>%
   mutate(
     label = paste0(
       "<b>", municipality, "</b><br>",
-      "Avg. daily cases: ", comma(new_cases_day_avg, 1), "<br>",
+      "Avg. daily cases: ", comma(new_cases_day_avg, 0.1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
       )
     )
@@ -148,8 +148,8 @@ mun_cases_poly %>%
         )
       )
     ) %>% 
-  formatRound(2, digits = 1) %>% 
-  formatRound(c(3:4, 6), digits = 0) %>% 
+  formatRound(2:3, digits = 1) %>% 
+  formatRound(c(4, 6), digits = 0) %>% 
   formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
   formatStyle(2:6, fontFamily = "Roboto Mono")
 ```
@@ -177,7 +177,7 @@ p <- all_days_mun %>%
     aes(
       text = paste0(
         "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
-        "Avg. daily cases: ", comma(active_cases / 14, 1), "<br>",
+        "Avg. daily cases: ", comma(active_cases / 14, 0.1), "<br>",
         "Per 100k: ", comma(active_per_cap / 14 * 1e5, 0.1)
       ))) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +

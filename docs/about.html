@@ -2232,10 +2232,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     width: 65px
   }
 
+  @media only screen and (max-width: 600px) {
+    .key-metric-t td:nth-child(4), .key-metric-t th:nth-child(4) {
+      display:none;
+    }
+  }
+
   .t-left {
     text-align: left;
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     border-bottom: 0px !important;
   }
 
@@ -2254,6 +2260,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border-bottom: 0px !important;
   }
 
+
+
   .plotly a {
     fill: rgba(0, 0, 0, 0.6) !important;
     text-decoration: underline !important;
@@ -2266,7 +2274,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     font-family: Roboto, sans-serif!important;
     font-size: 11px !important;
   }
-
 
   .dataTable caption {
     caption-side: bottom !important;
