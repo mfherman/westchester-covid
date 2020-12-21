@@ -106,7 +106,7 @@ to_plot <- nys_cases %>%
   geom_line(aes(y = new_cases_avg_7), color = "#3766b3", size = 0.65) +
   scale_x_date(
     label = label_date_short(),
-    date_breaks = "1 month",
+    date_breaks = "2 months",
     limits = c(as.Date("2020-03-01"), NA),
     expand = expansion(add = c(0, 2))
     ) +
@@ -197,7 +197,7 @@ to_map <- mun_cases_poly %>%
   mutate(
     label = paste0(
       "<b>", municipality, "</b><br>",
-      "Avg. daily cases: ", comma(new_cases_day_avg, 1), "<br>",
+      "Avg. daily cases: ", comma(new_cases_day_avg, 0.1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
       )
     )
