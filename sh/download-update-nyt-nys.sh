@@ -3,6 +3,7 @@
 Rscript "R/download-nys-cases-tests.R"
 Rscript "R/download-nyt-cases-deaths.R"
 Rscript "R/download-hotspot-zones.R"
+Rscript "R/download-hospital-data.R"
 Rscript "R/build-site.R"
 
 git commit -am  "update site with fresh data"

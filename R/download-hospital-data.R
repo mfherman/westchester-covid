@@ -34,7 +34,6 @@ hosp_data <- hospital %>%
 
 write_csv(hosp_data, "data/hospital-beds-occupancy.csv")
 
-
     # bed_pct_full = bed_occupied / bed_capacity,
     # icu_pct_full = icu_occupied / icu_capacity,
     # covid_patient_pct = covid_patients / all_patients
