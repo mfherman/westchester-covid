@@ -182,17 +182,27 @@ p <- all_days_mun %>%
       ))) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
   scale_x_date(
-
     labels = label_date_short(),
     breaks = "1 month",
     expand = expansion(mult = c(0.01, 0))
     ) +
-  labs(x = NULL, y = NULL) +
+  labs(x = NULL, y = NULL, title = "Average daily cases per 100k (beginning May 5)") +
   theme_minimal() +
   theme(
     legend.position = "none",
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
     )
 
-ggplotly_config(p)
+ggplotly_config(p) %>% 
+  layout(
+    annotations = list(
+      x = 1, y = -0.075,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases" target="_self">Westchester County DOH</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
 ```
