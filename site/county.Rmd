@@ -457,37 +457,88 @@ nyt_cases %>%
     )
 ```
 
-<!-- ## Nursing Homes -->
+## Nursing Homes
 
-<!-- ### Confirmed and presumed deaths in Westchester nursing homes -->
-<!-- ```{r} -->
-<!-- nh_deaths <- read_rds(here("data/nh-deaths.rds")) -->
+```{r}
+nh_deaths <- read_rds(here("data/nh-deaths.rds"))
 
-<!-- to_map <- nh_deaths %>%  -->
-<!--   mutate( -->
-<!--     label = paste0( -->
-<!--       "<b>", name, "</b><br>", -->
-<!--       "Deaths: ", comma(deaths_total, 1), "<br>", -->
-<!--       "Beds: ", comma(beds, 1) -->
-<!--       ), -->
-<!--     name = fct_reorder(name, deaths_total) -->
-<!--     ) -->
+wch_nh_sum <- nh_deaths %>% 
+  st_drop_geometry() %>% 
+  group_by(date) %>% 
+  summarize(n = n(), deaths = sum(deaths_total))
 
-<!-- to_map %>%  -->
-<!--   leaflet() %>%  -->
-<!--   addProviderTiles(providers$CartoDB.Positron) %>% -->
-<!--   addCircles( -->
-<!--     radius = ~ sqrt(deaths_total) * 300, -->
-<!--     color = "steelblue", -->
-<!--     opacity = 0.7, -->
-<!--     weight = 1.5, -->
-<!--     fillColor = "steelblue", -->
-<!--     fillOpacity = 0.2, -->
-<!--     label = lapply(to_map$label, htmltools::HTML), -->
-<!--     highlightOptions = highlightOptions(sendToBack = TRUE, color = "#6fb6f2", weight = 2.5) -->
-<!--     ) %>%  -->
-<!--   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%  -->
-<!--   addResetMapButton() -->
+wch_deaths <- nyt_cases %>% 
+  filter(date == wch_nh_sum$date, county == "Westchester")
+```
 
-<!-- ``` -->
+The Covid-19 pandemic has devastated long-term care facilities. The COVID Tracking Project estimates that [38% of all people in the US who died from Covid-19](https://covidtracking.com/data/long-term-care) were residents of long-term care facilities such as nursing homes and assisted living facilities.
+
+As of `r month_day_year(wch_nh_sum$date, abbr = TRUE)`, there have been `r comma(wch_nh_sum$deaths + 2, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County. This is `r percent((wch_nh_sum$deaths + 2) / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
+
+<aside>
+These figures undercount the total deaths of nursing home residents because the NYS DOH only reports deaths that occurred in nursing homes. If a nursing home resident died in a hospital, it is not counted as a nursing home death.
+</aside>
+
+### Confirmed and presumed Covid-19 deaths in nursing homes
+```{r nursing-home-map, out.height="600px", out.width="600px"}
+to_map <- nh_deaths %>%
+  mutate(
+    label = paste0(
+      "<b>", name, "</b><br>",
+      "Deaths: ", comma(deaths_total, 1), "<br>",
+      "Beds: ", comma(beds, 1)
+      ),
+    name = fct_reorder(name, deaths_total)
+    )
+
+to_map %>%
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircles(
+    radius = ~ sqrt(deaths_total) * 300,
+    color = "steelblue",
+    opacity = 0.7,
+    weight = 1.5,
+    fillColor = "steelblue",
+    fillOpacity = 0.2,
+    label = lapply(to_map$label, htmltools::HTML),
+    highlightOptions = highlightOptions(sendToBack = TRUE, color = "#6fb6f2", weight = 2.5)
+    ) %>%
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
+  addResetMapButton()
+```
+
+```{r nursing-home-table, layout="l-body-outset", out.height="510px"}
+to_map %>% 
+  st_drop_geometry() %>% 
+  arrange(desc(deaths_total)) %>% 
+  select(
+    Name = name,
+    Deaths = deaths_total,
+    `Total Beds` = beds
+    ) %>% 
+  datatable(
+    class = "compact hover",
+    extensions = c("Scroller", "Responsive"),
+    caption = tags$caption(
+      style = 'caption-side: bottom; text-align: right;',
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states">NY Times</a>')))
+    ),
+    options = list(
+      dom = "ft",
+      deferRender = TRUE,
+      scrollY = 250,
+      scroller = TRUE,
+      columnDefs = list(
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1),
+        list(className = "dt-center", targets = 5)
+        )
+      )
+    ) %>% 
+  formatRound(2, digits = 1) %>% 
+  formatRound(c(3:4, 6), digits = 0) %>% 
+  formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(2:6, fontFamily = "Roboto Mono")
+```
 

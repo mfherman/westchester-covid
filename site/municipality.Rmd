@@ -95,7 +95,8 @@ leaflet(to_map) %>%
     weight = 1.5,
     fillColor = "steelblue",
     fillOpacity = 0.2,
-    label = lapply(to_map_total$label, htmltools::HTML)
+    label = lapply(to_map_total$label, htmltools::HTML),
+    highlightOptions = highlightOptions(sendToBack = TRUE, color = "#6fb6f2", weight = 2.5)    
     ) %>% 
   addLegend(
     group = "Cases per 100k",
