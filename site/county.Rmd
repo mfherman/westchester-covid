@@ -422,7 +422,6 @@ to_map %>%
   formatStyle(2:6, fontFamily = "Roboto Mono")
 ```
 
-<br>
 
 ```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 nyt_cases %>% 
@@ -457,3 +456,38 @@ nyt_cases %>%
     #panel.border = element_rect(color = "gray95", fill = NA, size = 0.5)
     )
 ```
+
+<!-- ## Nursing Homes -->
+
+<!-- ### Confirmed and presumed deaths in Westchester nursing homes -->
+<!-- ```{r} -->
+<!-- nh_deaths <- read_rds(here("data/nh-deaths.rds")) -->
+
+<!-- to_map <- nh_deaths %>%  -->
+<!--   mutate( -->
+<!--     label = paste0( -->
+<!--       "<b>", name, "</b><br>", -->
+<!--       "Deaths: ", comma(deaths_total, 1), "<br>", -->
+<!--       "Beds: ", comma(beds, 1) -->
+<!--       ), -->
+<!--     name = fct_reorder(name, deaths_total) -->
+<!--     ) -->
+
+<!-- to_map %>%  -->
+<!--   leaflet() %>%  -->
+<!--   addProviderTiles(providers$CartoDB.Positron) %>% -->
+<!--   addCircles( -->
+<!--     radius = ~ sqrt(deaths_total) * 300, -->
+<!--     color = "steelblue", -->
+<!--     opacity = 0.7, -->
+<!--     weight = 1.5, -->
+<!--     fillColor = "steelblue", -->
+<!--     fillOpacity = 0.2, -->
+<!--     label = lapply(to_map$label, htmltools::HTML), -->
+<!--     highlightOptions = highlightOptions(sendToBack = TRUE, color = "#6fb6f2", weight = 2.5) -->
+<!--     ) %>%  -->
+<!--   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%  -->
+<!--   addResetMapButton() -->
+
+<!-- ``` -->
+

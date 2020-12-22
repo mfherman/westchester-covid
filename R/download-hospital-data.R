@@ -16,12 +16,13 @@ county_fips <- tidycensus::fips_codes %>%
   select(county, fips_code = county_fips)
 
 hosp_data <- hospital %>% 
-  filter(fips_code %in% fips, hospital_subtype != "Childrens Hospitals") %>% 
+  filter((fips_code %in% fips | state == "NY"), hospital_subtype != "Childrens Hospitals") %>% 
   left_join(county_fips, by = "fips_code") %>% 
   select(
     hospital_pk,
     fips_code,
     county,
+    state,
     year_week = collection_week,
     bed_capacity   = all_adult_hospital_inpatient_beds_7_day_avg,
     bed_occupied   = all_adult_hospital_inpatient_bed_occupied_7_day_avg,

@@ -120,7 +120,7 @@ Hospital metric definitions:
 - Beds used: staffed inpatient beds that are occupied
 - Bed occupancy: beds used divided by total beds
 - Total ICU beds: staffed inpatient ICU beds
-- ICU beds used: staffed inpatient  ICU beds that are occupied
+- ICU beds used: staffed inpatient ICU beds that are occupied
 - Bed occupancy: ICU beds used divided by total ICU beds
 
 Most recent data: **`r month_day_year(hosp_date, abbr = TRUE)` -- `r month_day_year(hosp_date + 7, abbr = TRUE)`**

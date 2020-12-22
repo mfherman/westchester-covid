@@ -26,9 +26,26 @@ hosp_wch_sum <- hosp_wch %>%
     pct_bed = bed_occupied / bed_capacity,
     pct_icu = icu_occupied / icu_capacity
     )
+
+hosp_nys <- hosp_cap %>% 
+  filter(
+    year_week == max(year_week),
+    state == "NY"
+    )
+
+hosp_nys_sum <- hosp_nys %>% 
+  group_by(year_week) %>% 
+  summarize(across(where(is.numeric), sum, na.rm = TRUE), .groups = "drop") %>% 
+  mutate(
+    bed_free = bed_capacity - bed_occupied,
+    icu_free = icu_capacity - icu_occupied,
+    pct_covid = covid_patients / all_patients,
+    pct_bed = bed_occupied / bed_capacity,
+    pct_icu = icu_occupied / icu_capacity
+    )
 ```
 
-In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7), abbr = TRUE)`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free.
+In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7), abbr = TRUE)`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free. Statewide, `r percent(hosp_nys_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_nys_sum$pct_icu, 1)` of all ICU beds were occupied.
 
 <br>
 
