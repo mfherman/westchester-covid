@@ -2,7 +2,10 @@
 title: "Westchester and surrounding counties"
 site: distill::distill_website
 preview: img/wch-map.png
-
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -281,10 +284,11 @@ nys_cases %>%
   formatStyle(2:7, fontFamily = "Roboto Mono")
 ```
 
-## Metro area
+
+## Metro area cases rates
 
 ```{r}
-recent_metro_nyt <- nyt_cases %>% 
+recent_metro_nyt <- nyt_cases %>%
   filter(date == max(date), county != "Westchester") %>% 
   arrange(desc(new_cases_per_cap))
 
@@ -315,23 +319,11 @@ to_map <- county_bound %>%
       )
     )
 
-hotspot_to_map <- hotspot %>% 
-  mutate(
-    label = paste0(
-      "<b>", cluster, "</b><br>",
-      "7-day avg positivity rate: ",  percent(pos_rate, accuracy = 0.1, scale = 1), "<br>",
-      "Zone effective date: ", month_day_year(date_eff, abbr = TRUE))
-    )
-
 county_pal <- colorNumeric(
   palette = "YlOrRd",
   domain = 0:100
   )
 
-hotspot_pal <- colorFactor(
-  palette = c("yellow2", "orange", "firebrick"),
-  levels = c("Yellow", "Orange", "Red")
-  )
 
 leaflet(to_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -350,22 +342,6 @@ leaflet(to_map) %>%
       bringToFront = TRUE
       )
     ) %>%
-  addPolygons(
-    data = hotspot_to_map,
-    group = "NYS micro-clusters",
-    weight = 1.5,
-    color = "white",
-    fillColor = ~hotspot_pal(zone),
-    fillOpacity = 0.8,
-    label = lapply(hotspot_to_map$label, htmltools::HTML),
-    highlight = highlightOptions(
-      weight = 2,
-      color = "#666666",
-      opacity = 0.7,
-      fillOpacity = 0.7,
-      bringToFront = TRUE
-      )
-    ) %>% 
   addLegend(
     pal = county_pal,
     values = 0:100,
@@ -374,10 +350,6 @@ leaflet(to_map) %>%
     position = "bottomright",
     title = "Avg. daily cases per 100k"
     ) %>% 
-  addLayersControl(
-    baseGroups = c("Cases per 100k", "NYS micro-clusters"),
-    options = layersControlOptions(collapsed = FALSE)
-   ) %>% 
   setView(lng = -73.75, lat = 41.3, zoom = 8) %>% 
   addResetMapButton()
 ```
@@ -422,6 +394,7 @@ to_map %>%
   formatStyle(2:6, fontFamily = "Roboto Mono")
 ```
 
+The timing of outbreaks in counties in the New York metro area has varied. Some counties such as Rockland, Westchester, and Nassau had particularly severe first waves in spring 2020. By contrast, other counties such as New Haven, Fairfield, Litchfield, had relatively mild first waves in the spring and more severe second waves in fall 2020. The chart below shows the variation in the number of cases per 100,000 residents from March 2020 through the present.
 
 ```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 nyt_cases %>% 
@@ -457,7 +430,89 @@ nyt_cases %>%
     )
 ```
 
-## Nursing Homes
+<br>
+
+## New York State micro-clusters
+
+```{r}
+wch_cluster <- hotspot %>% 
+  st_transform(2263) %>% 
+  st_filter(mun_bound)
+
+red <- wch_cluster %>% 
+  filter(zone == "red") %>% 
+  nrow()
+
+orange <- wch_cluster %>% 
+  filter(zone == "Orange") %>% 
+  nrow()
+
+yellow <- wch_cluster %>% 
+  filter(zone == "Yellow") %>% 
+  nrow()
+
+red_text <- case_when(
+  red == 0 ~ "are no red zones",
+  red == 1 ~ "is one red zone",
+  TRUE ~ paste("are", n2w(red), "red zones")
+  )
+
+orange_text <- case_when(
+  orange == 0 ~ "no orange zones",
+  orange == 1 ~ "one orange zone",
+  TRUE ~ paste(n2w(orange), "orange zones")
+  )
+
+yellow_text <- case_when(
+  yellow == 0 ~ "no yellow zones",
+  yellow == 1 ~ "one yellow zone",
+  TRUE ~ paste(n2w(yellow), "yellow zones")
+  )
+```
+
+In October, [Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. There are yellow, orange, and red zones and the determination of these clusters is based on a combination of test positivity rate, hospital admissions, and hospital capacity.
+
+Currently, in Westchester County, there `r red_text`, `r orange_text`, and `r yellow_text`.
+
+```{r hotspot-map, out.height = "600px"}
+hotspot_to_map <- hotspot %>% 
+  mutate(
+    label = paste0(
+      "<b>", cluster, "</b><br>",
+      "7-day avg positivity rate: ",  percent(pos_rate, accuracy = 0.1, scale = 1), "<br>",
+      "Zone effective date: ", month_day_year(date_eff, abbr = TRUE))
+    )
+
+hotspot_pal <- colorFactor(
+  palette = c("yellow2", "orange", "firebrick"),
+  levels = c("Yellow", "Orange", "Red")
+  )
+
+leaflet(hotspot_to_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = hotspot_to_map,
+    group = "NYS micro-clusters",
+    weight = 1.5,
+    color = "white",
+    fillColor = ~hotspot_pal(zone),
+    fillOpacity = 0.8,
+    label = lapply(hotspot_to_map$label, htmltools::HTML),
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666666",
+      opacity = 0.7,
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+      )
+    ) %>% 
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
+  addResetMapButton()
+```
+
+<br>
+
+## Deaths in nursing homes
 
 ```{r}
 nh_deaths <- read_rds(here("data/nh-deaths.rds"))
@@ -465,7 +520,7 @@ nh_deaths <- read_rds(here("data/nh-deaths.rds"))
 wch_nh_sum <- nh_deaths %>% 
   st_drop_geometry() %>% 
   group_by(date) %>% 
-  summarize(n = n(), deaths = sum(deaths_total))
+  summarize(n = n(), deaths = sum(deaths_total) + 2)  # victoria house has deaths, but closed in sept
 
 wch_deaths <- nyt_cases %>% 
   filter(date == wch_nh_sum$date, county == "Westchester")
@@ -473,10 +528,10 @@ wch_deaths <- nyt_cases %>%
 
 The Covid-19 pandemic has devastated long-term care facilities. The COVID Tracking Project estimates that [38% of all people in the US who died from Covid-19](https://covidtracking.com/data/long-term-care) were residents of long-term care facilities such as nursing homes and assisted living facilities.
 
-As of `r month_day_year(wch_nh_sum$date, abbr = TRUE)`, there have been `r comma(wch_nh_sum$deaths + 2, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County. This is `r percent((wch_nh_sum$deaths + 2) / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
+As of `r month_day_year(wch_nh_sum$date, abbr = TRUE)`, there have been `r comma(wch_nh_sum$deaths, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County. This is `r percent(wch_nh_sum$deaths / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
 
 <aside>
-These figures undercount the total deaths of nursing home residents because the NYS DOH only reports deaths that occurred in nursing homes. If a nursing home resident died in a hospital, it is not counted as a nursing home death.
+This is an [undercount of deaths of nursing home residents](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) because NYS DOH only reports deaths that occurred in nursing homes. If a nursing home resident died in a hospital, it is not counted as a nursing home death.
 </aside>
 
 ### Confirmed and presumed Covid-19 deaths in nursing homes
@@ -495,7 +550,7 @@ to_map %>%
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addCircles(
-    radius = ~ sqrt(deaths_total) * 300,
+    radius = ~ sqrt(deaths_total) * 450,
     color = "steelblue",
     opacity = 0.7,
     weight = 1.5,
@@ -508,22 +563,25 @@ to_map %>%
   addResetMapButton()
 ```
 
+<br>
+
 ```{r nursing-home-table, layout="l-body-outset", out.height="510px"}
 to_map %>% 
   st_drop_geometry() %>% 
   arrange(desc(deaths_total)) %>% 
   select(
-    Name = name,
+    `Nursing Home` = name,
+    City = city,
     Deaths = deaths_total,
     `Total Beds` = beds
     ) %>% 
   datatable(
     class = "compact hover",
     extensions = c("Scroller", "Responsive"),
-    caption = tags$caption(
-      style = 'caption-side: bottom; text-align: right;',
-      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states">NY Times</a>')))
-    ),
+    # caption = tags$caption(
+    #   style = 'caption-side: bottom; text-align: right;',
+    #   withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states">NY Times</a>')))
+    # ),
     options = list(
       dom = "ft",
       deferRender = TRUE,
@@ -531,14 +589,12 @@ to_map %>%
       scroller = TRUE,
       columnDefs = list(
         list(visible = FALSE, targets = 0),
-        list(className = "dt-head-left", targets = 1),
-        list(className = "dt-center", targets = 5)
+        list(className = "dt-head-left", targets = 1:2)
         )
       )
     ) %>% 
-  formatRound(2, digits = 1) %>% 
-  formatRound(c(3:4, 6), digits = 0) %>% 
-  formatStyle(1, fontFamily = "IBM Plex Sans") %>% 
-  formatStyle(2:6, fontFamily = "Roboto Mono")
+  formatRound(3:4, digits = 0) %>% 
+  formatStyle(1:2, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(3:4, fontFamily = "Roboto Mono")
 ```
 

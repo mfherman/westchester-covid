@@ -10,6 +10,7 @@
 
 /* Optional: embed custom fonts here with `@import`          */
 /* This must remain at the top of this file.                 */
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
@@ -25,7 +26,7 @@ html {
   --title-size:      40px;
   --body-size:       1.06rem;
   --code-size:       14px;
-  --aside-size:      12px;
+  --aside-size:      11px;
   --fig-cap-size:    13px;
   /*-- Main font colors --*/
   --title-color:     #000000;
@@ -50,7 +51,7 @@ d-byline {
 
 /*-- ARTICLE TABLE OF CONTENTS --*/
 .d-contents {
-  --heading-size:    18px;
+  --heading-size:    15px;
   --contents-size:   13px;
 }
 
@@ -83,10 +84,22 @@ d-appendix {
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
 
+
+aside {
+  font-family: Roboto, sans-serif !important;
+  line-height: 1.4em !important;
+}
+
 d-article h3 {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/*
+.d-contents nav a {
+  font-family: Roboto, sans-serif !important;
+}
+*/
 
 .leaflet {
   margin: auto;
