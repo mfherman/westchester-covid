@@ -134,7 +134,7 @@ Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
 *New York State Forward*
 
-The state publishes geographic boundaries of each micro-cluster along with recent 7-day average positivity rates for each cluster. Unfortunately, this data is not easily accessible, so I scrape this data on a regular basis from the [state's hot spot address map](https://covidhotspotlookup.health.ny.gov/#/home). The creation and update of zones does not appear to be a on a regular schedule.
+The state publishes **geographic boundaries of each micro-cluster** along with recent 7-day average positivity rates for each cluster. Unfortunately, this data is not easily accessible, so I scrape this data on a regular basis from the [state's hot spot address map](https://covidhotspotlookup.health.ny.gov/#/home). The creation and update of zones does not appear to be a on a regular schedule.
 
 Most recent data: **`r month_day_year(max(hotspot$date), abbr = TRUE)`**
 <br>
@@ -150,7 +150,7 @@ Where it's used: **New York State micro-clusters**
 
 *New York State Department of Health*
 
-This dataset includes the cumulative number of confirmed and presumed Covid-19 deaths at nursing homes and adult care facilities in New York State. Importantly, it only includes deaths that occurred in nursing home facilities. If a nursing home resident died in a hospital, it is not counted as a nursing home death. Because of this limitation, the number of nursing homes deaths is undercounted in these numbers. There has been [significant](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) [press](https://www.washingtonpost.com/health/new-yorks-true-nursing-home-death-toll-cloaked-in-secrecy/2020/08/11/f658ebfe-db8a-11ea-b4f1-25b762cdbbf4_story.html) [coverage](https://apnews.com/article/virus-outbreak-new-york-andrew-cuomo-elections-nursing-homes-5212e305921c250eb6cba4f6f246fc4d) of this issue, and hopefully the state will respond by releasing more detailed information related to Covid-19 in nursing homes.
+This dataset includes the cumulative number of confirmed and presumed **Covid-19 deaths at nursing homes** and adult care facilities in New York State. Importantly, it only includes deaths that occurred in nursing home facilities. If a nursing home resident died in a hospital, it is not counted as a nursing home death. Because of this limitation, the number of nursing homes deaths is undercounted in these numbers. There has been [significant](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) [press](https://www.washingtonpost.com/health/new-yorks-true-nursing-home-death-toll-cloaked-in-secrecy/2020/08/11/f658ebfe-db8a-11ea-b4f1-25b762cdbbf4_story.html) [coverage](https://apnews.com/article/virus-outbreak-new-york-andrew-cuomo-elections-nursing-homes-5212e305921c250eb6cba4f6f246fc4d) of this issue, and hopefully the state will respond by releasing more detailed information related to Covid-19 in nursing homes.
 
 The number of beds in each nursing home comes from [NYS Health Profiles](https://profiles.health.ny.gov/nursing_home/index).
 

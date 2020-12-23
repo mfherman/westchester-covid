@@ -1,5 +1,5 @@
 ---
-title: "Covid-19 in Westchester County"
+title: "Home"
 site: distill::distill_website
 preview: img/wch-map.png
 ---
@@ -88,6 +88,9 @@ pos_rate_recent <- cases_recent / tests_recent
 pos_rate_last_week <- cases_last_week / tests_last_week
 pos_rate_change <- pos_rate_recent - pos_rate_last_week
 ```
+
+<br>
+<br>
 
 ```{r county_case_bar, layout="l-body-outset"}
 to_plot <- nys_cases %>% 
@@ -204,7 +207,7 @@ to_map <- mun_cases_poly %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:100
+  domain = 0:125
   )
 
 to_map %>%
@@ -267,3 +270,10 @@ Data sources, etc.
 <br>
 
 <p style="text-align: center;">*Updated `r month_day_year(Sys.Date(), abbr = TRUE)`, `r pretty_time(Sys.time())`*</p>
+
+```{css}
+d-title, d-byline {
+  display: none
+}
+```
+

@@ -472,7 +472,7 @@ yellow_text <- case_when(
 
 [Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in October 2020, in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. Yellow, orange, and red zones have different restriction and the clusters are determined using a combination of test positivity rate, hospital admissions, and hospital capacity.
 
-Currently, in Westchester County, there `r red_text`, `r orange_text`, and `r yellow_text`.
+Currently, there `r red_text`, `r orange_text`, and `r yellow_text` in Westchester County.
 
 ```{r hotspot-map, out.height = "600px"}
 hotspot_to_map <- hotspot %>% 

@@ -1,30 +1,25 @@
 suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
-suppressWarnings(suppressPackageStartupMessages(library(rvest)))
-suppressWarnings(suppressPackageStartupMessages(library(janitor)))
 suppressWarnings(suppressPackageStartupMessages(library(lubridate)))
 suppressWarnings(suppressPackageStartupMessages(library(glue)))
+suppressWarnings(suppressPackageStartupMessages(library(jsonlite)))
 
 message(glue("{Sys.time()} -- Starting scrape for new daily muncipalilty data"))
 
 scrape_mun_daily <- function() {
 
-  covid_web <- read_html("https://www.westchestergov.com/covid-19-cases")
+  url <- "https://services.arcgis.com/XKEHpOulfycN9cGC/arcgis/rest/services/Mun_Coronavirus_poly/FeatureServer/0/query?f=json&where=(Confirmed%20%3C%3E%20555)%20AND%20(Active%3E0)&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAME%20asc&outSR=102100&resultOffset=0&resultRecordCount=100&resultType=standard&cacheHint=true"
+  url_date <- "https://services.arcgis.com/XKEHpOulfycN9cGC/ArcGIS/rest/services/Mun_Coronavirus_poly/FeatureServer/0?f=pjson"
   
-  web_date <- covid_web %>% 
-    html_node("#jm-maincontent > div > div:nth-child(5) > table > caption") %>% 
-    html_text() %>% 
-    str_remove("Active and Total Westchester County COVID-19 Cases as of ") %>% 
-    mdy()
+  last_update <- as.Date(as_datetime(fromJSON(url_date)[["editingInfo"]][["lastEditDate"]] / 1000))
   
-  web_table <- covid_web %>% 
-    html_node("#jm-maincontent > div > div:nth-child(5) > table") %>% 
-    html_table() %>% 
-    clean_names()
-  
-  web_table %>% 
-    mutate(date = web_date) %>% 
-    relocate(date)
-
+  fromJSON(url, flatten = TRUE)[["features"]] %>%
+    transmute(
+      date = last_update,
+      municipality = attributes.NAME,
+      total_cases = attributes.Confirmed,
+      active_cases = attributes.Active,
+      new_cases = attributes.Daily_New
+    )
 }
 
 update_daily_mun_data <- function() {

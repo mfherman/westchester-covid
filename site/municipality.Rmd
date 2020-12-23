@@ -28,11 +28,11 @@ tot_cases_most <- mun_cases_poly %>%
   arrange(desc(total_cases_per_cap))
 ```
 
-***The Westchester County Department of Health has not released updated case data by municipality since `r month_day_year(max(mun_recent$date), abbr = TRUE)`, so the information presented here may not reflect the current state of the pandemic in Westchester municipalities.***
+<!-- ***The Westchester County Department of Health has not released updated case data by municipality since `r month_day_year(max(mun_recent$date), abbr = TRUE)`, so the information presented here may not reflect the current state of the pandemic in Westchester municipalities.*** -->
 
-On Dec 18, 2020, the County government tweeted that they are pausing the release of municipal-level data:
+<!-- On Dec 18, 2020, the County government tweeted that they are pausing the release of municipal-level data: -->
 
-<a href="https://twitter.com/westchestergov/status/1340044992023318534"><img src="img/westchester-gov-tweet.png" alt="@westchestergov tweet" style="width:80%"></a>
+<!-- <a href="https://twitter.com/westchestergov/status/1340044992023318534"><img src="img/westchester-gov-tweet.png" alt="@westchestergov tweet" style="width:80%"></a> -->
 
 The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
 
@@ -66,7 +66,7 @@ to_map_total <- mun_cases_centroid %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:100
+  domain = 0:125
   )
 
 leaflet(to_map) %>%
@@ -101,9 +101,9 @@ leaflet(to_map) %>%
   addLegend(
     group = "Cases per 100k",
     pal = cd_pal,
-    values = 0:100,
+    values = 0:125,
     opacity = 0.7,
-    bins = c(0, 25, 50, 75, 100),
+    bins = c(0, 25, 50, 75, 100, 125),
     position = "bottomright",
     title = "Avg. daily cases per 100k<br>in past 14 days"
     ) %>% 
@@ -168,20 +168,31 @@ all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>%
   mutate(active_per_cap = active_cases / total_pop) %>% 
   group_by(municipality) %>% 
   fill(active_per_cap, c(total_cases:active_per_cap)) %>%
-  ungroup()
+  ungroup() %>% 
+  mutate(
+    across(c(active_per_cap, total_cases:active_per_cap),
+      ~ if_else(between(date, as.Date("2020-12-12"), as.Date("2020-12-21")), NA_real_, .x)
+    ))
   
 p <- all_days_mun %>%  
-  filter(!is.na(active_per_cap), active_per_cap < 0.03) %>% 
-  mutate(municipality = fct_reorder(municipality, active_per_cap, mean)) %>% 
+  filter(date >= as.Date("2020-05-05")) %>% 
+  mutate(municipality = fct_reorder(municipality, active_per_cap, last)) %>% 
   ggplot(aes(date, municipality, fill = active_per_cap)) +
   geom_tile(
     aes(
-      text = paste0(
+      text = str_replace_all(paste0(
         "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
         "Avg. daily cases: ", comma(active_cases / 14, 0.1), "<br>",
         "Per 100k: ", comma(active_per_cap / 14 * 1e5, 0.1)
-      ))) +
-  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+        ), "NA", "missing")
+      )
+    ) +
+  scale_fill_distiller(
+    palette = "YlOrRd",
+    direction = 1,
+    na.value = "gray",
+    breaks = c(0, 125)
+    ) +
   scale_x_date(
     labels = label_date_short(),
     breaks = "1 month",
