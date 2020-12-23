@@ -24,6 +24,8 @@ cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
 death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
 ```
 
+*Most recent data: `r month_day_year(recent$date, abbr = TRUE)`*
+
 On `r month_day_year(recent$date, abbr = TRUE)`, `r comma(recent$new_cases, 1)` people tested positive for the novel coronavirus out of `r comma(recent$new_tests, 1)` tests reported in Westchester. This is a test positivity rate of `r percent(recent$pos_rate, 0.1)`. `r n2w(recent_nyt$new_deaths, and = TRUE, hyphen = FALSE, cap = TRUE)` new deaths due to Covid-19 were reported on `r month_day_year(recent_nyt$date, abbr = TRUE)`. Since the beginning of the pandemic, `r comma(recent$total_cases, 1)` people have tested positive (`r cases_per_cap`) and `r comma(recent_nyt$total_deaths, 1)` have died in Westchester County (`r death_per_cap`).
 
 <br>
@@ -601,4 +603,3 @@ to_map %>%
   formatStyle(1:2, fontFamily = "IBM Plex Sans") %>% 
   formatStyle(3:4, fontFamily = "Roboto Mono")
 ```
-
