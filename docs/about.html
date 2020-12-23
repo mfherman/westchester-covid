@@ -2167,11 +2167,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0 !important;
   }
 
-  /*
   .d-contents nav a {
     font-family: Roboto, sans-serif !important;
+    font-weight: 400 !important;
   }
-  */
 
   .leaflet {
     margin: auto;
@@ -2272,8 +2271,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-bottom: 5px;
     border-bottom: 0px !important;
   }
-
-
 
   .plotly a {
     fill: rgba(0, 0, 0, 0.6) !important;
@@ -2513,14 +2510,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Tests are assigned to a county based on the patient’s address. If that cannot be determined, the address of the health care provider who ordered the test is used.</p>
 <p>If a person has multiple specimens tested on the same day, they are only counted as one test. If a person is tested on multiple days, each day’s test will be counted separately. An individual will only be counted positive one time, regardless of the number of positive tests that individual has.</p>
 <p>Most recent data: <strong>Dec 21, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (New York State only)</strong> <br> Where it’s used: <strong>New and total tests, new and total cases, test positivity rate</strong></p>
-<p><br> <br></p>
+<p><br></p>
 <h3 id="coronavirus-covid-19-data-in-the-united-states"><a href="https://github.com/nytimes/covid-19-data">Coronavirus (Covid-19) Data in the United States</a></h3>
 <p><em>The New York Times</em></p>
 <p>This dataset includes the number of <strong>cases</strong> and <strong>deaths</strong> due to Covid-19 in the United States. The data is reported by county. It is updated daily and includes all cases and deaths compiled by <em>Times</em> journalists by the end of the prior day. The data is based on reports from state and local health agencies across the county and each state may have a slightly different reporting methodology.</p>
 <p>For counties in New York State, the <em>Times</em> uses data reported by the NYS Department of Health. There is a one-day lag in the NYS data in the <em>Times</em> dataset. For example, data counted on December 16 by the New York Times was reported on December 15 by NYSDOH.</p>
 <p>Beginning August 6, the <a href="https://github.com/nytimes/covid-19-data/blob/master/NEW-YORK-DEATHS-METHODOLOGY.md">methodology for assigning deaths to counties in New York State was modified</a>. Currently, deaths are assigned to the county of residence. Before August 6, deaths were assigned to county in which the death took place.</p>
 <p>Most recent data: <strong>Dec 21, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>County (United States)</strong> <br> Where it’s used: <strong>New and total deaths, new and total cases (metro area)</strong></p>
-<p><br> <br></p>
+<p><br></p>
 <h3 id="covid-19-confirmed-cases"><a href="https://www.westchestergov.com/covid-19-cases">Covid-19 Confirmed Cases</a></h3>
 <p><em>Westchester County Department of Health</em></p>
 <p>This dataset includes the number of Covid-19 <strong>cases</strong> in each of the 43 municipalities of Westchester County. It is updated on (most) weekdays and includes all cases in which a positive coronavirus test is associated with a confirmed address in Westchester County. With each update, the County posts the number of new cases, active cases, and total cases per municipality. The number of “active cases” refers the number of positive tests in the past two weeks.</p>
@@ -2528,7 +2525,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Unfortunately, the County does not currently post historical data, but rather posts a map on most weekdays to the <a href="https://twitter.com/westchestergov/status/1336045976981811206">WestchesterGov Twitter account</a>. Because of this limitation, I have extracted this historical data from maps that are posted on Twitter. This extraction process is imperfect but until the county releases more accurate historical data, this is best I can do. Beginning on December 3, 2020, I began scraping the daily data from the <a href="https://westchestergov.com/covid-19-cases">Westchester County website</a>, which results in more reliable data. Because of the unavailability of this historical data from the County, <em>extreme caution</em> should be used when looking at municipal-level trends.</p>
 <p>Given these limitations, I have decided to use the “active cases” metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!</p>
 <p>Most recent data: <strong>Dec 11, 2020</strong> <br> Update frequency: <strong>Weekdays (usually)</strong> <br> Geographic aggregation: <strong>Municipality (Westchester County only)</strong> <br> Where it’s used: <strong>New and total cases</strong></p>
-<p><br> <br></p>
+<p><br></p>
 <h3 id="covid-19-reported-patient-impact-and-hospital-capacity-by-facility"><a href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility">COVID-19 Reported Patient Impact and Hospital Capacity by Facility</a></h3>
 <p><em>United States Department of Health and Human Services</em></p>
 <p>This dataset includes <strong>capacity</strong> and <strong>utilization</strong> of hospitals in the United States. It is reported on a weekly basis and provides facility-level information such as the number of total inpatient and ICU beds, the number of inpatient and ICU beds currently occupied, and the number of Covid-19 patients currently admitted to each hospital facility.</p>
@@ -2545,7 +2542,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>Bed occupancy: ICU beds used divided by total ICU beds</li>
 </ul>
 <p>Most recent data: <strong>Dec 11, 2020 – Dec 18, 2020</strong> <br> Update frequency: <strong>Weekly</strong> <br> Geographic aggregation: <strong>None (facility-level data, United States)</strong> <br> Where it’s used: <strong>Hospital capacity, occupancy, Covid-19 patients</strong></p>
-<p><br> <br></p>
+<p><br></p>
+<h3 id="new-york-state-micro-cluster-strategy"><a href="https://forward.ny.gov/micro-cluster-strategy">New York State Micro-Cluster Strategy</a></h3>
+<p><em>New York State Forward</em></p>
+<p>The state publishes geographic boundaries of each micro-cluster along with recent 7-day average positivity rates for each cluster. Unfortunately, this data is not easily accessible, so I scrape this data on a regular basis from the <a href="https://covidhotspotlookup.health.ny.gov/#/home">state’s hot spot address map</a>. The creation and update of zones does not appear to be a on a regular schedule.</p>
+<p>Most recent data: <strong>Dec 16, 2020</strong> <br> Update frequency: <strong>Sporadic</strong> <br> Geographic aggregation: <strong>None</strong> <br> Where it’s used: <strong>New York State micro-clusters</strong></p>
+<p><br></p>
+<h3 id="nursing-home-and-acf-covid-related-deaths-statewide"><a href="https://www.health.ny.gov/statistics/diseases/covid-19/fatalities_nursing_home_acf.pdf">Nursing Home and ACF COVID Related Deaths Statewide</a></h3>
+<p><em>New York State Department of Health</em></p>
+<p>This dataset includes the cumulative number of confirmed and presumed Covid-19 deaths at nursing homes and adult care facilities in New York State. Importantly, it only includes deaths that occurred in nursing home facilities. If a nursing home resident died in a hospital, it is not counted as a nursing home death. Because of this limitation, the number of nursing homes deaths is undercounted in these numbers. There has been <a href="https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york">significant</a> <a href="https://www.washingtonpost.com/health/new-yorks-true-nursing-home-death-toll-cloaked-in-secrecy/2020/08/11/f658ebfe-db8a-11ea-b4f1-25b762cdbbf4_story.html">press</a> <a href="https://apnews.com/article/virus-outbreak-new-york-andrew-cuomo-elections-nursing-homes-5212e305921c250eb6cba4f6f246fc4d">coverage</a> of this issue, and hopefully the state will respond by releasing more detailed information related to Covid-19 in nursing homes.</p>
+<p>The number of beds in each nursing home comes from <a href="https://profiles.health.ny.gov/nursing_home/index">NYS Health Profiles</a>.</p>
+<p>Most recent data: <strong>Dec 21, 2020</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>None (facility-level data, New York State)</strong> <br> Where it’s used: <strong>Deaths in nursing homes</strong></p>
+<p><br></p>
 <h3 id="american-community-survey"><a href="https://data.census.gov/cedsci/table?q=ACSDT1Y2019.B01003&amp;g=0500000US36119&amp;tid=ACSDT1Y2019.B01003&amp;hidePreview=true">American Community Survey</a></h3>
 <p><em>US Census Bureau</em></p>
 <p>To calculate per capita rates of Covid-19, I use estimates of <strong>total population</strong> from the American Community Survey (table B01003). County per capita rates are calculated using 2019 1-year ACS estimates. Municipality rates are calculated using 2015 – 2019 5-year ACS estimates.</p>

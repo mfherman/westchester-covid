@@ -242,7 +242,7 @@ to_map %>%
 <span style = "font-size:1.7rem;">
 [County and metro area &#10230;](county.html)
 </span></br>
-Westchester county cases, deaths, and tests + comparisons with the metro area
+Cases, deaths, and tests; cluster zones; nursing home deaths
 
 <span style = "font-size:1.7rem;">
 [Westchester towns &#10230;](municipality.html)

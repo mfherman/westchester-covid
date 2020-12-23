@@ -95,11 +95,10 @@ d-article h3 {
   padding: 0 !important;
 }
 
-/*
 .d-contents nav a {
   font-family: Roboto, sans-serif !important;
+  font-weight: 400 !important;
 }
-*/
 
 .leaflet {
   margin: auto;
@@ -200,8 +199,6 @@ th.t-left, th.t-right {
   padding-bottom: 5px;
   border-bottom: 0px !important;
 }
-
-
 
 .plotly a {
   fill: rgba(0, 0, 0, 0.6) !important;

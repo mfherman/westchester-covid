@@ -57,7 +57,6 @@ Geographic aggregation: **County (New York State only)**
 Where it's used: **New and total tests, new and total cases, test positivity rate**
 
 <br>
-<br>
 
 ### [Coronavirus (Covid-19) Data in the United States](https://github.com/nytimes/covid-19-data)
 
@@ -77,7 +76,6 @@ Geographic aggregation: **County (United States)**
 <br>
 Where it's used: **New and total deaths, new and total cases (metro area)**
 
-<br>
 <br>
 
 ### [Covid-19 Confirmed Cases](https://www.westchestergov.com/covid-19-cases)
@@ -100,7 +98,6 @@ Geographic aggregation: **Municipality (Westchester County only)**
 <br>
 Where it's used: **New and total cases**
 
-<br>
 <br>
 
 ### [COVID-19 Reported Patient Impact and Hospital Capacity by Facility](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility)
@@ -132,6 +129,39 @@ Geographic aggregation: **None (facility-level data, United States)**
 Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
 <br>
+
+### [New York State Micro-Cluster Strategy](https://forward.ny.gov/micro-cluster-strategy)
+
+*New York State Forward*
+
+The state publishes geographic boundaries of each micro-cluster along with recent 7-day average positivity rates for each cluster. Unfortunately, this data is not easily accessible, so I scrape this data on a regular basis from the [state's hot spot address map](https://covidhotspotlookup.health.ny.gov/#/home). The creation and update of zones does not appear to be a on a regular schedule.
+
+Most recent data: **`r month_day_year(max(hotspot$date), abbr = TRUE)`**
+<br>
+Update frequency: **Sporadic**
+<br>
+Geographic aggregation: **None**
+<br>
+Where it's used: **New York State micro-clusters**
+
+<br>
+
+### [Nursing Home and ACF COVID Related Deaths Statewide](https://www.health.ny.gov/statistics/diseases/covid-19/fatalities_nursing_home_acf.pdf)
+
+*New York State Department of Health*
+
+This dataset includes the cumulative number of confirmed and presumed Covid-19 deaths at nursing homes and adult care facilities in New York State. Importantly, it only includes deaths that occurred in nursing home facilities. If a nursing home resident died in a hospital, it is not counted as a nursing home death. Because of this limitation, the number of nursing homes deaths is undercounted in these numbers. There has been [significant](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) [press](https://www.washingtonpost.com/health/new-yorks-true-nursing-home-death-toll-cloaked-in-secrecy/2020/08/11/f658ebfe-db8a-11ea-b4f1-25b762cdbbf4_story.html) [coverage](https://apnews.com/article/virus-outbreak-new-york-andrew-cuomo-elections-nursing-homes-5212e305921c250eb6cba4f6f246fc4d) of this issue, and hopefully the state will respond by releasing more detailed information related to Covid-19 in nursing homes.
+
+The number of beds in each nursing home comes from [NYS Health Profiles](https://profiles.health.ny.gov/nursing_home/index).
+
+Most recent data: **`r month_day_year(max(nh_deaths$date), abbr = TRUE)`**
+<br>
+Update frequency: **Daily**
+<br>
+Geographic aggregation: **None (facility-level data, New York State)**
+<br>
+Where it's used: **Deaths in nursing homes**
+
 <br>
 
 ### [American Community Survey](https://data.census.gov/cedsci/table?q=ACSDT1Y2019.B01003&g=0500000US36119&tid=ACSDT1Y2019.B01003&hidePreview=true)

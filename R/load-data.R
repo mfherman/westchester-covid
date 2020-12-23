@@ -4,6 +4,7 @@ mun_bound <- read_rds(here("data/mun-boundary.rds"))
 county_bound <- read_rds(here("data/county-boundary.rds"))
 hotspot <- read_rds((here("data/nys-hotspot.rds")))
 hosp_geo <- read_rds(here("data/hospital-locations.rds"))
+nh_deaths <- read_rds(here("data/nh-deaths.rds"))
 
 hosp_cap <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = cols())
 mun_cases <- read_csv(here("data/by-mun-cases.csv"), col_types = cols())

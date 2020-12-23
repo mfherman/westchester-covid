@@ -394,7 +394,7 @@ to_map %>%
   formatStyle(2:6, fontFamily = "Roboto Mono")
 ```
 
-The timing of outbreaks in counties in the New York metro area has varied. Some counties such as Rockland, Westchester, and Nassau had particularly severe first waves in spring 2020. By contrast, other counties such as New Haven, Fairfield, Litchfield, had relatively mild first waves in the spring and more severe second waves in fall 2020. The chart below shows the variation in the number of cases per 100,000 residents from March 2020 through the present.
+The timing of outbreaks in counties in the New York metro area has varied. Some counties such as Rockland, Westchester, and Nassau had severe first waves in spring 2020. By contrast, other counties such as New Haven, Fairfield, Litchfield, had relatively mild first waves in the spring and more severe second waves in fall 2020. The chart below shows the number of cases per 100,000 residents from March 2020 through the present in each county.
 
 ```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 nyt_cases %>% 
@@ -421,7 +421,7 @@ nyt_cases %>%
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank(),
     strip.text = element_text(size = 12, hjust = 0.1, color = "gray15", family = "Roboto Condensed"),
-    axis.text.x = element_text(size = 6.5, color = "gray45"),
+    axis.text.x = element_text(size = 8, color = "gray45"),
     strip.placement = "outside",
     plot.title = element_text(face = "bold", size = 18),
     plot.subtitle = element_text(size = 12),
@@ -470,7 +470,7 @@ yellow_text <- case_when(
   )
 ```
 
-In October, [Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. There are yellow, orange, and red zones and the determination of these clusters is based on a combination of test positivity rate, hospital admissions, and hospital capacity.
+[Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in October 2020, in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. Yellow, orange, and red zones have different restriction and the clusters are determined using a combination of test positivity rate, hospital admissions, and hospital capacity.
 
 Currently, in Westchester County, there `r red_text`, `r orange_text`, and `r yellow_text`.
 
@@ -515,8 +515,6 @@ leaflet(hotspot_to_map) %>%
 ## Deaths in nursing homes
 
 ```{r}
-nh_deaths <- read_rds(here("data/nh-deaths.rds"))
-
 wch_nh_sum <- nh_deaths %>% 
   st_drop_geometry() %>% 
   group_by(date) %>% 
@@ -578,10 +576,10 @@ to_map %>%
   datatable(
     class = "compact hover",
     extensions = c("Scroller", "Responsive"),
-    # caption = tags$caption(
-    #   style = 'caption-side: bottom; text-align: right;',
-    #   withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states">NY Times</a>')))
-    # ),
+    caption = tags$caption(
+      style = 'caption-side: bottom; text-align: right;',
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#nursing-home-and-acf-covid-related-deaths-statewide">NYS DOH</a>')))
+    ),
     options = list(
       dom = "ft",
       deferRender = TRUE,
