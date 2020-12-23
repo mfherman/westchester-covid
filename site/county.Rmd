@@ -587,7 +587,13 @@ to_map %>%
       scroller = TRUE,
       columnDefs = list(
         list(visible = FALSE, targets = 0),
-        list(className = "dt-head-left", targets = 1:2)
+        list(className = "dt-head-left", targets = 1:2),
+        list(targets = 1, render = JS(
+              "function(data, type, row, meta) {",
+              "return type === 'display' && data.length > 40 ?",
+              "'<span title=\"' + data + '\">' + data.substr(0, 40) + '...</span>' : data;",
+              "}")
+             )
         )
       )
     ) %>% 
