@@ -1,11 +1,11 @@
 #!/bin/sh
 
-Rscript "R/download-nys-cases-tests.R"
-Rscript "R/download-nyt-cases-deaths.R"
-Rscript "R/download-hotspot-zones.R"
-Rscript "R/download-hospital-data.R"
-Rscript "R/download-nursing-home-deaths.R"
-Rscript "R/build-site.R"
+Rscript "R/pull/pull-nys-cases-tests.R"
+Rscript "R/pull/pull-nyt-cases-deaths.R"
+Rscript "R/pull/pull-hotspot-zones.R"
+Rscript "R/pull/pull-hospital-occupancy.R"
+Rscript "R/pull/pull-nursing-home-deaths.R"
+Rscript "R/build/build-site.R"
 
 git commit -am  "update site with fresh data"
 git push
