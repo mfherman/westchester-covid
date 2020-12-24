@@ -226,3 +226,10 @@ th.t-left, th.t-right {
   color: #333 !important;
   line-height: 1.7em !important;
 }
+
+.recent-update, .d-contents nav h3{
+  font-family: 'IBM Plex Sans' !important;
+  font-variant-caps: all-small-caps !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}

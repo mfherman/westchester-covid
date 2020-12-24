@@ -28,7 +28,7 @@ tot_cases_most <- mun_cases_poly %>%
   arrange(desc(total_cases_per_cap))
 ```
 
-*Most recent data: `r month_day_year(max(mun_recent$date), abbr = TRUE)`*
+<span class="recent-update">Most recent data: `r month_day_year(max(mun_recent$date), abbr = TRUE)`</span>
 
 The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been an average of `r comma(mun_cases_poly$active_cases[1] / 14, 1)` new cases per day reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1], 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2] / 14, 1)` new cases per day reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2], 1)` per 100,000). 
 
