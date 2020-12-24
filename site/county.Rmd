@@ -326,7 +326,6 @@ county_pal <- colorNumeric(
   domain = 0:100
   )
 
-
 leaflet(to_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
@@ -472,6 +471,8 @@ yellow_text <- case_when(
   )
 ```
 
+*Most recent data: `r month_day_year(max(wch_cluster$date), abbr = TRUE)`*
+
 [Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in October 2020, in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. Yellow, orange, and red zones have different restriction and the clusters are determined using a combination of test positivity rate, hospital admissions, and hospital capacity.
 
 Currently, there `r red_text`, `r orange_text`, and `r yellow_text` in Westchester County.
@@ -526,9 +527,11 @@ wch_deaths <- nyt_cases %>%
   filter(date == wch_nh_sum$date, county == "Westchester")
 ```
 
+*Most recent data: `r month_day_year(max(wch_nh_sum$date), abbr = TRUE)`*
+
 The Covid-19 pandemic has devastated long-term care facilities. The COVID Tracking Project estimates that [38% of all people in the US who died from Covid-19](https://covidtracking.com/data/long-term-care) were residents of long-term care facilities such as nursing homes and assisted living facilities.
 
-As of `r month_day_year(wch_nh_sum$date, abbr = TRUE)`, there have been `r comma(wch_nh_sum$deaths, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County. This is `r percent(wch_nh_sum$deaths / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
+There have been `r comma(wch_nh_sum$deaths, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County since the beginning of the pandemic. This is `r percent(wch_nh_sum$deaths / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
 
 <aside>
 This is an [undercount of deaths of nursing home residents](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) because NYS DOH only reports deaths that occurred in nursing homes. If a nursing home resident died in a hospital, it is not counted as a nursing home death.

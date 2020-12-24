@@ -30,7 +30,7 @@ tot_cases_most <- mun_cases_poly %>%
 
 *Most recent data: `r month_day_year(max(mun_recent$date), abbr = TRUE)`*
 
-The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been `r comma(mun_cases_poly$active_cases[1], 1)` cases reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1] * 14, 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2], 1)` cases reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2] * 14, 1)` per 100,000). 
+The municipality with the most new cases per capita in the past 14 days is **`r mun_cases_poly$municipality[1]`**, where there have been an average of `r comma(mun_cases_poly$active_cases[1] / 14, 1)` new cases per day reported between `r month_day_year(max(mun_recent$date) - days(14), abbr = TRUE)` and `r month_day_year(max(mun_recent$date), abbr = TRUE)`  (`r comma(mun_cases_poly$new_cases_per_cap[1], 1)` per 100,000 residents). **`r mun_cases_poly$municipality[2]`** is another recent hot spot, with `r comma(mun_cases_poly$active_cases[2] / 14, 1)` new cases per day reported in the last two weeks (`r comma(mun_cases_poly$new_cases_per_cap[2], 1)` per 100,000). 
 
 Throughout the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are **`r tot_cases_most$municipality[1]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and **`r tot_cases_most$municipality[2]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the fewest cases per capita are **`r tot_cases_least$municipality[1]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and **`r tot_cases_least$municipality[2]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
 
@@ -159,27 +159,26 @@ all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")
 all_mun <- mun_bound$municipality
 
 all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>% 
+  filter(date >= as.Date("2020-05-05")) %>% 
   left_join(mun_cases, by = c("date", "municipality")) %>% 
   left_join(st_drop_geometry(mun_bound), by = "municipality") %>% 
   mutate(active_per_cap = active_cases / total_pop) %>% 
   group_by(municipality) %>% 
-  fill(active_per_cap, c(total_cases:active_per_cap)) %>%
-  ungroup() %>% 
   mutate(
-    across(c(active_per_cap, total_cases:active_per_cap),
-      ~ if_else(between(date, as.Date("2020-12-12"), as.Date("2020-12-21")), NA_real_, .x)
-    ))
+    active_cases_est = na.approx(active_cases),
+    active_per_cap_est = active_cases_est / total_pop,
+    ) %>% 
+  ungroup()
   
 p <- all_days_mun %>%  
-  filter(date >= as.Date("2020-05-05")) %>% 
-  mutate(municipality = fct_reorder(municipality, active_per_cap, last)) %>% 
-  ggplot(aes(date, municipality, fill = active_per_cap)) +
+  mutate(municipality = fct_reorder(municipality, active_per_cap_est, last)) %>% 
+  ggplot(aes(date, municipality, fill = active_per_cap_est)) +
   geom_tile(
     aes(
       text = str_replace_all(paste0(
         "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
-        "Avg. daily cases: ", comma(active_cases / 14, 0.1), "<br>",
-        "Per 100k: ", comma(active_per_cap / 14 * 1e5, 0.1)
+        "Avg. daily cases: ", comma(active_cases_est / 14, 0.1), "<br>",
+        "Per 100k: ", comma(active_per_cap_est / 14 * 1e5, 0.1)
         ), "NA", "missing")
       )
     ) +

@@ -78,15 +78,18 @@ Where it's used: **New and total deaths, new and total cases (metro area)**
 
 <br>
 
-### [Covid-19 Confirmed Cases](https://www.westchestergov.com/covid-19-cases)
+### [Westchester County COVID-19 Dashboard](https://wcgis.maps.arcgis.com/apps/opsdashboard/index.html#/280339d96db14efd9cc304dba0f3a71d)
 
-*Westchester County Department of Health*
+*Westchester County Department of Health/GIS*
 
 This dataset includes the number of Covid-19 **cases** in each of the 43 municipalities of Westchester County. It is updated on (most) weekdays and includes all cases in which a positive coronavirus test is associated with a confirmed address in Westchester County. With each update, the County posts the number of new cases, active cases, and total cases per municipality. The number of "active cases" refers the number of positive tests in the past two weeks. 
 
-Often, the data reported by the county differs significantly from the data reported by NYSDOH. Given the lack of information shared by the Westchester County Department of Health about this data, I only use the County data to compare municipalities within Westchester. The data released by the County should not be directly compared to data released by the State or other sources.
+Often, the data reported by the county differs significantly from the data reported by NYS DOH. Given the lack of information shared by the Westchester County Department of Health about this data, I only use the County data to compare municipalities within Westchester. The data released by the County should not be directly compared to data released by the State or other sources.
 
-Unfortunately, the County does not currently post historical data, but rather posts a map on most weekdays to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). Because of this limitation, I have extracted this historical data from maps that are posted on Twitter. This extraction process is imperfect but until the county releases more accurate historical data, this is best I can do. Beginning on December 3, 2020, I began scraping the daily data from the [Westchester County website](https://westchestergov.com/covid-19-cases), which results in more reliable data. Because of the unavailability of this historical data from the County, *extreme caution* should be used when looking at municipal-level trends.
+Unfortunately, the County does not currently post historical data. From early 
+May until Dec 11, the County posted a map on most weekdays to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). Because of this limitation, I have extracted historical data from the maps that have been posted on Twitter. This extraction process is imperfect but until the county releases more accurate historical data, this is best I can do. Because of the unavailability of this historical data from the County, *extreme caution* should be used when looking at municipal-level trends.
+
+On Dec 23, 2020, the County released a [dashboard](https://wcgis.maps.arcgis.com/apps/opsdashboard/index.html#/280339d96db14efd9cc304dba0f3a71d) that largely contains the same information that was posted on the daily map, with the addition of other metrics reported by New York State. Again, this dashboard does not contain any municipal-level historical data. Each day, I take a snapshot of the data reported on the dashboard to create trends for municipalities.
 
 Given these limitations, I have decided to use the "active cases" metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!
 
@@ -106,7 +109,7 @@ Where it's used: **New and total cases**
 
 This dataset includes **capacity** and **utilization** of hospitals in the United States. It is reported on a weekly basis and provides facility-level information such as the number of total inpatient and ICU beds, the number of inpatient and ICU beds currently occupied, and the number of Covid-19 patients currently admitted to each hospital facility.
 
-The data is derived from reports made by hospitals and state health departments to HHS. It includes hospitals registered with the Centers for Medicare & Medicaid Services, but *does not* include psychiatric, rehabilitation, Indian Health Service (IHS) facilities, U.S. Department of Veterans Affairs (VA) facilities, Defense Health Agency (DHA) facilities, and religious non-medical facilities.
+The data is derived from reports made by hospitals and state health departments to HHS. It includes hospitals registered with the Centers for Medicare & Medicaid Services, but *does not* include psychiatric, rehabilitation, Indian Health Service (IHS) facilities, U.S. Department of Veterans Affairs (VA) facilities, Defense Health Agency (DHA) facilities, and religious non-medical facilities. There is a detailed [community FAQ](https://github.com/CareSet/COVID_Hospital_PUF) about this dataset that was developed by a group of data journalists, data scientists, and healthcare system researchers.
 
 On this site, I use weekly average figures reported by the HHS dataset. In other words, this data is not a snapshot of hospital occupancy on a given day, but rather the average occupancy over the report week.
 

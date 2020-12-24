@@ -1,6 +1,7 @@
 #!/bin/sh
 
 Rscript "R/download-mun-cases.R"
+Rscript "R/build-site.R"
 
-git commit data/by-mun-cases.csv -m "update municipality data"
+git commit -am "update municipality data"
 git push
