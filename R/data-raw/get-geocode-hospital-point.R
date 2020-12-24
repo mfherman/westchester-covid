@@ -36,5 +36,5 @@ hosp_geo <- hosp_addr %>%
     remove = FALSE
   )
 
-write_rds(hosp_geo, "data/hospital-locations.rds")
+write_sf(hosp_geo, "data/hospital-point.geojson")
 

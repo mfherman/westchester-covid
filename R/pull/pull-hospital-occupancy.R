@@ -1,4 +1,4 @@
-source(here::here("R/attach-packages.R"))
+source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
 
 url <- "https://healthdata.gov/node/3651441/download"

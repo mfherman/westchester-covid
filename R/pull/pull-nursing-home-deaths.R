@@ -1,4 +1,4 @@
-source(here::here("R/attach-packages.R"))
+source(here::here("R/build/attach-packages.R"))
 suppressPackageStartupMessages(suppressWarnings(suppressMessages(library(tabulizer))))
 
 message(glue("{Sys.time()} -- Starting download of NYS nursing home deaths"))
@@ -14,6 +14,7 @@ date <- extract_text(file, pages = 1) %>%
 nh_deaths <- extract_tables(file, pages = 9) %>% 
   as.data.frame() %>% 
   transmute(
+    date = date,
     name = X1,
     pfi = X2,
     county = X3,
@@ -29,30 +30,9 @@ nh_deaths <- extract_tables(file, pages = 9) %>%
     name = str_to_title(name)
     ) %>% 
   filter(county == "Westcheste") %>% 
-  as_tibble()
+  select(-county)
 
-nh_beds_geo <- read_rds("data/nh-beds-geo.rds")
-
-nh_clean <- nh_beds_geo %>% 
-  inner_join(nh_deaths, by = "name") %>% 
-  mutate(
-    date = date,
-    city = str_replace(city, "On", "on"),
-    city = if_else(city == "Croton on Hudson", "Croton-on-Hudson", city)
-    ) %>% 
-  transmute(
-    date,
-    name,
-    deaths_confirmed,
-    deaths_presumed,
-    deaths_total = deaths_confirmed + deaths_presumed,
-    beds,
-    address,
-    city = str_replace(city, "On", "on"),
-    zipcode
-    )
-
-write_rds(nh_clean, "data/nh-deaths.rds")
+write_csv(nh_deaths, "data/nursing-home-deaths.csv")
 
 message(glue("Most recent data is from {date}"))
 message(glue("{Sys.time()} -- Finished download of NYS nursing home deaths"))

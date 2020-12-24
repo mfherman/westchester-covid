@@ -31,4 +31,4 @@ nh_clean <- nh_name_entity %>%
     crs = 4326
   )
 
-write_rds(nh_clean, "data/nh-beds-geo.rds")
+write_sf(nh_clean, "data/nursing-home-point.geojson")

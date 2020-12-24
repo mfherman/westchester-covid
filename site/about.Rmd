@@ -7,9 +7,9 @@ preview: img/wch-map.png
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-source(here::here("R/attach-packages.R"))
-source(here::here("R/utils.R"))
-source(here::here("R/load-data.R"))
+source(here::here("R/build/attach-packages.R"))
+source(here::here("R/build/utils.R"))
+source(here::here("R/build/load-data.R"))
 ```
 
 ```{r}
@@ -157,7 +157,7 @@ This dataset includes the cumulative number of confirmed and presumed **Covid-19
 
 The number of beds in each nursing home comes from [NYS Health Profiles](https://profiles.health.ny.gov/nursing_home/index).
 
-Most recent data: **`r month_day_year(max(nh_deaths$date), abbr = TRUE)`**
+Most recent data: **`r month_day_year(max(nh_clean$date), abbr = TRUE)`**
 <br>
 Update frequency: **Daily**
 <br>

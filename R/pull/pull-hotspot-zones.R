@@ -1,5 +1,4 @@
-source(here::here("R/attach-packages.R"))
-
+source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of NY hotspots"))
 
 url <- "https://covidhotspotlookup.health.ny.gov/assets/HotSpots_Zone.geojson"
@@ -28,7 +27,7 @@ hotspot_rates <- jsonlite::fromJSON(rates_url, simplifyDataFrame = TRUE) %>%
 hotspot_geo %>% 
   ms_simplify(keep = 0.25) %>% 
   left_join(hotspot_rates, by = "zone_id") %>%
-  write_rds("data/nys-hotspot.rds")
+  write_sf("data/hotspot-poly.geojson")
 
 message(glue("Most recent data is from {max(hotspot_rates$date)}"))
 message(glue("{Sys.time()} -- Finsished download of NY hotspots"))

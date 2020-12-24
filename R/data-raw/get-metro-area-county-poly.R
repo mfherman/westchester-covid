@@ -1,6 +1,7 @@
 library(tidyverse)
 library(tidycensus)
 library(rmapshaper)
+library(sf)
 
 county_geo <- get_acs(
   geography = "county",
@@ -37,6 +38,4 @@ county_simple <- county_geo %>%
   bind_rows(nyc) %>% 
   st_transform(4326) 
 
-write_rds(county_simple, "data/county-boundary.rds")
-
-
+write_sf(county_simple, "data/county-poly.geojson")

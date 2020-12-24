@@ -30,4 +30,4 @@ mun_sf %>%
   left_join(pop_by_mun, by = "municipality") %>%
   relocate(geometry, .after = last_col()) %>% 
   ms_simplify(keep_shapes = TRUE, keep = 0.01) %>%
-  write_rds("data/mun-boundary.rds")
+  write_sf("data/mun-poly.geojson")

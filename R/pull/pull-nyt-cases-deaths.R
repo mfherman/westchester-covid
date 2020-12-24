@@ -1,5 +1,4 @@
-source(here::here("R/attach-packages.R"))
-
+source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
 url <- "https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv"
@@ -29,7 +28,7 @@ nyt_clean <- nyt_county %>%
   ungroup() %>% 
   rename(total_cases = cases, total_deaths = deaths)
 
-write_csv(nyt_clean, "data/by-county-cases-deaths-nyt.csv")
+write_csv(nyt_clean, "data/county-cases-deaths-nyt.csv")
 
 message(glue("Most recent data is from {max(nyt_clean$date)}"))
 message(glue("{Sys.time()} -- Finsished download of NY Times data"))

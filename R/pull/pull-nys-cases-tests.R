@@ -1,5 +1,4 @@
-source(here::here("R/attach-packages.R"))
-
+source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of NY state data"))
 
 url <- "https://health.data.ny.gov/api/views/xdss-u53e/rows.csv?accessType=DOWNLOAD"
@@ -26,7 +25,7 @@ state_clean <- state_county %>%
     ) %>% 
   arrange(date, county)
 
-write_csv(state_clean, "data/by-county-cases-tests-nys.csv")
+write_csv(state_clean, "data/county-cases-tests-nys.csv")
 
 message(glue("Most recent data is from {max(state_clean$date)}"))
 message(glue("{Sys.time()} -- Finsished download of NY state data"))

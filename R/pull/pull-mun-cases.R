@@ -1,8 +1,4 @@
-suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
-suppressWarnings(suppressPackageStartupMessages(library(lubridate)))
-suppressWarnings(suppressPackageStartupMessages(library(glue)))
-suppressWarnings(suppressPackageStartupMessages(library(jsonlite)))
-
+source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting scrape for new daily muncipalilty data"))
 
 scrape_mun_daily <- function() {

@@ -518,7 +518,7 @@ leaflet(hotspot_to_map) %>%
 ## Deaths in nursing homes
 
 ```{r}
-wch_nh_sum <- nh_deaths %>% 
+wch_nh_sum <- nh_clean %>% 
   st_drop_geometry() %>% 
   group_by(date) %>% 
   summarize(n = n(), deaths = sum(deaths_total) + 2, .groups = "drop")  # victoria house has deaths, but closed in sept
@@ -539,7 +539,7 @@ This is an [undercount of deaths of nursing home residents](https://www.propubli
 
 ### Confirmed and presumed Covid-19 deaths in nursing homes
 ```{r nursing-home-map, out.height="600px", out.width="600px"}
-to_map <- nh_deaths %>%
+to_map <- nh_clean %>%
   mutate(
     label = paste0(
       "<b>", name, "</b><br>",
