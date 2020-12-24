@@ -521,7 +521,7 @@ leaflet(hotspot_to_map) %>%
 wch_nh_sum <- nh_deaths %>% 
   st_drop_geometry() %>% 
   group_by(date) %>% 
-  summarize(n = n(), deaths = sum(deaths_total) + 2)  # victoria house has deaths, but closed in sept
+  summarize(n = n(), deaths = sum(deaths_total) + 2, .groups = "drop")  # victoria house has deaths, but closed in sept
 
 wch_deaths <- nyt_cases %>% 
   filter(date == wch_nh_sum$date, county == "Westchester")

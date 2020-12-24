@@ -1,9 +1,9 @@
-library(tidyverse)
-library(vroom)
+source(here::here("R/attach-packages.R"))
+message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
 
 url <- "https://healthdata.gov/node/3651441/download"
 
-hospital <- vroom(url)
+hospital <- vroom(url, col_types = cols())
 
 fips <- c("34003", "36119", "36087", "09001", "34031", "34017", "09005", "34013",
           "34027", "36071", "09009", "36079", "34037", "36027", "36111")
@@ -34,6 +34,10 @@ hosp_data <- hospital %>%
   mutate(across(where(is.numeric), na_if, -999999))
 
 write_csv(hosp_data, "data/hospital-beds-occupancy.csv")
+
+message(glue("Most recent data is from {max(hosp_data$year_week) + days(7)}"))
+message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
+
 
     # bed_pct_full = bed_occupied / bed_capacity,
     # icu_pct_full = icu_occupied / icu_capacity,

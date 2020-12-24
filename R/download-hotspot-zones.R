@@ -1,6 +1,6 @@
 source(here::here("R/attach-packages.R"))
 
-message(glue("{Sys.time()} -- Starting download of NY hotpsots"))
+message(glue("{Sys.time()} -- Starting download of NY hotspots"))
 
 url <- "https://covidhotspotlookup.health.ny.gov/assets/HotSpots_Zone.geojson"
 

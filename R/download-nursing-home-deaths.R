@@ -1,16 +1,17 @@
-library(tidyverse)
-library(tabulizer)
-library(sf)
+source(here::here("R/attach-packages.R"))
+suppressPackageStartupMessages(suppressWarnings(suppressMessages(library(tabulizer))))
+
+message(glue("{Sys.time()} -- Starting download of NYS nursing home deaths"))
 
 url <- "https://www.health.ny.gov/statistics/diseases/covid-19/fatalities_nursing_home_acf.pdf"
 file <- paste0("data/nh-pdf/nys-nursing-home-", Sys.Date(), ".pdf")
-download.file(url, file, mode = "wb")
+download.file(url, file, mode = "wb", quiet = TRUE)
 
 date <- extract_text(file, pages = 1) %>% 
   str_extract("Data through .*") %>% 
-  lubridate::mdy()
+  mdy()
 
-nh_deaths <- extract_tables(file, pages = 8) %>% 
+nh_deaths <- extract_tables(file, pages = 9) %>% 
   as.data.frame() %>% 
   transmute(
     name = X1,
@@ -52,3 +53,6 @@ nh_clean <- nh_beds_geo %>%
     )
 
 write_rds(nh_clean, "data/nh-deaths.rds")
+
+message(glue("Most recent data is from {date}"))
+message(glue("{Sys.time()} -- Finished download of NYS nursing home deaths"))
