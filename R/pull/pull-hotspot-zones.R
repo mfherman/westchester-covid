@@ -27,7 +27,7 @@ hotspot_rates <- jsonlite::fromJSON(rates_url, simplifyDataFrame = TRUE) %>%
 hotspot_geo %>% 
   ms_simplify(keep = 0.25) %>% 
   left_join(hotspot_rates, by = "zone_id") %>%
-  write_sf("data/hotspot-poly.geojson")
+  write_sf("data/hotspot-poly.geojson", delete_dsn = TRUE)
 
 message(glue("Most recent data is from {max(hotspot_rates$date)}"))
 message(glue("{Sys.time()} -- Finsished download of NY hotspots"))
