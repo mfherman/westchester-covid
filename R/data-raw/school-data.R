@@ -1,22 +1,31 @@
-library(tidyverse)
-library(readxl)
-library(jsonlite)
-library(glue)
+source(here::here("R/build/attach-packages.R"))
 
-# https://schoolcovidreportcard.health.ny.gov/assets/district.neighbors.json
-# https://schoolcovidreportcard.health.ny.gov/data/public/school.660101.660101030002.json
+parse_school <- function(x) {
+  tibble(
+    school = x$name,
+    school_beds = x$bedsCode,
+    district = x$districtName,
+    district_beds = x$districtBedsCode,
+    county = x$county,
+    street = x$addressLine1,
+    city = x$city,
+    state = x$state,
+    zip = x$zip,
+    model = x$teachingModel,
+    date = as.Date(lubridate::mdy_hms(x$updateDate)),
+    students = x$currentCounts$onSiteStudentPopulation,
+    staff = x$currentCounts$onSiteTeacherPopulation + x$currentCounts$onSiteStaffPopulation,
+    all_cases_students = x$allTimeCounts$onSitePositiveStudents,
+    all_cases_staff = x$allTimeCounts$onSitePositiveTeachers + x$allTimeCounts$onSitePositiveStaff,
+    recent_cases_students = x$lastFourteenDaysCounts$onSitePositiveStudents,
+    recent_cases_staff = x$lastFourteenDaysCounts$onSitePositiveTeachers + x$lastFourteenDaysCounts$onSitePositiveStaff
+  )
+}
 
 school_dir <- fromJSON("https://schoolcovidreportcard.health.ny.gov/data/directory/public.directory.abbreviated.json") %>% 
   map_dfr(bind_rows, .id = "school")
 
-districts <- school_dir %>%
-  filter(type == "District") %>%
-  select(
-    district = school,
-    district_beds = districtBedsCode
-  )
-
-schools <- school_dir %>%
+wch_schools <- school_dir %>%
   filter(type == "School") %>%
   mutate(school = str_remove(school, " \\(.*")) %>% 
   select(
@@ -24,38 +33,10 @@ schools <- school_dir %>%
     school_beds = schoolBedsCode,
     district_beds = districtBedsCode,
     address
-  )
+    ) %>% 
+  filter(str_starts(school_beds, "66"))
 
+school_json_url <- glue("https://schoolcovidreportcard.health.ny.gov/data/public/school.{school_beds$district_beds}.{school_beds$school_beds}.json")
+school_json <- map(school_json_url[340:354], fromJSON)
+school_data <- map_dfr(school_json, parse_school)
 
-
-
-dist_json <- glue("https://schoolcovidreportcard.health.ny.gov/data/public/district.{districts$district_beds}.json")
-
-
-a <- map(dist_json[1], fromJSON)
-
-
-
-View(a)
-
-  as.data.frame()
-
-
-school <- fromJSON("https://schoolcovidreportcard.health.ny.gov/data/public/school.660101.660101030002.json")
-
-View(school)
-
-
-https://schoolcovidreportcard.health.ny.gov/data/public/district.660101.json
-
-
-
-
-school_dir %>% 
-  filter(is.na(schoolBedsCode))
-
-
-
-https://schoolcovidreportcard.health.ny.gov/data/public/district.621601.json
-300000.343000010010 
-https://schoolcovidreportcard.health.ny.gov/data/public/school.300000.343000010010.json
