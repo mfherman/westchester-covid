@@ -11,7 +11,7 @@ date <- extract_text(file, pages = 1) %>%
   str_extract("Data through .*") %>% 
   mdy()
 
-nh_deaths <- extract_tables(file, pages = 9) %>% 
+nh_deaths <- extract_tables(file, pages = 8) %>% 
   as.data.frame() %>% 
   transmute(
     date = date,
