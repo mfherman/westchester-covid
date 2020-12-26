@@ -5,10 +5,25 @@ county_bound <- read_sf(here("data/county-poly.geojson"))
 hotspot      <- read_sf(here("data/hotspot-poly.geojson"))
 hosp_geo     <- read_sf(here("data/hospital-point.geojson"))
 nh_geo       <- read_sf(here("data/nursing-home-point.geojson"))
+school_geo   <- read_sf(here("data/school-point.geojson")) 
 
 hosp_cap     <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = cols())
 mun_cases    <- read_csv(here("data/mun-cases.csv"), col_types = cols())
 nh_deaths    <- read_csv(here("data/nursing-home-deaths.csv"), col_types = cols())
+school_cases <- read_csv(
+  here("data/school-cases.csv"),
+  col_types = cols(
+    school_beds = col_character(),
+    model = col_character(),
+    date = col_date(format = ""),
+    students = col_double(),
+    staff = col_double(),
+    all_cases_students = col_double(),
+    all_cases_staff = col_double(),
+    recent_cases_students = col_double(),
+    recent_cases_staff = col_double()
+    )
+  )
 
 nys_cases <- read_csv(here("data/county-cases-tests-nys.csv"), col_types = cols()) %>% 
   group_by(county) %>% 
