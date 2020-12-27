@@ -11,6 +11,36 @@ wch_pop <- get_estimates(
   county = "Westchester"
   )
 
+wch_puma <- get_acs(
+  geography = "puma",
+  state = "NY",
+  variables = "B01003_001"
+  ) %>% 
+  filter(str_detect(NAME, "Westchester"))
+
+wch_pums <- get_pums(
+  variables = c("AGEP", "RAC1P", "HISP"),
+  state = "NY",
+  puma = str_remove(wch_puma$GEOID, "36"),
+  year = 2019,
+  survey = "acs1",
+  recode = TRUE
+  )
+
+med_age_by_race <- wch_pums %>%
+  mutate(
+    race_eth = case_when(
+      HISP != "01" ~ "Latino",
+      RAC1P == 1 ~ "White",
+      RAC1P == 2 ~ "Black",
+      RAC1P == 6 ~ "Asian",
+      TRUE ~ "Other"
+    )
+  ) %>% 
+  group_by(race_eth) %>% 
+  summarize(med_age = spatstat::weighted.median(AGEP, PWGTP))
+
+
 nys_pop <- get_estimates(
   geography = "state",
   product = "characteristics",

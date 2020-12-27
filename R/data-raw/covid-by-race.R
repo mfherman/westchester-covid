@@ -1,4 +1,4 @@
-source(here::here("R/attach-packages.R"))
+source(here::here("R/build/attach-packages.R"))
 
 url_county <- "https://data.cdc.gov/resource/k8wy-p9cg.csv?fipscode=36119"
 url_state <- "https://data.cdc.gov/resource/ks3g-spdg.csv?state=New%20York"
@@ -56,15 +56,35 @@ calc <- pop_age_race %>%
     wch_expected_deaths = nys_death_rate * wch_pop
     )
 
-calc %>% 
+amr_by_race <- calc %>% 
   group_by(race) %>% 
   summarize(across(c(nys_pop, nys_deaths, wch_expected_deaths, wch_pop), sum)) %>% 
-  left_join(wch_death_race) %>% 
+  left_join(wch_death_race, by = "race") %>% 
   mutate(
-    nys_crude = nys_deaths / nys_pop,
+    nys_crude = nys_deaths / nys_pop * 1e5,
     wch_crude = wch_deaths / wch_pop * 1e5,
     smr = wch_deaths / wch_expected_deaths,
-    amr = smr * nys_crude * 1e5
+    amr = smr * nys_crude
+    )
+
+amr_by_race %>% 
+  mutate(race = fct_reorder(race, -amr)) %>% 
+  ggplot(aes(race, amr)) +
+  geom_col() +
+  labs(
+    x = NULL,
+    y = "Deaths by 100K (age-adjusted)"
+    ) +
+  theme_minimal()
+
+amr_all <- calc %>% 
+  summarize(across(c(nys_pop, nys_deaths, wch_expected_deaths, wch_pop), sum)) %>% 
+  mutate(
+    wch_deaths = max(county$covid_19_deaths_total),
+    nys_crude = nys_deaths / nys_pop * 1e5,
+    wch_crude = wch_deaths / wch_pop * 1e5,
+    smr = wch_deaths / wch_expected_deaths,
+    amr = smr * nys_crude
     )
 
 
