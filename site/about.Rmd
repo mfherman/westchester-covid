@@ -34,7 +34,7 @@ hosp_date <- hosp_cap %>%
   pull()
 ```
 
-This site contains information about the Covid-19 pandemic in Westchester County, NY and the surrounding metropolitan area. The [Westchester County Department of Health website](https://health.westchestergov.com/2019-novel-coronavirus) does not provide much data or detailed information about the state of the pandemic in the county, so this site hopes to fill the gap.
+This site contains information about the Covid-19 pandemic in Westchester County, NY and the surrounding metropolitan area. The Westchester County government has created a [dashboard](https://wcgis.maps.arcgis.com/apps/opsdashboard/index.html#/280339d96db14efd9cc304dba0f3a71d) that includes Covid-19 cases counts by municipality and current and historical county-level cases data. This site builds on the dashboard by providing per capita municipal case counts and historical data by municipality. In addition, this site includes data about Covid-19 in hospitals, schools, and nursing homes. 
 
 ## Data sources
 

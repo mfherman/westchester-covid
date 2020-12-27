@@ -479,17 +479,26 @@ top_district <- school_geo_cases %>%
 top_school <- school_geo_cases %>% 
   st_drop_geometry() %>%
   arrange(desc(recent_cases, school))
+
+tot_school <- top_school %>% 
+  summarize(across(c(all_cases_students, all_cases_staff), sum)) %>% 
+  mutate(all_cases = all_cases_staff + all_cases_students)
+
+fall_cases <- nys_cases %>% 
+  filter(date >= as.Date("2020-09-08"), county == "Westchester") %>%
+  summarize(fall_cases = sum(new_cases)) %>% 
+  pull()
 ```
 
 <span class="recent-update">Most recent data: `r month_day_year(max(school_cases$date), abbr = TRUE)`</span>
 
-In Westchester, schools do not appear to be a major site of transmission. Since many schools reopened for in-person learning in September, there have not been severe outbreaks within schools.
-
-Since September, the school district with the most reported cases is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported of on-site students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases.
+Since many schools in Westchester reopened for in-person learning in September, students and teachers have tested positive for coronavirus, which has led to some schools moving to remote-only learning temporarily. But in general, schools do not appear to be a major site of transmission. Since Sept 8, there have been `r comma(tot_school$all_cases, 1)` cases identified in students, teachers, and staff. This is `r percent(tot_school$all_cases / fall_cases, 1)` of all cases reported in Westchester during that time period.
 
 <aside>
 Here and below, the numbers are "on-site" cases, which includes students, teachers, and staff who have tested positive and been in school buildings.
 </aside>
+
+The school district with the most reported cases is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported of on-site students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases.
 
 In the *last 14 days*, the school with the most new on-site cases (students, teachers, staff combined is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days.
 
