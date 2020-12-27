@@ -59,7 +59,7 @@ tests_total <- recent$total_tests
 
 pos_rate_recent <- cases_recent / tests_recent
 pos_rate_last_week <- cases_last_week / tests_last_week
-pos_rate_change <- pos_rate_recent - pos_rate_last_week
+pos_rate_change <- (pos_rate_recent - pos_rate_last_week) * 100
 
 cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
 death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
@@ -137,7 +137,7 @@ ggplotly_config(to_plot) %>%
     <tr>
     <td class = "t-left">Pos rate</td>
     <td class = "t-right">`r percent(pos_rate_recent, 0.1)`</td>
-    <td class = "t-right">`r num_sign(pos_rate_recent, 0.1)`</td>
+    <td class = "t-right">`r num_sign(pos_rate_change, 0.1)`</td>
     <td class = "t-right"></td>
   </tr>
   
