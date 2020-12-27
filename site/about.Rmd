@@ -64,7 +64,7 @@ Where it's used: **New and total tests, new and total cases, test positivity rat
 
 This dataset includes the number of **cases** and **deaths** due to Covid-19 in the United States. The data is reported by county. It is updated daily and includes all cases and deaths compiled by *Times* journalists by the end of the prior day. The data is based on reports from state and local health agencies across the county and each state may have a slightly different reporting methodology.
 
-For counties in New York State, the *Times* uses data reported by the NYS Department of Health. There is a one-day lag in the NYS data in the *Times* dataset. For example, data counted on December 16 by the New York Times was reported on December 15 by NYSDOH.
+For counties in New York State, the *Times* uses data reported by the NYS Department of Health. There is a one-day lag in the NYS data in the *Times* dataset. For example, data counted on December 16 by the New York Times was reported on December 15 by NYS DOH.
 
 Beginning August 6, the [methodology for assigning deaths to counties in New York State was modified](https://github.com/nytimes/covid-19-data/blob/master/NEW-YORK-DEATHS-METHODOLOGY.md). Currently, deaths are assigned to the county of residence. Before August 6, deaths were assigned to county in which the death took place.
 

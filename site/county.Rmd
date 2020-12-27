@@ -722,7 +722,7 @@ to_map %>%
     extensions = c("Scroller", "Responsive"),
     caption = tags$caption(
       style = 'caption-side: bottom; text-align: right;',
-      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#nursing-home-and-acf-covid-related-deaths-statewide">NYS DOH</a>')))
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about.html#nursing-home-and-acf-covid-related-deaths-statewide">NYS Dept of Health</a>')))
     ),
     options = list(
       dom = "ft",
