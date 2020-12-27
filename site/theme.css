@@ -140,17 +140,6 @@ d-article h3 {
   }
 }
 
-.dataTables_info, .dataTables_filter, .dtr-title, .dataTables_empty, .dataTable > thead {
-  font-family: "IBM Plex Sans", sans-serif !important;
-  font-variant-caps: all-small-caps !important;
-  border-bottom: 0px !important;
-}
-
-.dtr-data {
-  font-family: "Roboto Mono", monospace !important;
-
-}
-
 .key-metric-t {
   table-layout: fixed;
   border-bottom: 0px !important;
@@ -227,7 +216,27 @@ th.t-left, th.t-right {
   line-height: 1.7em !important;
 }
 
-.recent-update, .d-contents nav h3{
+.school-table td, .school-table th {
+  font-size: 13px !important;
+  color: #333 !important;
+  line-height: 1.4em !important;
+}
+
+.school-table th {
+  line-height: 1em !important;
+}
+ 
+.dataTables_info, .dataTables_filter, .dtr-title, .dataTables_empty, .dataTable > thead {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-variant-caps: all-small-caps !important;
+  border-bottom: 0px !important;
+}
+
+.dtr-data {
+  font-family: "Roboto Mono", monospace !important;
+}
+
+.recent-update, .d-contents nav h3 {
   font-family: 'IBM Plex Sans' !important;
   font-variant-caps: all-small-caps !important;
   font-size: 18px !important;

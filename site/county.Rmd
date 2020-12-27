@@ -287,7 +287,7 @@ nys_cases %>%
 ```
 
 
-## Metro area cases rates
+## Metro area cases
 
 ```{r}
 recent_metro_nyt <- nyt_cases %>%
@@ -432,6 +432,134 @@ nyt_cases %>%
 ```
 
 <br>
+
+## School cases
+
+```{r}
+school_geo_cases <- school_geo %>% 
+  left_join(school_cases, by = "school_beds") %>% 
+  mutate(
+    district = if_else(is.na(district), "", district),
+    district = str_remove(district, "Ufsd|Csd|Sd"),
+    district = if_else(district == "-Tarrytowns", "Tarrytowns", district),
+    district = str_trim(district),
+    school = str_remove(school, "\\s*\\([^\\)]+\\)"),
+    date = month_day_year(date, abbr = TRUE),
+    recent_cases = recent_cases_students + recent_cases_staff,
+    label = if_else(
+      district == "",
+      paste0(
+        "<b>", school, "</b><br>",
+        "Recent student cases: ", comma(recent_cases_students, 1), "<br>",
+        "Recent staff cases: ", comma(recent_cases_staff, 1), "<br>",
+        "Onsite students :", comma(students, 1), "<br>",
+        "Onsite staff: ", comma(staff, 1), "<br>"
+        ),
+      paste0(
+        "<b>", school, " - ", district, "</b><br>",
+        "Recent student cases: ", comma(recent_cases_students, 1), "<br>",
+        "Recent staff cases: ", comma(recent_cases_staff, 1), "<br>",
+        "Onsite students: ", comma(students, 1), "<br>",
+        "Onsite staff: ", comma(staff, 1), "<br>"
+        )
+      )
+    ) %>% 
+  arrange(desc(recent_cases_students, district, school))
+
+top_district <- school_geo_cases %>% 
+  st_drop_geometry() %>%
+  filter(district != "") %>% 
+  group_by(district) %>% 
+  summarize(across(c(all_cases_students, all_cases_staff), sum)) %>% 
+  mutate(all_cases = all_cases_staff + all_cases_students) %>% 
+  arrange(desc(all_cases))
+
+top_school <- school_geo_cases %>% 
+  st_drop_geometry() %>%
+  arrange(desc(recent_cases, school))
+```
+
+<span class="recent-update">Most recent data: `r month_day_year(max(school_cases$date), abbr = TRUE)`</span>
+
+In Westchester, schools do not appear to be a major site of transmission. Since many schools reopened for in-person learning in September, there have not been severe outbreaks within schools.
+
+Since September, the school district with the most reported cases is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported between students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases.
+
+In the *last 14 days*, the school with the most new cases (students, teachers, staff combined is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days.
+
+### Schools with 3 or more cases in the last 14 days
+
+```{r school_map, out.height="600px", out.width="600px"}
+to_map <- school_geo_cases %>% 
+  filter(recent_cases > 2)
+
+to_map %>% 
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircles(
+    radius = ~ sqrt(recent_cases) * 350,
+    color = "steelblue",
+    opacity = 0.7,
+    weight = 1.5,
+    fillColor = "steelblue",
+    fillOpacity = 0.2,
+    label = lapply(to_map$label, HTML),
+    highlightOptions = highlightOptions(sendToBack = TRUE, color = "#6fb6f2", weight = 2.5)
+    ) %>%
+  setView(lat = 41.1, lng = -73.75, zoom = 10) %>%
+  addResetMapButton()
+```
+
+<br>
+
+The table below shows the total number of student and staff cases reported by each school since September, as well as the the number of recent cases (within the last 14 days). Each school also reports their teaching model (in-person, hybrid, or remote-only) as well as the number of students and staff currently attending or working in school buildings.
+
+<div class="l-page school-table">
+```{r school-table, layout="l-page"}
+school_geo_cases %>%
+  st_drop_geometry() %>% 
+  select(
+    `School` = school,
+    `District` = district,
+    `Model` = model,
+    `Report Date` = date,
+    `Recent student cases` = recent_cases_students,
+    `Recent staff cases` = recent_cases_staff,
+    `Total student cases` = all_cases_students,
+    `Total staff cases` = all_cases_staff,
+    `Onsite students` = students,
+    `Onsite staff` = staff
+    ) %>%
+  datatable(
+    class = "compact hover",
+    extensions = c("Scroller", "Responsive"),
+    caption = tags$caption(
+      style = 'caption-side: bottom; text-align: right;',
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about" target="_self">NYS Covid-19 Report Card</a>')))
+    ),    
+    options = list(
+      dom = "ft",
+      deferRender = TRUE,
+      scrollY = 250,
+      scroller = TRUE,
+      columnDefs = list(
+        list(visible = FALSE, targets = 0),
+        list(className = "dt-head-left", targets = 1:4),
+        list(targets = 1, render = JS(
+          "function(data, type, row, meta) {",
+          "return type === 'display' && data.length > 35 ?",
+          "'<span title=\"' + data + '\">' + data.substr(0, 35) + '...</span>' : data;",
+          "}")
+         )
+        )
+      )
+    ) %>%
+  formatRound(c(5:10), digits = 0) %>%
+  formatStyle(1:4, fontFamily = "IBM Plex Sans") %>% 
+  formatStyle(5:10, fontFamily = "Roboto Mono")
+```
+</div>
+
 
 ## New York State micro-clusters
 

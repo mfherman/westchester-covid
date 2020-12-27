@@ -125,7 +125,7 @@ Hospital metric definitions:
 
 Most recent data: **`r month_day_year(hosp_date, abbr = TRUE)` -- `r month_day_year(hosp_date + 7, abbr = TRUE)`**
 <br>
-Update frequency: **Weekly**
+Update frequency: **Weekly (updates published Mondays)**
 <br>
 Geographic aggregation: **None (facility-level data, United States)**
 <br>
@@ -133,15 +133,31 @@ Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
 <br>
 
+### [New York State School Covid-19 Report Card](https://schoolcovidreportcard.health.ny.gov/#/home)
+
+*New York Forward*
+
+This dataset includes
+
+Most recent data: **`r month_day_year(max(school_geo_cases$date), abbr = TRUE)`**
+<br>
+Update frequency: **Daily (varies by school)**
+<br>
+Geographic aggregation: **None (school-level data, New York State)**
+<br>
+Where it's used: **School cases**
+
+<br>
+
 ### [New York State Micro-Cluster Strategy](https://forward.ny.gov/micro-cluster-strategy)
 
-*New York State Forward*
+*New York Forward*
 
 The state publishes **geographic boundaries of each micro-cluster** along with recent 7-day average positivity rates for each cluster. Unfortunately, this data is not easily accessible, so I scrape this data on a regular basis from the [state's hot spot address map](https://covidhotspotlookup.health.ny.gov/#/home). The creation and update of zones does not appear to be a on a regular schedule.
 
 Most recent data: **`r month_day_year(max(hotspot$date), abbr = TRUE)`**
 <br>
-Update frequency: **Sporadic**
+Update frequency: **Daily**
 <br>
 Geographic aggregation: **None**
 <br>

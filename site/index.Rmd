@@ -8,51 +8,6 @@ preview: img/wch-map.png
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r}
-recent <- nys_cases %>% 
-  filter(date == max(date), county == "Westchester")
-
-last_week <- nys_cases %>% 
-  filter(date == max(date) - days(7), county == "Westchester")
-
-cases_recent <- recent$new_cases_avg_7 * 7
-cases_last_week <- last_week$new_cases_avg_7 * 7
-
-cases_change <- cases_recent - cases_last_week
-cases_change_pct <- cases_change / cases_last_week
-cases_change_word <- if_else(cases_change > 0, "increase", "decrease")
-
-cases_change_pct_print <- if_else(
-  abs(cases_change_pct) < 0.005,
-  "small",
-  percent(abs(cases_change_pct), 1)
-  )
-
-if (cases_change_pct_print == "small") {
-  pct_change_prefix <- "a"
-} else {
-  pct_change_prefix <- a_or_an(signif(cases_change_pct * 100, 2))
-}
-
-recent_nyt <- nyt_cases %>% 
-  filter(date == max(date), county == "Westchester")
-
-last_week_nyt <- nyt_cases %>% 
-  filter(date == max(date) - days(7), county == "Westchester")
-
-deaths_recent <- recent_nyt$new_deaths_avg_7 * 7
-deaths_last_week <- last_week_nyt$new_deaths_avg_7 * 7
-
-deaths_change <- deaths_recent - deaths_last_week
-deaths_change_pct <- deaths_change / deaths_last_week
-
-deaths_change_word <- if_else(deaths_change > 0, "more", "fewer")
-
-cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
-death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
-
-```
-
 ```{r calc-key-metrics}
 recent <- nys_cases %>% 
   filter(date == max(date), county == "Westchester")
@@ -71,12 +26,30 @@ cases_last_week <- last_week$new_cases_avg_7 * 7
 cases_change <- cases_recent - cases_last_week
 cases_change_pct <- cases_change / cases_last_week
 cases_total <- recent$total_cases
+cases_change_word <- if_else(cases_change > 0, "increase", "decrease")
+
+cases_change_pct_print <- if_else(
+  abs(cases_change_pct) < 0.005,
+  "small",
+  percent(abs(cases_change_pct), 1)
+  )
+
+if (cases_change_pct_print == "small") {
+  pct_change_prefix <- "a"
+} else {
+  pct_change_prefix <- a_or_an(signif(cases_change_pct * 100, 2))
+}
 
 deaths_recent <- recent_nyt$new_deaths_avg_7 * 7
 deaths_last_week <- last_week_nyt$new_deaths_avg_7 * 7
 deaths_change <- deaths_recent - deaths_last_week
 deaths_change_pct <- deaths_change / deaths_last_week
 deaths_total <- recent_nyt$total_deaths
+deaths_change_text <- case_when(
+  deaths_change == 0 ~ "the same number</span> as",
+  deaths_change > 0 ~ paste(deaths_change, "more</span>than"),
+  deaths_change < 0 ~ paste(abs(deaths_change), "fewer</span> than")
+  )
 
 tests_recent <- recent$new_tests_avg_7 * 7
 tests_last_week <- last_week$new_tests_avg_7 * 7
@@ -87,6 +60,9 @@ tests_total <- recent$total_tests
 pos_rate_recent <- cases_recent / tests_recent
 pos_rate_last_week <- cases_last_week / tests_last_week
 pos_rate_change <- pos_rate_recent - pos_rate_last_week
+
+cases_per_cap <- pretty_frac(recent$total_cases / recent_nyt$total_pop)
+death_per_cap <- pretty_frac(recent_nyt$total_deaths / recent_nyt$total_pop)
 ```
 
 <br>
@@ -172,7 +148,7 @@ ggplotly_config(to_plot) %>%
 
 In the last seven days, <span style = "color:white;background-color:steelblue;">`r comma(cases_recent, 1)` new cases</span> of Covid-19 have been reported in Westchester County. This is `r pct_change_prefix` <span style = "color:white;background-color:steelblue;">`r cases_change_pct_print` `r cases_change_word`</span> from the prior seven days. Since the beginning of the pandemic, <span style = "color:white;background-color:steelblue;">`r cases_per_cap`</span> Westchester residents have tested positive for the novel coronavirus.
 
-There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r abs(deaths_change)` `r deaths_change_word`</span> than in the prior seven days. <span style = "color:white;background-color:coral;">`r death_per_cap`</span> Westchester residents have died from Covid-19.
+There were <span style = "color:white;background-color:coral;">`r comma(deaths_recent, 1)` new deaths</span> due to Covid-19 reported in the last seven days. This is <span style = "color:white;background-color:coral;">`r deaths_change_text` in the prior seven days. <span style = "color:white;background-color:coral;">`r death_per_cap`</span> Westchester residents have died from Covid-19.
   </div>
 </div>
 
