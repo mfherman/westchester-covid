@@ -135,9 +135,13 @@ Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
 ### [New York State School Covid-19 Report Card](https://schoolcovidreportcard.health.ny.gov/#/home)
 
-*New York Forward*
+*New York State Department of Health/New York Forward*
 
-This dataset includes
+This dataset includes the number of positive tests reported by each school in New York State. The numbers are broken down by students, teachers, and staff, on-site and off-site. Each school also reports their current teaching model (in-person, hybrid, or remote-only) as well as the number of students and staff currently enrolled on-site or working in school buildings and number of students and staff currently off-site.
+
+The state does not currently publish historical data at the school-level, but rather the total number of cases reported by each school (since Sept 8) and the number of cases in the last 14 days. The data is reported daily by each school to the Department of Health.
+
+The school data presented on this site includes positive cases in students, teachers, and staff that are attending or working in school buildings, and excludes "off-site" cases. 
 
 Most recent data: **`r month_day_year(max(school_geo_cases$date), abbr = TRUE)`**
 <br>
@@ -145,7 +149,7 @@ Update frequency: **Daily (varies by school)**
 <br>
 Geographic aggregation: **None (school-level data, New York State)**
 <br>
-Where it's used: **School cases**
+Where it's used: **Cases in schools**
 
 <br>
 

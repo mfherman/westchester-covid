@@ -223,6 +223,7 @@ th.t-left, th.t-right {
 }
 
 .school-table th {
+  font-size: 13px !important;
   line-height: 1em !important;
 }
  
