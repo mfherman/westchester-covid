@@ -754,3 +754,82 @@ to_map %>%
   formatStyle(1:2, fontFamily = "IBM Plex Sans") %>% 
   formatStyle(3:4, fontFamily = "Roboto Mono")
 ```
+
+## Racial disparities
+
+```{r, eval=F}
+death_by_race <- tribble(
+  ~"race",   ~"deaths", ~"pop", ~"age_adjust",
+  "Hispanic", 275,      243261, 158.6,
+  "Black",    252,      138566, 156.8,
+  "White",    729,      520628, 74,
+  "Asian",    34,       63448,  51.4
+  ) %>% 
+  mutate(crude = deaths / pop * 1e5)
+
+
+p <- death_by_race %>% 
+  mutate(race = fct_reorder(race, -age_adjust)) %>% 
+  ggplot(aes(race, age_adjust)) +
+  geom_col(
+    fill = "steelblue",
+    alpha = 0.85,
+    aes(
+      text = paste0(
+        "<b>", race, "</b><br>",
+        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
+        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
+        "Deaths: ", comma(deaths), "<br>",
+        "Population: ", comma(pop)
+      )
+    )
+  ) +
+  geom_col(
+    fill = "steelblue",
+    alpha = 0.85,
+    aes(
+      y = crude,
+      text = paste0(
+        "<b>", race, "</b><br>",
+        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
+        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
+        "Deaths: ", comma(deaths), "<br>",
+        "Population: ", comma(pop)
+      )
+    )
+  ) +
+  labs(
+    title = "Deaths per 100,000 residents",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    axis.text.x = element_text(size = 15, family = "IBM Plex Sans Condensed"),
+    plot.title = element_text(face = "bold", size = 20)
+    ) 
+
+ggplotly_config(p) %>%
+  style(visible = FALSE, traces = 2) %>% 
+  layout(
+    updatemenus = list(
+      list(
+        type = "buttons",
+        pad = list(r = 30),
+        buttons = list(
+          list(
+            label = "Age-adjusted",
+            method = "update",
+            args = list(list(visible = list(TRUE, FALSE)))
+            ),
+          list(
+            label = "Crude",
+            method = "update",
+            args = list(list(visible = list(FALSE, TRUE)))
+            )
+          )
+        )
+      )
+    )
+```
