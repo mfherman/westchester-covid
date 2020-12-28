@@ -24,7 +24,7 @@ wch_death_race <- county %>%
   mutate(wch_deaths = covid_deaths * value) %>% 
   select(race, wch_deaths)
 
-nys_death_age <- state %>% 
+nys_death_age <- state %>% count(sex)
   select(
     date = end_week,
     age_group = age_group_new,
@@ -42,7 +42,31 @@ nys_death_age <- state %>%
   count(age_group, wt = covid_deaths, name = "nys_deaths") %>% 
   mutate(age_group = str_replace(paste("Age", age_group), "-", " to "))
   
+calc <- pop_age_race %>% 
+  left_join(nys_death_age, by = "age_group") %>% 
+  mutate(
+    nys_death_rate = nys_deaths / nys_pop,
+    wch_expected_deaths = nys_death_rate * wch_pop
+    )
 
+nys_deaths <- nys_death_age %>% 
+  summarize(nys_deaths = sum(nys_deaths)) %>% 
+  pull()
+
+nys_pop <- pop_age_race %>% 
+  summarize(nys_pop = sum(nys_pop)) %>% 
+  pull()
+
+amr_by_race <- calc %>% 
+  group_by(race) %>% 
+  summarize(across(c(wch_expected_deaths, wch_pop), sum)) %>%
+  left_join(wch_death_race, by = "race") %>% 
+  mutate(
+    nys_crude = nys_deaths / nys_pop * 1e5,
+    wch_crude = wch_deaths / wch_pop * 1e5,
+    smr = wch_deaths / wch_expected_deaths,
+    amr = smr * nys_crude
+    )
 
 
 amr_by_race %>% 
