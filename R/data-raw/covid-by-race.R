@@ -1,7 +1,8 @@
 source(here::here("R/build/attach-packages.R"))
 
 url_county <- "https://data.cdc.gov/resource/k8wy-p9cg.csv?fipscode=36119"
-url_state <- "https://data.cdc.gov/resource/ks3g-spdg.csv?state=New%20York"
+url_state <- "https://data.cdc.gov/resource/9bhg-hcku.csv?state=New%20York"
+#url_state <- "https://data.cdc.gov/resource/ks3g-spdg.csv?state=New%20York"
 
 county <- read_csv(url_county, col_types = cols())
 state <- read_csv(url_state, col_types = cols())
@@ -23,49 +24,26 @@ wch_death_race <- county %>%
   mutate(wch_deaths = covid_deaths * value) %>% 
   select(race, wch_deaths)
 
-death_age_race <- state %>% 
+nys_death_age <- state %>% 
   select(
     date = end_week,
     age_group = age_group_new,
-    race = race_and_hispanic_origin,
     covid_deaths = covid_19_deaths
     ) %>% 
-  filter(!age_group %in% c("0-17 years", "18-29 years", "30-49 years", "50-64 years")) %>% 
+  filter(!age_group %in% c("0-17 years", "18-29 years", "30-49 years", "50-64 years", "All Ages")) %>% 
   mutate(across(where(is.POSIXt), as.Date)) %>% 
-  replace_na(list(covid_deaths = 0)) %>% 
+  replace_na(list(covid_deaths = 0)) %>%
   mutate(
-    race = case_when(
-      race == "Hispanic" ~ "Latino",
-      race == "Non-Hispanic Asian" ~ "Asian",
-      race == "Non-Hispanic Black" ~ "Black",
-      race == "Non-Hispanic White" ~ "White",
-      TRUE ~ "Other"
-      ),
-    age_group = case_when(
-      age_group %in% c("Under 1 year", "1-4 years") ~ "0-4 years",
-      TRUE ~ age_group
+    age_group = if_else(
+      age_group %in% c("Under 1 year", "1-4 years"),
+      "0-4 years", age_group
       )
     ) %>%
-  count(age_group, race, wt = covid_deaths, name = "nys_deaths") %>% 
+  count(age_group, wt = covid_deaths, name = "nys_deaths") %>% 
   mutate(age_group = str_replace(paste("Age", age_group), "-", " to "))
+  
 
-calc <- pop_age_race %>% 
-  left_join(death_age_race, by = c("race", "age_group")) %>% 
-  mutate(
-    nys_death_rate = nys_deaths / nys_pop,
-    wch_expected_deaths = nys_death_rate * wch_pop
-    )
 
-amr_by_race <- calc %>% 
-  group_by(race) %>% 
-  summarize(across(c(nys_pop, nys_deaths, wch_expected_deaths, wch_pop), sum)) %>% 
-  left_join(wch_death_race, by = "race") %>% 
-  mutate(
-    nys_crude = nys_deaths / nys_pop * 1e5,
-    wch_crude = wch_deaths / wch_pop * 1e5,
-    smr = wch_deaths / wch_expected_deaths,
-    amr = smr * nys_crude
-    )
 
 amr_by_race %>% 
   mutate(race = fct_reorder(race, -amr)) %>% 
@@ -115,7 +93,47 @@ calll <- county %>%
 
 
 
-
-
-calll %>% 
-  filter(indicator == "Covid-19 deaths")
+## this is old with deaths by age and race by state
+# death_age_race <- state %>% 
+#   select(
+#     date = end_week,
+#     age_group = age_group_new,
+#     race = race_and_hispanic_origin,
+#     covid_deaths = covid_19_deaths
+#     ) %>% 
+#   filter(!age_group %in% c("0-17 years", "18-29 years", "30-49 years", "50-64 years")) %>% 
+#   mutate(across(where(is.POSIXt), as.Date)) %>% 
+#   replace_na(list(covid_deaths = 0)) %>% 
+#   mutate(
+#     race = case_when(
+#       race == "Hispanic" ~ "Latino",
+#       race == "Non-Hispanic Asian" ~ "Asian",
+#       race == "Non-Hispanic Black" ~ "Black",
+#       race == "Non-Hispanic White" ~ "White",
+#       TRUE ~ "Other"
+#       ),
+#     age_group = case_when(
+#       age_group %in% c("Under 1 year", "1-4 years") ~ "0-4 years",
+#       TRUE ~ age_group
+#       )
+#     ) %>%
+#   count(age_group, race, wt = covid_deaths, name = "nys_deaths") %>% 
+#   mutate(age_group = str_replace(paste("Age", age_group), "-", " to "))
+# 
+# calc <- pop_age_race %>% 
+#   left_join(death_age_race, by = c("race", "age_group")) %>% 
+#   mutate(
+#     nys_death_rate = nys_deaths / nys_pop,
+#     wch_expected_deaths = nys_death_rate * wch_pop
+#     )
+# 
+# amr_by_race <- calc %>% 
+#   group_by(race) %>% 
+#   summarize(across(c(nys_pop, nys_deaths, wch_expected_deaths, wch_pop), sum)) %>% 
+#   left_join(wch_death_race, by = "race") %>% 
+#   mutate(
+#     nys_crude = nys_deaths / nys_pop * 1e5,
+#     wch_crude = wch_deaths / wch_pop * 1e5,
+#     smr = wch_deaths / wch_expected_deaths,
+#     amr = smr * nys_crude
+#     )
