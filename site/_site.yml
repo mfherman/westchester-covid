@@ -14,7 +14,19 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "County"
-      href: county.html
+      menu:
+        - text: "Cases, tests, deaths"
+          href: county.html#
+        - text: "Metro area"
+          href: county.html#metro-area-cases
+        - text: "Schools"
+          href: county.html#cases-in-school
+        - text: "Clusters"
+          href: county.html#new-york-state-micro-clusters
+        - text: "Racial diaparities"
+          href: county.html#racial-disparities
+        - text: "Nursing homes"
+          href: county.html#deaths-in-nursing-homes
     - text: "Towns"
       href: municipality.html
     - text: "Hospitals"

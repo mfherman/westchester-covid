@@ -2083,6 +2083,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
 
+  @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
@@ -2498,7 +2500,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="county.html">County</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+County
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="county.html#">Cases, tests, deaths</a>
+<a href="county.html#metro-area-cases">Metro area</a>
+<a href="county.html#cases-in-school">Schools</a>
+<a href="county.html#new-york-state-micro-clusters">Clusters</a>
+<a href="county.html#racial-disparities">Racial diaparities</a>
+<a href="county.html#deaths-in-nursing-homes">Nursing homes</a>
+</div>
+</div>
 <a href="municipality.html">Towns</a>
 <a href="hospital.html">Hospitals</a>
 <a href="about.html">About</a>
