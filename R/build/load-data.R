@@ -71,3 +71,19 @@ nh_clean <- nh_geo %>%
     city = str_replace(city, "On", "on"),
     zipcode
     )
+
+# manually input from https://covid19tracker.health.ny.gov/views/NYS-COVID19-Tracker/NYSDOHCOVID-19Tracker-Fatalities?%3Aembed=yes&%3Atoolbar=no&%3Atabs=no
+death_by_race <- tribble(
+  ~"race",     ~"pop",  ~"deaths", ~"age_adjust", ~"date",
+  "Hispanic",  243261,   275,      158.6,        as.Date("2020-12-28"),
+  "Black",     138566,   252,      156.8,        NA,
+  "White",     520628,   729,      74,           NA,
+  "Asian",     63448,    34,       51.4,         NA,
+  "Other",     1709,     24,       NA,           NA
+  ) %>%    
+  mutate(
+    crude = deaths / pop * 1e5,
+    deaths_pct = deaths / sum(deaths),
+    pop_pct = pop / sum(pop),
+    pretty_rate = pretty_frac(age_adjust / 1e5)
+    )

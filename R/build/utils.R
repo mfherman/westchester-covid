@@ -16,7 +16,7 @@ ggplotly_config <- function(x, ...) {
       xaxis = list(fixedrange = TRUE),
       yaxis = list(fixedrange = TRUE),
       font = list(family = "IBM Plex Sans Condensed"),
-      hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"))
+      hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"), align = "left")
     ) %>%
     plotly::config(displayModeBar = FALSE)
   }

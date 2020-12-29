@@ -665,23 +665,7 @@ leaflet(hotspot_to_map) %>%
 
 ## Racial disparities
 
-```{r}
-death_by_race <- tribble(
-  ~"race",   ~"deaths", ~"pop", ~"age_adjust",
-  "Hispanic", 275,      243261, 158.6,
-  "Black",    252,      138566, 156.8,
-  "White",    729,      520628, 74,
-  "Asian",    34,       63448,  51.4,
-  "Other",    24,       1709,  NA
-  ) %>% 
-  mutate(
-    crude = deaths / pop * 1e5,
-    deaths_pct = deaths / sum(deaths),
-    pop_pct = pop / sum(pop),
-    pretty_rate = pretty_frac(age_adjust / 1e5)
-    )
-```
-
+<span class="recent-update">Most recent data: `r month_day_year(max(death_by_race$date, na.rm = TRUE), abbr = TRUE)`</span>
 
 The Covid-19 pandemic has disproportionately affected communities of color. Nationally, the COIVD Tracking Project estimates that [Black people are dying from Covid-19 at 1.7 times the rate of White people](https://covidtracking.com/race). Latino and Native people are also [dying more frequently](https://www.cdc.gov/nchs/nvss/vsrr/covid19/health_disparities.htm) from Covid-19 than white and Asian people. These national racial disparities are also evident in Westchester County. Black people make up `r percent(death_by_race$pop_pct[death_by_race$race == "Black"], 1)` of the total population of the county, but have accounted for `r percent(death_by_race$deaths_pct[death_by_race$race == "Black"], 1)` of Covid-19 deaths.
 
@@ -730,7 +714,7 @@ p <- death_by_race %>%
     )
   ) +
   labs(
-    title = "Covid-19 deaths per 100,000",
+    title = "Deaths per 100K",
     x = NULL,
     y = NULL
   ) +
@@ -747,7 +731,12 @@ ggplotly_config(p) %>%
     updatemenus = list(
       list(
         type = "buttons",
-        pad = list(r = 30),
+        direction = "right",
+        xanchor = "center",
+        yanchor = "top",
+        x = 0.2,
+        y = 1.05,
+        #pad = list("r" = 100, "t" = 10, "b" = 10),
         buttons = list(
           list(
             label = "Age-adjusted",

@@ -153,6 +153,24 @@ Where it's used: **Cases in schools**
 
 <br>
 
+### [Fatalities by Race/Ethnicity](https://covid19tracker.health.ny.gov/views/NYS-COVID19-Tracker/NYSDOHCOVID-19Tracker-FatalityDetail?%3Aembed=yes&%3Atoolbar=no&%3Atabs=no)
+
+*New York State Department of Health*
+
+This data includes Covid-19 death counts, crude death rates, and age-adjusted death rates by race and ethnicity for New York State and select counties in New York with large populations. It is updated daily, but the number of deaths by race lags the total number of deaths reported by the Department of Health in other places. For instance, on Dec 28, 2020, there were 1,314 deaths reported by race compared to 1,652 total deaths reported in Westchester.
+
+The Department of Health does not make the data easily accessible outside their published Tableau dashboard, so I am not able to automatically update this data at this time.
+
+Most recent data: **`r month_day_year(max(death_by_race$date, na.rm = TRUE), abbr = TRUE)`**
+<br>
+Update frequency: **Daily**
+<br>
+Geographic aggregation: **County (New York State, large-population counties only)**
+<br>
+Where it's used: **Racial disparities**
+
+<br>
+
 ### [New York State Micro-Cluster Strategy](https://forward.ny.gov/micro-cluster-strategy)
 
 *New York Forward*
