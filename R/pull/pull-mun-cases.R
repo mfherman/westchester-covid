@@ -6,7 +6,7 @@ scrape_mun_daily <- function() {
   url <- "https://services.arcgis.com/XKEHpOulfycN9cGC/arcgis/rest/services/Mun_Coronavirus_poly/FeatureServer/0/query?f=json&where=(Confirmed%20%3C%3E%20555)%20AND%20(Active%3E0)&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAME%20asc&outSR=102100&resultOffset=0&resultRecordCount=100&resultType=standard&cacheHint=true"
   url_date <- "https://services.arcgis.com/XKEHpOulfycN9cGC/ArcGIS/rest/services/Mun_Coronavirus_poly/FeatureServer/0?f=pjson"
   
-  last_update <- as.Date(as_datetime(fromJSON(url_date)[["editingInfo"]][["lastEditDate"]] / 1000))
+  last_update <- as.Date(as_datetime(fromJSON(url_date)[["editingInfo"]][["lastEditDate"]] / 1000)) - 1
   
   fromJSON(url, flatten = TRUE)[["features"]] %>%
     transmute(
