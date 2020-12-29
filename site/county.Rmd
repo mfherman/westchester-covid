@@ -763,7 +763,7 @@ ggplotly_config(p) %>%
         )
       ),
     annotations = list(
-      x = 1, y = -0.175,
+      x = 1, y = -0.17,
       text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
