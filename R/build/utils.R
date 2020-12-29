@@ -44,7 +44,7 @@ pretty_time <- function(x) {
 
 
 pretty_frac <- function(x, accuracy = 1) {
-  paste("1 in", scales::number(1 / x, accuracy))
+  paste("1 in", scales::comma(1 / x, accuracy))
   }
 
 num_sign <- function(x, accuracy = NULL) {

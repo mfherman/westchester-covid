@@ -40,6 +40,7 @@ med_age_by_race <- wch_pums %>%
   group_by(race_eth) %>% 
   summarize(med_age = spatstat::weighted.median(AGEP, PWGTP))
 
+write_csv
 
 nys_pop <- get_estimates(
   geography = "state",

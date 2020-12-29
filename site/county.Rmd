@@ -663,6 +663,116 @@ leaflet(hotspot_to_map) %>%
 
 <br>
 
+## Racial disparities
+
+```{r}
+death_by_race <- tribble(
+  ~"race",   ~"deaths", ~"pop", ~"age_adjust",
+  "Hispanic", 275,      243261, 158.6,
+  "Black",    252,      138566, 156.8,
+  "White",    729,      520628, 74,
+  "Asian",    34,       63448,  51.4,
+  "Other",    24,       1709,  NA
+  ) %>% 
+  mutate(
+    crude = deaths / pop * 1e5,
+    deaths_pct = deaths / sum(deaths),
+    pop_pct = pop / sum(pop),
+    pretty_rate = pretty_frac(age_adjust / 1e5)
+    )
+```
+
+
+The Covid-19 pandemic has disproportionately affected communities of color. Nationally, the COIVD Tracking Project estimates that [Black people are dying from Covid-19 at 1.7 times the rate of White people](https://covidtracking.com/race). Latino and Native people are also [dying more frequently](https://www.cdc.gov/nchs/nvss/vsrr/covid19/health_disparities.htm) from Covid-19 than white and Asian people. These national racial disparities are also evident in Westchester County. Black people make up `r percent(death_by_race$pop_pct[death_by_race$race == "Black"], 1)` of the total population of the county, but have accounted for `r percent(death_by_race$deaths_pct[death_by_race$race == "Black"], 1)` of Covid-19 deaths.
+
+The disparities are even more stark when taking age into account. [Age-adjustment](https://en.wikipedia.org/wiki/Age_adjustment) helps to compare groups by adjusting mortality rates for the different age distribution of each population. In Westchester, the median age of the white population is 48, while the median Latino person is 32 years old. The Black population is also younger than the white population, with a median age of 40. Because the white population is significantly older than the Black and Latino population, we would expect the Covid-19 mortality rate of white people to be higher than Black and Latino people.
+
+<aside>
+Since [older people are much more likely to die](https://ourworldindata.org/mortality-risk-covid#case-fatality-rate-of-covid-19-by-age) from Covid-19 than younger people, it is important to adjust for age when making these comparisons. The process of age-adjustment allows you to compare groups as if they had the same distribution of ages in their population.
+</aside>
+
+In fact, we see the opposite. When accounting for the age of the white population in Westchester, `r comma(death_by_race$age_adjust[death_by_race$race == "White"], 1)` out of 100,000 people have died due to Covid-19. By contrast, `r comma(death_by_race$age_adjust[death_by_race$race == "Hispanic"], 1)` out of 100,000 Latinos have died and `r comma(death_by_race$age_adjust[death_by_race$race == "Black"], 1)` out of 100,000 Black people have died.
+
+The chart below shows both the age-adjusted and crude (un-adjusted) death rates per 100,000 Westchester residents by race and ethnicity.
+
+```{r}
+p <- death_by_race %>% 
+  filter(race != "Other") %>% 
+  mutate(race = fct_reorder(race, -age_adjust)) %>% 
+  ggplot(aes(race, age_adjust)) +
+  geom_col(
+    fill = "coral",
+    alpha = 0.85,
+    width = 0.65,
+    aes(
+      text = paste0(
+        "<b>", race, "</b><br>",
+        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
+        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
+        "Deaths: ", comma(deaths), "<br>",
+        "Population: ", comma(pop)
+      )
+    )
+  ) +
+  geom_col(
+    fill = "steelblue",
+    alpha = 0.85,
+    width = 0.65,
+    aes(
+      y = crude,
+      text = paste0(
+        "<b>", race, "</b><br>",
+        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
+        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
+        "Deaths: ", comma(deaths), "<br>",
+        "Population: ", comma(pop)
+      )
+    )
+  ) +
+  labs(
+    title = "Covid-19 deaths per 100,000",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    axis.text.x = element_text(face = "bold", size = 15),
+    plot.title = element_text(face = "bold", size = 20)
+    ) 
+
+ggplotly_config(p) %>%
+  style(visible = FALSE, traces = 2) %>% 
+  layout(
+    updatemenus = list(
+      list(
+        type = "buttons",
+        pad = list(r = 30),
+        buttons = list(
+          list(
+            label = "Age-adjusted",
+            method = "update",
+            args = list(list(visible = list(TRUE, FALSE)))
+            ),
+          list(
+            label = "Crude",
+            method = "update",
+            args = list(list(visible = list(FALSE, TRUE)))
+            )
+          )
+        )
+      ),
+    annotations = list(
+      x = 1, y = -0.175,
+      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+
 ## Deaths in nursing homes
 
 ```{r}
@@ -755,81 +865,3 @@ to_map %>%
   formatStyle(3:4, fontFamily = "Roboto Mono")
 ```
 
-## Racial disparities
-
-```{r, eval=F}
-death_by_race <- tribble(
-  ~"race",   ~"deaths", ~"pop", ~"age_adjust",
-  "Hispanic", 275,      243261, 158.6,
-  "Black",    252,      138566, 156.8,
-  "White",    729,      520628, 74,
-  "Asian",    34,       63448,  51.4
-  ) %>% 
-  mutate(crude = deaths / pop * 1e5)
-
-
-p <- death_by_race %>% 
-  mutate(race = fct_reorder(race, -age_adjust)) %>% 
-  ggplot(aes(race, age_adjust)) +
-  geom_col(
-    fill = "steelblue",
-    alpha = 0.85,
-    aes(
-      text = paste0(
-        "<b>", race, "</b><br>",
-        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
-        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
-        "Deaths: ", comma(deaths), "<br>",
-        "Population: ", comma(pop)
-      )
-    )
-  ) +
-  geom_col(
-    fill = "steelblue",
-    alpha = 0.85,
-    aes(
-      y = crude,
-      text = paste0(
-        "<b>", race, "</b><br>",
-        "Age-adjusted deaths per 100K: ", comma(age_adjust, 0.1), "<br>",
-        "Crude deaths per 100K: ", comma(crude, 0.1), "<br>",
-        "Deaths: ", comma(deaths), "<br>",
-        "Population: ", comma(pop)
-      )
-    )
-  ) +
-  labs(
-    title = "Deaths per 100,000 residents",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid.major.x = element_blank(),
-    axis.text.x = element_text(size = 15, family = "IBM Plex Sans Condensed"),
-    plot.title = element_text(face = "bold", size = 20)
-    ) 
-
-ggplotly_config(p) %>%
-  style(visible = FALSE, traces = 2) %>% 
-  layout(
-    updatemenus = list(
-      list(
-        type = "buttons",
-        pad = list(r = 30),
-        buttons = list(
-          list(
-            label = "Age-adjusted",
-            method = "update",
-            args = list(list(visible = list(TRUE, FALSE)))
-            ),
-          list(
-            label = "Crude",
-            method = "update",
-            args = list(list(visible = list(FALSE, TRUE)))
-            )
-          )
-        )
-      )
-    )
-```
