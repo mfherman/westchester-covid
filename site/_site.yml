@@ -23,7 +23,7 @@ navbar:
           href: county.html#cases-in-school
         - text: "Clusters"
           href: county.html#new-york-state-micro-clusters
-        - text: "Racial diaparities"
+        - text: "Racial disparities"
           href: county.html#racial-disparities
         - text: "Nursing homes"
           href: county.html#deaths-in-nursing-homes
