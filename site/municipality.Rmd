@@ -153,7 +153,7 @@ mun_cases_poly %>%
 
 <br>
 
-Westchester County does not currently post historical data at the municipal-level, but I have reconstructed this data using maps that have been [posted on the WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). The earliest maps that included the number of active cases per municipality were posted in early May. As such, the data I have *largely misses the first wave of the pandemic* from March and April 2020.
+Westchester County does not currently publish historical data at the municipal-level, but I have reconstructed this data using maps [posted on the WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). The earliest maps that included the number of active cases by municipality were posted in early May. As such, the data I have *largely misses the first wave of the pandemic* from March and April 2020.
 
 <aside>
 Because of the unavailability of this historical data from the County, caution should be used when interpreting municipal-level trends.
