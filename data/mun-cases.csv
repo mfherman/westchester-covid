@@ -4373,7 +4373,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-02,Lewisboro,139,7,0
 2020-10-02,Mamaroneck Town,190,0,0
 2020-10-02,Mamaroneck Village,504,5,2
-2020-10-02,Mount Kisco,312,41,0
+2020-10-02,Mount Kisco,312,1,0
 2020-10-02,Mount Pleasant,650,23,1
 2020-10-02,Mount Vernon,2903,24,2
 2020-10-02,New Castle,249,2,0
@@ -4535,7 +4535,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-08,Bedford,308,8,1
 2020-10-08,Briarcliff Manor,130,2,0
 2020-10-08,Bronxville,98,2,0
-2020-10-08,Buchanan,47,4,0
+2020-10-08,Buchanan,47,1,0
 2020-10-08,Cortlandt,1009,25,3
 2020-10-08,Croton-on-Hudson,219,2,0
 2020-10-08,Dobbs Ferry,354,9,NA
@@ -6550,3 +6550,46 @@ date,municipality,total_cases,active_cases,new_cases
 2020-12-28,White Plains,3983,517,33
 2020-12-28,Yonkers,14273,1774,126
 2020-12-28,Yorktown,2122,366,37
+2020-12-29,Ardsley,244,33,4
+2020-12-29,Bedford,861,96,11
+2020-12-29,Briarcliff Manor,340,46,6
+2020-12-29,Bronxville,232,19,4
+2020-12-29,Buchanan,117,22,7
+2020-12-29,Cortlandt,1930,281,31
+2020-12-29,Croton-on-Hudson,472,82,12
+2020-12-29,Dobbs Ferry,686,74,4
+2020-12-29,Eastchester,1178,206,22
+2020-12-29,Elmsford,446,66,6
+2020-12-29,Greenburgh,2550,314,30
+2020-12-29,Harrison,1344,230,16
+2020-12-29,Hastings-on-Hudson,287,44,6
+2020-12-29,Irvington,220,31,1
+2020-12-29,Larchmont,219,39,3
+2020-12-29,Lewisboro,443,55,4
+2020-12-29,Mamaroneck Town,423,67,2
+2020-12-29,Mamaroneck Village,1343,215,28
+2020-12-29,Mount Kisco,939,109,4
+2020-12-29,Mount Pleasant,1579,242,15
+2020-12-29,Mount Vernon,4616,422,52
+2020-12-29,New Castle,618,92,8
+2020-12-29,New Rochelle,6426,728,58
+2020-12-29,North Castle,649,106,7
+2020-12-29,North Salem,350,38,6
+2020-12-29,Ossining Town,335,39,6
+2020-12-29,Ossining Village,2363,277,25
+2020-12-29,Peekskill,2313,301,35
+2020-12-29,Pelham,426,63,4
+2020-12-29,Pelham Manor,294,56,2
+2020-12-29,Pleasantville,362,56,3
+2020-12-29,Port Chester,2855,320,40
+2020-12-29,Pound Ridge,121,18,5
+2020-12-29,Rye Brook,538,93,11
+2020-12-29,Rye City,674,113,10
+2020-12-29,Scarsdale,682,76,6
+2020-12-29,Sleepy Hollow,1005,134,21
+2020-12-29,Somers,986,139,10
+2020-12-29,Tarrytown,655,77,7
+2020-12-29,Tuckahoe,310,49,6
+2020-12-29,White Plains,4039,529,56
+2020-12-29,Yonkers,14468,1848,195
+2020-12-29,Yorktown,2160,374,38

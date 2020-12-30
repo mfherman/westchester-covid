@@ -21,6 +21,7 @@ suppressPackageStartupMessages(suppressWarnings(library(vroom)))
 suppressPackageStartupMessages(suppressWarnings(library(glue)))
 suppressPackageStartupMessages(suppressWarnings(library(janitor)))
 suppressPackageStartupMessages(suppressWarnings(library(zoo)))
+suppressPackageStartupMessages(suppressWarnings(library(crosstalk)))
 
 conflicted::conflict_prefer("filter", "dplyr", quiet = TRUE)
 conflicted::conflict_prefer("layout", "plotly", quiet = TRUE)

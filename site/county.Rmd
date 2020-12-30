@@ -506,17 +506,68 @@ In the *last 14 days*, the school with the most new on-site cases (students, tea
 Not all schools report to the state with the same frequency, so some schools' data is more recent than others.
 </aside>
 
-### Schools with 3 or more cases in the last 14 days
+### School cases in the last 14 days
 
 ```{r school_map, out.height="600px", out.width="600px"}
+school_geo_cases <- school_geo %>% 
+  left_join(school_cases, by = "school_beds") %>% 
+  mutate(
+    district = if_else(is.na(district), "", district),
+    district = str_remove(district, "Ufsd|Csd|Sd"),
+    district = if_else(district == "-Tarrytowns", "Tarrytowns", district),
+    district = str_trim(district),
+    school = str_remove(school, "\\s*\\([^\\)]+\\)"),
+    date_print = month_day_year(date, abbr = TRUE),
+    recent_cases = recent_cases_students + recent_cases_staff,
+    label = if_else(
+      district == "",
+      paste0(
+        "<b>", school, "</b><br>",
+        "Recent student cases: ", comma(recent_cases_students, 1), "<br>",
+        "Recent staff cases: ", comma(recent_cases_staff, 1), "<br>",
+        "On-site students :", comma(students, 1), "<br>",
+        "On-site staff: ", comma(staff, 1), "<br>",
+        "Most recent report: ", date_print
+        ),
+      paste0(
+        "<b>", school, " - ", district, "</b><br>",
+        "Recent student cases: ", comma(recent_cases_students, 1), "<br>",
+        "Recent staff cases: ", comma(recent_cases_staff, 1), "<br>",
+        "On-site students: ", comma(students, 1), "<br>",
+        "On-site staff: ", comma(staff, 1), "<br>",
+        "Most recent report: ", date_print
+        )
+      )
+    ) %>% 
+  arrange(desc(recent_cases, district, school)) %>% 
+  select(
+    date,
+    `School` = school,
+    `District` = district,
+    `Model` = model,
+    `Report Date` = date_print,
+    `Recent student cases` = recent_cases_students,
+    `Recent staff cases` = recent_cases_staff,
+    `Total student cases` = all_cases_students,
+    `Total staff cases` = all_cases_staff,
+    #`On-site students` = students,
+    #`On-site staff` = staff,
+    label,
+    recent_cases
+    )
+
 to_map <- school_geo_cases %>% 
-  filter(recent_cases > 2)
+  filter(recent_cases > 1)
+
+# school_shared <- school_geo_cases %>%
+#   select(-label) %>%
+#   SharedData$new()
 
 to_map %>% 
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addCircles(
-    radius = ~ sqrt(recent_cases) * 350,
+    radius = ~ sqrt(recent_cases) * 400,
     color = "steelblue",
     opacity = 0.7,
     weight = 1.5,
@@ -529,27 +580,34 @@ to_map %>%
   addResetMapButton()
 ```
 
+```{r, eval=F}
+# filter_select(
+#     id = "District",
+#     label = "School District",
+#     sharedData = school_shared,
+#     group = ~District
+#   )
+
+filter_slider(
+    id = "cases-slider",
+    label = "Recent cases",
+    sharedData = school_shared,
+    column = ~recent_cases,
+    step = 1,
+    round = TRUE,
+    drag = FALSE,
+    ticks = FALSE,
+    from = 2
+  )
+```
+
 <br>
 
-The table below shows the total number of student and staff on-site cases reported by each school since September, as well as the the number of recent cases (within the last 14 days). Each school also reports their current teaching model (in-person, hybrid, or remote-only) as well as the number of students and staff currently enrolled on-site or working in school buildings.
+The table below shows the total number of student and staff on-site cases reported by each school since September, as well as the the number of recent cases (within the last 14 days). Each school also reports their current teaching model (in-person, hybrid, or remote-only).
 
 <div class="l-page school-table">
 ```{r school-table, layout="l-page"}
-school_geo_cases %>%
-  st_drop_geometry() %>% 
-  select(
-    date,
-    `School` = school,
-    `District` = district,
-    `Model` = model,
-    `Report Date` = date_print,
-    `Recent student cases` = recent_cases_students,
-    `Recent staff cases` = recent_cases_staff,
-    `Total student cases` = all_cases_students,
-    `Total staff cases` = all_cases_staff,
-    `On-site students` = students,
-    `On-site staff` = staff
-    ) %>%
+to_map %>%
   datatable(
     class = "compact hover",
     extensions = c("Scroller", "Responsive"),
@@ -563,7 +621,7 @@ school_geo_cases %>%
       scrollY = 250,
       scroller = TRUE,
       columnDefs = list(
-        list(visible = FALSE, targets = 0:1),
+        list(visible = FALSE, targets = c(0:1, 10:12)),
         list(orderData = 1, targets = 5),
         list(className = "dt-head-left", targets = 2:5),
         list(targets = 2, render = JS(
@@ -575,9 +633,9 @@ school_geo_cases %>%
         )
       )
     ) %>%
-  formatRound(c(6:11), digits = 0) %>%
+  formatRound(c(6:9), digits = 0) %>%
   formatStyle(2:5, fontFamily = "IBM Plex Sans") %>% 
-  formatStyle(6:11, fontFamily = "Roboto Mono")
+  formatStyle(6:9, fontFamily = "Roboto Mono")
 ```
 </div>
 
@@ -794,15 +852,27 @@ to_map <- nh_clean %>%
       "Beds: ", comma(beds, 1)
       ),
     name = fct_reorder(name, deaths_total)
+    ) %>% 
+  arrange(desc(deaths_total)) %>% 
+  select(
+    `Nursing Home` = name,
+    City = city,
+    Deaths = deaths_total,
+    `Total Beds` = beds,
+    label
     )
 
-to_map %>%
+nh_shared <- to_map %>% 
+  select(-label) %>% 
+  SharedData$new()
+
+nh_shared %>%
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addCircles(
-    radius = ~ sqrt(deaths_total) * 450,
+    radius = ~ sqrt(Deaths) * 450,
     color = "steelblue",
-    opacity = 0.7,
+    opacity = 0.8,
     weight = 1.5,
     fillColor = "steelblue",
     fillOpacity = 0.2,
@@ -816,15 +886,7 @@ to_map %>%
 <br>
 
 ```{r nursing-home-table, layout="l-body-outset", out.height="510px"}
-to_map %>% 
-  st_drop_geometry() %>% 
-  arrange(desc(deaths_total)) %>% 
-  select(
-    `Nursing Home` = name,
-    City = city,
-    Deaths = deaths_total,
-    `Total Beds` = beds
-    ) %>% 
+nh_shared %>% 
   datatable(
     class = "compact hover",
     extensions = c("Scroller", "Responsive"),
@@ -838,7 +900,7 @@ to_map %>%
       scrollY = 250,
       scroller = TRUE,
       columnDefs = list(
-        list(visible = FALSE, targets = 0),
+        list(visible = FALSE, targets = c(0, 5)),
         list(className = "dt-head-left", targets = 1:2),
         list(targets = 1, render = JS(
               "function(data, type, row, meta) {",
@@ -853,4 +915,3 @@ to_map %>%
   formatStyle(1:2, fontFamily = "IBM Plex Sans") %>% 
   formatStyle(3:4, fontFamily = "Roboto Mono")
 ```
-

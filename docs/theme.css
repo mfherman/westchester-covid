@@ -245,3 +245,8 @@ th.t-left, th.t-right {
   font-size: 18px !important;
   font-weight: 700 !important;
 }
+
+#cases-slider {
+  margin-left: 100px;
+  margin-right: 100px;
+}

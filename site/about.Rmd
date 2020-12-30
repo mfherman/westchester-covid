@@ -82,16 +82,16 @@ Where it's used: **New and total deaths, new and total cases (metro area)**
 
 *Westchester County Department of Health/GIS*
 
-This dataset includes the number of Covid-19 **cases** in each of the 43 municipalities of Westchester County. It is updated on (most) weekdays and includes all cases in which a positive coronavirus test is associated with a confirmed address in Westchester County. With each update, the County posts the number of new cases, active cases, and total cases per municipality. The number of "active cases" refers the number of positive tests in the past two weeks. 
+This dataset includes the number of Covid-19 **cases in each of the 43 municipalities** of Westchester County. It is updated on (most) weekdays and includes all cases in which a positive coronavirus test is associated with a confirmed address in Westchester County. With each update, the County posts the number of new cases, active cases, and total cases per municipality. The number of "active cases" refers the number of positive tests in the past two weeks. 
 
 Often, the data reported by the county differs significantly from the data reported by NYS DOH. Given the lack of information shared by the Westchester County Department of Health about this data, I only use the County data to compare municipalities within Westchester. The data released by the County should not be directly compared to data released by the State or other sources.
 
 Unfortunately, the County does not currently post historical data. From early 
-May until Dec 11, the County posted a map on most weekdays to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). Because of this limitation, I have extracted historical data from the maps that have been posted on Twitter. This extraction process is imperfect but until the county releases more accurate historical data, this is best I can do. Because of the unavailability of this historical data from the County, *extreme caution* should be used when looking at municipal-level trends.
+May until December 11, the County posted a map on most weekdays to the [WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). I have extracted the historical cases data from the maps posted on Twitter. This extraction process is imperfect, but until more accurate historical data is released, this is best I can do. *Extreme caution* should be used when looking at municipal-level trends due to these limitations.
 
-On Dec 23, 2020, the County released a [dashboard](https://wcgis.maps.arcgis.com/apps/opsdashboard/index.html#/280339d96db14efd9cc304dba0f3a71d) that largely contains the same information that was posted on the daily map, with the addition of other metrics reported by New York State. Again, this dashboard does not contain any municipal-level historical data. Each day, I take a snapshot of the data reported on the dashboard to create trends for municipalities.
+On Dec 23, 2020, the County released a [dashboard](https://wcgis.maps.arcgis.com/apps/opsdashboard/index.html#/280339d96db14efd9cc304dba0f3a71d) that contains the same information that was posted on the daily map, with the addition of other metrics reported by New York State. This dashboard does not contain any municipal-level historical data either. Each day, I take a snapshot of the data reported on the dashboard to create trends for municipalities.
 
-Given these limitations, I have decided to use the "active cases" metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!
+I have decided to use the "active cases" metric as rolling 14-day average for most of the municipal-level on this site, as it seems to be the best balance between accuracy and recency If you or anyone you know works for the County, please encourage them to release more detailed historical data!
 
 Most recent data: **`r month_day_year(mun_date, abbr = TRUE)`**
 <br>

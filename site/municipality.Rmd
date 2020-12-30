@@ -34,7 +34,7 @@ The municipality with the most new cases per capita in the past 14 days is **`r 
 
 Throughout the pandemic, the municipalities that have had the largest share of their population test positive for coronavirus are **`r tot_cases_most$municipality[1]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[1])`) and **`r tot_cases_most$municipality[2]`** (`r pretty_frac(tot_cases_most$total_cases_per_cap[2])`). The municipalities that have had the fewest cases per capita are **`r tot_cases_least$municipality[1]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[1])`) and **`r tot_cases_least$municipality[2]`** (`r pretty_frac(tot_cases_least$total_cases_per_cap[2])`).
 
-### New cases per capita (14-day average)
+### New cases per 100,000 residents (14-day average)
 
 ```{r mun_per_capita_map, out.height="600px", out.width="600px"}
 mun_cases_centroid <- mun_cases_poly %>% 
@@ -131,7 +131,7 @@ mun_cases_poly %>%
     extensions = c("Scroller", "Responsive"),
     caption = tags$caption(
       style = 'caption-side: bottom; text-align: right;',
-      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases" target="_self">Westchester County DOH</a>')))
+      withTags(div(HTML('Source: <a href="https://westchester-covid.mattherman.info/about#westchester-county-covid-19-dashboard" target="_self">Westchester County DOH</a>')))
     ),
     options = list(
       dom = "ft",
@@ -152,7 +152,18 @@ mun_cases_poly %>%
 ```
 
 <br>
-<br>
+
+Westchester County does not currently post historical data at the municipal-level, but I have reconstructed this data using maps that have been [posted on the WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). The first maps that included the number of active cases per municipality were posted in early May. As such, the data I have *largely misses the first wave of the pandemic* from March and April 2020.
+
+<aside>
+Because of the unavailability of this historical data from the County, caution should be used when interpreting municipal-level trends.
+</aside>
+
+The chart below shows the severity of the pandemic in each municipality by plotting the rolling 14-day average of new cases per 100,000 residents by day. The municipalities are ordered from top to bottom by their current average daily cases per 100,000.
+
+<aside>
+For days with missing data, I have imputed the case numbers using linear interpolation.
+</aside>
 
 ```{r mun_heat_map, layout="l-page", out.height="700px"}
 all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")
@@ -205,7 +216,7 @@ ggplotly_config(p) %>%
   layout(
     annotations = list(
       x = 1, y = -0.075,
-      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-confirmed-cases" target="_self">Westchester County DOH</a>', 
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#westchester-county-covid-19-dashboard" target="_self">Westchester County DOH</a>', 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",
