@@ -45,7 +45,7 @@ hosp_nys_sum <- hosp_nys %>%
     )
 ```
 
-<span class="recent-update">Most recent data: `r month_day_year(hosp_wch_sum$year_week, abbr = TRUE)` -- `r month_day_year(hosp_wch_sum$year_week + days(7), abbr = TRUE)`</span>
+<span class="recent-update">Most recent data: `r month_day_year(hosp_wch_sum$year_week, abbr = TRUE)` -- `r month_day_year(hosp_wch_sum$year_week + days(6), abbr = TRUE)`</span>
 
 In the week ending `r month_day_year(hosp_wch_sum$year_week + days(7), abbr = TRUE)`, there were `r comma(hosp_wch_sum$covid_patients, 1)` patients hospitalized with confirmed or suspected cases of Covid-19 in Westchester hospitals (`r percent(hosp_wch_sum$pct_covid, 1)` of all inpatients). `r percent(hosp_wch_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_wch_sum$pct_icu, 1)` of all ICU beds were occupied. There were `r comma(hosp_wch_sum$bed_free, 1)` total beds free and `r comma(hosp_wch_sum$icu_free, 1)` ICU beds free. Statewide, `r percent(hosp_nys_sum$pct_bed, 1)` of all inpatient beds were occupied and `r percent(hosp_nys_sum$pct_icu, 1)` of all ICU beds were occupied.
 

@@ -123,7 +123,7 @@ Hospital metric definitions:
 - ICU beds used: staffed inpatient ICU beds that are occupied
 - Bed occupancy: ICU beds used divided by total ICU beds
 
-Most recent data: **`r month_day_year(hosp_date, abbr = TRUE)` -- `r month_day_year(hosp_date + 7, abbr = TRUE)`**
+Most recent data: **`r month_day_year(hosp_date, abbr = TRUE)` -- `r month_day_year(hosp_date + 6, abbr = TRUE)`**
 <br>
 Update frequency: **Weekly (updates published Mondays)**
 <br>
