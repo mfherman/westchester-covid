@@ -500,7 +500,7 @@ Here and below, the numbers are "on-site" cases, which includes students, teache
 
 The school district with the most reported cases is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported of on-site students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases.
 
-In the *last 14 days*, the school with the most new on-site cases (students, teachers, staff combined is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days.
+In the *last 14 days*, the school with the most new on-site cases (students, teachers, staff combined) is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days.
 
 <aside>
 Not all schools report to the state with the same frequency, so some schools' data is more recent than others.
@@ -811,7 +811,7 @@ ggplotly_config(p) %>%
       ),
     annotations = list(
       x = 1, y = -0.17,
-      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
+      text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#fatalities-by-raceethnicity' target='_self'>NYS Dept of Health</a>", 
       showarrow = FALSE,
       xref = "paper", yref = "paper", 
       xanchor = "right", yanchor = "auto",

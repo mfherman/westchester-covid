@@ -1,5 +1,6 @@
 ---
 title: "Home"
+description: "A tracking site with data about the Covid-19 pandemic in Westchester County, NY. Includes cases by municipality as well as Covid-19 data for hospitals, schools, and nursing homes."
 site: distill::distill_website
 preview: img/wch-map.png
 ---

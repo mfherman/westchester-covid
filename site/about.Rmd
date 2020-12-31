@@ -137,7 +137,7 @@ Where it's used: **Hospital capacity, occupancy, Covid-19 patients**
 
 *New York State Department of Health/New York Forward*
 
-This dataset includes the number of positive tests reported by each school in New York State. The numbers are broken down by students, teachers, and staff, on-site and off-site. Each school also reports their current teaching model (in-person, hybrid, or remote-only) as well as the number of students and staff currently enrolled on-site or working in school buildings and number of students and staff currently off-site.
+This dataset includes the number of **positive tests reported by each school** in New York State. The numbers are broken down by students, teachers, and staff, on-site and off-site. Each school also reports their current teaching model (in-person, hybrid, or remote-only) as well as the number of students and staff currently enrolled on-site or working in school buildings and number of students and staff currently off-site.
 
 The state does not currently publish historical data at the school-level, but rather the total number of cases reported by each school (since Sept 8) and the number of cases in the last 14 days. The data is reported daily by each school to the Department of Health.
 
@@ -157,7 +157,7 @@ Where it's used: **Cases in schools**
 
 *New York State Department of Health*
 
-This data includes Covid-19 death counts, crude death rates, and age-adjusted death rates by race and ethnicity for New York State and select counties in New York with large populations. It is updated daily, but the number of deaths by race lags the total number of deaths reported by the Department of Health in other places. For instance, on Dec 28, 2020, there were 1,314 deaths reported by race compared to 1,652 total deaths reported in Westchester.
+This data includes Covid-19 **death counts, crude death rates, and age-adjusted death rates by race and ethnicity** for New York State and select counties in New York with large populations. It is updated daily, but the number of deaths by race lags the total number of deaths reported by the Department of Health in other places. For instance, on Dec 28, 2020, there were 1,314 deaths reported by race compared to 1,652 total deaths reported in Westchester.
 
 The Department of Health does not make the data easily accessible outside their published Tableau dashboard, so I am not able to automatically update this data at this time.
 
