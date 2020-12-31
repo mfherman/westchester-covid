@@ -303,7 +303,7 @@ tot_metro_least <- nyt_cases %>%
   arrange(tot_cases_per_cap)
 ```
 
-In the New York metropolitan area, the county with the most new cases per capita in the past seven days is **`r recent_metro_nyt$county[1]` County**, where there have been an average of `r comma(recent_metro_nyt$new_cases_avg_7[1], 1)` cases per day reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[1], 1)` per 100,000 residents). **`r recent_metro_nyt$county[2]` County** is another recent hot spot, with `r comma(recent_metro_nyt$new_cases_avg_7[2], 1)` average daily cases cases reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[2], 1)` per 100,000). In **Westchester County**, `r comma(recent_nyt$new_cases_per_cap[1], 1)` cases per 100,000 residents have been reported in the past week (`r comma(recent_nyt$new_cases_avg_7[1], 1)` new cases per day).
+In the New York metropolitan area, the county with the most new cases per capita in the last seven days is **`r recent_metro_nyt$county[1]` County**, where there have been an average of `r comma(recent_metro_nyt$new_cases_avg_7[1], 1)` cases per day reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[1], 1)` per 100,000 residents). **`r recent_metro_nyt$county[2]` County** is another recent hot spot, with `r comma(recent_metro_nyt$new_cases_avg_7[2], 1)` average daily cases cases reported in the past week (`r comma(recent_metro_nyt$new_cases_per_cap[2], 1)` per 100,000). In **Westchester County**, `r comma(recent_nyt$new_cases_per_cap[1], 1)` cases per 100,000 residents have been reported in the past week (`r comma(recent_nyt$new_cases_avg_7[1], 1)` new cases per day).
 
 Throughout the pandemic, the counties that have had the largest share of their population test positive for coronavirus are **`r tot_metro_nyt$county[1]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[1])`) and **`r tot_metro_nyt$county[2]`** (`r pretty_frac(tot_metro_nyt$tot_cases_per_cap[2])`). The counties that have had the fewest cases per capita are **`r tot_metro_least$county[1]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[1])`) and **`r tot_metro_least$county[2]`** (`r pretty_frac(tot_metro_least$tot_cases_per_cap[2])`). In **Westchester County**, `r pretty_frac(recent_nyt$tot_cases_per_cap)` residents have tested positive since the beginning of the pandemic.
 
@@ -506,7 +506,7 @@ In the *last 14 days*, the school with the most new on-site cases (students, tea
 Not all schools report to the state with the same frequency, so some schools' data is more recent than others.
 </aside>
 
-### School cases in the last 14 days
+### Schools with more than 1 new case in the last 14 days
 
 ```{r school_map, out.height="600px", out.width="600px"}
 school_geo_cases <- school_geo %>% 
@@ -607,7 +607,7 @@ The table below shows the total number of student and staff on-site cases report
 
 <div class="l-page school-table">
 ```{r school-table, layout="l-page"}
-to_map %>%
+school_geo_cases %>%
   datatable(
     class = "compact hover",
     extensions = c("Scroller", "Responsive"),
