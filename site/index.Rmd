@@ -90,7 +90,7 @@ to_plot <- nys_cases %>%
     limits = c(as.Date("2020-03-01"), NA),
     expand = expansion(add = c(0, 2))
     ) +
-  scale_y_continuous(label = label_number_si()) +
+  scale_y_continuous(label = label_comma(1)) +
   labs(
     title = "New cases reported",
     x = NULL,
