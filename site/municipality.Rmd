@@ -47,7 +47,8 @@ to_map <- mun_cases_poly %>%
       "<b>", municipality, "</b><br>",
       "Avg. daily cases: ", comma(new_cases_day_avg, 0.1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
-      )
+      ),
+    new_cases_per_cap_map = if_else(new_cases_per_cap > 125, 125, new_cases_per_cap)
     )
 
 to_map_total <- mun_cases_centroid %>% 
@@ -62,7 +63,7 @@ to_map_total <- mun_cases_centroid %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:150
+  domain = 0:125
   )
 
 leaflet(to_map) %>%
@@ -71,7 +72,7 @@ leaflet(to_map) %>%
     group = "Cases per 100k",
     weight = 1.5,
     color = "white",
-    fillColor = ~cd_pal(new_cases_per_cap),
+    fillColor = ~cd_pal(new_cases_per_cap_map),
     fillOpacity = 0.8,
     label = lapply(to_map$label, htmltools::HTML),
     highlight = highlightOptions(
@@ -97,9 +98,9 @@ leaflet(to_map) %>%
   addLegend(
     group = "Cases per 100k",
     pal = cd_pal,
-    values = 0:150,
+    values = 0:125,
     opacity = 0.7,
-    bins = c(0, 25, 50, 75, 100, 125, 150),
+    bins = c(0, 25, 50, 75, 100, 125),
     position = "bottomright",
     title = "Avg. daily cases per 100k<br>in last 14 days"
     ) %>% 
