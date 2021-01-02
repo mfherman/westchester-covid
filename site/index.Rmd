@@ -184,7 +184,7 @@ to_map <- mun_cases_poly %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:125
+  domain = 0:150
   )
 
 to_map %>%

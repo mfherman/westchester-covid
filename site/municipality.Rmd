@@ -97,9 +97,9 @@ leaflet(to_map) %>%
   addLegend(
     group = "Cases per 100k",
     pal = cd_pal,
-    values = 0:125,
+    values = 0:150,
     opacity = 0.7,
-    bins = c(0, 25, 50, 75, 100, 125),
+    bins = c(0, 25, 50, 75, 100, 125, 150),
     position = "bottomright",
     title = "Avg. daily cases per 100k<br>in last 14 days"
     ) %>% 
@@ -197,7 +197,7 @@ p <- all_days_mun %>%
     palette = "YlOrRd",
     direction = 1,
     na.value = "gray",
-    breaks = c(0, 125)
+    breaks = c(0, 150)
     ) +
   scale_x_date(
     labels = label_date_short(),
@@ -250,7 +250,7 @@ p <- mun_sd %>%
     ) +
   expand_limits(x = 0) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_comma(1)) + 
+  scale_y_continuous(label = label_number_si(1)) + 
   scale_size(trans = "log10") +
   labs(
     x = "Families below 200% of poverty line",
@@ -258,18 +258,36 @@ p <- mun_sd %>%
   ) +
   theme_minimal()
 
-ggplotly_config(p)
+p_plotly <- ggplotly_config(p)
 
-p <- mun_sd %>%
-  ggplot(aes(crowded_pct, total_cases_per_cap)) +
-  geom_point(aes(
-    size = log10(total_pop),
-    text = paste0(
-      municipality
-    ))) +
+p2 <- mun_sd %>%
+  ggplot(aes(crowded_pct, total_cases_per_cap * 1e5)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        municipality
+        )
+      ),
+    color = "steelblue",
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0) + 
+  scale_x_continuous(label = label_percent(1)) +
+  scale_y_continuous(label = label_number_si(1)) + 
+  scale_size(trans = "log10") +
+  labs(
+    x = "Families below 200% of poverty line",
+    y = "Total cases per 100k"
+  ) +
   theme_minimal()
 
-ggplotly_config(p)
+p2_plotly <- ggplotly_config(p2)
+
+
+p_plotly %>% 
+  subplot(p2_plotly)
+
 
 
 mun_acs_calc %>%
