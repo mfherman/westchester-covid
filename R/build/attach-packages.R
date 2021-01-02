@@ -1,5 +1,3 @@
-message(paste0(Sys.time(), " -- Attaching packages"))
-
 suppressPackageStartupMessages(suppressWarnings(library(tidyverse)))
 suppressPackageStartupMessages(suppressWarnings(library(plotly)))
 suppressPackageStartupMessages(suppressWarnings(library(sf)))

@@ -224,3 +224,52 @@ ggplotly_config(p) %>%
       )
     )
 ```
+
+
+```{r, eval = F}
+mun_acs_calc <- mun_acs %>% 
+  left_join(mun_recent, by = "municipality") %>% 
+  mutate(total_cases_per_cap = total_cases / total_pop)
+
+p <- mun_acs_calc %>% 
+  ggplot(aes(poverty_pct, total_cases_per_cap * 1e5)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        municipality
+        )
+      ),
+    color = "steelblue",
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0) + 
+  scale_x_continuous(label = label_percent(1)) +
+  scale_y_continuous(label = label_comma(1)) + 
+  scale_size(trans = "log10") +
+  labs(
+    x = "Families below 200% of poverty line",
+    y = "Total cases per 100k"
+  ) +
+  theme_minimal()
+
+ggplotly_config(p)
+
+p <- mun_acs_calc %>%
+  ggplot(aes(crowded_pct, total_cases_per_cap)) +
+  geom_point(aes(
+    size = log10(total_pop),
+    text = paste0(
+      municipality
+    ))) +
+  theme_minimal()
+
+ggplotly_config(p)
+
+
+mun_acs_calc %>%
+  ggplot(aes(over_65_pct, total_cases_per_cap)) +
+  geom_point(aes(size = log(total_pop)))
+```
+
+

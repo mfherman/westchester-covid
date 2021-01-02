@@ -1,5 +1,3 @@
-message(paste0(Sys.time(), " -- Loading data"))
-
 mun_bound    <- read_sf(here("data/mun-poly.geojson"))
 county_bound <- read_sf(here("data/county-poly.geojson"))
 hotspot      <- read_sf(here("data/hotspot-poly.geojson"))
@@ -10,6 +8,7 @@ school_geo   <- read_sf(here("data/school-point.geojson"))
 hosp_cap     <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = cols())
 mun_cases    <- read_csv(here("data/mun-cases.csv"), col_types = cols())
 nh_deaths    <- read_csv(here("data/nursing-home-deaths.csv"), col_types = cols())
+mun_acs      <- read_csv(here("data/mun-acs-estimates.csv"), col_types = cols())
 school_cases <- read_csv(
   here("data/school-cases.csv"),
   col_types = cols(
@@ -75,9 +74,9 @@ nh_clean <- nh_geo %>%
 # manually input from https://covid19tracker.health.ny.gov/views/NYS-COVID19-Tracker/NYSDOHCOVID-19Tracker-Fatalities?%3Aembed=yes&%3Atoolbar=no&%3Atabs=no
 death_by_race <- tribble(
   ~"race",     ~"pop",  ~"deaths", ~"age_adjust", ~"date",
-  "Hispanic",  243261,   278,      159.8,        as.Date("2020-12-29"),
-  "Black",     138566,   253,      157.4,        NA,
-  "White",     520628,   736,      74.7,         NA,
+  "Hispanic",  243261,   279,      160.7,        as.Date("2020-12-29"),
+  "Black",     138566,   255,      158.5,        NA,
+  "White",     520628,   741,      75.2,         NA,
   "Asian",     63448,    34,       54.5,         NA,
   "Other",     1709,     24,       NA,           NA
   ) %>%    
