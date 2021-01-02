@@ -62,7 +62,7 @@ to_map_total <- mun_cases_centroid %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:125
+  domain = 0:150
   )
 
 leaflet(to_map) %>%
@@ -231,7 +231,12 @@ mun_acs_calc <- mun_acs %>%
   left_join(mun_recent, by = "municipality") %>% 
   mutate(total_cases_per_cap = total_cases / total_pop)
 
-p <- mun_acs_calc %>% 
+
+
+mun_sd <- mun_acs_calc %>% 
+  SharedData$new()
+
+p <- mun_sd %>% 
   ggplot(aes(poverty_pct, total_cases_per_cap * 1e5)) +
   geom_point(
     aes(
@@ -255,7 +260,7 @@ p <- mun_acs_calc %>%
 
 ggplotly_config(p)
 
-p <- mun_acs_calc %>%
+p <- mun_sd %>%
   ggplot(aes(crowded_pct, total_cases_per_cap)) +
   geom_point(aes(
     size = log10(total_pop),
