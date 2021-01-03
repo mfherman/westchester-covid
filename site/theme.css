@@ -136,9 +136,18 @@ d-article h3 {
   flex: 60%;
 }
 
-@media (max-width: 1000px) {
-  .index-row, .scatter {
+@media only screen and (max-width: 1000px) {
+  .index-row {
     flex-direction: column !important;
+  }
+  .scatter-wide {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .scatter-long {
+    display: none !important;
   }
 }
 

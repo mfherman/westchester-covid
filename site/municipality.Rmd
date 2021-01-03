@@ -228,7 +228,7 @@ ggplotly_config(p) %>%
 
 <br>
 
-```{r, layout="l-page", out.height="400px", eval=F}
+```{r}
 mun_acs_calc <- mun_acs %>% 
   left_join(mun_recent, by = "municipality") %>% 
   mutate(total_cases_per_cap = total_cases / total_pop)
@@ -237,14 +237,14 @@ mun_sd <- mun_acs_calc %>%
   SharedData$new()
 
 p <- mun_sd %>% 
-  ggplot(aes(poverty_pct, total_cases_per_cap * 1e3)) +
+  ggplot(aes(poverty_pct, total_cases_per_cap)) +
   geom_point(
     aes(
       size = total_pop,
       text = paste0(
         "<b>", municipality, "</b><br>",
         "Families below 200% poverty line: ", percent(poverty_pct, 1), "<br>",
-        "Total cases per 1k: ", comma(total_cases_per_cap, 0.1)
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
         )
       ),
     shape = 21,
@@ -252,29 +252,28 @@ p <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 20) + 
+  expand_limits(x = 0, y = 0.02) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_comma(1), breaks = c(20, 40, 60, 80, 100)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Families below 200% of poverty line",
-    y = "Total cases per 100k"
+    y = "Total population with positive test"
   ) +
   theme_minimal() +
   theme(axis.title.x = element_text(size = 14))
 
-p_plotly <- ggplotly_config(p) %>% 
-  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+p_plotly <- ggplotly_config(p)
 
 p2 <- mun_sd %>%
-  ggplot(aes(crowded_pct, total_cases_per_cap * 1e3)) +
+  ggplot(aes(crowded_pct, total_cases_per_cap)) +
   geom_point(
     aes(
       size = total_pop,
       text = paste0(
         "<b>", municipality, "</b><br>",
         "Overcrowded households: ", percent(crowded_pct, 1), "<br>",
-        "Total cases per 1k: ", comma(total_cases_per_cap * 1e3, 0.1)
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
         )
       ),
     shape = 21,
@@ -282,29 +281,28 @@ p2 <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 20) + 
+  expand_limits(x = 0, y = 0.02) + 
   scale_x_continuous(label = label_percent(1), breaks = c(0, 0.05, 0.1)) +
-  scale_y_continuous(label = label_comma(1), breaks = c(20, 40, 60, 80, 100)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Overcrowded households",
-    y = NULL
+    y = "Total population with positive test"
   ) +
   theme_minimal() +
   theme(axis.title.x = element_text(size = 14))
 
-p2_plotly <- ggplotly_config(p2) %>% 
-  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+p2_plotly <- ggplotly_config(p2)
 
 p3 <- mun_sd %>%
-  ggplot(aes(black_lat_pct, total_cases_per_cap * 1e3)) +
+  ggplot(aes(black_lat_pct, total_cases_per_cap)) +
   geom_point(
     aes(
       size = total_pop,
       text = paste0(
         "<b>", municipality, "</b><br>",
         "Black or Latino population: ", percent(black_lat_pct, 1), "<br>",
-        "Total cases per 1k: ", comma(total_cases_per_cap * 1e3, 0.1)
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
         )
       ),
     shape = 21,
@@ -312,34 +310,129 @@ p3 <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 20) + 
+  expand_limits(x = 0, y = 0.02) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_comma(1), breaks = c(20, 40, 60, 80, 100)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
     labs(
     x = "Black or Latino population",
-    y = NULL
+    y = "Total population with positive test"
   ) +
   theme_minimal() +
   theme(axis.title.x = element_text(size = 14))
 
-p3_plotly <- ggplotly_config(p3) %>% 
-  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+p3_plotly <- ggplotly_config(p3)
 
- 
-subplot(list(p_plotly, p2_plotly, p3_plotly), titleX = TRUE, shareY = TRUE) %>%
-  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+scatter <- list(p_plotly, p2_plotly, p3_plotly)
+```
 
-# browsable(div(
-#   class = "scatter l-page", style = "display: flex; flex-direction: row; max-width: 1072px",
-#   div(p_plotly, style = "flex: 34%;"),
-#   div(p2_plotly, style = "flex: 33%;"),
-#   div(p3_plotly, style = "flex: 33%;")
-# ))
+<div class="scatter-wide l-page">
+```{r, layout="l-page", out.height="400px", eval=F}
+subplot(scatter, titleX = TRUE, shareY = TRUE) %>%
+  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+```
+</div>
+
+```{r}
+p <- mun_acs_calc %>% 
+  ggplot(aes(poverty_pct, total_cases_per_cap)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        "<b>", municipality, "</b><br>",
+        "Families below 200% poverty line: ", percent(poverty_pct, 1), "<br>",
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
+        )
+      ),
+    shape = 21,
+    color = "steelblue",
+    fill = adjustcolor("steelblue", alpha.f = 0.3),
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0, y = 0.02) + 
+  scale_x_continuous(label = label_percent(1)) +
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_size(trans = "log10", range = c(1, 5)) +
+  labs(
+    x = "Families below 200% of poverty line",
+    y = "Total population with positive test"
+  ) +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14))
+
+p_plotly <- ggplotly_config(p)
+
+p2 <- mun_acs_calc %>%
+  ggplot(aes(crowded_pct, total_cases_per_cap)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        "<b>", municipality, "</b><br>",
+        "Overcrowded households: ", percent(crowded_pct, 1), "<br>",
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
+        )
+      ),
+    shape = 21,
+    color = "steelblue",
+    fill = adjustcolor("steelblue", alpha.f = 0.3),
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0, y = 0.02) + 
+  scale_x_continuous(label = label_percent(1), breaks = c(0, 0.05, 0.1)) +
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_size(trans = "log10", range = c(1, 5)) +
+  labs(
+    x = "Overcrowded households",
+    y = "Total population with positive test"
+  ) +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14))
+
+p2_plotly <- ggplotly_config(p2)
+
+p3 <- mun_acs_calc %>%
+  ggplot(aes(black_lat_pct, total_cases_per_cap)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        "<b>", municipality, "</b><br>",
+        "Black or Latino population: ", percent(black_lat_pct, 1), "<br>",
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
+        )
+      ),
+    shape = 21,
+    color = "steelblue",
+    fill = adjustcolor("steelblue", alpha.f = 0.3),
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0, y = 0.02) + 
+  scale_x_continuous(label = label_percent(1)) +
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_size(trans = "log10", range = c(1, 5)) +
+    labs(
+    x = "Black or Latino population",
+    y = "Total population with positive test"
+  ) +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14))
+
+p3_plotly <- ggplotly_config(p3)
 
 ```
 
+<div class="scatter-long">
+```{r eval=F}
+p_plotly
+```
 
+```{r eval=F}
+p2_plotly
+```
 
-
-
+```{r eval=F}
+p3_plotly
+```
+</div>
