@@ -10,7 +10,8 @@ variables <- c(
   paste0("B01001_0", c(20:25, 44:49)),
   paste0("B25014_0", str_pad(c(1, 5:7, 11:13), 2, "left", "0")),
   paste0("B17026_0", str_pad(1:9, 2, "left", "0")),
-  paste0("B03002_0", str_pad(c(4, 12), 2, "left", "0"))
+  paste0("B03002_0", str_pad(c(4, 12), 2, "left", "0")),
+  paste0("B15003_0", str_pad(1:18, 2, "left", "0"))
   )
   
 tract_acs <- get_acs(
@@ -36,18 +37,25 @@ tract_acs_calc <- tract_acs %>%
     poverty_d = B17026_001E,
     poverty   = B17026_002E + B17026_003E + B17026_004E + B17026_005E + 
                 B17026_006E + B17026_007E + B17026_008E + B17026_009E,
-    black_lat = B03002_004E + B03002_012E
-  )
+    black_lat = B03002_004E + B03002_012E,
+    educ_d    = B15003_001E,
+    hs_less   = B15003_002E + B15003_003E + B15003_004E + B15003_005E +
+                B15003_006E + B15003_007E + B15003_008E + B15003_009E +
+                B15003_010E + B15003_011E + B15003_012E + B15003_013E +
+                B15003_014E + B15003_015E + B15003_016E + B15003_017E +
+                B15003_018E
+       )
 
 mun_acs <- tract_acs_calc %>% 
   left_join(tract_mun, by = "GEOID") %>% 
   group_by(municipality) %>% 
   summarize(across(where(is.numeric), sum), .groups = "drop") %>% 
   mutate(
-    over_65_pct = over_65 / total_pop,
-    crowded_pct = crowded / crowded_d,
-    poverty_pct = poverty / poverty_d,
-    black_lat_pct = black_lat / total_pop
+    over_65_pct   = over_65 / total_pop,
+    crowded_pct   = crowded / crowded_d,
+    poverty_pct   = poverty / poverty_d,
+    black_lat_pct = black_lat / total_pop,
+    hs_less_pct   = hs_less / educ_d
   ) 
 
 write_csv(mun_acs, "data/mun-acs-estimates.csv")

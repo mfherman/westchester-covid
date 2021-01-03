@@ -154,6 +154,8 @@ mun_cases_poly %>%
 
 <br>
 
+## Municipal trends
+
 Westchester County does not currently publish historical data at the municipal-level, but I have reconstructed this data using maps [posted on the WestchesterGov Twitter account](https://twitter.com/westchestergov/status/1336045976981811206). The earliest maps that included the number of active cases by municipality were posted in early May. As such, the data I have *largely misses the first wave of the pandemic* from March and April 2020.
 
 <aside>
@@ -323,11 +325,58 @@ p3 <- mun_sd %>%
 
 p3_plotly <- ggplotly_config(p3)
 
+p4 <- mun_sd %>%
+  ggplot(aes(hs_less_pct, total_cases_per_cap)) +
+  geom_point(
+    aes(
+      size = total_pop,
+      text = paste0(
+        "<b>", municipality, "</b><br>",
+        "Black or Latino population: ", percent(hs_less_pct, 1), "<br>",
+        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
+        )
+      ),
+    shape = 21,
+    color = "steelblue",
+    fill = adjustcolor("steelblue", alpha.f = 0.3),
+    alpha = 0.9
+    ) +
+  expand_limits(x = 0, y = 0.02) + 
+  scale_x_continuous(label = label_percent(1)) +
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_size(trans = "log10", range = c(1, 5)) +
+    labs(
+    x = "Black or Latino population",
+    y = "Total population with positive test"
+  ) +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 14))
+
+p4_plotly <- ggplotly_config(p4)
+
 scatter <- list(p_plotly, p2_plotly, p3_plotly)
 ```
 
+## Socioeconomic factors associated with Covid-19 case counts 
+
+In the same way that the [death rate from Covid-19 is higher for Black and Latino people](county.html#racial-disparities) in Westchester County, the total number of cases in a community is also [correlated with socioeconomic characteristics](https://www.cdc.gov/coronavirus/2019-ncov/community/health-equity/race-ethnicity.html). The risk of being infected with the novel coronavirus is higher for people of color due to factors such as systemic discrimination and racism, disproportionate representation in "essential" occupations, overcrowded and multigenerational households, and educational and income gaps.
+
+The scatterplots below show the relationship between the total cases per capita in a municipality (through the pandemic) and three selected characteristics of each municipality: poverty, overcrowding, Black or Latino population. Each circle represents one of the 43 Westchester municipalities. Circles in the upper right hand corner of each plot represent municipalities with high case rates and high levels of each socioeconomic variable. Municipalities with low case rate and low levels of each socioeconomic factor are in the bottom left.
+
+<aside>
+[See here](about.html#american-community-survey) for more information on how each of the socioeconomic variables is calculated.
+<br><br>
+The size of each circle is based on the total population of each municipality.
+</aside>
+
+There is a strong positive correlation between each of the variables and the number of cases per capita. This suggests that the national trends of disproportionate impacts of the pandemic on disadvantaged communities also exists in Westchester County.
+
+<aside>
+Hover over a circle to see which municipality it represents.
+</aside>
+
 <div class="scatter-wide l-page">
-```{r, layout="l-page", out.height="400px", eval=F}
+```{r, layout="l-page", out.height="400px", eval=T}
 subplot(scatter, titleX = TRUE, shareY = TRUE) %>%
   highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
 ```
@@ -420,19 +469,18 @@ p3 <- mun_acs_calc %>%
   theme(axis.title.x = element_text(size = 14))
 
 p3_plotly <- ggplotly_config(p3)
-
 ```
 
 <div class="scatter-long">
-```{r eval=F}
+```{r eval=T}
 p_plotly
 ```
 
-```{r eval=F}
+```{r eval=T}
 p2_plotly
 ```
 
-```{r eval=F}
+```{r eval=T}
 p3_plotly
 ```
 </div>
