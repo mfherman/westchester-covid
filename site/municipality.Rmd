@@ -228,7 +228,7 @@ ggplotly_config(p) %>%
 
 <br>
 
-```{r, layout="l-page", out.height="400px"}
+```{r, layout="l-page", out.height="400px", eval=F}
 mun_acs_calc <- mun_acs %>% 
   left_join(mun_recent, by = "municipality") %>% 
   mutate(total_cases_per_cap = total_cases / total_pop)
@@ -327,15 +327,15 @@ p3_plotly <- ggplotly_config(p3) %>%
   highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
 
  
-# subplot(list(p_plotly, p2_plotly, p3_plotly), titleX = TRUE, shareY = TRUE) %>% 
-#   highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+subplot(list(p_plotly, p2_plotly, p3_plotly), titleX = TRUE, shareY = TRUE) %>%
+  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
 
-browsable(div(
-  class = "scatter l-page", style = "display: flex; flex-direction: row; max-width: 1072px",
-  div(p_plotly, style = "flex: 34%;"),
-  div(p2_plotly, style = "flex: 33%;"),
-  div(p3_plotly, style = "flex: 33%;")
-))
+# browsable(div(
+#   class = "scatter l-page", style = "display: flex; flex-direction: row; max-width: 1072px",
+#   div(p_plotly, style = "flex: 34%;"),
+#   div(p2_plotly, style = "flex: 33%;"),
+#   div(p3_plotly, style = "flex: 33%;")
+# ))
 
 ```
 
