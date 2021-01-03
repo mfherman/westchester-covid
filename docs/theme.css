@@ -137,8 +137,8 @@ d-article h3 {
 }
 
 @media (max-width: 1000px) {
-  .index-row {
-    flex-direction: column;
+  .index-row, .scatter {
+    flex-direction: column !important;
   }
 }
 

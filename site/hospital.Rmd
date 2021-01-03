@@ -73,7 +73,7 @@ p <- to_plot %>%
   geom_point(
     aes(
       text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
         "Covid-19 patients: ", comma(covid_patients, 1)
         )
       ),
@@ -119,7 +119,7 @@ p <- to_plot %>%
   geom_point(
     aes(
       text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
         "Covid-19 patients: ", percent(covid_pct, 1)
         )
       ),
@@ -165,7 +165,7 @@ p <- to_plot %>%
   geom_point(
     aes(
       text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
         "Bed occupancy: ", percent(bed_pct, 1), "<br>",
         "Beds occupied: ", comma(bed_occupied, 1), "<br>",
         "Bed capacity: ", comma(bed_capacity, 1), "<br>"
@@ -213,7 +213,7 @@ p <- to_plot %>%
   geom_point(
     aes(
       text = paste0(
-        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(7), abbr = TRUE), "</b><br>",
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
         "ICU bed occupancy: ", percent(icu_pct, 1), "<br>",
         "ICU beds occupied: ", comma(icu_occupied, 1), "<br>",
         "ICU bed capacity: ", comma(icu_capacity, 1), "<br>"
@@ -277,7 +277,7 @@ to_map <- hosp_geo %>%
     pct_icu = icu_occupied / icu_capacity,
     label = paste0(
       "<b>", hospital_name, "</b></br>",
-      "Week ending ", month_day_year(year_week + days(7), abbr = TRUE), "<br><br>",
+      "Week ending ", month_day_year(year_week + days(6), abbr = TRUE), "<br><br>",
       "Bed occupancy: ", percent(bed_occupied / bed_capacity, 1), "<br>",
       "Beds free: ", comma(bed_free, 1), "</br>",   
       "Total beds: ", comma(bed_capacity, 1), "</br>",
