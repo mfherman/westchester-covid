@@ -27,7 +27,7 @@ navbar:
           href: county.html#racial-disparities
         - text: "Nursing homes"
           href: county.html#deaths-in-nursing-homes
-    - text: "Towns"
+    - text: "Municipalities"
       href: municipality.html
     - text: "Hospitals"
       href: hospital.html
