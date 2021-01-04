@@ -2215,10 +2215,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     .scatter-wide {
       display: none !important;
     }
+    .heat-desktop {
+      display: none !important;
+    }
   }
 
   @media only screen and (min-width: 1000px) {
     .scatter-long {
+      display: none !important;
+    }
+    .heat-mobile {
       display: none !important;
     }
   }
@@ -2330,7 +2336,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   #cases-slider {
     margin-left: 100px;
     margin-right: 100px;
-  }</style>
+  }
+
+  .scatter-wide label {
+    font-family: Roboto, sans-serif;
+    font-variant-caps: all-small-caps;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .selectize-control {
+    font-family: "IBM Plex Sans", sans-serif !important;
+    width: 300px;
+  }
+
+  </style>
   <style type="text/css">
   /* base style */
 
@@ -2621,11 +2641,20 @@ County
 <p>The number of beds in each nursing home comes from <a href="https://profiles.health.ny.gov/nursing_home/index">NYS Health Profiles</a>.</p>
 <p>Most recent data: <strong>Jan 2, 2021</strong> <br> Update frequency: <strong>Daily</strong> <br> Geographic aggregation: <strong>None (facility-level data, New York State)</strong> <br> Where it’s used: <strong>Deaths in nursing homes</strong></p>
 <p><br></p>
-<h3 id="american-community-survey"><a href="https://data.census.gov/cedsci/table?q=ACSDT1Y2019.B01003&amp;g=0500000US36119&amp;tid=ACSDT1Y2019.B01003&amp;hidePreview=true">American Community Survey</a></h3>
+<h3 id="american-community-survey"><a href="https://www.census.gov/programs-surveys/acs">American Community Survey</a></h3>
 <p><em>US Census Bureau</em></p>
-<p><strong>Total population</strong></p>
-<p>To calculate per capita rates of Covid-19, I use estimates of <strong>total population</strong> from the American Community Survey (table B01003). County per capita rates are calculated using 2019 1-year ACS estimates. Municipality rates are calculated using 2015 – 2019 5-year ACS estimates. <br> <br> <strong>Families below 200% of poverty line</strong> <br> <a href="https://censusreporter.org/data/table/?table=B17026&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B17026</a> <br> The percentage of families with a ratio of income to poverty level below 2. The US Census Bureau does not adjust the poverty line for the cost of living in a particular region. Given the high cost of living in Westchester County, I have used 200% of the poverty line when considering families in Westchester in poverty. The current <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-thresholds.html">poverty threshold</a> for a family of four (two adults, two related children under 18) is $25,926. Any family earning less than $51,852 in year is below 200% of the poverty line. <br> &lt;br <strong>Overcrowded households</strong>: <br> <a href="https://censusreporter.org/data/table/?table=B25014&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B25014</a> <br> There are a number of <a href="https://www.census.gov/programs-surveys/ahs/research/publications/Measuring_Overcrowding_in_Hsg.html">methods for measuring overcrowding in housing</a>. The simplest and most common methodology is to divide the number of people living in a housing unit by the number rooms in that housing unit. If the number of occupants per room exceeds 1, then that housing unit is considered overcrowded. The percentage of overcrowded households is the number of housing units with more than 1 occupant per room divided by the total number of occupied housing units. <br> <br> <strong>Black or Latino population</strong>: <br> <a href="https://censusreporter.org/data/table/?table=B03002&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B03002</a> <br> This measures the percentage of the total population that identifies as Hispanic or Latino of any race or non-Hispanic Black or African American. <br></p>
-<p>Where it’s used: <strong>Per capita case rates</strong></p>
+<p>The American Community Survey (ACS) is conducted by the US Census Bureau on an ongoing basis and is used to estimate demographic, social, economic, and other characteristics of people and households in the Unites States. Approximately 3.5 million households participate each year.</p>
+<p>ACS data is published at different levels of geographic aggregation including by state, county, census tract, and many other geographies. On this site, all county-level ACS data uses 2019 1-year estimates and all municipal-level data uses 2015 – 2019 5-year ACS estimates.</p>
+<p>In order to create municipal-level estimates, I aggregate data from all the census tracts that are contained within each municipality’s boundaries. Most Westchester municipalities are composed of complete census tracts, but for the small number of census tracts that cross municipal boundaries, I <a href="https://github.com/mfherman/westchester-covid/blob/master/R/data-raw/get-mun-poly.R#L25-L27">assign the tract to the municipality that contains the largest proportion</a> of the area of the tract.</p>
+<aside>
+Code to download ACS data and create the municipal-level estimates is <a href="https://github.com/mfherman/westchester-covid/blob/master/R/data-raw/get-mun-acs-estimates.R">available on GitHub</a>.
+</aside>
+<p><strong>Total population</strong> <br> <a href="https://censusreporter.org/data/table/?table=B01003&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B01003</a> <br> The total number of people living in a county or census tract. This is used to estimate per capita rates of Covid-19 prevalence. <br> <br> <strong>Families below 200% of poverty line</strong> <br> <a href="https://censusreporter.org/data/table/?table=B17026&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B17026</a> <br> The percentage of families with a ratio of income to poverty level below 2. The US Census Bureau does not adjust the poverty line for the cost of living in a particular region. Given the high cost of living in Westchester County, I have used 200% of the poverty line when considering families in Westchester in poverty. The current <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-thresholds.html">poverty threshold</a> for a family of four (two adults, two related children under 18) is $25,926. Any family earning less than $51,852 in year is below 200% of the poverty line. <br> <br> <strong>Overcrowded households</strong> <br> <a href="https://censusreporter.org/data/table/?table=B25014&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B25014</a> <br> There are a number of <a href="https://www.census.gov/programs-surveys/ahs/research/publications/Measuring_Overcrowding_in_Hsg.html">methods for measuring overcrowding in housing</a>. The simplest and most common methodology is to divide the number of people living in a housing unit by the number of rooms in that housing unit. If the number of occupants per room exceeds one, then that housing unit is considered overcrowded. The percentage of overcrowded households is the number of housing units with more than 1 occupant per room divided by the total number of occupied housing units.</p>
+<aside>
+All rooms, not just bedrooms are counted in this measure
+</aside>
+<p><br> <br> <strong>Black or Latino population</strong> <br> <a href="https://censusreporter.org/data/table/?table=B03002&amp;geo_ids=05000US36119&amp;primary_geo_id=05000US36119">Table B03002</a> <br> This measures the percentage of the total population that identifies as Hispanic or Latino of any race or non-Hispanic Black or African American. <br></p>
+<p>Where it’s used: <strong>Per capita cases and deaths; socioeconomic factors associated with Covid-19</strong></p>
 <h2 id="me">Me</h2>
 <p>This website was built and is maintained by me, <a href="http://mattherman.info">Matt Herman</a>. I live in Katonah, NY. Contact me at <a href="mailto:mfherman@gmail.com">mfherman@gmail.com</a> with comments, questions, or suggestions.</p>
 <h2 id="tools-etc.">Tools, etc.</h2>

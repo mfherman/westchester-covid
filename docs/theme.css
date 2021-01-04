@@ -143,10 +143,16 @@ d-article h3 {
   .scatter-wide {
     display: none !important;
   }
+  .heat-desktop {
+    display: none !important;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
   .scatter-long {
+    display: none !important;
+  }
+  .heat-mobile {
     display: none !important;
   }
 }
@@ -259,3 +265,17 @@ th.t-left, th.t-right {
   margin-left: 100px;
   margin-right: 100px;
 }
+
+.scatter-wide label {
+  font-family: Roboto, sans-serif;
+  font-variant-caps: all-small-caps;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.selectize-control {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  width: 300px;
+}
+
+

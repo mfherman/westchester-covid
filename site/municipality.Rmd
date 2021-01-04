@@ -168,6 +168,7 @@ The chart below shows the severity of the pandemic in each municipality by plott
 For days with missing data, I have imputed the case numbers using linear interpolation.
 </aside>
 
+<div class="l-page heat-desktop"> 
 ```{r mun_heat_map, layout="l-page", out.height="700px"}
 all_dates <- seq(min(mun_cases$date), max(mun_cases$date), by = "1 day")
 all_mun <- mun_bound$municipality
@@ -207,7 +208,7 @@ p <- all_days_mun %>%
     breaks = "1 month",
     expand = expansion(mult = c(0.01, 0))
     ) +
-  labs(x = NULL, y = NULL, title = "Average daily cases per 100k (beginning May 5)") +
+  labs(x = NULL, y = NULL, title = "Average daily cases per 100k (beginning May 2020)") +
   theme_minimal() +
   theme(
     legend.position = "none",
@@ -227,6 +228,55 @@ ggplotly_config(p) %>%
       )
     )
 ```
+</div>
+
+<div class="l-page heat-mobile"> 
+```{r mun_heat_map_mobile, layout="l-page", out.height="700px"}
+p <- all_days_mun %>%  
+  mutate(municipality = fct_reorder(municipality, active_per_cap_est, last)) %>% 
+  ggplot(aes(date, municipality, fill = active_per_cap_est)) +
+  geom_tile(
+    aes(
+      text = str_replace_all(paste0(
+        "<b>", municipality, " - ", month_day_year(date, abbr = TRUE), "</b><br>",
+        "Avg. daily cases: ", comma(active_cases_est / 14, 0.1), "<br>",
+        "Per 100k: ", comma(active_per_cap_est / 14 * 1e5, 0.1)
+        ), "NA", "missing")
+      )
+    ) +
+  scale_fill_distiller(
+    palette = "YlOrRd",
+    direction = 1,
+    na.value = "gray",
+    breaks = c(0, 150)
+    ) +
+  scale_x_date(
+    labels = label_date_short(),
+    breaks = "1 month",
+    expand = expansion(mult = c(0.01, 0)),
+    limits = c(as.Date("2020-10-01"), NA)
+    ) +
+  labs(x = NULL, y = NULL, title = "Avg daily cases per 100k (beginning Oct 2020)") +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+    )
+
+ggplotly_config(p) %>% 
+  layout(
+    annotations = list(
+      x = 1, y = -0.075,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#westchester-county-covid-19-dashboard" target="_self">Westchester County DOH</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+</div>
 
 <br>
 
@@ -235,8 +285,11 @@ mun_acs_calc <- mun_acs %>%
   left_join(mun_recent, by = "municipality") %>% 
   mutate(total_cases_per_cap = total_cases / total_pop)
 
-mun_sd <- mun_acs_calc %>% 
-  SharedData$new()
+
+mun_sd <- highlight_key(mun_acs_calc, ~municipality, group = "Municpality")
+
+# mun_sd <- mun_acs_calc %>% 
+#   SharedData$new()
 
 p <- mun_sd %>% 
   ggplot(aes(poverty_pct, total_cases_per_cap)) +
@@ -357,7 +410,7 @@ p4_plotly <- ggplotly_config(p4)
 scatter <- list(p_plotly, p2_plotly, p3_plotly)
 ```
 
-## Socioeconomic factors associated with Covid-19 case counts 
+## Socioeconomic factors associated with Covid-19 prevalance
 
 In the same way that the [death rate from Covid-19 is higher for Black and Latino people](county.html#racial-disparities) in Westchester County, the total number of cases in a community is also [correlated with socioeconomic characteristics](https://www.cdc.gov/coronavirus/2019-ncov/community/health-equity/race-ethnicity.html). The risk of being infected with the novel coronavirus is higher for people of color due to factors such as systemic discrimination and racism, disproportionate representation in "essential" occupations, overcrowded and multigenerational households, and educational and income gaps.
 
@@ -378,7 +431,12 @@ Hover over a circle to see which municipality it represents.
 <div class="scatter-wide l-page">
 ```{r, layout="l-page", out.height="400px", eval=T}
 subplot(scatter, titleX = TRUE, shareY = TRUE) %>%
-  highlight(on = "plotly_hover", off = "plotly_doubleclick", opacityDim = 0.5)
+  highlight(
+    on = "plotly_hover",
+    off = "plotly_doubleclick",
+    opacityDim = 0.5,
+    selectize = TRUE
+    )
 ```
 </div>
 
