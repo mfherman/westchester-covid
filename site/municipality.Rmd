@@ -220,10 +220,7 @@ p <- all_days_mun %>%
 
 ggplotly(p, tooltip = "text") %>%
   layout(
-    xaxis = list(
-      type = "date",
-      tickformat = "%d %B"
-      ),
+    #xaxis = list(fixedrange = TRUE),
     #yaxis = list(fixedrange = TRUE),
     font = list(family = "IBM Plex Sans Condensed"),
     hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"), align = "left"),
@@ -237,8 +234,6 @@ ggplotly(p, tooltip = "text") %>%
       )
     ) %>%
     plotly::config(displayModeBar = TRUE)
-
-ggplotly_config
 ```
 </div>
 
