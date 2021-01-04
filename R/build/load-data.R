@@ -74,10 +74,10 @@ nh_clean <- nh_geo %>%
 # manually input from https://covid19tracker.health.ny.gov/views/NYS-COVID19-Tracker/NYSDOHCOVID-19Tracker-Fatalities?%3Aembed=yes&%3Atoolbar=no&%3Atabs=no
 death_by_race <- tribble(
   ~"race",     ~"pop",  ~"deaths", ~"age_adjust", ~"date",
-  "Hispanic",  243261,   279,      160.7,        as.Date("2020-12-29"),
-  "Black",     138566,   255,      158.5,        NA,
-  "White",     520628,   741,      75.2,         NA,
-  "Asian",     63448,    34,       54.5,         NA,
+  "Latino",    243261,   280,      161.1,        as.Date("2021-01-02"),
+  "Black",     138566,   256,      159.1,        NA,
+  "White",     520628,   752,      76.4,         NA,
+  "Asian",     63448,    36,       54.5,         NA,
   "Other",     1709,     24,       NA,           NA
   ) %>%    
   mutate(

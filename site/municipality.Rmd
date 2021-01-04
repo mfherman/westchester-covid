@@ -285,6 +285,10 @@ mun_acs_calc <- mun_acs %>%
   left_join(mun_recent, by = "municipality") %>% 
   mutate(total_cases_per_cap = total_cases / total_pop)
 
+cors <- mun_acs_calc %>% 
+  select(total_cases_per_cap, poverty_pct, crowded_pct, black_lat_pct) %>% 
+  cor() %>%
+  as.data.frame()
 
 mun_sd <- highlight_key(mun_acs_calc, ~municipality, group = "Municpality")
 
@@ -412,9 +416,9 @@ scatter <- list(p_plotly, p2_plotly, p3_plotly)
 
 ## Socioeconomic factors associated with Covid-19 prevalance
 
-In the same way that the [death rate from Covid-19 is higher for Black and Latino people](county.html#racial-disparities) in Westchester County, the total number of cases in a community is also [correlated with socioeconomic characteristics](https://www.cdc.gov/coronavirus/2019-ncov/community/health-equity/race-ethnicity.html). The risk of being infected with the novel coronavirus is higher for people of color due to factors such as systemic discrimination and racism, disproportionate representation in "essential" occupations, overcrowded and multigenerational households, and educational and income gaps.
+In the same way that the [death rate from Covid-19 is Westchester County is higher for Black and Latino people](county.html#racial-disparities) than for White people, the total number of cases in the community is also [correlated with socioeconomic characteristics](https://www.cdc.gov/coronavirus/2019-ncov/community/health-equity/race-ethnicity.html). The risk of being infected with the novel coronavirus is higher for people of color due to factors including disproportionate representation in "essential" occupations, overcrowded and multigenerational households, and systemic discrimination and racism resulting in disparities in education and income as well as reduced access to high quality healthcare.
 
-The scatterplots below show the relationship between the total cases per capita in a municipality (through the pandemic) and three selected characteristics of each municipality: poverty, overcrowding, Black or Latino population. Each circle represents one of the 43 Westchester municipalities. Circles in the upper right hand corner of each plot represent municipalities with high case rates and high levels of each socioeconomic variable. Municipalities with low case rate and low levels of each socioeconomic factor are in the bottom left.
+The scatterplots below illustrate the relationship between the total cases per capita in each municipality and three selected characteristics: poverty, overcrowding, and Black or Latino population. Each circle represents one of the 43 Westchester municipalities. Circles in the upper right-hand corner of each plot represent municipalities with high case rates and high levels of each socioeconomic variable. Municipalities with low case rates and low levels of each socioeconomic factor are in the bottom left.
 
 <aside>
 [See here](about.html#american-community-survey) for more information on how each of the socioeconomic variables is calculated.
@@ -434,7 +438,7 @@ subplot(scatter, titleX = TRUE, shareY = TRUE) %>%
   highlight(
     on = "plotly_hover",
     off = "plotly_doubleclick",
-    opacityDim = 0.5,
+    opacityDim = 0.25,
     selectize = TRUE
     )
 ```
@@ -519,7 +523,7 @@ p3 <- mun_acs_calc %>%
   scale_x_continuous(label = label_percent(1)) +
   scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
-    labs(
+  labs(
     x = "Black or Latino population",
     y = "Total population with positive test"
   ) +
