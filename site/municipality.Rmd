@@ -118,14 +118,15 @@ leaflet(to_map) %>%
 mun_cases_poly %>% 
   st_drop_geometry() %>% 
   arrange(desc(new_cases_per_cap)) %>% 
-  mutate(total_cases_per_cap = pretty_frac(total_cases_per_cap)) %>% 
+  mutate(per_cap_frac = pretty_frac(total_cases_per_cap)) %>% 
   select(
     `Municipality` = municipality,
     `Avg daily cases per 100k` = new_cases_per_cap,
     `Avg daily cases` = new_cases_day_avg,
     `Total cases` = total_cases,
-    `Share of pop` = total_cases_per_cap,
-    `Total pop` = total_pop
+    `Share of pop` = per_cap_frac,
+    `Total pop` = total_pop,
+    total_cases_per_cap
     ) %>% 
   datatable(
     class = "compact hover",
@@ -140,7 +141,8 @@ mun_cases_poly %>%
       scrollY = 250,
       scroller = TRUE,
       columnDefs = list(
-        list(visible = FALSE, targets = 0),
+        list(orderData = 7, targets = 5),
+        list(visible = FALSE, targets = c(0, 7)),
         list(className = "dt-head-left", targets = 1),
         list(className = "dt-center", targets = 5)
         )
@@ -216,8 +218,15 @@ p <- all_days_mun %>%
     plot.title = element_text(face = "bold", size = 20)
     )
 
-ggplotly_config(p) %>% 
+ggplotly(p, tooltip = "text") %>%
   layout(
+    xaxis = list(
+      type = "date",
+      tickformat = "%d %B"
+      ),
+    #yaxis = list(fixedrange = TRUE),
+    font = list(family = "IBM Plex Sans Condensed"),
+    hoverlabel = list(font = list(family = "IBM Plex Sans Condensed"), align = "left"),
     annotations = list(
       x = 1, y = -0.075,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#westchester-county-covid-19-dashboard" target="_self">Westchester County DOH</a>', 
@@ -226,7 +235,10 @@ ggplotly_config(p) %>%
       xanchor = "right", yanchor = "auto",
       xshift = 0, yshift = 0
       )
-    )
+    ) %>%
+    plotly::config(displayModeBar = TRUE)
+
+ggplotly_config
 ```
 </div>
 

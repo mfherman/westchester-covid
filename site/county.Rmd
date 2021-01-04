@@ -361,14 +361,15 @@ leaflet(to_map) %>%
 to_map %>% 
   st_drop_geometry() %>% 
   arrange(desc(new_cases_per_cap)) %>% 
-  mutate(tot_cases_per_cap = pretty_frac(tot_cases_per_cap)) %>% 
+  mutate(per_cap_frac = pretty_frac(tot_cases_per_cap)) %>% 
   select(
     `County` = county,
     `Avg daily cases per 100k` = new_cases_per_cap,
     `Avg daily cases` = new_cases_avg_7,
     `Total cases` = total_cases,
-    `Share of pop` = tot_cases_per_cap,
-    `Total pop` = total_pop.x
+    `Share of pop` = per_cap_frac,
+    `Total pop` = total_pop.x,
+    tot_cases_per_cap
     ) %>% 
   datatable(
     class = "compact hover",
@@ -383,7 +384,8 @@ to_map %>%
       scrollY = 250,
       scroller = TRUE,
       columnDefs = list(
-        list(visible = FALSE, targets = 0),
+        list(orderData = 7, targets = 5),
+        list(visible = FALSE, targets = c(0, 7)),
         list(className = "dt-head-left", targets = 1),
         list(className = "dt-center", targets = 5)
         )
