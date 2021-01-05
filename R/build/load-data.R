@@ -9,6 +9,7 @@ hosp_cap     <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = c
 mun_cases    <- read_csv(here("data/mun-cases.csv"), col_types = cols())
 nh_deaths    <- read_csv(here("data/nursing-home-deaths.csv"), col_types = cols())
 mun_acs      <- read_csv(here("data/mun-acs-estimates.csv"), col_types = cols())
+cdc_vac      <- read_csv(here("data/state-vac-cdc.csv"), col_types = cols())
 school_cases <- read_csv(
   here("data/school-cases.csv"),
   col_types = cols(

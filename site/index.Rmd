@@ -223,7 +223,7 @@ to_map %>%
 Cases, deaths, and tests; cases in schools; racial disparities; cluster zones; nursing home deaths
 
 <span style = "font-size:1.7rem;">
-[Westchester towns &#10230;](municipality.html)
+[Westchester municipalities &#10230;](municipality.html)
 </span></br>
 Recent cases in the 43 municipalities of Westchester County
 
