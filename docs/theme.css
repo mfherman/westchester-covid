@@ -186,7 +186,7 @@ d-article h3 {
 
 @media only screen and (max-width: 650px) {
   .plotly .gtitle {
-    font-size: 18px !important;
+    font-size: 15px !important;
   }
 }
 
