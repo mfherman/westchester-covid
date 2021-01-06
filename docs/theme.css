@@ -146,6 +146,9 @@ d-article h3 {
   .heat-desktop {
     display: none !important;
   }
+  .img-desktop {
+    display: none !important;
+  }  
 }
 
 @media only screen and (min-width: 1000px) {
@@ -153,6 +156,9 @@ d-article h3 {
     display: none !important;
   }
   .heat-mobile {
+    display: none !important;
+  }
+  .img-mobile {
     display: none !important;
   }
 }

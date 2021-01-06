@@ -217,23 +217,23 @@ to_map %>%
 </br>
 </br>
     <div style = "font-family:'IBM Plex Sans', sans-serif;">
-<span style = "font-size:1.7rem;">
+<span style = "font-size:1.6rem;">
 [County and metro area &#10230;](county.html)
 </span></br>
 Cases, deaths, and tests; cases in schools; racial disparities; cluster zones; nursing home deaths
 
-<span style = "font-size:1.7rem;">
+<span style = "font-size:1.6rem;">
 [Westchester municipalities &#10230;](municipality.html)
 </span></br>
 Recent cases in the 43 municipalities of Westchester County
 
-<span style = "font-size:1.7rem;">
+<span style = "font-size:1.6rem;">
 [Hospital capacity &#10230;](hospital.html)
 </span>
 </br>
 Available beds and Covid-19 patients in metro area hospitals
 
-<span style = "font-size:1.7rem;">
+<span style = "font-size:1.6rem;">
 [About the site &#10230;](about.html)
 </span></br>
 Data sources, etc.

@@ -399,8 +399,8 @@ to_map %>%
 
 The timing of outbreaks in counties in the New York metro area has varied. Some counties such as Rockland, Westchester, and Nassau had severe first waves in spring 2020. By contrast, other counties such as New Haven, Fairfield, Litchfield, had relatively mild first waves in the spring and more severe second waves in fall 2020. The chart below shows the number of cases per 100,000 residents from March 2020 through the present in each county.
 
-```{r small_mult_cases_per_cap, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
-nyt_cases %>% 
+```{r small_mult_cases_per_cap}
+p <- nyt_cases %>% 
   mutate(
     county = fct_reorder(county, -new_cases_per_cap, mean, na.rm = TRUE),
     county = fct_relevel(county, "Westchester")
@@ -412,7 +412,6 @@ nyt_cases %>%
     unhighlighted_params = list(size = 0.2)
     ) +
   scale_x_date(expand = expansion(add = c(0, 2))) +
-  facet_wrap(vars(county), nrow = 3, strip.position = "bottom") +
   labs(
     title = "New cases per 100,000 residents",
     subtitle = str_wrap("Trend lines for all counties in the metro area are drawn in gray to compare with trend of each county drawn in blue", 65),
@@ -432,6 +431,19 @@ nyt_cases %>%
     #panel.border = element_rect(color = "gray95", fill = NA, size = 0.5)
     )
 ```
+<div class = "l-page img-desktop">
+```{r layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
+p +
+  facet_wrap(vars(county), nrow = 3, strip.position = "bottom")
+```
+</div>
+
+<div class = "img-mobile">
+```{r, dpi = 300, dev="svg", fig.height=12}
+p +
+  facet_wrap(vars(county), nrow = 6, strip.position = "bottom")
+```
+</div>
 
 <br>
 
