@@ -318,7 +318,8 @@ to_map <- county_bound %>%
       "<b>", county, "</b><br>",
       "Avg. daily cases: ", comma(new_cases_avg_7, 1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
-      )
+      ),
+    per_cap_map = if_else(new_cases_per_cap > 125, 125, new_cases_per_cap)
     )
 
 county_pal <- colorNumeric(
@@ -332,7 +333,7 @@ leaflet(to_map) %>%
     group = "Cases per 100k",
     weight = 1.5,
     color = "white",
-    fillColor = ~county_pal(new_cases_per_cap),
+    fillColor = ~county_pal(per_cap_map),
     fillOpacity = 0.8,
     label = lapply(to_map$label, htmltools::HTML),
     highlight = highlightOptions(
@@ -432,14 +433,14 @@ p <- nyt_cases %>%
     )
 ```
 <div class = "l-page img-desktop">
-```{r layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
+```{r county-trend-sm-mult-wide, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
 p +
   facet_wrap(vars(county), nrow = 3, strip.position = "bottom")
 ```
 </div>
 
 <div class = "img-mobile">
-```{r, dpi = 300, dev="svg", fig.height=12}
+```{r county-trend-sm-mult-long, dpi = 300, dev="svg", fig.height=12}
 p +
   facet_wrap(vars(county), nrow = 6, strip.position = "bottom")
 ```

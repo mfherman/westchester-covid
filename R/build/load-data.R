@@ -39,9 +39,10 @@ nys_cases <- read_csv(here("data/county-cases-tests-nys.csv"), col_types = cols(
 nyt_cases <- read_csv(here("data/county-cases-deaths-nyt.csv"), col_types = cols()) %>% 
   group_by(county, state) %>% 
   mutate(
+    new_cases = if_else(state == "New Jersey" & date == as.Date("2021-01-04"), NA_real_, new_cases),
     across(
       where(is.numeric), 
-      list("avg_7" = ~ slide_dbl(.x, mean, .before = 6, .complete = TRUE))
+      list("avg_7" = ~ slide_dbl(.x, mean, na.rm = TRUE, .before = 6, .complete = TRUE))
       )
     ) %>% 
   ungroup() %>% 
