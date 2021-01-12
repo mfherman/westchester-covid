@@ -184,12 +184,13 @@ all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>%
   mutate(
     active_cases_est = na.approx(active_cases),
     active_per_cap_est = active_cases_est / total_pop,
+    active_per_cap_limit = if_else(active_per_cap_est / 14 * 1e5 > 125, 125, active_per_cap_est / 14 * 1e5)
     ) %>% 
   ungroup()
 
 p <- all_days_mun %>%  
   mutate(municipality = fct_reorder(municipality, active_per_cap_est, last)) %>% 
-  ggplot(aes(as.numeric(as.POSIXct(date)) * 1000, municipality, fill = active_per_cap_est)) + #https://stackoverflow.com/questions/38919395/plotly-r-cant-make-custom-xaxis-date-ranges-to-works
+  ggplot(aes(as.numeric(as.POSIXct(date)) * 1000, municipality, fill = active_per_cap_limit)) + #https://stackoverflow.com/questions/38919395/plotly-r-cant-make-custom-xaxis-date-ranges-to-works
   geom_tile(
     aes(
       text = str_replace_all(paste0(
@@ -201,9 +202,7 @@ p <- all_days_mun %>%
     ) +
   scale_fill_distiller(
     palette = "YlOrRd",
-    direction = 1,
-    na.value = "gray",
-    breaks = c(0, 150)
+    direction = 1
     ) +
   scale_x_continuous(expand = expansion(mult = c(0.01, 0))) +
   labs(x = NULL, y = NULL, title = "Average daily cases per 100k (beginning May 2020)") +
@@ -259,8 +258,6 @@ p <- all_days_mun %>%
   scale_fill_distiller(
     palette = "YlOrRd",
     direction = 1,
-    na.value = "gray",
-    breaks = c(0, 150)
     ) +
   scale_x_date(
     labels = label_date_short(),
@@ -273,7 +270,7 @@ p <- all_days_mun %>%
   theme(
     legend.position = "none",
     panel.grid = element_blank(),
-    plot.title = element_text(face = "bold", size = 20)
+    plot.title = element_text(face = "bold", size = 16)
     )
 
 ggplotly_config(p) %>% 
