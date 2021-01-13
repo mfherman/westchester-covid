@@ -5521,11 +5521,11 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2021-01-10,Fairfield,Connecticut,09001,61285,1779,0,0
 2021-01-10,Litchfield,Connecticut,09005,8239,239,0,0
 2021-01-10,New Haven,Connecticut,09009,52278,1627,0,0
-2021-01-10,Bergen,New Jersey,34003,56890,2376,530,0
-2021-01-10,Essex,New Jersey,34013,55454,2429,457,0
+2021-01-10,Bergen,New Jersey,34003,56890,2378,530,2
+2021-01-10,Essex,New Jersey,34013,55454,2438,457,9
 2021-01-10,Hudson,New Jersey,34017,52036,1750,372,0
 2021-01-10,Morris,New Jersey,34027,26149,994,274,0
-2021-01-10,Passaic,New Jersey,34031,45642,1510,266,0
+2021-01-10,Passaic,New Jersey,34031,45642,1514,266,4
 2021-01-10,Sussex,New Jersey,34037,6027,228,135,0
 2021-01-10,Dutchess,New York,36027,14471,273,259,3
 2021-01-10,Nassau,New York,36059,102584,2482,1403,12
@@ -5539,12 +5539,12 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2021-01-11,Fairfield,Connecticut,09001,63073,1797,1788,18
 2021-01-11,Litchfield,Connecticut,09005,8496,239,257,0
 2021-01-11,New Haven,Connecticut,09009,53924,1648,1646,21
-2021-01-11,Bergen,New Jersey,34003,57259,2376,369,0
-2021-01-11,Essex,New Jersey,34013,55789,2429,335,0
-2021-01-11,Hudson,New Jersey,34017,52546,1750,510,0
-2021-01-11,Morris,New Jersey,34027,26488,994,339,0
-2021-01-11,Passaic,New Jersey,34031,45892,1510,250,0
-2021-01-11,Sussex,New Jersey,34037,6108,228,81,0
+2021-01-11,Bergen,New Jersey,34003,57259,2380,369,2
+2021-01-11,Essex,New Jersey,34013,55789,2443,335,5
+2021-01-11,Hudson,New Jersey,34017,52546,1753,510,3
+2021-01-11,Morris,New Jersey,34027,26488,998,339,4
+2021-01-11,Passaic,New Jersey,34031,45892,1517,250,3
+2021-01-11,Sussex,New Jersey,34037,6108,229,81,1
 2021-01-11,Dutchess,New York,36027,14757,275,286,2
 2021-01-11,Nassau,New York,36059,104078,2489,1494,7
 2021-01-11,New York City,New York,NA,493306,25635,5755,73
@@ -5554,3 +5554,21 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2021-01-11,Suffolk,New York,36103,115489,2466,1546,13
 2021-01-11,Ulster,New York,36111,6927,170,92,3
 2021-01-11,Westchester,New York,36119,78533,1736,803,6
+2021-01-12,Fairfield,Connecticut,09001,64066,1806,993,9
+2021-01-12,Litchfield,Connecticut,09005,8631,241,135,2
+2021-01-12,New Haven,Connecticut,09009,54757,1653,833,5
+2021-01-12,Bergen,New Jersey,34003,57609,2383,350,3
+2021-01-12,Essex,New Jersey,34013,56168,2450,379,7
+2021-01-12,Hudson,New Jersey,34017,52954,1761,408,8
+2021-01-12,Morris,New Jersey,34027,26691,1003,203,5
+2021-01-12,Passaic,New Jersey,34031,46104,1519,212,2
+2021-01-12,Sussex,New Jersey,34037,6185,229,77,0
+2021-01-12,Dutchess,New York,36027,14997,277,240,2
+2021-01-12,Nassau,New York,36059,105497,2496,1419,7
+2021-01-12,New York City,New York,NA,498877,25698,5571,63
+2021-01-12,Orange,New York,36071,26802,553,299,2
+2021-01-12,Putnam,New York,36079,5930,68,86,0
+2021-01-12,Rockland,New York,36087,30273,609,258,1
+2021-01-12,Suffolk,New York,36103,117156,2487,1667,21
+2021-01-12,Ulster,New York,36111,7038,175,111,5
+2021-01-12,Westchester,New York,36119,79405,1744,872,8
