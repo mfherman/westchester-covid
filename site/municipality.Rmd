@@ -244,8 +244,8 @@ ggplotly(p, tooltip = "text") %>%
 <div class="l-page heat-mobile"> 
 ```{r mun_heat_map_mobile, layout="l-page", out.height="700px"}
 p <- all_days_mun %>%  
-  mutate(municipality = fct_reorder(municipality, active_per_cap_est, last)) %>% 
-  ggplot(aes(date, municipality, fill = active_per_cap_est)) +
+  mutate(municipality = fct_reorder(municipality, active_per_cap_limit, last)) %>% 
+  ggplot(aes(date, municipality, fill = active_per_cap_limit)) +
   geom_tile(
     aes(
       text = str_replace_all(paste0(
@@ -270,7 +270,7 @@ p <- all_days_mun %>%
   theme(
     legend.position = "none",
     panel.grid = element_blank(),
-    plot.title = element_text(face = "bold", size = 16)
+    plot.title = element_text(face = "bold", size = 14)
     )
 
 ggplotly_config(p) %>% 
