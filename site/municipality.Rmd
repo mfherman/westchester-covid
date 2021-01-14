@@ -391,34 +391,40 @@ p3 <- mun_sd %>%
 
 p3_plotly <- ggplotly_config(p3)
 
-p4 <- mun_sd %>%
-  ggplot(aes(hs_less_pct, total_cases_per_cap)) +
-  geom_point(
-    aes(
-      size = total_pop,
-      text = paste0(
-        "<b>", municipality, "</b><br>",
-        "Black or Latino population: ", percent(hs_less_pct, 1), "<br>",
-        "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
-        )
-      ),
-    shape = 21,
-    color = "steelblue",
-    fill = adjustcolor("steelblue", alpha.f = 0.3),
-    alpha = 0.9
-    ) +
-  expand_limits(x = 0, y = 0.02) + 
-  scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
-  scale_size(trans = "log10", range = c(1, 5)) +
-    labs(
-    x = "Black or Latino population",
-    y = "Total population with positive test"
-  ) +
-  theme_minimal() +
-  theme(axis.title.x = element_text(size = 14))
 
-p4_plotly <- ggplotly_config(p4)
+# label_frac <- function(x, accuracy = NULL) {
+#     function(x) pretty_frac(x, accuracy = accuracy)
+#     }
+#   
+# 
+# p4 <- mun_sd %>%
+#   ggplot(aes(hs_less_pct, total_cases_per_cap)) +
+#   geom_point(
+#     aes(
+#       size = total_pop,
+#       text = paste0(
+#         "<b>", municipality, "</b><br>",
+#         "Black or Latino population: ", percent(hs_less_pct, 1), "<br>",
+#         "Share of population with positive test: ", pretty_frac(total_cases_per_cap)
+#         )
+#       ),
+#     shape = 21,
+#     color = "steelblue",
+#     fill = adjustcolor("steelblue", alpha.f = 0.3),
+#     alpha = 0.9
+#     ) +
+#   expand_limits(x = 0, y = 0.02) + 
+#   scale_x_continuous(label = label_percent(1)) +
+#   scale_y_continuous(label = label_frac(1), breaks = seq(0, 0.2, by = 0.02)) + 
+#   scale_size(trans = "log10", range = c(1, 5)) +
+#     labs(
+#     x = "Black or Latino population",
+#     y = "Total population with positive test"
+#   ) +
+#   theme_minimal() +
+#   theme(axis.title.x = element_text(size = 14))
+# 
+# p4_plotly <- ggplotly_config(p4)
 
 scatter <- list(p_plotly, p2_plotly, p3_plotly)
 ```
