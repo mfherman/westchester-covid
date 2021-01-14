@@ -431,18 +431,25 @@ p <- nyt_cases %>%
     panel.spacing.y = unit(12, "points")
     #panel.border = element_rect(color = "gray95", fill = NA, size = 0.5)
     )
+
+p2 <- p +
+  facet_wrap(vars(county), nrow = 3, strip.position = "bottom")
+
+ggsave(here("site/img/county-wide.png"), p2, device = ragg::agg_png(), width = 12, height = 6)
 ```
 <div class = "l-page img-desktop">
-```{r county-trend-sm-mult-wide, layout="l-page", fig.retina=2, dev="ragg_png", fig.height=6, fig.width=12}
-p +
-  facet_wrap(vars(county), nrow = 3, strip.position = "bottom")
+```{r county-trend-sm-mult-wide, layout="l-page"}
+knitr::include_graphics(here("site/img/county-wide.png"))
 ```
 </div>
 
 <div class = "img-mobile">
-```{r county-trend-sm-mult-long, fig.retina=2, dev="ragg_png", fig.height=12}
-p +
+```{r county-trend-sm-mult-long}
+p2 <- p +
   facet_wrap(vars(county), nrow = 6, strip.position = "bottom")
+
+ggsave(here("site/img/county-long.png"), p2, device = ragg::agg_png(), width = 6, height = 12)
+knitr::include_graphics(here("site/img/county-long.png"), )
 ```
 </div>
 
