@@ -22,7 +22,7 @@ hosp_wch_sum <- hosp_wch %>%
   mutate(
     bed_free = bed_capacity - bed_occupied,
     icu_free = icu_capacity - icu_occupied,
-    pct_covid = covid_patients / all_patients,
+    pct_covid = covid_patients / bed_occupied,
     pct_bed = bed_occupied / bed_capacity,
     pct_icu = icu_occupied / icu_capacity
     )
@@ -39,7 +39,7 @@ hosp_nys_sum <- hosp_nys %>%
   mutate(
     bed_free = bed_capacity - bed_occupied,
     icu_free = icu_capacity - icu_occupied,
-    pct_covid = covid_patients / all_patients,
+    pct_covid = covid_patients / bed_occupied,
     pct_bed = bed_occupied / bed_capacity,
     pct_icu = icu_occupied / icu_capacity
     )
@@ -51,6 +51,9 @@ In the week ending `r month_day_year(hosp_wch_sum$year_week + days(6), abbr = TR
 
 <aside>
 All hospital metrics reported are weekly averages.
+<br>
+<br>
+Westchester Medical Center, the largest hospital in the county, did not report complete data before mid-Oct 2020.
 </aside>
 
 <br>
@@ -58,7 +61,7 @@ All hospital metrics reported are weekly averages.
 <div class = "l-body-outset">
 ::::: {.panelset}
 ::: {.panel}
-[Covid-19 patients]{.panel-name}
+[Covid patients]{.panel-name}
 
 ```{r, layout="body-outset"}
 to_plot <- hosp_cap %>% 
@@ -68,7 +71,9 @@ to_plot <- hosp_cap %>%
   mutate(
     bed_pct = bed_occupied / bed_capacity,
     icu_pct = icu_occupied / icu_capacity,
-    covid_pct = covid_patients / all_patients
+    covid_pct = covid_patients / bed_occupied,
+    non_covid_patients = bed_occupied - covid_patients,
+    icu_non_covid_patients = icu_occupied - icu_covid_patients
   )
 
 p <- to_plot %>% 
@@ -91,7 +96,7 @@ p <- to_plot %>%
     x = NULL,
     y = NULL
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 14) +
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
@@ -115,7 +120,7 @@ ggplotly_config(p) %>%
 :::
 
 ::: {.panel}
-[% Covid-19 patients]{.panel-name}
+[% Covid patients]{.panel-name}
 ```{r, layout="body-outset"}
 p <- to_plot %>% 
   ggplot(aes(year_week + 3.5, covid_pct)) +
@@ -137,7 +142,7 @@ p <- to_plot %>%
     x = NULL,
     y = NULL
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 14) +
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
@@ -185,7 +190,7 @@ p <- to_plot %>%
     x = NULL,
     y = NULL
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 14) +
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
@@ -233,7 +238,7 @@ p <- to_plot %>%
     x = NULL,
     y = NULL
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 14) +
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
@@ -244,6 +249,68 @@ p <- to_plot %>%
 ggplotly_config(p) %>% 
   layout(
     hovermode = "x unified",
+    annotations = list(
+      x = 1, y = -0.175,
+      text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
+      showarrow = FALSE,
+      xref = "paper", yref = "paper", 
+      xanchor = "right", yanchor = "auto",
+      xshift = 0, yshift = 0
+      )
+    )
+```
+:::
+
+::: {.panel}
+[ICU beds & Covid patients]{.panel-name}
+```{r, layout="body-outset"}
+icu_cap_long <- to_plot %>% 
+  select(year_week, icu_capacity, icu_covid_patients, icu_non_covid_patients) %>% 
+  pivot_longer(-year_week, names_to = "metric", values_to = "n") %>% 
+  mutate(
+    metric = case_when(
+      metric == "icu_capacity" ~ "ICU beds",
+      metric == "icu_covid_patients" ~ "ICU Covid-19 patients",
+      TRUE ~ "ICU non-Covid-19 patients"
+    )
+  )
+
+p <- icu_cap_long %>% 
+  ggplot(aes(year_week + 3.5, n, color = metric)) +
+  geom_line() +
+  geom_point(
+    aes(
+      text = paste0(
+        "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
+        metric, ": ", comma(n, 1)
+        )
+      )
+    ) +
+  scale_x_date(labels = label_date_short()) +
+  scale_y_continuous(labels = label_comma(1)) +
+  scale_color_manual(
+    values = c(
+      `ICU beds` = "gray35",
+      `ICU Covid-19 patients` = "coral",
+      `ICU non-Covid-19 patients` = "steelblue"
+      )
+  ) +
+  labs(
+    title = "ICU beds and Covid-19 and non-Covid-19 ICU patients",
+    x = NULL,
+    y = NULL,
+    color = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    plot.title = element_text(face = "bold", size = 20)
+  )
+
+ggplotly_config(p) %>% 
+  layout(
     annotations = list(
       x = 1, y = -0.175,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
@@ -276,7 +343,7 @@ to_map <- hosp_geo %>%
   mutate(
     bed_free = bed_capacity - bed_occupied,
     icu_free = icu_capacity - icu_occupied,
-    pct_covid = covid_patients / all_patients,
+    pct_covid = covid_patients / bed_occupied,
     pct_bed = bed_occupied / bed_capacity,
     pct_icu = icu_occupied / icu_capacity,
     label = paste0(

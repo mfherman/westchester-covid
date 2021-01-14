@@ -433,14 +433,14 @@ p <- nyt_cases %>%
     )
 ```
 <div class = "l-page img-desktop">
-```{r county-trend-sm-mult-wide, layout="l-page", dpi=300, dev="svg", fig.height=6, fig.width=12}
+```{r county-trend-sm-mult-wide, layout="l-page", fig.retina=2, dev="ragg_png", fig.height=6, fig.width=12}
 p +
   facet_wrap(vars(county), nrow = 3, strip.position = "bottom")
 ```
 </div>
 
 <div class = "img-mobile">
-```{r county-trend-sm-mult-long, dpi = 300, dev="svg", fig.height=12}
+```{r county-trend-sm-mult-long, fig.retina=2, dev="ragg_png", fig.height=12}
 p +
   facet_wrap(vars(county), nrow = 6, strip.position = "bottom")
 ```

@@ -24,19 +24,19 @@ hosp_data <- hospital %>%
     county,
     state,
     year_week = collection_week,
-    bed_capacity   = all_adult_hospital_inpatient_beds_7_day_avg,
-    bed_occupied   = all_adult_hospital_inpatient_bed_occupied_7_day_avg,
-    icu_capacity   = total_staffed_adult_icu_beds_7_day_avg,
-    icu_occupied   = staffed_adult_icu_bed_occupancy_7_day_avg,
-    covid_patients = total_adult_patients_hospitalized_confirmed_and_suspected_covid_7_day_avg,
-    all_patients   = all_adult_hospital_inpatient_bed_occupied_7_day_avg
+    bed_capacity       = all_adult_hospital_inpatient_beds_7_day_avg,
+    bed_occupied       = all_adult_hospital_inpatient_bed_occupied_7_day_avg,
+    icu_capacity       = total_staffed_adult_icu_beds_7_day_avg,
+    icu_occupied       = staffed_adult_icu_bed_occupancy_7_day_avg,
+    covid_patients     = total_adult_patients_hospitalized_confirmed_and_suspected_covid_7_day_avg,
+    icu_covid_patients = staffed_icu_adult_patients_confirmed_and_suspected_covid_7_day_avg
     ) %>% 
   mutate(across(where(is.numeric), na_if, -999999))
 
 write_csv(hosp_data, "data/hospital-beds-occupancy.csv")
 
 message(glue("Most recent data is from {max(hosp_data$year_week) + days(7)}"))
-message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
+message(glue("{Sys.time()} -- Finished download of HHS hospital data"))
 
 
     # bed_pct_full = bed_occupied / bed_capacity,
