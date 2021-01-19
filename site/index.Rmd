@@ -48,8 +48,8 @@ deaths_change_pct <- deaths_change / deaths_last_week
 deaths_total <- recent_nyt$total_deaths
 deaths_change_text <- case_when(
   deaths_change == 0 ~ "the same number</span> as",
-  deaths_change > 0 ~ paste(deaths_change, "more</span> than"),
-  deaths_change < 0 ~ paste(abs(deaths_change), "fewer</span> than")
+  deaths_change > 0 ~ paste(comma(deaths_change, 1), "more</span> than"),
+  deaths_change < 0 ~ paste(comma(abs(deaths_change), 1), "fewer</span> than")
   )
 
 tests_recent <- recent$new_tests_avg_7 * 7
