@@ -27,21 +27,29 @@ data <- fromJSON(extract[1, 3])
 
 table <- data[["secondaryInfo"]][["presModelMap"]][["dataDictionary"]][["presModelHolder"]][["genDataDictionaryPresModel"]][["dataSegments"]][["0"]][["dataColumns"]][["dataValues"]][[2]]
 
+
+second_admin_pct <- parse_number(table[5]) / (parse_number(table[3]) + parse_number(table[5]))
+second_rcv_pct <- parse_number(table[4]) / (parse_number(table[2]) + parse_number(table[4]))
+
 new_data <- tibble(
   date = lubridate::mdy(table[1]),
   region = table[7:16],
-  doses_admin = parse_number(table[33:42]),
-  doses_recieved = parse_number(table[44:53])
+  doses_admin = parse_number(table[35:44]),
+  doses_recieved = parse_number(table[46:55]),
+  first_dose_admin_est = doses_admin * (1 - second_admin_pct),
+  second_dose_admin_est = doses_admin * second_admin_pct,
+  first_dose_rcv_est = doses_recieved * (1 - second_rcv_pct),
+  second_dose_rcv_est = doses_recieved * second_rcv_pct
 )
 
-old_data <- read_csv("data/state-vac.csv", col_types = cols())
+old_data <- read_csv(here("data/state-vac.csv"), col_types = cols())
 max_date <- max(old_data$date)
 
 if (max_date < max(new_data$date)) {
   
   old_data %>% 
     bind_rows(new_data) %>% 
-    write_csv("data/state-vac.csv")
+    write_csv(here("data/state-vac.csv"))
   
   message(glue("Most recent data is from {max(new_data$date)}"))
 
