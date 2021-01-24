@@ -70,7 +70,7 @@ to_plot <- nys_cases %>%
 
 ggplotly_config(to_plot) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.21,
       text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
@@ -121,7 +121,7 @@ to_plot <- nys_cases %>%
 
 ggplotly_config(to_plot) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.21,
       text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
@@ -172,7 +172,7 @@ to_plot <- nys_cases %>%
 
 ggplotly_config(to_plot) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.21,
       text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#new-york-state-statewide-covid-19-testing' target='_self'>NYS Dept of Health</a>", 
@@ -223,7 +223,7 @@ to_plot <- nyt_cases %>%
 
 ggplotly_config(to_plot) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.21,
       text = "Source: <a href='https://westchester-covid.mattherman.info/about.html#coronavirus-covid-19-data-in-the-united-states' target='_self'>NY Times</a>", 

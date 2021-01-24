@@ -106,7 +106,7 @@ p <- to_plot %>%
 
 ggplotly_config(p) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.175,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
@@ -152,7 +152,7 @@ p <- to_plot %>%
 
 ggplotly_config(p) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.175,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
@@ -200,7 +200,7 @@ p <- to_plot %>%
 
 ggplotly_config(p) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.175,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 
@@ -248,7 +248,7 @@ p <- to_plot %>%
 
 ggplotly_config(p) %>% 
   layout(
-    hovermode = "x unified",
+    hovermode = "x",
     annotations = list(
       x = 1, y = -0.175,
       text = 'Source: <a href="https://westchester-covid.mattherman.info/about#covid-19-reported-patient-impact-and-hospital-capacity-by-facility" target="_self">US HHS</a>', 

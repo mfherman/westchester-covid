@@ -103,7 +103,7 @@ to_plot <- nys_cases %>%
     )
 
 ggplotly_config(to_plot) %>% 
-  layout(hovermode = "x unified")
+  layout(hovermode = "x")
 ```
 
 <div class="index-row l-page">
