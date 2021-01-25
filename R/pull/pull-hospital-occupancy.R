@@ -23,7 +23,7 @@ hosp_data <- hospital %>%
     fips_code,
     county,
     state,
-    year_week = collection_week,
+    year_week          = collection_week,
     bed_capacity       = all_adult_hospital_inpatient_beds_7_day_avg,
     bed_occupied       = all_adult_hospital_inpatient_bed_occupied_7_day_avg,
     icu_capacity       = total_staffed_adult_icu_beds_7_day_avg,
@@ -31,7 +31,13 @@ hosp_data <- hospital %>%
     covid_patients     = total_adult_patients_hospitalized_confirmed_and_suspected_covid_7_day_avg,
     icu_covid_patients = staffed_icu_adult_patients_confirmed_and_suspected_covid_7_day_avg
     ) %>% 
-  mutate(across(where(is.numeric), na_if, -999999))
+  mutate(
+    across(where(is.numeric), na_if, -999999),
+    icu_covid_patients = if_else(
+      hospital_pk == "330208" & year_week == as.Date("2021-01-01"),   # fix bad data for one hospital
+      9.3, icu_covid_patients
+      )
+    )
 
 write_csv(hosp_data, "data/hospital-beds-occupancy.csv")
 
