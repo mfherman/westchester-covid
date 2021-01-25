@@ -190,7 +190,7 @@ all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>%
 
 p <- all_days_mun %>%  
   mutate(municipality = fct_reorder(municipality, active_per_cap_est, last)) %>% 
-  ggplot(aes(as.character(date), municipality, fill = active_per_cap_limit)) + #https://stackoverflow.com/questions/38919395/plotly-r-cant-make-custom-xaxis-date-ranges-to-works
+  ggplot(aes(date, municipality, fill = active_per_cap_limit)) + 
   geom_tile(
     aes(
       text = str_replace_all(paste0(
@@ -204,7 +204,11 @@ p <- all_days_mun %>%
     palette = "YlOrRd",
     direction = 1
     ) +
-  #scale_x_continuous(expand = expansion(mult = c(0.01, 0))) +
+  scale_x_date(
+    date_breaks = "1 month",
+    label = label_date_short(),
+    expand = expansion(mult = c(0.01, 0))
+    ) +
   labs(x = NULL, y = NULL, title = "Average daily cases per 100k (beginning May 2020)") +
   theme_minimal() +
   theme(
