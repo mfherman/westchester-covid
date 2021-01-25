@@ -3,7 +3,7 @@ message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
 
 url <- "https://healthdata.gov/node/3651441/download"
 
-hospital <- vroom(url, col_types = cols())
+hospital <- vroom(url, col_types = cols(), guess_max = 1e6)
 
 fips <- c("34003", "36119", "36087", "09001", "34031", "34017", "09005", "34013",
           "34027", "36071", "09009", "36079", "34037", "36027", "36111")
