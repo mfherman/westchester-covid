@@ -21,8 +21,8 @@ navbar:
           href: county.html#metro-area-cases
         - text: "Schools"
           href: county.html#cases-in-school
-        - text: "Clusters"
-          href: county.html#new-york-state-micro-clusters
+        # - text: "Clusters"
+        #   href: county.html#new-york-state-micro-clusters
         - text: "Racial disparities"
           href: county.html#racial-disparities
         - text: "Nursing homes"

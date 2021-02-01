@@ -220,7 +220,7 @@ to_map %>%
 <span style = "font-size:1.6rem;">
 [County and metro area &#10230;](county.html)
 </span></br>
-Cases, deaths, and tests; cases in schools; racial disparities; cluster zones; nursing home deaths
+Cases, deaths, and tests; cases in schools; racial disparities; nursing home deaths
 
 <span style = "font-size:1.6rem;">
 [Westchester municipalities &#10230;](municipality.html)

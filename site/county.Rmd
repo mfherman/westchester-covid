@@ -661,23 +661,23 @@ school_geo_cases %>%
 ```
 </div>
 
-## New York State micro-clusters
+<!-- ## New York State micro-clusters -->
 
 ```{r}
-wch_cluster <- hotspot %>% 
-  st_transform(2263) %>% 
+wch_cluster <- hotspot %>%
+  st_transform(2263) %>%
   st_filter(mun_bound)
 
-red <- wch_cluster %>% 
-  filter(zone == "red") %>% 
+red <- wch_cluster %>%
+  filter(zone == "red") %>%
   nrow()
 
-orange <- wch_cluster %>% 
-  filter(zone == "Orange") %>% 
+orange <- wch_cluster %>%
+  filter(zone == "Orange") %>%
   nrow()
 
-yellow <- wch_cluster %>% 
-  filter(zone == "Yellow") %>% 
+yellow <- wch_cluster %>%
+  filter(zone == "Yellow") %>%
   nrow()
 
 red_text <- case_when(
@@ -699,49 +699,49 @@ yellow_text <- case_when(
   )
 ```
 
-<span class="recent-update">Most recent data: `r month_day_year(max(wch_cluster$date), abbr = TRUE)`</span>
+<!-- <span class="recent-update">Most recent data: `r month_day_year(max(wch_cluster$date), abbr = TRUE)`</span> -->
 
-[Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in October 2020, in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. Yellow, orange, and red zones have different restriction and the clusters are determined using a combination of test positivity rate, hospital admissions, and hospital capacity.
+<!-- [Governor Cuomo announced a "micro-cluster strategy"](https://www.wgrz.com/article/news/health/coronavirus/cluster-action-initiative-will-become-more-specific/71-cf1e7e41-850c-48c0-8887-82c610258d2a) in October 2020, in which small geographic areas are targeted with [enhanced restrictions](https://forward.ny.gov/cluster-action-initiative) on gatherings, indoor dining, and other activities. Yellow, orange, and red zones have different restriction and the clusters are determined using a combination of test positivity rate, hospital admissions, and hospital capacity. -->
 
-Currently, there `r red_text`, `r orange_text`, and `r yellow_text` in Westchester County.
+<!-- Currently, there `r red_text`, `r orange_text`, and `r yellow_text` in Westchester County. -->
 
-```{r hotspot-map, out.height = "600px"}
-hotspot_to_map <- hotspot %>% 
-  mutate(
-    label = paste0(
-      "<b>", cluster, "</b><br>",
-      "7-day avg positivity rate: ",  percent(pos_rate, accuracy = 0.1, scale = 1), "<br>",
-      "Zone effective date: ", month_day_year(date_eff, abbr = TRUE))
-    )
+<!-- ```{r hotspot-map, out.height = "600px"} -->
+<!-- hotspot_to_map <- hotspot %>%  -->
+<!--   mutate( -->
+<!--     label = paste0( -->
+<!--       "<b>", cluster, "</b><br>", -->
+<!--       "7-day avg positivity rate: ",  percent(pos_rate, accuracy = 0.1, scale = 1), "<br>", -->
+<!--       "Zone effective date: ", month_day_year(date_eff, abbr = TRUE)) -->
+<!--     ) -->
 
-hotspot_pal <- colorFactor(
-  palette = c("yellow2", "orange", "firebrick"),
-  levels = c("Yellow", "Orange", "Red")
-  )
+<!-- hotspot_pal <- colorFactor( -->
+<!--   palette = c("yellow2", "orange", "firebrick"), -->
+<!--   levels = c("Yellow", "Orange", "Red") -->
+<!--   ) -->
 
-leaflet(hotspot_to_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(
-    data = hotspot_to_map,
-    group = "NYS micro-clusters",
-    weight = 1.5,
-    color = "white",
-    fillColor = ~hotspot_pal(zone),
-    fillOpacity = 0.8,
-    label = lapply(hotspot_to_map$label, htmltools::HTML),
-    highlight = highlightOptions(
-      weight = 2,
-      color = "#666666",
-      opacity = 0.7,
-      fillOpacity = 0.7,
-      bringToFront = TRUE
-      )
-    ) %>% 
-  setView(lat = 41.1, lng = -73.75, zoom = 10) %>% 
-  addResetMapButton()
-```
+<!-- leaflet(hotspot_to_map) %>% -->
+<!--   addProviderTiles(providers$CartoDB.Positron) %>% -->
+<!--   addPolygons( -->
+<!--     data = hotspot_to_map, -->
+<!--     group = "NYS micro-clusters", -->
+<!--     weight = 1.5, -->
+<!--     color = "white", -->
+<!--     fillColor = ~hotspot_pal(zone), -->
+<!--     fillOpacity = 0.8, -->
+<!--     label = lapply(hotspot_to_map$label, htmltools::HTML), -->
+<!--     highlight = highlightOptions( -->
+<!--       weight = 2, -->
+<!--       color = "#666666", -->
+<!--       opacity = 0.7, -->
+<!--       fillOpacity = 0.7, -->
+<!--       bringToFront = TRUE -->
+<!--       ) -->
+<!--     ) %>%  -->
+<!--   setView(lat = 41.1, lng = -73.75, zoom = 10) %>%  -->
+<!--   addResetMapButton() -->
+<!-- ``` -->
 
-<br>
+<!-- <br> -->
 
 ## Racial disparities
 

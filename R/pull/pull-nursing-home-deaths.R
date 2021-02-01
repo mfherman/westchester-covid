@@ -11,8 +11,8 @@ date <- extract_text(file, pages = 1) %>%
   str_extract("Data through .*") %>% 
   mdy()
 
-nh_deaths <- extract_tables(file, pages = 8:9) %>%
-  map_dfr(as.data.frame) %>%
+nh_deaths <- extract_tables(file, pages = 3:9) %>%
+  map_dfr(as.data.frame) %>% View()
   transmute(
     date = date,
     name = V1,
@@ -20,7 +20,7 @@ nh_deaths <- extract_tables(file, pages = 8:9) %>%
     county = V3,
     deaths_confirmed = as.numeric(V4),
     deaths_presumed = as.numeric(V5)
-  ) %>% 
+  ) %>%
   mutate(
     name = case_when(
       name == "NORTH WESTCHESTER RESTORATIVE THERAPY AND NURSING" ~ "NORTH WESTCHESTER RESTORATIVE THERAPY AND NURSING CENTER",
@@ -29,7 +29,7 @@ nh_deaths <- extract_tables(file, pages = 8:9) %>%
       ),
     name = str_to_title(name)
     ) %>% 
-  filter(county == "Westcheste") %>% 
+  filter(str_detect(county, "Westch")) %>% 
   select(-county)
 
 write_csv(nh_deaths, "data/nursing-home-deaths.csv")
