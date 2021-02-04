@@ -12,7 +12,7 @@ date <- extract_text(file, pages = 1) %>%
   mdy()
 
 nh_deaths <- extract_tables(file, pages = 3:9) %>%
-  map_dfr(as.data.frame) %>% View()
+  map_dfr(as.data.frame) %>%
   transmute(
     date = date,
     name = V1,
