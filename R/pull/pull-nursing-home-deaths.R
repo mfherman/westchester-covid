@@ -11,7 +11,7 @@ date <- extract_text(file, pages = 1) %>%
   str_extract("Data through .*") %>% 
   mdy()
 
-nh_deaths <- extract_tables(file, pages = 3:9) %>%
+nh_deaths <- extract_tables(file, pages = 3:10) %>%
   map_dfr(as.data.frame) %>%
   transmute(
     date = date,
@@ -36,3 +36,4 @@ write_csv(nh_deaths, "data/nursing-home-deaths.csv")
 
 message(glue("Most recent data is from {date}"))
 message(glue("{Sys.time()} -- Finished download of NYS nursing home deaths"))
+
