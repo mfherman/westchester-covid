@@ -11,7 +11,7 @@ date <- extract_text(file, pages = 1) %>%
   str_extract("Data through .*") %>% 
   mdy()
 
-nh_deaths <- extract_tables(file, pages = 3:10) %>%
+nh_deaths <- extract_tables(file, pages = 2:7) %>%
   map_dfr(as.data.frame) %>%
   transmute(
     date = date,
@@ -19,7 +19,8 @@ nh_deaths <- extract_tables(file, pages = 3:10) %>%
     pfi = V2,
     county = V3,
     deaths_confirmed = as.numeric(V4),
-    deaths_presumed = as.numeric(V5)
+    deaths_hosp_confirmed = as.numeric(V5),
+    deaths_presumed = as.numeric(V6)
   ) %>%
   mutate(
     name = case_when(
