@@ -856,15 +856,15 @@ wch_deaths <- nyt_cases %>%
 
 <span class="recent-update">Most recent data: `r month_day_year(max(wch_nh_sum$date), abbr = TRUE)`</span>
 
-The Covid-19 pandemic has devastated long-term care facilities. The COVID Tracking Project estimates that [38% of all people in the US who died from Covid-19](https://covidtracking.com/data/long-term-care) were residents of long-term care facilities such as nursing homes and assisted living facilities.
+The Covid-19 pandemic has devastated long-term care facilities. The COVID Tracking Project estimates that [36% of all people in the US who died from Covid-19](https://covidtracking.com/data/long-term-care) were residents of long-term care facilities such as nursing homes and assisted living facilities.
 
-There have been `r comma(wch_nh_sum$deaths, 1)` confirmed or presumed deaths to due Covid-19 in nursing homes in Westchester County since the beginning of the pandemic. This is `r percent(wch_nh_sum$deaths / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
+There have been `r comma(wch_nh_sum$deaths, 1)` confirmed or presumed deaths to due Covid-19 of nursing home residents in Westchester County since the beginning of the pandemic. This is `r percent(wch_nh_sum$deaths / wch_deaths$total_deaths, 1)` of all deaths reported in Westchester.
 
 <aside>
-This is an [undercount of deaths of nursing home residents](https://www.propublica.org/article/not-mentioned-in-cuomos-coronavirus-book-how-many-nursing-home-residents-died-in-new-york) because NYS DOH only reports deaths that occurred in nursing homes. If a nursing home resident died in a hospital, it is not counted as a nursing home death.
+Until Feb 2021, NYS was [undercounting deaths of nursing home residents](https://www.nytimes.com/2021/02/12/nyregion/new-york-nursing-homes-cuomo.html) because NYS DOH only reported deaths that occurred in nursing homes and not in hospitals.
 </aside>
 
-### Confirmed and presumed Covid-19 deaths in nursing homes
+### Confirmed and presumed Covid-19 deaths of nursing home residents
 ```{r nursing-home-map, out.height="600px", out.width="600px"}
 to_map <- nh_clean %>%
   mutate(
@@ -892,7 +892,7 @@ nh_shared %>%
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addCircles(
-    radius = ~ sqrt(Deaths) * 450,
+    radius = ~ sqrt(Deaths) * 400,
     color = "steelblue",
     opacity = 0.8,
     weight = 1.5,

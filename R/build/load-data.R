@@ -8,6 +8,8 @@ school_geo   <- read_sf(here("data/school-point.geojson"))
 hosp_cap     <- read_csv(here("data/hospital-beds-occupancy.csv"), col_types = cols())
 mun_cases    <- read_csv(here("data/mun-cases.csv"), col_types = cols())
 nh_deaths    <- read_csv(here("data/nursing-home-deaths.csv"), col_types = cols())
+#nh_detail    <- read_csv(here("data/nursing-home-deaths-detail.csv"), col_types = cols())
+
 mun_acs      <- read_csv(here("data/mun-acs-estimates.csv"), col_types = cols())
 cdc_vac      <- read_csv(here("data/state-vac-cdc.csv"), col_types = cols())
 school_cases <- read_csv(
@@ -54,6 +56,12 @@ nyt_cases <- read_csv(here("data/county-cases-deaths-nyt.csv"), col_types = cols
     ) %>% 
   select(-geometry)
 
+
+death_by_nh <- nh_detail %>% 
+  group_by(name) %>% 
+  summarize(across(where(is.numeric), sum)) %>% 
+  mutate(deaths_total = in_facil_confirmed + in_facil_presumed + out_confirmed)
+  
 nh_clean <- nh_geo %>% 
   inner_join(nh_deaths, by = "name") %>% 
   mutate(
@@ -66,21 +74,22 @@ nh_clean <- nh_geo %>%
     name,
     deaths_confirmed,
     deaths_presumed,
-    deaths_total = deaths_confirmed + deaths_presumed,
+    deaths_hosp_confirmed,
+    deaths_total = deaths_confirmed + deaths_presumed + deaths_hosp_confirmed,
     beds,
     address,
-    city = str_replace(city, "On", "on"),
+    city,
     zipcode
     )
 
 # manually input from https://covid19tracker.health.ny.gov/views/NYS-COVID19-Tracker/NYSDOHCOVID-19Tracker-Fatalities?%3Aembed=yes&%3Atoolbar=no&%3Atabs=no
 death_by_race <- tribble(
   ~"race",     ~"pop",  ~"deaths", ~"age_adjust", ~"date",
-  "Latino",    243261,   312,      180.9,        as.Date("2021-01-30"),
-  "Black",     138566,   274,      170.6,        NA,
-  "White",     520628,   883,      89.3,         NA,
-  "Asian",     63448,    41,       61.9,         NA,
-  "Other",     1709,     24,       NA,           NA
+  "Latino",    243261,   332,      193.3,        as.Date("2021-02-13"),
+  "Black",     138566,   288,      178.7,        NA,
+  "White",     520628,   948,      96.3,         NA,
+  "Asian",     63448,    46,       69.7,         NA,
+  "Other",     1709,     26,       NA,           NA
   ) %>%    
   mutate(
     crude = deaths / pop * 1e5,
