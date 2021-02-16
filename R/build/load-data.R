@@ -56,11 +56,10 @@ nyt_cases <- read_csv(here("data/county-cases-deaths-nyt.csv"), col_types = cols
     ) %>% 
   select(-geometry)
 
-
-death_by_nh <- nh_detail %>% 
-  group_by(name) %>% 
-  summarize(across(where(is.numeric), sum)) %>% 
-  mutate(deaths_total = in_facil_confirmed + in_facil_presumed + out_confirmed)
+# death_by_nh <- nh_detail %>% 
+#   group_by(name) %>% 
+#   summarize(across(where(is.numeric), sum)) %>% 
+#   mutate(deaths_total = in_facil_confirmed + in_facil_presumed + out_confirmed)
   
 nh_clean <- nh_geo %>% 
   inner_join(nh_deaths, by = "name") %>% 
