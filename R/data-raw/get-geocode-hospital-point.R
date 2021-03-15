@@ -2,8 +2,8 @@ library(tidyverse)
 library(vroom)
 library(tidygeocoder)
 library(sf)
-# TODO this relies on a retired API url... using legacy domain will work temporarily, but needs to be ported to new API...
-url <- "https://legacy.healthdata.gov/node/3651441/download"
+
+url <- "https://beta.healthdata.gov/api/views/anag-cw7u/rows.csv?accessType=DOWNLOAD"
 
 hospital <- vroom(url)
 
