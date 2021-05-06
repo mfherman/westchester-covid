@@ -412,7 +412,7 @@ p <- nyt_cases %>%
     use_direct_label = FALSE,
     unhighlighted_params = list(size = 0.2)
     ) +
-  scale_x_date(expand = expansion(add = c(0, 2))) +
+  scale_x_date(expand = expansion(add = c(0, 2)), date_labels = label_date_short()) +
   labs(
     title = "New cases per 100,000 residents",
     subtitle = str_wrap("Trend lines for all counties in the metro area are drawn in gray to compare with trend of each county drawn in blue", 65),
