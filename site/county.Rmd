@@ -403,7 +403,8 @@ The timing of outbreaks in counties in the New York metro area has varied. Some 
 ```{r small_mult_cases_per_cap}
 p <- nyt_cases %>% 
   mutate(
-    county = fct_reorder(county, -new_cases_per_cap, mean, na.rm = TRUE),
+    new_cases_per_cap = if_else(new_cases_per_cap < 0, NA_real_, new_cases_per_cap),
+    county = fct_reorder(county, -new_cases_per_cap, last),
     county = fct_relevel(county, "Westchester")
     ) %>%
   ggplot(aes(date, new_cases_per_cap, color = county)) +
@@ -412,7 +413,7 @@ p <- nyt_cases %>%
     use_direct_label = FALSE,
     unhighlighted_params = list(size = 0.2)
     ) +
-  scale_x_date(expand = expansion(add = c(0, 2)), date_labels = label_date_short()) +
+  scale_x_date(expand = expansion(add = c(0, 2)), labels = label_date_short()) +
   labs(
     title = "New cases per 100,000 residents",
     subtitle = str_wrap("Trend lines for all counties in the metro area are drawn in gray to compare with trend of each county drawn in blue", 65),
