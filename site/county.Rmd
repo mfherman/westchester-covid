@@ -456,7 +456,7 @@ knitr::include_graphics(here("site/img/county-long.png"), )
 
 <br>
 
-## Cases in school
+## Cases in schools
 
 ```{r}
 school_geo_cases <- school_geo %>% 
@@ -756,7 +756,7 @@ The disparities are even more stark when taking age into account. [Age-adjustmen
 Since [older people are much more likely to die](https://ourworldindata.org/mortality-risk-covid#case-fatality-rate-of-covid-19-by-age) from Covid-19 than younger people, it is important to adjust for age when making these comparisons. The process of age-adjustment allows you to compare groups as if they had the same distribution of ages in their population.
 </aside>
 
-In fact, we see the opposite. When accounting for the age of the white population in Westchester, `r comma(death_by_race$age_adjust[death_by_race$race == "White"], 1)` out of 100,000 people have died due to Covid-19. By contrast, `r comma(death_by_race$age_adjust[death_by_race$race == "Hispanic"], 1)` out of 100,000 Latinos have died and `r comma(death_by_race$age_adjust[death_by_race$race == "Black"], 1)` out of 100,000 Black people have died.
+In fact, we see the opposite. When accounting for the age of the white population in Westchester, `r comma(death_by_race$age_adjust[death_by_race$race == "White"], 1)` out of 100,000 people have died due to Covid-19. By contrast, `r comma(death_by_race$age_adjust[death_by_race$race == "Latino"], 1)` out of 100,000 Latinos have died and `r comma(death_by_race$age_adjust[death_by_race$race == "Black"], 1)` out of 100,000 Black people have died.
 
 The chart below shows both the age-adjusted and crude (un-adjusted) death rates per 100,000 Westchester residents by race and ethnicity.
 
