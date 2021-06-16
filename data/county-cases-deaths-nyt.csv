@@ -8326,3 +8326,21 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2021-06-14,Suffolk,New York,36103,201008,3400,19,0
 2021-06-14,Ulster,New York,36111,13907,257,2,0
 2021-06-14,Westchester,New York,36119,129656,2290,12,1
+2021-06-15,Fairfield,Connecticut,09001,100308,2201,15,0
+2021-06-15,Litchfield,Connecticut,09005,14644,298,10,0
+2021-06-15,New Haven,Connecticut,09009,92183,2128,13,0
+2021-06-15,Bergen,New Jersey,34003,104610,2879,36,1
+2021-06-15,Essex,New Jersey,34013,94317,3010,38,3
+2021-06-15,Hudson,New Jersey,34017,88230,2295,33,1
+2021-06-15,Morris,New Jersey,34027,50250,1238,13,1
+2021-06-15,Passaic,New Jersey,34031,73165,1930,36,0
+2021-06-15,Sussex,New Jersey,34037,14041,305,5,0
+2021-06-15,Dutchess,New York,36027,29472,445,2,0
+2021-06-15,Nassau,New York,36059,183649,3175,25,0
+2021-06-15,New York City,New York,NA,952963,33359,191,11
+2021-06-15,Orange,New York,36071,48327,721,4,1
+2021-06-15,Putnam,New York,36079,10606,92,1,0
+2021-06-15,Rockland,New York,36087,46944,754,8,0
+2021-06-15,Suffolk,New York,36103,201036,3400,28,0
+2021-06-15,Ulster,New York,36111,13908,257,1,0
+2021-06-15,Westchester,New York,36119,129663,2291,7,1
