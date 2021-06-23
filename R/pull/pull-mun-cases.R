@@ -39,8 +39,22 @@ update_daily_mun_data <- function() {
   
   message(glue("{Sys.time()} -- Data is updated! Writing to file."))
   
+  all_mun <- old_mun_daily %>% 
+    filter(municipality != "Totals") %>% 
+    distinct(municipality)
+  
+  new_mun_daily_filled <- new_mun_daily %>% 
+    full_join(all_mun, by = "municipality") %>% 
+    mutate(
+    active_cases = if_else(is.na(active_cases), 0, active_cases),
+    new_cases    = if_else(is.na(new_cases), 0, new_cases),
+    )
+
   old_mun_daily %>% 
-    bind_rows(new_mun_daily) %>% 
+    bind_rows(new_mun_daily_filled) %>% 
+    group_by(municipality) %>% 
+    fill(total_cases) %>% 
+    ungroup() %>% 
     write_csv("data/mun-cases.csv")
 }
 
