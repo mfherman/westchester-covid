@@ -365,7 +365,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-11,Harrison,371,31,2
 2020-05-11,Hastings-on-Hudson,110,3,0
 2020-05-11,Irvington,77,7,0
-2020-05-11,Larchmont,62,2,NA
+2020-05-11,Larchmont,62,2,0
 2020-05-11,Lewisboro,93,19,1
 2020-05-11,Mamaroneck Town,164,12,0
 2020-05-11,Mamaroneck Village,362,44,0
@@ -380,7 +380,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-11,Ossining Village,975,115,2
 2020-05-11,Peekskill,804,163,4
 2020-05-11,Pelham,162,9,0
-2020-05-11,Pelham Manor,102,2,NA
+2020-05-11,Pelham Manor,102,2,0
 2020-05-11,Pleasantville,108,6,0
 2020-05-11,Port Chester,1091,165,3
 2020-05-11,Pound Ridge,25,1,0
@@ -420,7 +420,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-12,New Rochelle,2760,221,15
 2020-05-12,North Castle,187,15,2
 2020-05-12,North Salem,115,26,3
-2020-05-12,Ossining Town,144,9,NA
+2020-05-12,Ossining Town,144,9,0
 2020-05-12,Ossining Village,981,108,6
 2020-05-12,Peekskill,812,149,8
 2020-05-12,Pelham,162,9,0
@@ -688,7 +688,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-21,Ossining Village,1002,44,1
 2020-05-21,Peekskill,873,88,1
 2020-05-21,Pelham,157,1,0
-2020-05-21,Pelham Manor,102,1,NA
+2020-05-21,Pelham Manor,102,1,0
 2020-05-21,Pleasantville,115,8,0
 2020-05-21,Port Chester,1163,91,1
 2020-05-21,Pound Ridge,26,0,0
@@ -719,7 +719,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-22,Irvington,78,1,0
 2020-05-22,Larchmont,65,1,1
 2020-05-22,Lewisboro,95,2,1
-2020-05-22,Mamaroneck Town,165,2,NA
+2020-05-22,Mamaroneck Town,165,2,0
 2020-05-22,Mamaroneck Village,380,18,7
 2020-05-22,Mount Kisco,272,23,6
 2020-05-22,Mount Pleasant,552,19,3
@@ -733,7 +733,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-22,Peekskill,889,97,16
 2020-05-22,Pelham,159,2,2
 2020-05-22,Pelham Manor,102,1,0
-2020-05-22,Pleasantville,115,8,NA
+2020-05-22,Pleasantville,115,8,0
 2020-05-22,Port Chester,1178,96,15
 2020-05-22,Pound Ridge,26,0,0
 2020-05-22,Rye Brook,175,13,2
@@ -777,7 +777,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-26,Peekskill,903,73,1
 2020-05-26,Pelham,159,0,0
 2020-05-26,Pelham Manor,102,0,0
-2020-05-26,Pleasantville,115,6,NA
+2020-05-26,Pleasantville,115,6,0
 2020-05-26,Port Chester,1194,83,14
 2020-05-26,Pound Ridge,26,0,0
 2020-05-26,Rye Brook,175,5,0
@@ -890,14 +890,14 @@ date,municipality,total_cases,active_cases,new_cases
 2020-05-29,Eastchester,438,2,0
 2020-05-29,Elmsford,191,6,0
 2020-05-29,Greenburgh,1111,34,4
-2020-05-29,Harrison,388,5,NA
+2020-05-29,Harrison,388,5,0
 2020-05-29,Hastings-on-Hudson,119,5,3
 2020-05-29,Irvington,79,2,0
 2020-05-29,Larchmont,66,2,0
 2020-05-29,Lewisboro,96,3,0
 2020-05-29,Mamaroneck Town,165,0,0
 2020-05-29,Mamaroneck Village,392,20,0
-2020-05-29,Mount Kisco,271,8,NA
+2020-05-29,Mount Kisco,271,8,0
 2020-05-29,Mount Pleasant,555,11,1
 2020-05-29,Mount Vernon,2609,46,6
 2020-05-29,New Castle,179,7,0
@@ -931,7 +931,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-01,Cortlandt,785,33,4
 2020-06-01,Croton-on-Hudson,169,3,0
 2020-06-01,Dobbs Ferry,306,12,1
-2020-06-01,Eastchester,438,2,NA
+2020-06-01,Eastchester,438,2,0
 2020-06-01,Elmsford,192,6,1
 2020-06-01,Greenburgh,1117,32,6
 2020-06-01,Harrison,388,3,0
@@ -1022,7 +1022,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-04,Eastchester,439,3,1
 2020-06-04,Elmsford,192,3,0
 2020-06-04,Greenburgh,1119,25,3
-2020-06-04,Harrison,389,2,NA
+2020-06-04,Harrison,389,2,0
 2020-06-04,Hastings-on-Hudson,120,5,0
 2020-06-04,Irvington,79,1,0
 2020-06-04,Larchmont,66,0,0
@@ -1034,7 +1034,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-04,Mount Vernon,2628,33,5
 2020-06-04,New Castle,179,2,0
 2020-06-04,New Rochelle,2895,67,4
-2020-06-04,North Castle,195,1,NA
+2020-06-04,North Castle,195,1,0
 2020-06-04,North Salem,133,3,1
 2020-06-04,Ossining Town,150,2,0
 2020-06-04,Ossining Village,1032,16,2
@@ -1055,35 +1055,35 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-04,Yonkers,6842,138,10
 2020-06-04,Yorktown,639,32,1
 2020-06-04,Totals,26537,573,50
-2020-06-05,Ardsley,NA,NA,NA
+2020-06-05,Ardsley,92,0,0
 2020-06-05,Bedford,245,9,1
 2020-06-05,Briarcliff Manor,94,2,0
-2020-06-05,Bronxville,NA,1,NA
+2020-06-05,Bronxville,64,1,0
 2020-06-05,Buchanan,33,0,0
-2020-06-05,Cortlandt,789,16,NA
-2020-06-05,Croton-on-Hudson,170,0,NA
+2020-06-05,Cortlandt,789,16,0
+2020-06-05,Croton-on-Hudson,170,0,0
 2020-06-05,Dobbs Ferry,305,3,0
 2020-06-05,Eastchester,439,3,0
 2020-06-05,Elmsford,196,7,4
 2020-06-05,Greenburgh,1120,24,1
-2020-06-05,Harrison,389,2,NA
+2020-06-05,Harrison,389,2,0
 2020-06-05,Hastings-on-Hudson,122,7,2
 2020-06-05,Irvington,79,1,0
-2020-06-05,Larchmont,66,NA,0
-2020-06-05,Lewisboro,101,7,NA
-2020-06-05,Mamaroneck Town,165,0,NA
+2020-06-05,Larchmont,66,0,0
+2020-06-05,Lewisboro,101,7,0
+2020-06-05,Mamaroneck Town,165,0,0
 2020-06-05,Mamaroneck Village,410,26,3
-2020-06-05,Mount Kisco,278,5,NA
+2020-06-05,Mount Kisco,278,5,0
 2020-06-05,Mount Pleasant,560,10,0
-2020-06-05,Mount Vernon,2628,31,NA
+2020-06-05,Mount Vernon,2628,31,0
 2020-06-05,New Castle,179,2,0
 2020-06-05,New Rochelle,2901,62,6
-2020-06-05,North Castle,195,NA,NA
+2020-06-05,North Castle,195,0,0
 2020-06-05,North Salem,135,5,2
 2020-06-05,Ossining Town,151,3,1
 2020-06-05,Ossining Village,1035,16,3
 2020-06-05,Peekskill,932,39,4
-2020-06-05,Pelham,156,NA,0
+2020-06-05,Pelham,156,0,0
 2020-06-05,Pelham Manor,103,1,0
 2020-06-05,Pleasantville,117,2,0
 2020-06-05,Port Chester,1219,29,0
@@ -1094,11 +1094,11 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-05,Sleepy Hollow,365,2,0
 2020-06-05,Somers,354,28,5
 2020-06-05,Tarrytown,273,5,1
-2020-06-05,Tuckahoe,132,3,NA
-2020-06-05,White Plains,1748,18,NA
-2020-06-05,Yonkers,6853,129,NA
-2020-06-05,Yorktown,NA,3,2
-2020-06-05,Totals,NA,538,46
+2020-06-05,Tuckahoe,132,3,0
+2020-06-05,White Plains,1748,18,0
+2020-06-05,Yonkers,6853,129,0
+2020-06-05,Yorktown,639,3,2
+2020-06-05,Totals,26537,538,46
 2020-06-08,Ardsley,92,0,0
 2020-06-08,Bedford,245,9,1
 2020-06-08,Briarcliff Manor,97,4,1
@@ -1113,7 +1113,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-08,Harrison,390,2,0
 2020-06-08,Hastings-on-Hudson,124,8,0
 2020-06-08,Irvington,79,0,0
-2020-06-08,Larchmont,66,0,NA
+2020-06-08,Larchmont,66,0,0
 2020-06-08,Lewisboro,105,9,3
 2020-06-08,Mamaroneck Town,165,0,0
 2020-06-08,Mamaroneck Village,414,24,0
@@ -1122,8 +1122,8 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-08,Mount Vernon,2646,43,1
 2020-06-08,New Castle,179,0,0
 2020-06-08,New Rochelle,2934,79,1
-2020-06-08,North Castle,195,0,NA
-2020-06-08,North Salem,140,11,NA
+2020-06-08,North Castle,195,0,0
+2020-06-08,North Salem,140,11,0
 2020-06-08,Ossining Town,152,4,0
 2020-06-08,Ossining Village,1040,21,0
 2020-06-08,Peekskill,941,32,1
@@ -1190,7 +1190,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-12,Ardsley,92,1,0
 2020-06-12,Bedford,247,12,0
 2020-06-12,Briarcliff Manor,97,5,0
-2020-06-12,Bronxville,64,1,NA
+2020-06-12,Bronxville,64,1,0
 2020-06-12,Buchanan,33,0,0
 2020-06-12,Cortlandt,818,51,2
 2020-06-12,Croton-on-Hudson,186,20,0
@@ -1211,7 +1211,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-12,New Castle,179,2,0
 2020-06-12,New Rochelle,2939,110,5
 2020-06-12,North Castle,195,3,0
-2020-06-12,North Salem,140,17,NA
+2020-06-12,North Salem,140,17,0
 2020-06-12,Ossining Town,152,8,0
 2020-06-12,Ossining Village,1043,30,2
 2020-06-12,Peekskill,943,47,1
@@ -1275,54 +1275,54 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-15,Yonkers,7006,212,76
 2020-06-15,Yorktown,681,50,17
 2020-06-15,Totals,27214,834,307
-2020-06-16,Ardsley,NA,NA,NA
-2020-06-16,Bedford,NA,NA,NA
-2020-06-16,Briarcliff Manor,NA,NA,NA
-2020-06-16,Bronxville,NA,NA,NA
+2020-06-16,Ardsley,92,0,0
+2020-06-16,Bedford,248,0,0
+2020-06-16,Briarcliff Manor,100,0,0
+2020-06-16,Bronxville,64,0,0
 2020-06-16,Buchanan,33,0,0
-2020-06-16,Cortlandt,NA,NA,NA
-2020-06-16,Croton-on-Hudson,NA,22,NA
-2020-06-16,Dobbs Ferry,NA,NA,NA
-2020-06-16,Eastchester,NA,NA,NA
-2020-06-16,Elmsford,NA,NA,NA
-2020-06-16,Greenburgh,NA,NA,NA
-2020-06-16,Harrison,NA,NA,NA
-2020-06-16,Hastings-on-Hudson,NA,9,NA
-2020-06-16,Irvington,NA,NA,NA
-2020-06-16,Larchmont,NA,NA,NA
-2020-06-16,Lewisboro,NA,NA,NA
-2020-06-16,Mamaroneck Town,NA,NA,NA
-2020-06-16,Mamaroneck Village,NA,27,NA
-2020-06-16,Mount Kisco,NA,NA,NA
-2020-06-16,Mount Pleasant,NA,NA,NA
-2020-06-16,Mount Vernon,NA,NA,NA
-2020-06-16,New Castle,NA,NA,NA
-2020-06-16,New Rochelle,NA,NA,NA
-2020-06-16,North Castle,NA,NA,NA
-2020-06-16,North Salem,NA,NA,NA
-2020-06-16,Ossining Town,NA,NA,NA
-2020-06-16,Ossining Village,NA,NA,NA
-2020-06-16,Peekskill,NA,NA,NA
-2020-06-16,Pelham,NA,NA,NA
-2020-06-16,Pelham Manor,NA,NA,NA
-2020-06-16,Pleasantville,NA,NA,NA
-2020-06-16,Port Chester,NA,NA,NA
+2020-06-16,Cortlandt,826,0,0
+2020-06-16,Croton-on-Hudson,198,22,0
+2020-06-16,Dobbs Ferry,310,0,0
+2020-06-16,Eastchester,444,0,0
+2020-06-16,Elmsford,199,0,0
+2020-06-16,Greenburgh,1139,0,0
+2020-06-16,Harrison,396,0,0
+2020-06-16,Hastings-on-Hudson,125,9,0
+2020-06-16,Irvington,80,0,0
+2020-06-16,Larchmont,66,0,0
+2020-06-16,Lewisboro,105,0,0
+2020-06-16,Mamaroneck Town,167,0,0
+2020-06-16,Mamaroneck Village,422,27,0
+2020-06-16,Mount Kisco,277,0,0
+2020-06-16,Mount Pleasant,572,0,0
+2020-06-16,Mount Vernon,2672,0,0
+2020-06-16,New Castle,183,0,0
+2020-06-16,New Rochelle,2977,0,0
+2020-06-16,North Castle,198,0,0
+2020-06-16,North Salem,141,0,0
+2020-06-16,Ossining Town,152,0,0
+2020-06-16,Ossining Village,1054,0,0
+2020-06-16,Peekskill,956,0,0
+2020-06-16,Pelham,158,0,0
+2020-06-16,Pelham Manor,105,0,0
+2020-06-16,Pleasantville,120,0,0
+2020-06-16,Port Chester,1233,0,0
 2020-06-16,Pound Ridge,27,1,0
-2020-06-16,Rye Brook,NA,NA,NA
-2020-06-16,Rye City,NA,NA,NA
-2020-06-16,Scarsdale,NA,NA,NA
-2020-06-16,Sleepy Hollow,NA,NA,NA
-2020-06-16,Somers,NA,NA,NA
-2020-06-16,Tarrytown,NA,NA,NA
-2020-06-16,Tuckahoe,NA,NA,NA
-2020-06-16,White Plains,NA,NA,NA
-2020-06-16,Yonkers,NA,NA,NA
-2020-06-16,Yorktown,NA,NA,NA
-2020-06-16,Totals,NA,NA,NA
+2020-06-16,Rye Brook,177,0,0
+2020-06-16,Rye City,202,0,0
+2020-06-16,Scarsdale,353,0,0
+2020-06-16,Sleepy Hollow,368,0,0
+2020-06-16,Somers,379,0,0
+2020-06-16,Tarrytown,282,0,0
+2020-06-16,Tuckahoe,134,0,0
+2020-06-16,White Plains,1793,0,0
+2020-06-16,Yonkers,7006,0,0
+2020-06-16,Yorktown,681,0,0
+2020-06-16,Totals,27214,0,0
 2020-06-17,Ardsley,93,2,0
 2020-06-17,Bedford,249,7,0
 2020-06-17,Briarcliff Manor,104,9,2
-2020-06-17,Bronxville,64,NA,0
+2020-06-17,Bronxville,64,0,0
 2020-06-17,Buchanan,33,0,0
 2020-06-17,Cortlandt,827,29,0
 2020-06-17,Croton-on-Hudson,199,20,0
@@ -1465,7 +1465,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-23,Harrison,395,4,0
 2020-06-23,Hastings-on-Hudson,130,14,1
 2020-06-23,Irvington,82,2,0
-2020-06-23,Larchmont,67,NA,0
+2020-06-23,Larchmont,67,0,0
 2020-06-23,Lewisboro,107,4,0
 2020-06-23,Mamaroneck Town,169,3,0
 2020-06-23,Mamaroneck Village,430,12,1
@@ -1490,7 +1490,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-23,Sleepy Hollow,371,5,1
 2020-06-23,Somers,403,66,7
 2020-06-23,Tarrytown,284,6,0
-2020-06-23,Tuckahoe,134,NA,0
+2020-06-23,Tuckahoe,134,0,0
 2020-06-23,White Plains,1812,53,3
 2020-06-23,Yonkers,7070,132,9
 2020-06-23,Yorktown,692,27,0
@@ -1548,15 +1548,15 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-25,Croton-on-Hudson,203,14,0
 2020-06-25,Dobbs Ferry,314,6,0
 2020-06-25,Eastchester,449,8,0
-2020-06-25,Elmsford,196,6,NA
+2020-06-25,Elmsford,196,6,0
 2020-06-25,Greenburgh,1146,13,1
-2020-06-25,Harrison,397,5,NA
+2020-06-25,Harrison,397,5,0
 2020-06-25,Hastings-on-Hudson,130,2,0
-2020-06-25,Irvington,82,2,NA
+2020-06-25,Irvington,82,2,0
 2020-06-25,Larchmont,67,1,0
 2020-06-25,Lewisboro,108,4,0
 2020-06-25,Mamaroneck Town,169,3,0
-2020-06-25,Mamaroneck Village,431,8,NA
+2020-06-25,Mamaroneck Village,431,8,0
 2020-06-25,Mount Kisco,279,6,0
 2020-06-25,Mount Pleasant,580,11,0
 2020-06-25,Mount Vernon,2699,45,2
@@ -1597,7 +1597,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-06-26,Harrison,397,3,0
 2020-06-26,Hastings-on-Hudson,130,3,0
 2020-06-26,Irvington,82,2,0
-2020-06-26,Larchmont,67,1,NA
+2020-06-26,Larchmont,67,1,0
 2020-06-26,Lewisboro,108,4,0
 2020-06-26,Mamaroneck Town,169,3,0
 2020-06-26,Mamaroneck Village,432,10,1
@@ -1766,12 +1766,12 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-06,Buchanan,35,1,0
 2020-07-06,Cortlandt,863,26,8
 2020-07-06,Croton-on-Hudson,205,5,1
-2020-07-06,Dobbs Ferry,320,8,NA
+2020-07-06,Dobbs Ferry,320,8,0
 2020-07-06,Eastchester,452,5,0
 2020-07-06,Elmsford,202,9,3
 2020-07-06,Greenburgh,1157,20,6
 2020-07-06,Harrison,404,9,5
-2020-07-06,Hastings-on-Hudson,132,4,NA
+2020-07-06,Hastings-on-Hudson,132,4,0
 2020-07-06,Irvington,82,1,0
 2020-07-06,Larchmont,69,2,0
 2020-07-06,Lewisboro,110,4,0
@@ -1912,7 +1912,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-09,Mount Kisco,283,5,0
 2020-07-09,Mount Pleasant,596,15,1
 2020-07-09,Mount Vernon,2737,47,0
-2020-07-09,New Castle,202,16,NA
+2020-07-09,New Castle,202,16,0
 2020-07-09,New Rochelle,3093,81,7
 2020-07-09,North Castle,203,4,0
 2020-07-09,North Salem,148,6,0
@@ -1946,7 +1946,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-10,Eastchester,452,2,0
 2020-07-10,Elmsford,207,13,1
 2020-07-10,Greenburgh,1169,24,2
-2020-07-10,Harrison,406,11,NA
+2020-07-10,Harrison,406,11,0
 2020-07-10,Hastings-on-Hudson,133,2,0
 2020-07-10,Irvington,82,1,0
 2020-07-10,Larchmont,69,2,0
@@ -1965,7 +1965,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-10,Peekskill,988,21,3
 2020-07-10,Pelham,160,2,0
 2020-07-10,Pelham Manor,113,3,0
-2020-07-10,Pleasantville,126,4,NA
+2020-07-10,Pleasantville,126,4,0
 2020-07-10,Port Chester,1262,19,1
 2020-07-10,Pound Ridge,29,1,0
 2020-07-10,Rye Brook,183,4,0
@@ -2388,7 +2388,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-24,Greenburgh,1189,21,1
 2020-07-24,Harrison,411,5,2
 2020-07-24,Hastings-on-Hudson,137,1,0
-2020-07-24,Irvington,85,4,NA
+2020-07-24,Irvington,85,4,0
 2020-07-24,Larchmont,71,2,0
 2020-07-24,Lewisboro,114,2,0
 2020-07-24,Mamaroneck Town,176,2,0
@@ -2401,7 +2401,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-24,North Castle,206,2,0
 2020-07-24,North Salem,148,2,0
 2020-07-24,Ossining Town,158,2,0
-2020-07-24,Ossining Village,1077,6,NA
+2020-07-24,Ossining Village,1077,6,0
 2020-07-24,Peekskill,1009,24,0
 2020-07-24,Pelham,164,3,2
 2020-07-24,Pelham Manor,120,6,3
@@ -2425,7 +2425,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-27,Bronxville,85,6,1
 2020-07-27,Buchanan,39,1,0
 2020-07-27,Cortlandt,897,25,7
-2020-07-27,Croton-on-Hudson,209,1,NA
+2020-07-27,Croton-on-Hudson,209,1,0
 2020-07-27,Dobbs Ferry,330,6,1
 2020-07-27,Eastchester,459,3,0
 2020-07-27,Elmsford,211,2,0
@@ -2444,7 +2444,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-27,New Rochelle,3137,34,7
 2020-07-27,North Castle,208,3,2
 2020-07-27,North Salem,148,0,0
-2020-07-27,Ossining Town,158,NA,0
+2020-07-27,Ossining Town,158,0,0
 2020-07-27,Ossining Village,1083,12,6
 2020-07-27,Peekskill,1014,25,5
 2020-07-27,Pelham,164,3,0
@@ -2554,7 +2554,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-30,Ardsley,101,4,0
 2020-07-30,Bedford,265,2,0
 2020-07-30,Briarcliff Manor,111,1,0
-2020-07-30,Bronxville,85,3,NA
+2020-07-30,Bronxville,85,3,0
 2020-07-30,Buchanan,39,1,0
 2020-07-30,Cortlandt,902,26,1
 2020-07-30,Croton-on-Hudson,209,1,0
@@ -2576,7 +2576,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-30,New Rochelle,3145,37,2
 2020-07-30,North Castle,208,3,0
 2020-07-30,North Salem,148,0,0
-2020-07-30,Ossining Town,158,NA,0
+2020-07-30,Ossining Town,158,0,0
 2020-07-30,Ossining Village,1087,15,1
 2020-07-30,Peekskill,1019,23,3
 2020-07-30,Pelham,164,2,0
@@ -2632,7 +2632,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-07-31,Rye City,218,4,2
 2020-07-31,Scarsdale,368,7,1
 2020-07-31,Sleepy Hollow,412,8,1
-2020-07-31,Somers,402,NA,0
+2020-07-31,Somers,402,0,0
 2020-07-31,Tarrytown,297,3,0
 2020-07-31,Tuckahoe,140,2,0
 2020-07-31,White Plains,1881,26,2
@@ -2712,7 +2712,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-05,Ossining Village,1091,14,1
 2020-08-05,Peekskill,1024,17,0
 2020-08-05,Pelham,169,6,1
-2020-08-05,Pelham Manor,120,NA,NA
+2020-08-05,Pelham Manor,120,0,0
 2020-08-05,Pleasantville,134,8,0
 2020-08-05,Port Chester,1296,15,2
 2020-08-05,Pound Ridge,29,0,0
@@ -2728,14 +2728,14 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-05,Yorktown,739,10,0
 2020-08-05,Totals,28914,403,23
 2020-08-07,Ardsley,101,1,0
-2020-08-07,Bedford,266,2,NA
+2020-08-07,Bedford,266,2,0
 2020-08-07,Briarcliff Manor,111,0,0
 2020-08-07,Bronxville,86,3,0
 2020-08-07,Buchanan,40,1,0
 2020-08-07,Cortlandt,921,28,1
 2020-08-07,Croton-on-Hudson,210,1,0
 2020-08-07,Dobbs Ferry,332,4,1
-2020-08-07,Eastchester,461,3,NA
+2020-08-07,Eastchester,461,3,0
 2020-08-07,Elmsford,211,0,0
 2020-08-07,Greenburgh,1218,31,6
 2020-08-07,Harrison,429,17,1
@@ -2771,99 +2771,99 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-07,Yonkers,7411,105,10
 2020-08-07,Yorktown,740,9,1
 2020-08-07,Totals,28969,409,36
-2020-08-10,Ardsley,NA,NA,NA
-2020-08-10,Bedford,NA,NA,NA
-2020-08-10,Briarcliff Manor,NA,NA,NA
-2020-08-10,Bronxville,NA,NA,NA
-2020-08-10,Buchanan,NA,NA,NA
-2020-08-10,Cortlandt,NA,NA,NA
-2020-08-10,Croton-on-Hudson,NA,NA,NA
-2020-08-10,Dobbs Ferry,NA,NA,NA
-2020-08-10,Eastchester,NA,NA,NA
-2020-08-10,Elmsford,NA,NA,NA
-2020-08-10,Greenburgh,NA,NA,NA
-2020-08-10,Harrison,NA,NA,NA
-2020-08-10,Hastings-on-Hudson,NA,NA,NA
-2020-08-10,Irvington,NA,NA,NA
-2020-08-10,Larchmont,NA,NA,NA
-2020-08-10,Lewisboro,NA,NA,NA
-2020-08-10,Mamaroneck Town,NA,NA,NA
-2020-08-10,Mamaroneck Village,NA,NA,NA
-2020-08-10,Mount Kisco,NA,NA,NA
-2020-08-10,Mount Pleasant,NA,NA,NA
-2020-08-10,Mount Vernon,NA,NA,NA
-2020-08-10,New Castle,NA,NA,NA
-2020-08-10,New Rochelle,NA,NA,NA
-2020-08-10,North Castle,NA,NA,NA
-2020-08-10,North Salem,NA,NA,NA
-2020-08-10,Ossining Town,NA,NA,NA
-2020-08-10,Ossining Village,NA,NA,NA
-2020-08-10,Peekskill,NA,NA,NA
-2020-08-10,Pelham,NA,NA,NA
-2020-08-10,Pelham Manor,NA,NA,NA
-2020-08-10,Pleasantville,NA,NA,NA
-2020-08-10,Port Chester,NA,NA,NA
+2020-08-10,Ardsley,101,0,0
+2020-08-10,Bedford,266,0,0
+2020-08-10,Briarcliff Manor,111,0,0
+2020-08-10,Bronxville,86,0,0
+2020-08-10,Buchanan,40,0,0
+2020-08-10,Cortlandt,921,0,0
+2020-08-10,Croton-on-Hudson,210,0,0
+2020-08-10,Dobbs Ferry,332,0,0
+2020-08-10,Eastchester,461,0,0
+2020-08-10,Elmsford,211,0,0
+2020-08-10,Greenburgh,1218,0,0
+2020-08-10,Harrison,429,0,0
+2020-08-10,Hastings-on-Hudson,138,0,0
+2020-08-10,Irvington,86,0,0
+2020-08-10,Larchmont,75,0,0
+2020-08-10,Lewisboro,118,0,0
+2020-08-10,Mamaroneck Town,176,0,0
+2020-08-10,Mamaroneck Village,477,0,0
+2020-08-10,Mount Kisco,289,0,0
+2020-08-10,Mount Pleasant,592,0,0
+2020-08-10,Mount Vernon,2799,0,0
+2020-08-10,New Castle,213,0,0
+2020-08-10,New Rochelle,3153,0,0
+2020-08-10,North Castle,217,0,0
+2020-08-10,North Salem,149,0,0
+2020-08-10,Ossining Town,158,0,0
+2020-08-10,Ossining Village,1092,0,0
+2020-08-10,Peekskill,1026,0,0
+2020-08-10,Pelham,170,0,0
+2020-08-10,Pelham Manor,120,0,0
+2020-08-10,Pleasantville,134,0,0
+2020-08-10,Port Chester,1299,0,0
 2020-08-10,Pound Ridge,29,0,0
-2020-08-10,Rye Brook,NA,NA,NA
-2020-08-10,Rye City,NA,NA,NA
-2020-08-10,Scarsdale,NA,NA,NA
-2020-08-10,Sleepy Hollow,NA,NA,NA
-2020-08-10,Somers,NA,NA,NA
-2020-08-10,Tarrytown,NA,NA,NA
-2020-08-10,Tuckahoe,NA,NA,NA
-2020-08-10,White Plains,NA,NA,NA
-2020-08-10,Yonkers,NA,NA,NA
-2020-08-10,Yorktown,NA,NA,NA
-2020-08-10,Totals,NA,NA,NA
-2020-08-11,Ardsley,NA,NA,NA
-2020-08-11,Bedford,NA,NA,NA
-2020-08-11,Briarcliff Manor,NA,NA,NA
-2020-08-11,Bronxville,NA,NA,NA
-2020-08-11,Buchanan,NA,NA,NA
-2020-08-11,Cortlandt,NA,NA,NA
-2020-08-11,Croton-on-Hudson,NA,NA,NA
-2020-08-11,Dobbs Ferry,NA,NA,NA
-2020-08-11,Eastchester,NA,NA,NA
-2020-08-11,Elmsford,NA,NA,NA
-2020-08-11,Greenburgh,NA,NA,NA
-2020-08-11,Harrison,NA,NA,NA
-2020-08-11,Hastings-on-Hudson,NA,NA,NA
-2020-08-11,Irvington,NA,NA,NA
-2020-08-11,Larchmont,NA,NA,NA
-2020-08-11,Lewisboro,NA,NA,NA
-2020-08-11,Mamaroneck Town,NA,NA,NA
-2020-08-11,Mamaroneck Village,NA,NA,NA
-2020-08-11,Mount Kisco,NA,NA,NA
-2020-08-11,Mount Pleasant,NA,NA,NA
-2020-08-11,Mount Vernon,NA,NA,NA
-2020-08-11,New Castle,NA,NA,NA
-2020-08-11,New Rochelle,NA,NA,NA
-2020-08-11,North Castle,NA,NA,NA
-2020-08-11,North Salem,NA,NA,NA
-2020-08-11,Ossining Town,NA,NA,NA
-2020-08-11,Ossining Village,NA,NA,NA
-2020-08-11,Peekskill,NA,NA,NA
-2020-08-11,Pelham,NA,NA,NA
-2020-08-11,Pelham Manor,NA,NA,NA
-2020-08-11,Pleasantville,NA,NA,NA
-2020-08-11,Port Chester,NA,NA,NA
+2020-08-10,Rye Brook,188,0,0
+2020-08-10,Rye City,219,0,0
+2020-08-10,Scarsdale,369,0,0
+2020-08-10,Sleepy Hollow,415,0,0
+2020-08-10,Somers,404,0,0
+2020-08-10,Tarrytown,298,0,0
+2020-08-10,Tuckahoe,141,0,0
+2020-08-10,White Plains,1888,0,0
+2020-08-10,Yonkers,7411,0,0
+2020-08-10,Yorktown,740,0,0
+2020-08-10,Totals,28969,0,0
+2020-08-11,Ardsley,101,0,0
+2020-08-11,Bedford,266,0,0
+2020-08-11,Briarcliff Manor,111,0,0
+2020-08-11,Bronxville,86,0,0
+2020-08-11,Buchanan,40,0,0
+2020-08-11,Cortlandt,921,0,0
+2020-08-11,Croton-on-Hudson,210,0,0
+2020-08-11,Dobbs Ferry,332,0,0
+2020-08-11,Eastchester,461,0,0
+2020-08-11,Elmsford,211,0,0
+2020-08-11,Greenburgh,1218,0,0
+2020-08-11,Harrison,429,0,0
+2020-08-11,Hastings-on-Hudson,138,0,0
+2020-08-11,Irvington,86,0,0
+2020-08-11,Larchmont,75,0,0
+2020-08-11,Lewisboro,118,0,0
+2020-08-11,Mamaroneck Town,176,0,0
+2020-08-11,Mamaroneck Village,477,0,0
+2020-08-11,Mount Kisco,289,0,0
+2020-08-11,Mount Pleasant,592,0,0
+2020-08-11,Mount Vernon,2799,0,0
+2020-08-11,New Castle,213,0,0
+2020-08-11,New Rochelle,3153,0,0
+2020-08-11,North Castle,217,0,0
+2020-08-11,North Salem,149,0,0
+2020-08-11,Ossining Town,158,0,0
+2020-08-11,Ossining Village,1092,0,0
+2020-08-11,Peekskill,1026,0,0
+2020-08-11,Pelham,170,0,0
+2020-08-11,Pelham Manor,120,0,0
+2020-08-11,Pleasantville,134,0,0
+2020-08-11,Port Chester,1299,0,0
 2020-08-11,Pound Ridge,29,0,0
-2020-08-11,Rye Brook,NA,NA,NA
-2020-08-11,Rye City,NA,NA,NA
-2020-08-11,Scarsdale,NA,NA,NA
-2020-08-11,Sleepy Hollow,NA,NA,NA
-2020-08-11,Somers,NA,NA,NA
-2020-08-11,Tarrytown,NA,NA,NA
-2020-08-11,Tuckahoe,NA,NA,NA
-2020-08-11,White Plains,NA,NA,NA
-2020-08-11,Yonkers,NA,NA,NA
-2020-08-11,Yorktown,NA,NA,NA
-2020-08-11,Totals,NA,NA,NA
+2020-08-11,Rye Brook,188,0,0
+2020-08-11,Rye City,219,0,0
+2020-08-11,Scarsdale,369,0,0
+2020-08-11,Sleepy Hollow,415,0,0
+2020-08-11,Somers,404,0,0
+2020-08-11,Tarrytown,298,0,0
+2020-08-11,Tuckahoe,141,0,0
+2020-08-11,White Plains,1888,0,0
+2020-08-11,Yonkers,7411,0,0
+2020-08-11,Yorktown,740,0,0
+2020-08-11,Totals,28969,0,0
 2020-08-12,Ardsley,101,0,0
 2020-08-12,Bedford,266,1,0
 2020-08-12,Briarcliff Manor,111,0,0
 2020-08-12,Bronxville,87,3,0
-2020-08-12,Buchanan,41,NA,0
+2020-08-12,Buchanan,41,0,0
 2020-08-12,Cortlandt,922,12,0
 2020-08-12,Croton-on-Hudson,210,1,0
 2020-08-12,Dobbs Ferry,332,0,0
@@ -2906,7 +2906,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-13,Ardsley,102,1,1
 2020-08-13,Bedford,266,1,0
 2020-08-13,Briarcliff Manor,111,0,0
-2020-08-13,Bronxville,87,2,NA
+2020-08-13,Bronxville,87,2,0
 2020-08-13,Buchanan,41,1,0
 2020-08-13,Cortlandt,924,13,2
 2020-08-13,Croton-on-Hudson,210,1,0
@@ -2945,7 +2945,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-13,Tuckahoe,141,1,0
 2020-08-13,White Plains,1900,19,1
 2020-08-13,Yonkers,7475,104,4
-2020-08-13,Yorktown,744,6,NA
+2020-08-13,Yorktown,744,6,0
 2020-08-13,Totals,29143,331,24
 2020-08-17,Ardsley,102,1,0
 2020-08-17,Bedford,267,1,1
@@ -3005,7 +3005,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-18,Harrison,433,4,0
 2020-08-18,Hastings-on-Hudson,140,1,0
 2020-08-18,Irvington,87,1,0
-2020-08-18,Larchmont,75,NA,0
+2020-08-18,Larchmont,75,0,0
 2020-08-18,Lewisboro,119,1,0
 2020-08-18,Mamaroneck Town,177,0,0
 2020-08-18,Mamaroneck Village,485,8,1
@@ -3029,7 +3029,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-18,Scarsdale,371,3,0
 2020-08-18,Sleepy Hollow,434,18,3
 2020-08-18,Somers,408,5,0
-2020-08-18,Tarrytown,300,NA,0
+2020-08-18,Tarrytown,300,0,0
 2020-08-18,Tuckahoe,143,3,0
 2020-08-18,White Plains,1910,24,2
 2020-08-18,Yonkers,7558,141,9
@@ -3089,7 +3089,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-20,Dobbs Ferry,332,0,0
 2020-08-20,Eastchester,464,3,1
 2020-08-20,Elmsford,213,2,0
-2020-08-20,Greenburgh,1238,2,NA
+2020-08-20,Greenburgh,1238,2,0
 2020-08-20,Harrison,433,3,0
 2020-08-20,Hastings-on-Hudson,140,1,0
 2020-08-20,Irvington,87,0,0
@@ -3110,7 +3110,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-20,Pelham,174,3,0
 2020-08-20,Pelham Manor,124,4,1
 2020-08-20,Pleasantville,136,0,0
-2020-08-20,Port Chester,1312,NA,0
+2020-08-20,Port Chester,1312,0,0
 2020-08-20,Pound Ridge,29,0,0
 2020-08-20,Rye Brook,191,2,0
 2020-08-20,Rye City,221,2,1
@@ -3132,7 +3132,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-21,Croton-on-Hudson,212,2,0
 2020-08-21,Dobbs Ferry,333,1,1
 2020-08-21,Eastchester,464,3,0
-2020-08-21,Elmsford,213,2,NA
+2020-08-21,Elmsford,213,2,0
 2020-08-21,Greenburgh,1239,2,1
 2020-08-21,Harrison,433,3,0
 2020-08-21,Hastings-on-Hudson,140,1,0
@@ -3145,7 +3145,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-21,Mount Pleasant,598,6,1
 2020-08-21,Mount Vernon,2830,32,9
 2020-08-21,New Castle,215,2,0
-2020-08-21,New Rochelle,3181,26,NA
+2020-08-21,New Rochelle,3181,26,0
 2020-08-21,North Castle,219,3,1
 2020-08-21,North Salem,150,1,0
 2020-08-21,Ossining Town,160,2,0
@@ -3156,7 +3156,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-21,Pleasantville,136,0,0
 2020-08-21,Port Chester,1314,15,2
 2020-08-21,Pound Ridge,29,0,0
-2020-08-21,Rye Brook,191,2,NA
+2020-08-21,Rye Brook,191,2,0
 2020-08-21,Rye City,221,2,0
 2020-08-21,Scarsdale,371,3,0
 2020-08-21,Sleepy Hollow,435,19,1
@@ -3179,7 +3179,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-24,Elmsford,213,1,0
 2020-08-24,Greenburgh,1241,17,2
 2020-08-24,Harrison,437,7,4
-2020-08-24,Hastings-on-Hudson,141,2,NA
+2020-08-24,Hastings-on-Hudson,141,2,0
 2020-08-24,Irvington,87,1,0
 2020-08-24,Larchmont,75,0,0
 2020-08-24,Lewisboro,122,3,0
@@ -3273,7 +3273,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-26,Lewisboro,123,4,1
 2020-08-26,Mamaroneck Town,178,4,0
 2020-08-26,Mamaroneck Village,488,4,0
-2020-08-26,Mount Kisco,290,NA,0
+2020-08-26,Mount Kisco,290,0,0
 2020-08-26,Mount Pleasant,600,5,0
 2020-08-26,Mount Vernon,2836,29,5
 2020-08-26,New Castle,216,3,1
@@ -3317,7 +3317,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-27,Lewisboro,123,4,0
 2020-08-27,Mamaroneck Town,178,1,0
 2020-08-27,Mamaroneck Village,488,4,0
-2020-08-27,Mount Kisco,290,NA,0
+2020-08-27,Mount Kisco,290,0,0
 2020-08-27,Mount Pleasant,601,6,1
 2020-08-27,Mount Vernon,2838,28,2
 2020-08-27,New Castle,217,4,1
@@ -3343,50 +3343,50 @@ date,municipality,total_cases,active_cases,new_cases
 2020-08-27,Yonkers,7647,130,7
 2020-08-27,Yorktown,758,15,1
 2020-08-27,Totals,29586,378,21
-2020-08-29,Ardsley,NA,NA,NA
-2020-08-29,Bedford,NA,NA,NA
-2020-08-29,Briarcliff Manor,NA,NA,NA
-2020-08-29,Bronxville,NA,NA,NA
-2020-08-29,Buchanan,NA,NA,NA
-2020-08-29,Cortlandt,NA,NA,NA
-2020-08-29,Croton-on-Hudson,NA,NA,NA
-2020-08-29,Dobbs Ferry,NA,NA,NA
-2020-08-29,Eastchester,NA,NA,NA
-2020-08-29,Elmsford,NA,NA,NA
-2020-08-29,Greenburgh,NA,NA,NA
-2020-08-29,Harrison,NA,NA,NA
-2020-08-29,Hastings-on-Hudson,NA,NA,NA
-2020-08-29,Irvington,NA,NA,NA
-2020-08-29,Larchmont,NA,NA,NA
-2020-08-29,Lewisboro,NA,NA,NA
-2020-08-29,Mamaroneck Town,NA,NA,NA
-2020-08-29,Mamaroneck Village,NA,NA,NA
-2020-08-29,Mount Kisco,NA,NA,NA
-2020-08-29,Mount Pleasant,NA,NA,NA
-2020-08-29,Mount Vernon,NA,NA,NA
-2020-08-29,New Castle,NA,NA,NA
-2020-08-29,New Rochelle,NA,NA,NA
-2020-08-29,North Castle,NA,NA,NA
-2020-08-29,North Salem,NA,NA,NA
-2020-08-29,Ossining Town,NA,NA,NA
-2020-08-29,Ossining Village,NA,NA,NA
-2020-08-29,Peekskill,NA,NA,NA
-2020-08-29,Pelham,NA,NA,NA
-2020-08-29,Pelham Manor,NA,NA,NA
-2020-08-29,Pleasantville,NA,NA,NA
-2020-08-29,Port Chester,NA,NA,NA
+2020-08-29,Ardsley,102,0,0
+2020-08-29,Bedford,269,0,0
+2020-08-29,Briarcliff Manor,112,0,0
+2020-08-29,Bronxville,89,0,0
+2020-08-29,Buchanan,43,0,0
+2020-08-29,Cortlandt,947,0,0
+2020-08-29,Croton-on-Hudson,212,0,0
+2020-08-29,Dobbs Ferry,336,0,0
+2020-08-29,Eastchester,465,0,0
+2020-08-29,Elmsford,213,0,0
+2020-08-29,Greenburgh,1242,0,0
+2020-08-29,Harrison,438,0,0
+2020-08-29,Hastings-on-Hudson,141,0,0
+2020-08-29,Irvington,87,0,0
+2020-08-29,Larchmont,75,0,0
+2020-08-29,Lewisboro,123,0,0
+2020-08-29,Mamaroneck Town,178,0,0
+2020-08-29,Mamaroneck Village,488,0,0
+2020-08-29,Mount Kisco,290,0,0
+2020-08-29,Mount Pleasant,601,0,0
+2020-08-29,Mount Vernon,2838,0,0
+2020-08-29,New Castle,217,0,0
+2020-08-29,New Rochelle,3196,0,0
+2020-08-29,North Castle,221,0,0
+2020-08-29,North Salem,151,0,0
+2020-08-29,Ossining Town,160,0,0
+2020-08-29,Ossining Village,1102,0,0
+2020-08-29,Peekskill,1051,0,0
+2020-08-29,Pelham,176,0,0
+2020-08-29,Pelham Manor,124,0,0
+2020-08-29,Pleasantville,138,0,0
+2020-08-29,Port Chester,1321,0,0
 2020-08-29,Pound Ridge,29,0,0
-2020-08-29,Rye Brook,NA,NA,NA
-2020-08-29,Rye City,NA,NA,NA
-2020-08-29,Scarsdale,NA,NA,NA
-2020-08-29,Sleepy Hollow,NA,NA,NA
-2020-08-29,Somers,NA,NA,NA
-2020-08-29,Tarrytown,NA,NA,NA
-2020-08-29,Tuckahoe,NA,NA,NA
-2020-08-29,White Plains,NA,NA,NA
-2020-08-29,Yonkers,NA,NA,NA
-2020-08-29,Yorktown,NA,NA,NA
-2020-08-29,Totals,NA,NA,NA
+2020-08-29,Rye Brook,192,0,0
+2020-08-29,Rye City,224,0,0
+2020-08-29,Scarsdale,373,0,0
+2020-08-29,Sleepy Hollow,439,0,0
+2020-08-29,Somers,413,0,0
+2020-08-29,Tarrytown,303,0,0
+2020-08-29,Tuckahoe,143,0,0
+2020-08-29,White Plains,1919,0,0
+2020-08-29,Yonkers,7647,0,0
+2020-08-29,Yorktown,758,0,0
+2020-08-29,Totals,29586,0,0
 2020-08-31,Ardsley,102,0,0
 2020-08-31,Bedford,274,6,5
 2020-08-31,Briarcliff Manor,112,1,0
@@ -3502,14 +3502,14 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-02,North Salem,152,3,0
 2020-09-02,Ossining Town,163,3,1
 2020-09-02,Ossining Village,1111,12,2
-2020-09-02,Peekskill,1056,12,NA
+2020-09-02,Peekskill,1056,12,0
 2020-09-02,Pelham,176,2,0
 2020-09-02,Pelham Manor,125,2,0
 2020-09-02,Pleasantville,138,2,0
 2020-09-02,Port Chester,1328,15,2
 2020-09-02,Pound Ridge,29,0,0
 2020-09-02,Rye Brook,194,3,1
-2020-09-02,Rye City,224,2,NA
+2020-09-02,Rye City,224,2,0
 2020-09-02,Scarsdale,374,3,0
 2020-09-02,Sleepy Hollow,445,11,1
 2020-09-02,Somers,417,6,1
@@ -3517,7 +3517,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-02,Tuckahoe,145,2,0
 2020-09-02,White Plains,1934,26,2
 2020-09-02,Yonkers,7705,116,2
-2020-09-02,Yorktown,766,17,NA
+2020-09-02,Yorktown,766,17,0
 2020-09-02,Totals,29818,427,438
 2020-09-03,Ardsley,102,0,0
 2020-09-03,Bedford,277,8,0
@@ -3549,13 +3549,13 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-03,Peekskill,1057,12,1
 2020-09-03,Pelham,176,2,0
 2020-09-03,Pelham Manor,125,2,0
-2020-09-03,Pleasantville,139,3,NA
+2020-09-03,Pleasantville,139,3,0
 2020-09-03,Port Chester,1329,15,1
 2020-09-03,Pound Ridge,29,0,0
 2020-09-03,Rye Brook,194,3,0
 2020-09-03,Rye City,226,4,2
 2020-09-03,Scarsdale,374,3,0
-2020-09-03,Sleepy Hollow,446,12,NA
+2020-09-03,Sleepy Hollow,446,12,0
 2020-09-03,Somers,419,8,2
 2020-09-03,Tarrytown,309,10,0
 2020-09-03,Tuckahoe,146,3,1
@@ -3611,7 +3611,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-08,Bedford,281,12,4
 2020-09-08,Briarcliff Manor,119,7,1
 2020-09-08,Bronxville,94,9,1
-2020-09-08,Buchanan,44,1,NA
+2020-09-08,Buchanan,44,1,0
 2020-09-08,Cortlandt,967,17,2
 2020-09-08,Croton-on-Hudson,214,2,1
 2020-09-08,Dobbs Ferry,338,4,2
@@ -3660,7 +3660,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-09,Croton-on-Hudson,214,2,0
 2020-09-09,Dobbs Ferry,338,2,0
 2020-09-09,Eastchester,470,6,0
-2020-09-09,Elmsford,214,1,NA
+2020-09-09,Elmsford,214,1,0
 2020-09-09,Greenburgh,1264,22,2
 2020-09-09,Harrison,450,12,0
 2020-09-09,Hastings-on-Hudson,143,2,0
@@ -3787,7 +3787,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-15,Bedford,289,12,1
 2020-09-15,Briarcliff Manor,126,9,1
 2020-09-15,Bronxville,95,5,0
-2020-09-15,Buchanan,45,2,NA
+2020-09-15,Buchanan,45,2,0
 2020-09-15,Cortlandt,974,14,0
 2020-09-15,Croton-on-Hudson,216,3,0
 2020-09-15,Dobbs Ferry,344,8,0
@@ -3797,7 +3797,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-15,Harrison,454,11,1
 2020-09-15,Hastings-on-Hudson,145,4,0
 2020-09-15,Irvington,88,1,0
-2020-09-15,Larchmont,78,3,NA
+2020-09-15,Larchmont,78,3,0
 2020-09-15,Lewisboro,132,9,2
 2020-09-15,Mamaroneck Town,190,10,0
 2020-09-15,Mamaroneck Village,497,7,0
@@ -3811,7 +3811,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-15,Ossining Town,164,2,0
 2020-09-15,Ossining Village,1127,16,3
 2020-09-15,Peekskill,1064,9,1
-2020-09-15,Pelham,176,NA,0
+2020-09-15,Pelham,176,0,0
 2020-09-15,Pelham Manor,128,3,1
 2020-09-15,Pleasantville,148,10,1
 2020-09-15,Port Chester,1339,12,0
@@ -3945,7 +3945,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-18,Peekskill,1064,6,0
 2020-09-18,Pelham,176,0,0
 2020-09-18,Pelham Manor,128,3,0
-2020-09-18,Pleasantville,148,8,NA
+2020-09-18,Pleasantville,148,8,0
 2020-09-18,Port Chester,1341,11,0
 2020-09-18,Pound Ridge,30,1,0
 2020-09-18,Rye Brook,200,4,0
@@ -4030,10 +4030,10 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-22,North Salem,159,5,1
 2020-09-22,Ossining Town,165,3,0
 2020-09-22,Ossining Village,1133,17,3
-2020-09-22,Peekskill,1069,NA,2
+2020-09-22,Peekskill,1069,0,2
 2020-09-22,Pelham,177,1,0
 2020-09-22,Pelham Manor,129,4,1
-2020-09-22,Pleasantville,151,8,NA
+2020-09-22,Pleasantville,151,8,0
 2020-09-22,Port Chester,1343,7,0
 2020-09-22,Pound Ridge,31,1,0
 2020-09-22,Rye Brook,202,3,0
@@ -4229,7 +4229,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-29,Bronxville,96,1,0
 2020-09-29,Buchanan,46,1,0
 2020-09-29,Cortlandt,990,17,1
-2020-09-29,Croton-on-Hudson,217,1,NA
+2020-09-29,Croton-on-Hudson,217,1,0
 2020-09-29,Dobbs Ferry,348,3,1
 2020-09-29,Eastchester,479,7,4
 2020-09-29,Elmsford,219,1,0
@@ -4296,7 +4296,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-09-30,Ossining Village,1143,14,1
 2020-09-30,Peekskill,1072,8,1
 2020-09-30,Pelham,179,3,0
-2020-09-30,Pelham Manor,129,NA,0
+2020-09-30,Pelham Manor,129,0,0
 2020-09-30,Pleasantville,152,4,0
 2020-09-30,Port Chester,1353,12,3
 2020-09-30,Pound Ridge,34,4,0
@@ -4317,7 +4317,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-01,Bronxville,96,1,0
 2020-10-01,Buchanan,47,2,1
 2020-10-01,Cortlandt,992,18,0
-2020-10-01,Croton-on-Hudson,218,NA,0
+2020-10-01,Croton-on-Hudson,218,0,0
 2020-10-01,Dobbs Ferry,350,5,0
 2020-10-01,Eastchester,479,6,0
 2020-10-01,Elmsford,219,1,0
@@ -4326,7 +4326,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-01,Hastings-on-Hudson,148,2,1
 2020-10-01,Irvington,94,2,0
 2020-10-01,Larchmont,85,4,0
-2020-10-01,Lewisboro,139,NA,1
+2020-10-01,Lewisboro,139,0,1
 2020-10-01,Mamaroneck Town,190,0,0
 2020-10-01,Mamaroneck Village,502,3,0
 2020-10-01,Mount Kisco,312,1,0
@@ -4404,7 +4404,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-05,Briarcliff Manor,130,3,2
 2020-10-05,Bronxville,96,0,0
 2020-10-05,Buchanan,47,2,0
-2020-10-05,Cortlandt,1000,20,NA
+2020-10-05,Cortlandt,1000,20,0
 2020-10-05,Croton-on-Hudson,219,2,0
 2020-10-05,Dobbs Ferry,353,8,2
 2020-10-05,Eastchester,480,4,0
@@ -4473,7 +4473,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-06,Peekskill,1079,10,0
 2020-10-06,Pelham,181,2,0
 2020-10-06,Pelham Manor,133,4,3
-2020-10-06,Pleasantville,158,NA,1
+2020-10-06,Pleasantville,158,0,1
 2020-10-06,Port Chester,1367,22,3
 2020-10-06,Pound Ridge,37,5,0
 2020-10-06,Rye Brook,210,8,2
@@ -4488,7 +4488,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-06,Yorktown,836,32,5
 2020-10-06,Totals,31272,608,83
 2020-10-07,Ardsley,108,3,0
-2020-10-07,Bedford,307,NA,0
+2020-10-07,Bedford,307,0,0
 2020-10-07,Briarcliff Manor,130,2,0
 2020-10-07,Bronxville,97,1,4
 2020-10-07,Buchanan,47,2,0
@@ -4538,7 +4538,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-08,Buchanan,47,1,0
 2020-10-08,Cortlandt,1009,25,3
 2020-10-08,Croton-on-Hudson,219,2,0
-2020-10-08,Dobbs Ferry,354,9,NA
+2020-10-08,Dobbs Ferry,354,9,0
 2020-10-08,Eastchester,481,3,0
 2020-10-08,Elmsford,220,4,0
 2020-10-08,Greenburgh,1309,17,0
@@ -4546,7 +4546,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-08,Hastings-on-Hudson,153,6,1
 2020-10-08,Irvington,98,5,1
 2020-10-08,Larchmont,85,2,0
-2020-10-08,Lewisboro,140,4,NA
+2020-10-08,Lewisboro,140,4,0
 2020-10-08,Mamaroneck Town,191,4,0
 2020-10-08,Mamaroneck Village,506,4,1
 2020-10-08,Mount Kisco,314,3,0
@@ -4616,7 +4616,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-09,Tarrytown,331,9,1
 2020-10-09,Tuckahoe,151,5,0
 2020-10-09,White Plains,2008,34,1
-2020-10-09,Yonkers,8038,116,NA
+2020-10-09,Yonkers,8038,116,0
 2020-10-09,Yorktown,842,37,4
 2020-10-09,Totals,31408,667,54
 2020-10-13,Ardsley,114,9,6
@@ -4681,7 +4681,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-14,Lewisboro,143,4,0
 2020-10-14,Mamaroneck Town,194,3,1
 2020-10-14,Mamaroneck Village,516,12,1
-2020-10-14,Mount Kisco,319,NA,1
+2020-10-14,Mount Kisco,319,0,1
 2020-10-14,Mount Pleasant,675,27,0
 2020-10-14,Mount Vernon,2943,43,2
 2020-10-14,New Castle,259,7,0
@@ -4798,12 +4798,12 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-19,Ardsley,115,7,0
 2020-10-19,Bedford,320,2,6
 2020-10-19,Briarcliff Manor,134,4,1
-2020-10-19,Bronxville,98,2,NA
-2020-10-19,Buchanan,49,2,NA
+2020-10-19,Bronxville,98,2,0
+2020-10-19,Buchanan,49,2,0
 2020-10-19,Cortlandt,1033,29,3
 2020-10-19,Croton-on-Hudson,220,1,1
 2020-10-19,Dobbs Ferry,364,8,2
-2020-10-19,Eastchester,NA,NA,NA
+2020-10-19,Eastchester,486,0,0
 2020-10-19,Elmsford,222,3,1
 2020-10-19,Greenburgh,1347,42,18
 2020-10-19,Harrison,498,7,7
@@ -4818,25 +4818,25 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-19,Mount Vernon,2965,48,13
 2020-10-19,New Castle,264,8,2
 2020-10-19,New Rochelle,3546,179,28
-2020-10-19,North Castle,247,3,NA
+2020-10-19,North Castle,247,3,0
 2020-10-19,North Salem,196,9,1
-2020-10-19,Ossining Town,175,NA,0
-2020-10-19,Ossining Village,NA,NA,NA
+2020-10-19,Ossining Town,175,0,0
+2020-10-19,Ossining Village,1168,0,0
 2020-10-19,Peekskill,1102,23,4
-2020-10-19,Pelham,186,6,NA
+2020-10-19,Pelham,186,6,0
 2020-10-19,Pelham Manor,137,4,4
-2020-10-19,Pleasantville,167,9,NA
+2020-10-19,Pleasantville,167,9,0
 2020-10-19,Port Chester,1413,47,20
 2020-10-19,Pound Ridge,41,5,0
 2020-10-19,Rye Brook,223,2,3
 2020-10-19,Rye City,262,23,10
 2020-10-19,Scarsdale,402,6,1
-2020-10-19,Sleepy Hollow,495,2,NA
+2020-10-19,Sleepy Hollow,495,2,0
 2020-10-19,Somers,478,4,7
-2020-10-19,Tarrytown,340,NA,2
+2020-10-19,Tarrytown,340,0,2
 2020-10-19,Tuckahoe,152,3,0
 2020-10-19,White Plains,2031,30,9
-2020-10-19,Yonkers,8156,138,NA
+2020-10-19,Yonkers,8156,138,0
 2020-10-19,Yorktown,869,33,9
 2020-10-19,Totals,32110,864,214
 2020-10-20,Ardsley,115,7,0
@@ -4865,7 +4865,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-20,North Castle,248,3,4
 2020-10-20,North Salem,186,9,0
 2020-10-20,Ossining Town,175,0,0
-2020-10-20,Ossining Village,NA,NA,NA
+2020-10-20,Ossining Village,1168,0,0
 2020-10-20,Peekskill,1105,24,3
 2020-10-20,Pelham,186,5,0
 2020-10-20,Pelham Manor,137,4,0
@@ -4886,41 +4886,41 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-21,Ardsley,116,8,1
 2020-10-21,Bedford,321,13,1
 2020-10-21,Briarcliff Manor,135,4,0
-2020-10-21,Bronxville,98,1,NA
-2020-10-21,Buchanan,49,2,NA
-2020-10-21,Cortlandt,1041,NA,2
-2020-10-21,Croton-on-Hudson,224,2,NA
-2020-10-21,Dobbs Ferry,361,7,NA
+2020-10-21,Bronxville,98,1,0
+2020-10-21,Buchanan,49,2,0
+2020-10-21,Cortlandt,1041,0,2
+2020-10-21,Croton-on-Hudson,224,2,0
+2020-10-21,Dobbs Ferry,361,7,0
 2020-10-21,Eastchester,488,6,0
-2020-10-21,Elmsford,222,3,NA
+2020-10-21,Elmsford,222,3,0
 2020-10-21,Greenburgh,1354,44,3
 2020-10-21,Harrison,500,7,2
-2020-10-21,Hastings-on-Hudson,156,4,NA
+2020-10-21,Hastings-on-Hudson,156,4,0
 2020-10-21,Irvington,103,3,0
 2020-10-21,Larchmont,94,7,1
-2020-10-21,Lewisboro,145,5,NA
+2020-10-21,Lewisboro,145,5,0
 2020-10-21,Mamaroneck Town,204,10,1
 2020-10-21,Mamaroneck Village,534,26,4
-2020-10-21,Mount Kisco,324,NA,NA
+2020-10-21,Mount Kisco,324,0,0
 2020-10-21,Mount Pleasant,686,18,4
 2020-10-21,Mount Vernon,2979,87,9
 2020-10-21,New Castle,264,9,1
 2020-10-21,New Rochelle,3571,183,10
 2020-10-21,North Castle,249,3,1
 2020-10-21,North Salem,187,5,1
-2020-10-21,Ossining Town,175,NA,0
-2020-10-21,Ossining Village,NA,NA,NA
+2020-10-21,Ossining Town,175,0,0
+2020-10-21,Ossining Village,1168,0,0
 2020-10-21,Peekskill,1107,2,2
 2020-10-21,Pelham,187,5,1
 2020-10-21,Pelham Manor,138,5,1
-2020-10-21,Pleasantville,167,5,NA
+2020-10-21,Pleasantville,167,5,0
 2020-10-21,Port Chester,1423,53,9
 2020-10-21,Pound Ridge,42,5,1
-2020-10-21,Rye Brook,223,12,NA
+2020-10-21,Rye Brook,223,12,0
 2020-10-21,Rye City,270,30,0
-2020-10-21,Scarsdale,403,6,NA
-2020-10-21,Sleepy Hollow,NA,16,3
-2020-10-21,Somers,478,13,NA
+2020-10-21,Scarsdale,403,6,0
+2020-10-21,Sleepy Hollow,498,16,3
+2020-10-21,Somers,478,13,0
 2020-10-21,Tarrytown,343,1,3
 2020-10-21,Tuckahoe,153,2,0
 2020-10-21,White Plains,2045,40,6
@@ -4941,7 +4941,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-22,Harrison,504,20,4
 2020-10-22,Hastings-on-Hudson,156,4,0
 2020-10-22,Irvington,103,3,0
-2020-10-22,Larchmont,95,NA,1
+2020-10-22,Larchmont,95,0,1
 2020-10-22,Lewisboro,145,5,0
 2020-10-22,Mamaroneck Town,203,12,2
 2020-10-22,Mamaroneck Village,537,29,3
@@ -4953,14 +4953,14 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-22,North Castle,249,3,0
 2020-10-22,North Salem,187,4,0
 2020-10-22,Ossining Town,175,0,0
-2020-10-22,Ossining Village,NA,NA,NA
+2020-10-22,Ossining Village,1168,0,0
 2020-10-22,Peekskill,1112,26,5
 2020-10-22,Pelham,187,5,0
 2020-10-22,Pelham Manor,138,5,0
 2020-10-22,Pleasantville,168,5,1
 2020-10-22,Port Chester,1433,59,10
 2020-10-22,Pound Ridge,44,6,1
-2020-10-22,Rye Brook,223,NA,0
+2020-10-22,Rye Brook,223,0,0
 2020-10-22,Rye City,272,30,2
 2020-10-22,Scarsdale,403,6,0
 2020-10-22,Sleepy Hollow,504,19,3
@@ -4985,22 +4985,22 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-23,Harrison,504,19,0
 2020-10-23,Hastings-on-Hudson,156,2,0
 2020-10-23,Irvington,103,3,0
-2020-10-23,Larchmont,95,7,NA
+2020-10-23,Larchmont,95,7,0
 2020-10-23,Lewisboro,145,3,0
 2020-10-23,Mamaroneck Town,203,1,0
 2020-10-23,Mamaroneck Village,542,32,5
 2020-10-23,Mount Kisco,327,13,0
 2020-10-23,Mount Pleasant,690,20,4
 2020-10-23,Mount Vernon,2992,67,9
-2020-10-23,New Castle,267,12,NA
+2020-10-23,New Castle,267,12,0
 2020-10-23,New Rochelle,3583,189,6
 2020-10-23,North Castle,249,3,0
 2020-10-23,North Salem,187,4,0
 2020-10-23,Ossining Town,175,0,0
-2020-10-23,Ossining Village,NA,NA,NA
+2020-10-23,Ossining Village,1168,0,0
 2020-10-23,Peekskill,1114,28,2
-2020-10-23,Pelham,187,5,NA
-2020-10-23,Pelham Manor,138,5,NA
+2020-10-23,Pelham,187,5,0
+2020-10-23,Pelham Manor,138,5,0
 2020-10-23,Pleasantville,168,4,0
 2020-10-23,Port Chester,1437,63,4
 2020-10-23,Pound Ridge,44,6,0
@@ -5018,7 +5018,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-26,Ardsley,118,4,2
 2020-10-26,Bedford,333,20,6
 2020-10-26,Briarcliff Manor,136,3,1
-2020-10-26,Bronxville,98,NA,0
+2020-10-26,Bronxville,98,0,0
 2020-10-26,Buchanan,51,2,1
 2020-10-26,Cortlandt,1050,5,5
 2020-10-26,Croton-on-Hudson,223,4,1
@@ -5040,7 +5040,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-26,New Rochelle,3625,184,42
 2020-10-26,North Castle,252,5,3
 2020-10-26,North Salem,189,5,2
-2020-10-26,Ossining Town,175,NA,0
+2020-10-26,Ossining Town,175,0,0
 2020-10-26,Ossining Village,1181,2,6
 2020-10-26,Peekskill,1128,7,14
 2020-10-26,Pelham,189,6,2
@@ -5053,9 +5053,9 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-26,Scarsdale,405,6,2
 2020-10-26,Sleepy Hollow,510,7,5
 2020-10-26,Somers,484,3,4
-2020-10-26,Tarrytown,347,NA,1
+2020-10-26,Tarrytown,347,0,1
 2020-10-26,Tuckahoe,153,1,0
-2020-10-26,White Plains,2061,45,NA
+2020-10-26,White Plains,2061,45,0
 2020-10-26,Yonkers,8294,207,7
 2020-10-26,Yorktown,890,35,7
 2020-10-26,Totals,32717,1033,267
@@ -5067,7 +5067,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-27,Cortlandt,1052,27,2
 2020-10-27,Croton-on-Hudson,223,4,0
 2020-10-27,Dobbs Ferry,365,6,1
-2020-10-27,Eastchester,NA,NA,NA
+2020-10-27,Eastchester,492,0,0
 2020-10-27,Elmsford,223,3,0
 2020-10-27,Greenburgh,1368,43,3
 2020-10-27,Harrison,515,25,7
@@ -5079,7 +5079,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-27,Mamaroneck Village,558,41,6
 2020-10-27,Mount Kisco,331,12,0
 2020-10-27,Mount Pleasant,693,19,1
-2020-10-27,Mount Vernon,NA,NA,NA
+2020-10-27,Mount Vernon,3008,0,0
 2020-10-27,New Castle,272,14,2
 2020-10-27,New Rochelle,3649,194,24
 2020-10-27,North Castle,252,5,0
@@ -5099,7 +5099,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-27,Somers,486,15,2
 2020-10-27,Tarrytown,349,13,2
 2020-10-27,Tuckahoe,153,1,0
-2020-10-27,White Plains,2078,59,NA
+2020-10-27,White Plains,2078,59,0
 2020-10-27,Yonkers,8351,244,57
 2020-10-27,Yorktown,895,36,5
 2020-10-27,Totals,32904,1150,187
@@ -5120,7 +5120,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-28,Larchmont,95,5,0
 2020-10-28,Lewisboro,150,7,0
 2020-10-28,Mamaroneck Town,209,15,4
-2020-10-28,Mamaroneck Village,560,42,NA
+2020-10-28,Mamaroneck Village,560,42,0
 2020-10-28,Mount Kisco,334,14,3
 2020-10-28,Mount Pleasant,694,18,4
 2020-10-28,Mount Vernon,3035,87,8
@@ -5167,7 +5167,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-29,Mamaroneck Village,561,40,4
 2020-10-29,Mount Kisco,338,7,4
 2020-10-29,Mount Pleasant,695,7,1
-2020-10-29,Mount Vernon,NA,NA,NA
+2020-10-29,Mount Vernon,3035,0,0
 2020-10-29,New Castle,272,13,0
 2020-10-29,New Rochelle,3669,154,10
 2020-10-29,North Castle,252,5,0
@@ -5182,7 +5182,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-10-29,Pound Ridge,45,4,0
 2020-10-29,Rye Brook,227,7,0
 2020-10-29,Rye City,276,24,0
-2020-10-29,Scarsdale,NA,10,3
+2020-10-29,Scarsdale,408,10,3
 2020-10-29,Sleepy Hollow,514,17,0
 2020-10-29,Somers,489,16,2
 2020-10-29,Tarrytown,350,13,0
@@ -5252,9 +5252,9 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-02,Larchmont,98,4,3
 2020-11-02,Lewisboro,158,13,3
 2020-11-02,Mamaroneck Town,215,18,4
-2020-11-02,Mamaroneck Village,575,44,NA
+2020-11-02,Mamaroneck Village,575,44,0
 2020-11-02,Mount Kisco,343,19,2
-2020-11-02,Mount Pleasant,705,NA,9
+2020-11-02,Mount Pleasant,705,0,9
 2020-11-02,Mount Vernon,3069,101,2
 2020-11-02,New Castle,280,7,7
 2020-11-02,New Rochelle,3733,17,37
@@ -5262,8 +5262,8 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-02,North Salem,191,5,1
 2020-11-02,Ossining Town,176,1,0
 2020-11-02,Ossining Village,1203,4,10
-2020-11-02,Peekskill,1156,50,NA
-2020-11-02,Pelham,197,NA,3
+2020-11-02,Peekskill,1156,50,0
+2020-11-02,Pelham,197,0,3
 2020-11-02,Pelham Manor,147,9,4
 2020-11-02,Pleasantville,174,7,1
 2020-11-02,Port Chester,1494,79,20
@@ -5272,7 +5272,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-02,Rye City,283,12,7
 2020-11-02,Scarsdale,413,14,1
 2020-11-02,Sleepy Hollow,522,23,8
-2020-11-02,Somers,499,NA,4
+2020-11-02,Somers,499,0,4
 2020-11-02,Tarrytown,354,13,3
 2020-11-02,Tuckahoe,158,5,4
 2020-11-02,White Plains,2122,82,23
@@ -5280,11 +5280,11 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-02,Yorktown,909,33,8
 2020-11-02,Totals,33521,1296,342
 2020-11-04,Ardsley,123,7,2
-2020-11-04,Bedford,345,NA,3
+2020-11-04,Bedford,345,0,3
 2020-11-04,Briarcliff Manor,143,8,3
-2020-11-04,Bronxville,102,4,NA
+2020-11-04,Bronxville,102,4,0
 2020-11-04,Buchanan,54,4,1
-2020-11-04,Cortlandt,1089,27,NA
+2020-11-04,Cortlandt,1089,27,0
 2020-11-04,Croton-on-Hudson,228,5,1
 2020-11-04,Dobbs Ferry,375,13,1
 2020-11-04,Eastchester,510,2,2
@@ -5305,17 +5305,17 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-04,North Castle,269,20,7
 2020-11-04,North Salem,194,7,3
 2020-11-04,Ossining Town,177,2,1
-2020-11-04,Ossining Village,NA,NA,NA
+2020-11-04,Ossining Village,1203,0,0
 2020-11-04,Peekskill,1169,53,13
-2020-11-04,Pelham,197,NA,0
+2020-11-04,Pelham,197,0,0
 2020-11-04,Pelham Manor,148,9,1
 2020-11-04,Pleasantville,174,6,0
 2020-11-04,Port Chester,1519,86,25
 2020-11-04,Pound Ridge,46,2,1
 2020-11-04,Rye Brook,238,13,4
 2020-11-04,Rye City,288,7,6
-2020-11-04,Scarsdale,NA,12,3
-2020-11-04,Sleepy Hollow,525,NA,3
+2020-11-04,Scarsdale,413,12,3
+2020-11-04,Sleepy Hollow,525,0,3
 2020-11-04,Somers,504,23,5
 2020-11-04,Tarrytown,356,12,2
 2020-11-04,Tuckahoe,160,7,2
@@ -5461,7 +5461,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-10,Bronxville,109,10,0
 2020-11-10,Buchanan,59,7,2
 2020-11-10,Cortlandt,1103,48,10
-2020-11-10,Croton-on-Hudson,233,NA,2
+2020-11-10,Croton-on-Hudson,233,0,2
 2020-11-10,Dobbs Ferry,389,24,4
 2020-11-10,Eastchester,525,26,10
 2020-11-10,Elmsford,240,17,3
@@ -5524,7 +5524,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-12,New Rochelle,3931,229,62
 2020-11-12,North Castle,295,40,5
 2020-11-12,North Salem,199,9,1
-2020-11-12,Ossining Town,183,NA,2
+2020-11-12,Ossining Town,183,0,2
 2020-11-12,Ossining Village,1276,87,27
 2020-11-12,Peekskill,1242,96,26
 2020-11-12,Pelham,207,11,3
@@ -5647,7 +5647,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-17,Irvington,118,1,1
 2020-11-17,Larchmont,114,16,0
 2020-11-17,Lewisboro,183,24,3
-2020-11-17,Mamaroneck Town,238,22,NA
+2020-11-17,Mamaroneck Town,238,22,0
 2020-11-17,Mamaroneck Village,639,87,6
 2020-11-17,Mount Kisco,412,62,7
 2020-11-17,Mount Pleasant,776,62,10
@@ -5761,7 +5761,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-11-19,Tuckahoe,180,17,2
 2020-11-19,White Plains,2330,184,8
 2020-11-19,Yonkers,9141,568,52
-2020-11-19,Yorktown,1076,150,NA
+2020-11-19,Yorktown,1076,150,0
 2020-11-19,Totals,37501,3419,277
 2020-11-20,Ardsley,133,8,1
 2020-11-20,Bedford,422,73,8
@@ -5992,7 +5992,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-12-01,Croton-on-Hudson,279,30,2
 2020-12-01,Dobbs Ferry,458,36,5
 2020-12-01,Eastchester,704,127,12
-2020-12-01,Elmsford,292,44,NA
+2020-12-01,Elmsford,292,44,0
 2020-12-01,Greenburgh,1688,189,13
 2020-12-01,Harrison,775,135,5
 2020-12-01,Hastings-on-Hudson,194,17,0
@@ -6006,7 +6006,7 @@ date,municipality,total_cases,active_cases,new_cases
 2020-12-01,Mount Vernon,3625,329,33
 2020-12-01,New Castle,385,46,4
 2020-12-01,New Rochelle,4663,488,62
-2020-12-01,North Castle,373,53,NA
+2020-12-01,North Castle,373,53,0
 2020-12-01,North Salem,254,39,3
 2020-12-01,Ossining Town,217,18,4
 2020-12-01,Ossining Village,1654,261,18
@@ -11746,3 +11746,96 @@ date,municipality,total_cases,active_cases,new_cases
 2021-06-21,White Plains,7507,14,1
 2021-06-21,Yonkers,29221,70,6
 2021-06-21,Yorktown,4474,8,0
+2021-05-16,Pound Ridge,273,0,0
+2021-05-25,New Castle,1125,0,0
+2021-05-26,New Castle,1125,0,0
+2021-05-27,New Castle,1125,0,0
+2021-05-30,Pelham Manor,586,0,0
+2021-05-31,Pelham Manor,586,0,0
+2021-05-31,Pound Ridge,273,0,0
+2021-06-01,Pelham Manor,586,0,0
+2021-06-01,Pleasantville,703,0,0
+2021-06-01,Pound Ridge,273,0,0
+2021-06-02,Pelham Manor,586,0,0
+2021-06-02,Pleasantville,703,0,0
+2021-06-02,Pound Ridge,273,0,0
+2021-06-03,Lewisboro,845,0,0
+2021-06-03,North Castle,1221,0,0
+2021-06-03,Pelham Manor,586,0,0
+2021-06-03,Pleasantville,703,0,0
+2021-06-03,Pound Ridge,273,0,0
+2021-06-03,Tuckahoe,728,0,0
+2021-06-06,Bronxville,514,0,0
+2021-06-06,Larchmont,525,0,0
+2021-06-06,North Castle,1221,0,0
+2021-06-06,Pelham Manor,586,0,0
+2021-06-06,Pleasantville,703,0,0
+2021-06-06,Pound Ridge,273,0,0
+2021-06-07,Bronxville,514,0,0
+2021-06-07,Larchmont,525,0,0
+2021-06-07,North Castle,1221,0,0
+2021-06-07,Pelham Manor,586,0,0
+2021-06-07,Pleasantville,703,0,0
+2021-06-07,Pound Ridge,273,0,0
+2021-06-08,Bronxville,514,0,0
+2021-06-08,Buchanan,279,0,0
+2021-06-08,Larchmont,525,0,0
+2021-06-08,North Castle,1221,0,0
+2021-06-08,Pelham Manor,586,0,0
+2021-06-08,Pleasantville,703,0,0
+2021-06-08,Pound Ridge,273,0,0
+2021-06-09,Bronxville,514,0,0
+2021-06-09,Larchmont,525,0,0
+2021-06-09,North Castle,1221,0,0
+2021-06-09,Pelham Manor,586,0,0
+2021-06-09,Pleasantville,703,0,0
+2021-06-09,Pound Ridge,273,0,0
+2021-06-10,Bronxville,514,0,0
+2021-06-10,Larchmont,525,0,0
+2021-06-10,North Castle,1221,0,0
+2021-06-10,Pelham Manor,586,0,0
+2021-06-10,Pleasantville,703,0,0
+2021-06-10,Pound Ridge,273,0,0
+2021-06-13,Bronxville,514,0,0
+2021-06-13,Larchmont,525,0,0
+2021-06-13,North Castle,1221,0,0
+2021-06-13,Pelham Manor,586,0,0
+2021-06-13,Pleasantville,703,0,0
+2021-06-13,Pound Ridge,273,0,0
+2021-06-14,Bronxville,514,0,0
+2021-06-14,Larchmont,525,0,0
+2021-06-14,North Castle,1221,0,0
+2021-06-14,Pelham Manor,586,0,0
+2021-06-14,Pleasantville,703,0,0
+2021-06-14,Pound Ridge,273,0,0
+2021-06-15,Bronxville,514,0,0
+2021-06-15,Irvington,475,0,0
+2021-06-15,Larchmont,525,0,0
+2021-06-15,North Castle,1221,0,0
+2021-06-15,Pelham Manor,586,0,0
+2021-06-15,Pleasantville,703,0,0
+2021-06-15,Pound Ridge,273,0,0
+2021-06-16,Bronxville,514,0,0
+2021-06-16,Irvington,475,0,0
+2021-06-16,Larchmont,525,0,0
+2021-06-16,North Castle,1221,0,0
+2021-06-16,Pelham Manor,586,0,0
+2021-06-16,Pleasantville,703,0,0
+2021-06-16,Pound Ridge,273,0,0
+2021-06-20,Bronxville,514,0,0
+2021-06-20,Dobbs Ferry,1352,0,0
+2021-06-20,Elmsford,772,0,0
+2021-06-20,Larchmont,525,0,0
+2021-06-20,Mamaroneck Village,2453,0,0
+2021-06-20,North Castle,1221,0,0
+2021-06-20,Pelham Manor,586,0,0
+2021-06-20,Pleasantville,703,0,0
+2021-06-20,Pound Ridge,273,0,0
+2021-06-21,Bronxville,514,0,0
+2021-06-21,Dobbs Ferry,1352,0,0
+2021-06-21,Elmsford,772,0,0
+2021-06-21,Larchmont,525,0,0
+2021-06-21,North Castle,1221,0,0
+2021-06-21,Pelham Manor,586,0,0
+2021-06-21,Pleasantville,703,0,0
+2021-06-21,Pound Ridge,273,0,0
