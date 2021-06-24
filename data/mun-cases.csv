@@ -11839,3 +11839,46 @@ date,municipality,total_cases,active_cases,new_cases
 2021-06-21,Pelham Manor,586,0,0
 2021-06-21,Pleasantville,703,0,0
 2021-06-21,Pound Ridge,273,0,0
+2021-06-23,Ardsley,430,3,1
+2021-06-23,Bedford,1645,1,1
+2021-06-23,Briarcliff Manor,671,1,0
+2021-06-23,Bronxville,515,1,0
+2021-06-23,Cortlandt,3727,13,1
+2021-06-23,Croton-on-Hudson,773,3,0
+2021-06-23,Eastchester,2261,5,0
+2021-06-23,Elmsford,774,2,1
+2021-06-23,Greenburgh,4837,9,2
+2021-06-23,Harrison,2845,5,2
+2021-06-23,Hastings-on-Hudson,623,1,0
+2021-06-23,Irvington,475,2,0
+2021-06-23,Lewisboro,845,1,0
+2021-06-23,Mamaroneck Town,985,2,0
+2021-06-23,Mamaroneck Village,2453,1,0
+2021-06-23,Mount Pleasant,2866,8,0
+2021-06-23,Mount Vernon,9240,14,2
+2021-06-23,New Castle,1125,1,0
+2021-06-23,New Rochelle,11622,14,4
+2021-06-23,North Salem,624,3,0
+2021-06-23,Ossining Town,588,1,0
+2021-06-23,Ossining Village,4118,6,2
+2021-06-23,Peekskill,3912,7,1
+2021-06-23,Pelham,767,5,0
+2021-06-23,Port Chester,4980,7,2
+2021-06-23,Rye Brook,994,1,0
+2021-06-23,Rye City,1460,1,0
+2021-06-23,Scarsdale,1176,6,1
+2021-06-23,Sleepy Hollow,1773,1,0
+2021-06-23,Somers,2089,4,0
+2021-06-23,Tarrytown,1552,6,1
+2021-06-23,Tuckahoe,728,2,0
+2021-06-23,White Plains,7511,15,4
+2021-06-23,Yonkers,29227,62,4
+2021-06-23,Yorktown,4475,8,1
+NA,Buchanan,279,0,0
+NA,Dobbs Ferry,1352,0,0
+NA,Larchmont,525,0,0
+NA,Mount Kisco,1430,0,0
+NA,North Castle,1221,0,0
+NA,Pelham Manor,586,0,0
+NA,Pleasantville,703,0,0
+NA,Pound Ridge,273,0,0

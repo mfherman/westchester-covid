@@ -46,8 +46,8 @@ update_daily_mun_data <- function() {
   new_mun_daily_filled <- new_mun_daily %>% 
     full_join(all_mun, by = "municipality") %>% 
     mutate(
-    active_cases = if_else(is.na(active_cases), 0, active_cases),
-    new_cases    = if_else(is.na(new_cases), 0, new_cases),
+    active_cases = if_else(is.na(active_cases), 0L, active_cases),
+    new_cases    = if_else(is.na(new_cases), 0L, new_cases),
     )
 
   old_mun_daily %>% 
