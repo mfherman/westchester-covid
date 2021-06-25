@@ -53,8 +53,9 @@ update_daily_mun_data <- function() {
   old_mun_daily %>% 
     bind_rows(new_mun_daily_filled) %>% 
     group_by(municipality) %>% 
-    fill(total_cases, date) %>% 
+    fill(total_cases) %>% 
     ungroup() %>% 
+    fill(date) %>% 
     write_csv("data/mun-cases.csv")
 }
 
