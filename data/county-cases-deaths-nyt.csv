@@ -8722,3 +8722,21 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2021-07-06,Suffolk,New York,36103,201602,3407,22,0
 2021-07-06,Ulster,New York,36111,13937,257,1,0
 2021-07-06,Westchester,New York,36119,129946,2293,9,0
+2021-07-07,Fairfield,Connecticut,09001,100603,2201,30,0
+2021-07-07,Litchfield,Connecticut,09005,14706,298,-1,0
+2021-07-07,New Haven,Connecticut,09009,92519,2132,19,0
+2021-07-07,Bergen,New Jersey,34003,105129,2892,21,2
+2021-07-07,Essex,New Jersey,34013,94532,3025,11,1
+2021-07-07,Hudson,New Jersey,34017,88471,2305,9,1
+2021-07-07,Morris,New Jersey,34027,50439,1241,24,0
+2021-07-07,Passaic,New Jersey,34031,73488,1939,15,0
+2021-07-07,Sussex,New Jersey,34037,14140,307,7,0
+2021-07-07,Dutchess,New York,36027,29532,446,4,0
+2021-07-07,Nassau,New York,36059,184219,3180,37,0
+2021-07-07,New York City,New York,NA,956963,33442,168,4
+2021-07-07,Orange,New York,36071,48473,723,5,0
+2021-07-07,Putnam,New York,36079,10635,93,1,0
+2021-07-07,Rockland,New York,36087,47105,758,12,1
+2021-07-07,Suffolk,New York,36103,201633,3407,31,0
+2021-07-07,Ulster,New York,36111,13939,257,2,0
+2021-07-07,Westchester,New York,36119,129961,2293,15,0
