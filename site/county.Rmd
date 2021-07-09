@@ -458,7 +458,7 @@ knitr::include_graphics(here("site/img/county-long.png"), )
 
 <!-- ## Cases in schools -->
 
-```{r, eval=FALSE}
+```{r}
 school_geo_cases <- school_geo %>% 
   left_join(school_cases, by = "school_beds") %>% 
   mutate(
