@@ -23,7 +23,7 @@ update_daily_mun_data <- function() {
   updated <- FALSE
   counter <- 0
   
-  old_mun_daily <- read_csv("data/mun-cases.csv", col_types = cols())
+  old_mun_daily <- read_csv("data/mun-cases.csv", col_types = cols(), lazy = FALSE)
   max_old_date <- max(old_mun_daily$date)
 
   while (!updated | counter < 22) {
