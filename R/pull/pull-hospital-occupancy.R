@@ -1,7 +1,7 @@
 source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of HHS hospital data"))
 
-url <- "https://beta.healthdata.gov/api/views/anag-cw7u/rows.csv?accessType=DOWNLOAD"
+url <- "https://healthdata.gov/api/views/anag-cw7u/rows.csv?accessType=DOWNLOAD"
 
 hospital <- read_csv(url, col_types = cols(), guess_max = 1e6)
 
