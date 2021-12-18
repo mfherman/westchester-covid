@@ -1,5 +1,6 @@
 #!/bin/sh
 
+which Rscript
 Rscript "R/pull/pull-nys-cases-tests.R"
 Rscript "R/pull/pull-nyt-cases-deaths.R"
 #Rscript "R/pull/pull-hotspot-zones.R"
