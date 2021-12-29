@@ -319,12 +319,12 @@ to_map <- county_bound %>%
       "Avg. daily cases: ", comma(new_cases_avg_7, 1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
       ),
-    per_cap_map = if_else(new_cases_per_cap > 125, 125, new_cases_per_cap)
+    per_cap_map = if_else(new_cases_per_cap > 250, 250, new_cases_per_cap)
     )
 
 county_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:125
+  domain = 0:250
   )
 
 leaflet(to_map) %>%
@@ -346,9 +346,10 @@ leaflet(to_map) %>%
     ) %>%
   addLegend(
     pal = county_pal,
-    values = 0:125,
+    values = 0:250,
     opacity = 0.7,
-    bins = c(0, 25, 50, 75, 100, 125),
+    # bins = c(0, 25, 50, 75, 100, 125),
+    bins = seq(from = 0, to = 250, by = 50),
     position = "bottomright",
     title = "Avg. daily cases per 100k"
     ) %>% 

@@ -80,6 +80,7 @@ p <- to_plot %>%
   ggplot(aes(year_week + 3.5, covid_patients)) +
   geom_line(color = "steelblue") +
   geom_point(
+    alpha = 0,
     aes(
       text = paste0(
         "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
@@ -126,6 +127,7 @@ p <- to_plot %>%
   ggplot(aes(year_week + 3.5, covid_pct)) +
   geom_line(color = "steelblue") +
   geom_point(
+    alpha = 0,
     aes(
       text = paste0(
         "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
@@ -172,6 +174,7 @@ p <- to_plot %>%
   ggplot(aes(year_week + 3.5, bed_pct)) +
   geom_line(color = "steelblue") +
   geom_point(
+    alpha = 0,
     aes(
       text = paste0(
         "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
@@ -221,6 +224,7 @@ p <- to_plot %>%
   geom_line(color = "steelblue") +
   geom_point(
     aes(
+      alpha = 0,
       text = paste0(
         "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",
         "ICU bed occupancy: ", percent(icu_pct, 1), "<br>",
@@ -279,6 +283,7 @@ p <- icu_cap_long %>%
   ggplot(aes(year_week + 3.5, n, color = metric)) +
   geom_line() +
   geom_point(
+    alpha = 0,
     aes(
       text = paste0(
         "<b>", month_day_year(year_week, abbr = TRUE), " - ", month_day_year(year_week + days(6), abbr = TRUE), "</b><br>",

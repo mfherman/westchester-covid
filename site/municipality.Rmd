@@ -48,7 +48,7 @@ to_map <- mun_cases_poly %>%
       "Avg. daily cases: ", comma(new_cases_day_avg, 0.1), "<br>",
       "Per 100k: ", number(new_cases_per_cap, 0.1)
       ),
-    new_cases_per_cap_map = if_else(new_cases_per_cap > 125, 125, new_cases_per_cap)
+    new_cases_per_cap_map = if_else(new_cases_per_cap > 250, 250, new_cases_per_cap)
     )
 
 to_map_total <- mun_cases_centroid %>% 
@@ -63,7 +63,7 @@ to_map_total <- mun_cases_centroid %>%
 
 cd_pal <- colorNumeric(
   palette = "YlOrRd",
-  domain = 0:125
+  domain = 0:250
   )
 
 leaflet(to_map) %>%
@@ -98,9 +98,10 @@ leaflet(to_map) %>%
   addLegend(
     group = "Cases per 100k",
     pal = cd_pal,
-    values = 0:125,
+    values = 0:250,
     opacity = 0.7,
-    bins = c(0, 25, 50, 75, 100, 125),
+    # bins = c(0, 25, 50, 75, 100, 125),
+    bins = seq(from = 0, to = 250, by = 50),
     position = "bottomright",
     title = "Avg. daily cases per 100k<br>in last 14 days"
     ) %>% 
@@ -184,7 +185,7 @@ all_days_mun <- crossing(date = all_dates, municipality = all_mun) %>%
   mutate(
     active_cases_est = na.approx(active_cases),
     active_per_cap_est = active_cases_est / total_pop,
-    active_per_cap_limit = if_else(active_per_cap_est / 14 * 1e5 > 125, 125, active_per_cap_est / 14 * 1e5)
+    active_per_cap_limit = if_else(active_per_cap_est / 14 * 1e5 > 250, 250, active_per_cap_est / 14 * 1e5)
     ) %>% 
   ungroup()
 
