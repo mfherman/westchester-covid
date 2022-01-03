@@ -11956,7 +11956,7 @@ date,county,state,fips,total_cases,total_deaths,new_cases,new_deaths
 2022-01-02,Dutchess,New York,36027,47166,537,702,1
 2022-01-02,Nassau,New York,36059,308406,3417,6040,5
 2022-01-02,New York City,New York,NA,1630332,35448,35650,46
-2022-01-02,Orange,New York,36071,79133,834,1242,0
+2022-01-02,Orange,New York,36071,79148,834,1257,0
 2022-01-02,Putnam,New York,36079,17569,106,309,0
 2022-01-02,Rockland,New York,36087,69087,807,846,1
 2022-01-02,Suffolk,New York,36103,332956,3813,5918,0
