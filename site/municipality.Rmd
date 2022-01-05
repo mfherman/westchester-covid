@@ -268,9 +268,9 @@ p <- all_days_mun %>%
     labels = label_date_short(),
     breaks = "1 month",
     expand = expansion(mult = c(0.01, 0)),
-    limits = c(as.Date("2020-10-01"), NA)
+    limits = c(as.Date("2021-09-01"), NA)
     ) +
-  labs(x = NULL, y = NULL, title = "Avg daily cases per 100k (beginning Oct 2020)") +
+  labs(x = NULL, y = NULL, title = "Avg daily cases per 100k (beginning Sept 2021)") +
   theme_minimal() +
   theme(
     legend.position = "none",
@@ -325,9 +325,9 @@ p <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Families below 200% of poverty line",
@@ -354,9 +354,9 @@ p2 <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1), breaks = c(0, 0.05, 0.1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Overcrowded households",
@@ -383,9 +383,9 @@ p3 <- mun_sd %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
     labs(
     x = "Black or Latino population",
@@ -481,9 +481,9 @@ p <- mun_acs_calc %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Families below 200% of poverty line",
@@ -510,9 +510,9 @@ p2 <- mun_acs_calc %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1), breaks = c(0, 0.05, 0.1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Overcrowded households",
@@ -539,9 +539,9 @@ p3 <- mun_acs_calc %>%
     fill = adjustcolor("steelblue", alpha.f = 0.3),
     alpha = 0.9
     ) +
-  expand_limits(x = 0, y = 0.02) + 
+  expand_limits(x = 0, y = 0.05) + 
   scale_x_continuous(label = label_percent(1)) +
-  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.2, by = 0.02)) + 
+  scale_y_continuous(label = label_percent(1), breaks = seq(0, 0.5, by = 0.05)) + 
   scale_size(trans = "log10", range = c(1, 5)) +
   labs(
     x = "Black or Latino population",
