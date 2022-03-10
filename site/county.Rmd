@@ -490,7 +490,7 @@ school_geo_cases <- school_geo %>%
         )
       )
     ) %>% 
-  arrange(desc(recent_cases_students, district, school))
+  arrange(desc(recent_cases_students), desc(district), desc(school))
 
 top_district <- school_geo_cases %>% 
   st_drop_geometry() %>%
@@ -502,7 +502,7 @@ top_district <- school_geo_cases %>%
 
 top_school <- school_geo_cases %>% 
   st_drop_geometry() %>%
-  arrange(desc(recent_cases, school))
+  arrange(desc(recent_cases), desc(school))
 
 tot_school <- top_school %>% 
   summarize(across(c(all_cases_students, all_cases_staff), sum)) %>% 
@@ -563,7 +563,7 @@ school_geo_cases <- school_geo %>%
         )
       )
     ) %>% 
-  arrange(desc(recent_cases, district, school)) %>% 
+  arrange(desc(recent_cases), desc(district), desc(school)) %>% 
   select(
     date,
     `School` = school,
