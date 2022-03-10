@@ -1,3 +1,3 @@
 source(here::here("R/build/utils.R"))
 
-build_site()
+build_site(quiet = TRUE)
