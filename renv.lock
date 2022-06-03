@@ -1645,6 +1645,14 @@
         "yaml"
       ]
     },
+    "rpart": {
+      "Package": "rpart",
+      "Version": "4.1.16",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ea3ca1d9473daabb3cd0f1b4f974c1ed",
+      "Requirements": []
+    },
     "rprojroot": {
       "Package": "rprojroot",
       "Version": "2.0.3",
@@ -1834,6 +1842,7 @@
         "goftest",
         "mgcv",
         "nlme",
+        "rpart",
         "spatstat.data",
         "spatstat.geom",
         "spatstat.random",
