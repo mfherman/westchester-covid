@@ -132,7 +132,7 @@ ggplotly_config(to_plot) %>%
     <td class = "t-left">Tests</td>
     <td class = "t-right">`r comma(tests_recent, 1)`</td>
     <td class = "t-right">`r percent_sign(tests_change_pct, 1)`</td>
-    <td class = "t-right">`r label_number_si(0.01)(tests_total)`</td>
+    <td class = "t-right">`r number(tests_total, scale_cut = cut_short_scale(), accuracy = 0.01)`</td>
     
   </tr>
     <tr>
