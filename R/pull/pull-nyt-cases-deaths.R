@@ -1,7 +1,7 @@
 source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
-url <- "https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv"
+urls <- paste0("https://github.com/nytimes/covid-19-data/raw/master/us-counties-", 2020:2022, ".csv")
 
 ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange", "Ulster",
                  "New York City", "Suffolk", "Nassau", "Dutchess")
@@ -10,7 +10,7 @@ ct_counties <- c("Fairfield", "New Haven", "Litchfield")
 
 nj_counties <- c("Bergen", "Passaic", "Sussex", "Hudson", "Essex", "Morris")
 
-nyt_county <- vroom(url, col_types = cols()) %>% 
+nyt_county <- read_csv(urls, col_types = cols()) %>% 
   filter(
     (state == "New York" & county %in% ny_counties) |
     (state == "Connecticut" & county %in% ct_counties) |
