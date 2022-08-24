@@ -455,9 +455,9 @@ knitr::include_graphics(here("site/img/county-long.png"), )
 ```
 </div>
 
-<br>
+<!-- <br> -->
 
-## Cases in schools
+<!-- ## Cases in schools -->
 
 ```{r}
 school_geo_cases <- school_geo %>% 
@@ -514,25 +514,25 @@ fall_cases <- nys_cases %>%
   pull()
 ```
 
-<span class="recent-update">Most recent data: `r month_day_year(max(school_cases$date), abbr = TRUE)`</span>
+<!-- <span class="recent-update">Most recent data: `r month_day_year(max(school_cases$date), abbr = TRUE)`</span> -->
 
-Since Sept 12, 2021 there have been `r comma(tot_school$all_cases, 1)` cases identified in students, teachers, and staff. This is `r percent(tot_school$all_cases / fall_cases, 1)` of all cases reported in Westchester during that time period.
+<!-- Since Sept 12, 2021 there have been `r comma(tot_school$all_cases, 1)` cases identified in students, teachers, and staff. This is `r percent(tot_school$all_cases / fall_cases, 1)` of all cases reported in Westchester during that time period. -->
 
-<aside>
-Here and below, the numbers are "on-site" cases, which includes students, teachers, and staff who have tested positive and been in school buildings.
-</aside>
+<!-- <aside> -->
+<!-- Here and below, the numbers are "on-site" cases, which includes students, teachers, and staff who have tested positive and been in school buildings. -->
+<!-- </aside> -->
 
-The school district with the most reported cases this school year is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported of on-site students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases.
+<!-- The school district with the most reported cases this school year is **`r top_district$district[1]` School District**. There have been `r comma(top_district$all_cases[1], 1)` positive tests reported of on-site students, teachers, and staff. The district with the second most reported cases is **`r top_district$district[2]` School District** with `r comma(top_district$all_cases[2], 1)` cases. -->
 
-In the *last 14 days*, the school with the most new on-site cases (students, teachers, staff combined) is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days.
+<!-- In the *last 14 days*, the school with the most new on-site cases (students, teachers, staff combined) is **`r top_school$school[1]`** in `r top_school$city[1]` with `r comma(top_school$recent_cases[1], 1)` cases. **`r top_school$school[2]`** in `r top_school$city[2]` has reported `r comma(top_school$recent_cases[2], 1)` new cases in the last 14 days. -->
 
-<aside>
-Not all schools report to the state with the same frequency, so some schools' data is more recent than others.
-</aside>
+<!-- <aside> -->
+<!-- Not all schools report to the state with the same frequency, so some schools' data is more recent than others. -->
+<!-- </aside> -->
 
-### Schools with more than 1 new case in the last 14 days
+<!-- ### Schools with more than 1 new case in the last 14 days -->
 
-```{r school_map, out.height="600px", out.width="600px", eval=TRUE}
+```{r school_map, out.height="600px", out.width="600px", eval=FALSE}
 school_geo_cases <- school_geo %>% 
   left_join(school_cases, by = "school_beds") %>% 
   mutate(
@@ -625,12 +625,12 @@ filter_slider(
   )
 ```
 
-<br>
+<!-- <br> -->
 
-The table below shows the total number of student and staff on-site cases reported by each school since September 12, 2021, as well as the the number of recent cases (within the last 14 days).
+<!-- The table below shows the total number of student and staff on-site cases reported by each school since September 12, 2021, as well as the the number of recent cases (within the last 14 days). -->
 
-<div class="l-page school-table">
-```{r school-table, layout="l-page", eval=TRUE}
+<!-- <div class="l-page school-table"> -->
+```{r school-table, layout="l-page", eval=FALSE}
 school_geo_cases %>%
   select(-Model) %>% 
   datatable(
