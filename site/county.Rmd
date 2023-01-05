@@ -439,6 +439,7 @@ p2 <- p +
 
 ggsave(here("site/img/county-wide.png"), p2, device = ragg::agg_png(), width = 12, height = 6)
 ```
+
 <div class = "l-page img-desktop">
 ```{r county-trend-sm-mult-wide, layout="l-page"}
 knitr::include_graphics(here("site/img/county-wide.png"))
@@ -662,7 +663,7 @@ school_geo_cases %>%
   formatStyle(1:4, fontFamily = "IBM Plex Sans") %>% 
   formatStyle(5:8, fontFamily = "Roboto Mono")
 ```
-</div>
+<!-- </div> -->
 
 <!-- ## New York State micro-clusters -->
 

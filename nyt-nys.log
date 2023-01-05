@@ -1,0 +1,36 @@
+sh\download-update-nyt-nys.sh: line 3: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 4: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 8: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 11: Rscript: command not found
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	docs/Rplot001.png
+	nyt-nys.log
+	site/Rplot001.png
+
+nothing added to commit but untracked files present (use "git add" to track)
+Everything up-to-date
+which: no Rscript in (/mingw64/bin:/usr/bin:/c/Users/mherman/r-projects/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/ProgramData/chocolatey/bin:/c/Program Files/Java/jdk1.8.0_211/bin:/c/Users/mherman/AppData/Local/Microsoft/WindowsApps:/c/Users/mherman/AppData/Local/GitHubDesktop/bin:/cmd:/bin)
+sh\download-update-nyt-nys.sh: line 4: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 5: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 9: Rscript: command not found
+sh\download-update-nyt-nys.sh: line 12: Rscript: command not found
+[master d5abde5] update site with fresh data
+ Committer: Matt Herman <mherman@csg.org>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+To https://github.com/mfherman/westchester-covid.git
+   9527048..d5abde5  master -> master

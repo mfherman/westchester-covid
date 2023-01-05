@@ -1,7 +1,7 @@
 source(here::here("R/build/attach-packages.R"))
 message(glue("{Sys.time()} -- Starting download of NY Times data"))
 
-urls <- paste0("https://github.com/nytimes/covid-19-data/raw/master/us-counties-", 2020:2022, ".csv")
+urls <- paste0("https://github.com/nytimes/covid-19-data/raw/master/rolling-averages/us-counties-", 2020:2023, ".csv")
 
 ny_counties <- c("Westchester", "Putnam", "Rockland", "Orange", "Ulster",
                  "New York City", "Suffolk", "Nassau", "Dutchess")
@@ -18,15 +18,19 @@ nyt_county <- read_csv(urls, col_types = cols()) %>%
     )
 
 nyt_clean <- nyt_county %>% 
+  mutate(
+    new_cases = cases,
+    new_deaths = deaths
+    ) %>% 
   group_by(county, state) %>% 
   mutate(
-    new_cases = cases - lag(cases),
-    new_cases = if_else(is.na(new_cases), 0, new_cases),
-    new_deaths = deaths - lag(deaths),
-    new_deaths = if_else(is.na(new_deaths) | new_deaths < 0, 0, new_deaths)
-    ) %>% 
-  ungroup() %>% 
-  rename(total_cases = cases, total_deaths = deaths)
+    total_cases = cumsum(new_cases),
+    total_deaths = cumsum(new_deaths),
+    new_deaths = if_else(new_deaths < 0, 0, new_deaths),
+    new_deaths = if_else(date %in% as.Date(c("2022-11-11", "2022-12-08", "2023-01-04")),
+                         0, new_deaths)
+    
+    )
 
 write_csv(nyt_clean, "data/county-cases-deaths-nyt.csv")
 
